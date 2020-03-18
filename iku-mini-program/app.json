@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/students/students",
+    "pages/about/about",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "爱酷体育",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "images/home.png",
+      "selectedIconPath": "images/home1.png"
+    }, {
+      "pagePath": "pages/students/students",
+      "text": "学员中心",
+      "iconPath": "images/goodscar.png",
+      "selectedIconPath":"images/goodscar1.png"
+    }, {
+      "pagePath": "pages/about/about",
+      "text": "我",
+      "iconPath":"images/my.png",
+      "selectedIconPath": "images/my1.png"
+    }]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

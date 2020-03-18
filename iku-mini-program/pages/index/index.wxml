@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<swiper class="slides">
+  <swiper-item >
+
+  </swiper-item>
+</swiper>
+
+<view class="course">
+  <text class="title">课程</text>
+  <view class="grids">
+    <view class="item">
+      <image src="" />
+      <text>篮球</text>
+    </view>
+    <view class="item">
+      <image src="" />
+      <text>网球</text>
+    </view>
+    <view class="item">
+      <image src="" />
+      <text>游泳</text>
+    </view>
+  </view>
+</view>
+
+<view class="great-moment">
+  <text class="title">精彩时刻</text>
+  <view></view>
+</view>
+<view class="attention">
+  <text class="title">实时关注</text>
+  <view ></view>
+</view>
