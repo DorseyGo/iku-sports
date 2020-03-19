@@ -1,0 +1,133 @@
+/* pages/course/course.wxss */
+.slides {
+    height: 380rpx;
+    background-color: aquamarine;
+}
+
+.slides image {
+    height: 100%;
+    width: 100%;
+}
+
+/* for introduction grids */
+.intro {
+    height: 300rpx;
+    width: 100%;
+}
+
+.intro .grids {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.intro .grids .item {
+    width: 50%;
+    height: 80%;
+    padding: 24rpx;
+}
+
+.intro .grids .item .elem {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    background-color: #888;
+    padding: 8rpx;
+}
+
+.intro .grids .item .elem .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 5rpx;
+}
+
+.intro .grids .item .elem .info .title {
+    flex: 1;
+    display: block;
+    color: black;
+    font-weight: bold;
+}
+
+.intro .grids .item .elem .info .brief {
+    height: 36rpx;
+    font-size: 24rpx;
+    color: #cccccc;
+    padding: 5rpx;
+}
+
+.intro .grids .item .elem view image {
+    height: 100%;
+    width: 100rpx;
+}
+
+/* nav */
+view.nav {
+    padding: 24rpx;
+    display: flex;
+    flex-direction: row;
+    font-size: 32rpx;
+}
+
+view.nav text {
+    flex: 1;
+    font-weight: bold;
+}
+
+view.nav navigator text {
+    width: 128rpx;
+    font-size: 26rpx;
+    font-weight: normal;
+}
+
+/* promotion */
+.promotion {
+    width: 100%;
+}
+
+.promotion .grids {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.promotion .grids .item {
+    flex: 1;
+    width: 50%;
+    height: 288rpx;
+    padding: 24rpx;
+}
+
+.promotion .grids .item .elem {
+    display: flex;
+    flex-direction: row;
+    background-color: #888;
+    padding: 8rpx;
+}
+
+.promotion .grids .item .elem .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 5rpx;
+}
+
+.promotion .grids .item .elem .info .title {
+    flex: 1;
+    display: block;
+    color: black;
+    font-weight: bold;
+}
+
+.promotion .grids .item .elem .info .brief {
+    height: 36rpx;
+    font-size: 24rpx;
+    color: #cccccc;
+    padding: 5rpx;
+}
+
+.promotion .grids .item .elem view image {
+    height: 100%;
+    width: 100rpx;
+}

@@ -1,25 +1,17 @@
 <!--index.wxml-->
 <swiper class="slides">
-  <swiper-item >
-
+  <swiper-item wx:for="{{activities}}" wx:key="id">
+    <image src="{{item.image}}" />
   </swiper-item>
 </swiper>
 
 <view class="course">
   <text class="title">课程</text>
   <view class="grids">
-    <view class="item">
-      <image src="" />
-      <text>篮球</text>
-    </view>
-    <view class="item">
-      <image src="" />
-      <text>网球</text>
-    </view>
-    <view class="item">
-      <image src="" />
-      <text>游泳</text>
-    </view>
+    <navigator url="/pages/course/course?category={{item.id}}" class="item" wx:for="{{categories}}" wx:key="id">
+      <image src="{{item.icon}}" />
+      <text>{{item.name}}</text>
+    </navigator>
   </view>
 </view>
 

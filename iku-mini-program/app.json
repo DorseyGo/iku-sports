@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/students/students",
     "pages/about/about",
+    "pages/course/course",
     "pages/logs/logs"
   ],
   "window": {

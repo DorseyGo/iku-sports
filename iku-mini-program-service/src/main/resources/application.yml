@@ -1,0 +1,28 @@
+server:
+  port: 9080
+
+iku:
+  mini-program:
+    database:
+      hostname: 172.17.1.96
+      port: 3308
+      db-name: iku
+
+spring:
+  output:
+    ansi:
+      enabled: always
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url:  jdbc:mysql://${iku.mini-program.database.hostname}:${iku.mini-program.database.port}/${iku.mini-program.database.db-name}?useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: engine
+    hikari:
+      maximum-pool-size: 200
+      minimum-idle: 5
+      connection-test-query: SELECT 1
+      connection-timeout: 1800
+      idle-timeout: 1800
+      validation-timeout: 1800
+  jpa:
+    show-sql: true

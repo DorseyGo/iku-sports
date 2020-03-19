@@ -1,0 +1,1 @@
+INSERT INTO category (name, icon, sequence) VALUES ('篮球', NULL, 0), ('网球', NULL, 1), ('游泳', NULL, 2);
