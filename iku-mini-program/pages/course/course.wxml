@@ -1,126 +1,142 @@
 <!--pages/course/course.wxml-->
 <swiper class="slides">
-    <swiper-item>
-        <image src="" />
-    </swiper-item>
+	<swiper-item>
+		<image src="" />
+	</swiper-item>
 </swiper>
 
 <view class="intro">
-    <view class="grids">
-        <view class="item">
-            <view class="elem">
-                <view class="info">
-                    <text class="title">免费学</text>
-                    <text class="brief">免费视频及音频</text>
-                </view>
-                <view>
-                    <image src="" />
-                </view>
-            </view>
-        </view>
-        <view class="item">
-            <view class="elem">
-                <view class="info">
-                    <text class="title">文章</text>
-                    <text class="brief">精选篮球文章教程</text>
-                </view>
-                <view>
-                    <image src="" />
-                </view>
-            </view>
-        </view>
-    </view>
-</view>
+	<view class="grids">
+		<navigator class="item" url="/pages/list/list">
+			<view class="elem">
+				<view class="info">
+					<text class="title">Title</text>
+					<text class="brief">Brief</text>
+				</view>
+				<image/>
+			</view>
+		</navigator>
 
-<view class="nav">
-    <text>新课推荐</text>
-    <navigator src="/pages/list/list">
-        <text>查看更多></text>
-    </navigator>
+		<navigator class="item" url="/pages/list/list">
+			<view class="elem">
+				<view class="info">
+					<text class="title">Title</text>
+					<text class="brief">Brief</text>
+				</view>
+				<image/>
+			</view>
+		</navigator>
+	</view>
 </view>
 
 <view class="promotion">
-    <view class="grids">
-        <view class="item">
+	<view class="nav">
+		<text>新课推荐</text>
+		<navigator src="/pages/list/list">
+			<text>查看更多></text>
+		</navigator>
+	</view>
+
+	<view class="grids">
+		<navigator class="item" url="/pages/list/list">
+			<view class="elem">
+				<view class="info">
+					<text class="title">Title</text>
+					<text class="brief">Brief</text>
+				</view>
+				<image/>
+			</view>
+		</navigator>
+
+		<navigator class="item" url="/pages/list/list">
+			<view class="elem">
+				<view class="info">
+					<text class="title">Title</text>
+					<text class="brief">Brief</text>
+				</view>
+				<image/>
+			</view>
+		</navigator>
+
+		<navigator class="item" url="/pages/list/list">
+			<view class="elem">
+				<view class="info">
+					<text class="title">Title</text>
+					<text class="brief">Brief</text>
+				</view>
+				<image/>
+			</view>
+		</navigator>
+
+		<navigator class="item" url="/pages/list/list">
+			<view class="elem">
+				<view class="info">
+					<text class="title">Title</text>
+					<text class="brief">Brief</text>
+				</view>
+				<image/>
+			</view>
+		</navigator>
+	</view>
+</view>
+
+<view class="popularity">
+	<view class="nav">
+		<text>人气爆款</text>
+		<navigator src="/pages/list/list">
+			<text>查看更多></text>
+		</navigator>
+	</view>
+    <view class="tabs">
+        <navigator class="item" url="/pages/course/details">
             <view class="elem">
-                <view class="info">
-                    <text class="title">基础体能</text>
-                    <text class="brief">15245次学习</text>
+                <view class="badge">
+                    <image  />
+                    <text>Popularity Measure</text>
                 </view>
-                <view>
-                    <image src="" />
+                <view class="info">
+                    <text></text>
+                    <image  />
                 </view>
             </view>
-        </view>
-        <view class="item">
             <view class="elem">
-                <view class="info">
-                    <text class="title">运球突破</text>
-                    <text class="brief">15245次学习</text>
-                </view>
-                <view>
-                    <image src="" />
+                <text class="title">Title</text>
+                <view class="brief">
+                    <text class="totals">Totals</text>
+                    <text class="vip">VIP</text>
                 </view>
             </view>
-        </view>
-        <view class="item">
+        </navigator>
+        <navigator class="item" url="/pages/course/details">
             <view class="elem">
-                <view class="info">
-                    <text class="title">投篮训练</text>
-                    <text class="brief">15245次学习</text>
+                <view class="badge">
+                    <image  />
+                    <text>Popularity Measure</text>
                 </view>
-                <view>
-                    <image src="" />
+                <view class="info">
+                    <text></text>
+                    <image  />
                 </view>
             </view>
-        </view>
-        <view class="item">
             <view class="elem">
-                <view class="info">
-                    <text class="title">防守训练</text>
-                    <text class="brief">15245次学习</text>
-                </view>
-                <view>
-                    <image src="" />
+                <text class="title">Title</text>
+                <view class="brief">
+                    <text class="totals">Totals</text>
+                    <text class="vip">VIP</text>
                 </view>
             </view>
-        </view>
+        </navigator>
     </view>
 </view>
 
-<view class="nav">
-    <text>人气爆款</text>>
-    <navigator src="/pages/list/list">
-        <text>查看更多</text>
-    </navigator>
-</view>
-<view class="popularity">
-    <view class="grids">
-        <view class="item">
-            <view class="popularity-measure">
-                <image src="" />
-                <text>2.4万次学习</text>
-            </view>>
-            <view class="course">
-                <image />
-                <view>
-                    <text>基础体能.叫你如何从0开始学习篮球</text>
-                    <text>共7节 银牌会员</text>
-                </view>
-            </view>
-        </view>
-        <view class="item">
-            <view class="popularity-measure">
-                <image src="" />
-                <text>2.4万次学习</text>
-            </view>>
-            <view class="course">
-                <image />
-                <view>
-                    <text>基础体能.叫你如何从0开始学习篮球</text>
-                    <text>共7节 银牌会员</text>
-                </view>
-            </view>
-        </view>
+<view class="classics">
+	<view class="nav">
+		<text>往期经典</text>
+		<navigator src="/pages/list/list">
+			<text>查看更多></text>
+		</navigator>
+	</view>
+    <view class="tabs">
+        
     </view>
 </view>
