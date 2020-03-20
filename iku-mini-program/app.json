@@ -4,6 +4,8 @@
     "pages/students/students",
     "pages/about/about",
     "pages/course/course",
+    "pages/course/list/list",
+    "pages/course/details/details",
     "pages/logs/logs"
   ],
   "window": {

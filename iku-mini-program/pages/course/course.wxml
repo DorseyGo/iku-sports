@@ -7,7 +7,7 @@
 
 <view class="intro">
 	<view class="grids">
-		<navigator class="item" url="/pages/list/list">
+		<navigator class="item" url="/pages/course/list">
 			<view class="elem">
 				<view class="info">
 					<text class="title">Title</text>
@@ -17,7 +17,7 @@
 			</view>
 		</navigator>
 
-		<navigator class="item" url="/pages/list/list">
+		<navigator class="item" url="/pages/course/list">
 			<view class="elem">
 				<view class="info">
 					<text class="title">Title</text>
@@ -32,13 +32,13 @@
 <view class="promotion">
 	<view class="nav">
 		<text>新课推荐</text>
-		<navigator src="/pages/list/list">
+		<navigator src="/pages/course/list">
 			<text>查看更多></text>
 		</navigator>
 	</view>
 
 	<view class="grids">
-		<navigator class="item" url="/pages/list/list">
+		<navigator class="item" url="/pages/course/list">
 			<view class="elem">
 				<view class="info">
 					<text class="title">Title</text>
@@ -48,7 +48,7 @@
 			</view>
 		</navigator>
 
-		<navigator class="item" url="/pages/list/list">
+		<navigator class="item" url="/pages/course/list">
 			<view class="elem">
 				<view class="info">
 					<text class="title">Title</text>
@@ -58,7 +58,7 @@
 			</view>
 		</navigator>
 
-		<navigator class="item" url="/pages/list/list">
+		<navigator class="item" url="/pages/course/list">
 			<view class="elem">
 				<view class="info">
 					<text class="title">Title</text>
@@ -68,7 +68,7 @@
 			</view>
 		</navigator>
 
-		<navigator class="item" url="/pages/list/list">
+		<navigator class="item" url="/pages/course/list">
 			<view class="elem">
 				<view class="info">
 					<text class="title">Title</text>
@@ -83,7 +83,7 @@
 <view class="popularity">
 	<view class="nav">
 		<text>人气爆款</text>
-		<navigator src="/pages/list/list">
+		<navigator src="/pages/course/list">
 			<text>查看更多></text>
 		</navigator>
 	</view>
@@ -132,11 +132,38 @@
 <view class="classics">
 	<view class="nav">
 		<text>往期经典</text>
-		<navigator src="/pages/list/list">
+		<navigator src="/pages/course/list">
 			<text>查看更多></text>
 		</navigator>
 	</view>
     <view class="tabs">
-        
+        <navigator url="/pages/course/detail" class="item">
+            <view class="elem info">
+                <text></text>
+                <image  />
+            </view>
+
+            <view class="elem">
+                <text class="title">Title</text>
+                <view class="brief">
+                    <text class="totals">Totals</text>
+                    <text class="vip">VIP</text>
+                </view>
+            </view>
+        </navigator>
+        <navigator url="/pages/course/detail" class="item">
+            <view class="elem info">
+                <text></text>
+                <image  />
+            </view>
+
+            <view class="elem">
+                <text class="title">Title</text>
+                <view class="brief">
+                    <text class="totals">Totals</text>
+                    <text class="vip">VIP</text>
+                </view>
+            </view>
+        </navigator>
     </view>
 </view>

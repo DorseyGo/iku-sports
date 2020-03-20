@@ -63,12 +63,17 @@ view.nav navigator text {
     padding: 8rpx;
 }
 
-.intro .grids .item .info .title, .promotion .grids .item .info .title,
-.popularity .tabs .item .elem .totals, .popularity .tabs .item .elem .title {
+.intro .grids .item .info .title, 
+.promotion .grids .item .info .title,
+.popularity .tabs .item .elem .totals, 
+.popularity .tabs .item .elem .title,
+.classics .tabs .item .elem .title,
+.classics .tabs .item .elem .totals {
     flex: 1;
 }
 
-.intro .grids .item .info .brief, .promotion .grids .item .info .brief {
+.intro .grids .item .info .brief, 
+.promotion .grids .item .info .brief {
     height: 36rpx;
     font-size: 24rpx;
     color: #888;
@@ -81,13 +86,15 @@ view.nav navigator text {
 }
 
 /* for popularity */
-.popularity .tabs {
+.popularity .tabs, 
+.classics .tabs {
     display: flex;
     flex-direction: column;
     padding: 24rpx;
 }
 
-.popularity .tabs .item {
+.popularity .tabs .item, 
+.classics .tabs .item {
     height: 288rpx;
 
     display: flex;
@@ -96,7 +103,8 @@ view.nav navigator text {
     align-items: center;
 }
 
-.popularity .tabs .item .elem {
+.popularity .tabs .item .elem, 
+.classics .tabs .item .elem {
     width: 50%;
     height: 100%;
     box-sizing: border-box;
@@ -106,25 +114,29 @@ view.nav navigator text {
     flex-direction: column;
 }
 
-.popularity .tabs .item .elem .info {
+.popularity .tabs .item .elem .info, 
+.classics .tabs .item .elem.info {
     flex: 1;
     background-color: #eee;
-    height: 100rpx;
+    /* height: 100rpx; */
 
     display: flex;
     flex-direction: row;
 }
 
-.popularity .tabs .item .elem .info text {
+.popularity .tabs .item .elem .info text, 
+.classics .tabs .item .elem.info text {
     width: 128rpx;
 }
 
-.popularity .tabs .item .elem .info image {
+.popularity .tabs .item .elem .info image, 
+.classics .tabs .item .elem.info image {
     flex: 1;
     height: 100%;
 }
 
-.popularity .tabs .item .elem .title {
+.popularity .tabs .item .elem .title, 
+.classics .tabs .item .elem .title {
     padding: 36rpx 24rpx;
 }
 
@@ -133,7 +145,8 @@ view.nav navigator text {
     width: 36rpx;
 }
 
-.popularity .tabs .item .elem .brief {
+.popularity .tabs .item .elem .brief,
+.classics .tabs .item .elem .brief {
     height: 36rpx;
     font-size: 24rpx;
     color: #888;
@@ -143,11 +156,19 @@ view.nav navigator text {
     flex-direction: row;
 }
 
-.popularity .tabs .item .elem .brief .vip, .popularity .tabs .item .elem .badge {
+.popularity .tabs .item .elem .brief .vip, 
+.popularity .tabs .item .elem .badge,
+.classics .tabs .item .elem .brief .vip {
     color: red;
     font-weight: bold;
 }
 
-.popularity .tabs .item .elem .brief .vip {
+.popularity .tabs .item .elem .brief .vip,
+.classics .tabs .item .elem .brief .vip {
     width: 72rpx;
+ }
+
+ /* classics */
+ .classics .tabs .item {
+     padding: 22rpx 0rpx;
  }
