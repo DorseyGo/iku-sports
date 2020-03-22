@@ -1,0 +1,45 @@
+<!--pages/article/list/list.wxml-->
+<view class="grids">
+    <view class="item">
+        <navigator class="elem">
+            <image  />
+            <view class="info">
+                <view class="article">
+                    <text class="title">Title</text>
+                    <view class="attention">
+                        <view class="watches">
+                            <image  />
+                            <text>watches</text>
+                        </view>
+                        <view class="likes">
+                            <image  />
+                            <text>likes</text>
+                        </view>
+                    </view>
+                </view>
+                <text class="read">Read</text>
+            </view>
+        </navigator>
+    </view>
+    <view class="item">
+        <navigator class="elem">
+            <image  />
+            <view class="info">
+                <view class="article">
+                    <text class="title">Title</text>
+                    <view class="attention">
+                        <view class="watches">
+                            <image  />
+                            <text>watches</text>
+                        </view>
+                        <view class="likes">
+                            <image  />
+                            <text>likes</text>
+                        </view>
+                    </view>
+                </view>
+                <text class="read">read</text>
+            </view>
+        </navigator>
+    </view>
+</view>

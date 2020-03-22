@@ -1,0 +1,80 @@
+/* pages/article/list/list.wxss */
+.grids {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.grids .item {
+    height: 288rpx;
+    padding: 12rpx;
+}
+
+.grids .item .elem {
+    height: 100%;
+    width: 100%;
+    padding: 12rpx;
+    box-sizing: border-box;
+    border-bottom: solid 1rpx #ccc;
+    /* justify-content: center; */
+    /* align-items: center; */
+
+    display: flex;
+    flex-direction: row;
+}
+
+.grids .item .elem image {
+    height: 100%;
+    width: 240rpx;
+
+    background-color: burlywood;
+}
+
+.grids .item .elem .info {
+
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+.grids .item .elem .info .read {
+    width: 76rpx;
+    height: 100%;
+
+    font-size: 24rpx;
+    color: #888;
+}
+
+.grids .item .elem .info .article {
+    padding: 0rpx 24rpx;
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.grids .item .elem .info .article .title {
+    flex: 1;
+}
+
+.grids .item .elem .info .article .attention {
+    height: 38rpx;
+    font-size: 24rpx;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.grids .item .elem .info .article .attention view image {
+    width: 38rpx;
+}
+
+.grids .item .elem .info .article .attention view text {
+    flex: 1;
+    padding: 12rpx;
+}
+
+.grids .item .elem .info .article .attention view {
+    width: 50%;
+}
