@@ -29,9 +29,9 @@ public class CategoryController {
 
     @ResponseBody
     @GetMapping("/api/categories")
-    public Response<Category> getAllCategories() {
+    public Response<List<Category>> getAllCategories() {
         final List<Category> categories = categoryService.getAllCategories();
 
-        return new Response<Category>().status(Response.SUCCESS).data(categories);
+        return new Response<List<Category>>().status(Response.SUCCESS).data(categories);
     }
 }

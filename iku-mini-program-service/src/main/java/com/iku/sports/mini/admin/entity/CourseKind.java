@@ -1,33 +1,28 @@
 /**
- * File: Activity
+ * File: CourseKind
  * Author: DorSey Q F TANG
- * Created: 2020/3/19
+ * Created: 2020/3/22 09:30
  * CopyRight: All rights reserved
- **/
+ */
 package com.iku.sports.mini.admin.entity;
-
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
-@NoArgsConstructor
 @Entity
-public class Activity {
+@Table(name = "course_kind")
+public class CourseKind {
 
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private int id;
+    private short id;
 
-    @Column(name = "image")
-    private String image;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "link")
-    private String link;
+    @Column(name = "icon")
+    private String icon;
 
     @Column(name = "create_time")
     private Date createTime;

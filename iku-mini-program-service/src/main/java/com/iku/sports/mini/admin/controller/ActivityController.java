@@ -29,8 +29,8 @@ public class ActivityController {
 
     @ResponseBody
     @GetMapping("/api/activities")
-    public Response<Activity> getFirst3Activities() {
+    public Response<List<Activity>> getFirst3Activities() {
         final List<Activity> activities = activityService.getFirst3Activities();
-        return new Response<Activity>().status(Response.SUCCESS).data(activities);
+        return new Response<List<Activity>>().status(Response.SUCCESS).data(activities);
     }
 }

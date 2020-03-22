@@ -4,8 +4,8 @@ server:
 iku:
   mini-program:
     database:
-      hostname: 172.17.1.96
-      port: 3308
+      hostname: 127.0.0.1
+      port: 3307
       db-name: iku
 
 spring:

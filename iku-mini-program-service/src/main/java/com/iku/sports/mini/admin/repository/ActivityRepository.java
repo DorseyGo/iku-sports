@@ -8,6 +8,7 @@ package com.iku.sports.mini.admin.repository;
 
 import com.iku.sports.mini.admin.entity.Activity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,4 +17,6 @@ import java.util.List;
 public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
     List<Activity> findFirst3ByOrderByCreateTimeDesc();
+
+    List<Activity> findFirst3ByCategoryIdOrderByCreateTimeDesc(final short categoryId);
 }

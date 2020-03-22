@@ -17,7 +17,7 @@ import java.util.List;
 public class Response<T> implements Serializable {
     private int statusCode;
     private String errorPhase;
-    private List<T> data;
+    private T data;
 
     public static final int SUCCESS = 0;
     public static final int FAIL = 1;
@@ -27,7 +27,7 @@ public class Response<T> implements Serializable {
         return this;
     }
 
-    public Response<T> data(final List<T> data) {
+    public Response<T> data(final T data) {
         this.data = data;
         return this;
     }

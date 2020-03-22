@@ -6,6 +6,8 @@
     "pages/course/course",
     "pages/course/list/list",
     "pages/course/details/details",
+    "pages/article/list/list",
+    "pages/article/details/details",
     "pages/logs/logs"
   ],
   "window": {
