@@ -6,9 +6,11 @@
  **/
 package com.iku.sports.mini.admin;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@MapperScan(basePackages = {"com.iku.sports.mini.admin.repository"})
 @SpringBootApplication
 public class MiniProgramApplication {
     public static void main(String[] args) {

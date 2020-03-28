@@ -9,7 +9,6 @@ package com.iku.sports.mini.admin.service.impl;
 import com.iku.sports.mini.admin.entity.Activity;
 import com.iku.sports.mini.admin.repository.ActivityRepository;
 import com.iku.sports.mini.admin.service.ActivityService;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

@@ -6,8 +6,10 @@
  **/
 package com.iku.sports.mini.admin.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Tolerate;
 
 import java.io.Serializable;
 import java.util.List;

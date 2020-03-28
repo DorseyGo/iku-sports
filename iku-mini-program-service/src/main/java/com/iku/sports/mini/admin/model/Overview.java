@@ -19,10 +19,4 @@ public class Overview {
 
     private List<Activity> activities;
 
-    private List<CourseKind> courseKinds;
-
-    private List<Course> popularCourses;
-
-    private List<Course> classicCourses;
-
 }
