@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
 --
 CREATE TABLE IF NOT EXISTS `course` (
   `id` TINYINT(2) NOT NULL AUTO_INCREMENT,
-  `level` CHAR[1] NOT NULL DEFAULT '1' COMMENT '1, for primary, 2 for intermediate, 3 for senior',
+  `level` CHAR(1) NOT NULL DEFAULT '1' COMMENT '1, for primary, 2 for intermediate, 3 for senior',
   `fee` BIGINT NOT NULL DEFAULT '0',
   `category_id` TINYINT(2) NOT NULL,
   PRIMARY KEY (`id`)
