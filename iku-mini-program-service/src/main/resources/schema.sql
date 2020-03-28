@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS `class` (
   `chapter` TINYINT(3) DEFAULT '1' COMMENT 'chapter of class',
   `video_url` VARCHAR(255) COMMENT 'the video URL address',
   `content` VARCHAR(255) COMMENT 'the content',
+  `watches` BIGINT(20) COMMENT 'the watches for this class',
   `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `course_id` TINYINT(2) NOT NULL,
   `teacher_id` INT(4) NOT NULL,
