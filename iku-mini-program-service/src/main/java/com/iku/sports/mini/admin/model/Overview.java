@@ -7,9 +7,6 @@
 package com.iku.sports.mini.admin.model;
 
 import com.iku.sports.mini.admin.entity.Activity;
-import com.iku.sports.mini.admin.entity.Course;
-import com.iku.sports.mini.admin.entity.CourseKind;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

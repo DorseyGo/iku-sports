@@ -6,32 +6,21 @@
  **/
 package com.iku.sports.mini.admin.entity;
 
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Controller;
+import lombok.experimental.Tolerate;
 
-import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
-@Entity
+@Builder
 public class Activity {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
     private int id;
-
-    @Column(name = "image")
     private String image;
-
-    @Column(name = "link")
     private String link;
-
-    @Column(name = "create_time")
     private Date createTime;
 
-    @Column(name = "category_id")
-    private short categoryId;
+    @Tolerate
+    public Activity() {}
 }

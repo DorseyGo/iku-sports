@@ -7,10 +7,43 @@
 package com.iku.sports.mini.admin.repository;
 
 import com.iku.sports.mini.admin.entity.Category;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.jdbc.SQL;
+import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
-@Repository("categoryRepository")
-public interface CategoryRepository extends JpaRepository<Category, Short> {
+import java.util.Arrays;
+import java.util.List;
 
+@Repository("categoryRepository")
+public interface CategoryRepository {
+
+    String TABLE = "category";
+
+    @Results(id = "categoryRM", value = {
+            @Result(property = "id", column = "id", jdbcType = JdbcType.TINYINT),
+            @Result(property = "name", column = "name", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "icon", column = "icon", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "sequence", column = "sequence", jdbcType = JdbcType.TINYINT)
+    })
+    @SelectProvider(type = CategorySQLProvider.class, method = "findAll")
+    List<Category> findAll();
+
+    // ---
+    // SQL provider
+    // ---
+    class CategorySQLProvider {
+        static final List<String> COLS = Arrays.asList("id", "name", "icon", "sequence");
+
+        public String findAll() {
+            return new SQL() {
+                {
+                    SELECT(COLS.toArray(new String[COLS.size()]));
+                    FROM(TABLE);
+                }
+            }.toString();
+        }
+    }
 }

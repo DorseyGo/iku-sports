@@ -6,37 +6,24 @@
  **/
 package com.iku.sports.mini.admin.entity;
 
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.experimental.Tolerate;
 
-import javax.annotation.Generated;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.Date;
 
-@NoArgsConstructor
 @Data
-@Entity
+@Builder
 public class Category implements Comparable<Category> {
 
-    @Id
-    @GeneratedValue
     private short id;
-
-    @Column(name = "name", unique = true)
     private String name;
-
-    @Column(name = "icon", unique = false)
     private String icon;
-
-    @Column(name = "sequence")
     private short sequence;
-
-    @Column(name = "last_modified_time")
     private Date lastModifiedTime;
+
+    @Tolerate
+    public Category() {}
 
     @Override
     public int compareTo(final Category other) {
