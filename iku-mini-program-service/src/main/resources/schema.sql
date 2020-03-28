@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
 CREATE TABLE IF NOT EXISTS `course` (
   `id` TINYINT(2) NOT NULL AUTO_INCREMENT,
   `level` CHAR(1) NOT NULL DEFAULT '1' COMMENT '1, for primary, 2 for intermediate, 3 for senior',
-  `fee` BIGINT NOT NULL DEFAULT '0',
+  `fee` BIGINT(20) NOT NULL DEFAULT '0',
   `category_id` TINYINT(2) NOT NULL,
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
@@ -71,11 +71,11 @@ CREATE TABLE IF NOT EXISTS `teacher`(
 --
 CREATE TABLE IF NOT EXISTS `order`(
   `id` VARCHAR(32) NOT NULL,
-  `fee` BITINT NOT NULL DEFAULT '0' COMMENT 'the original fee',
+  `fee` BIGINT(20) NOT NULL DEFAULT '0' COMMENT 'the original fee',
   `discount` FLOAT NOT NULL DEFAULT '0' COMMENT 'the discount',
-  `money_paid` BIGINT NOT NULL DEFAULT '0' COMMENT 'money paid by user',
+  `money_paid` BIGINT(20) NOT NULL DEFAULT '0' COMMENT 'money paid by user',
   `paid_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `refund_money` BITINT NOT NULL DEFAULT '0',
+  `refund_money` BIGINT(20) NOT NULL DEFAULT '0',
   `status` CHAR(1) DEFAULT '0' COMMENT '0 for unpaid, 1 for paid, 2 for refund, 3 for cancel',
   `course_id` TINYINT(2) NOT NULL,
   `student_id` BIGINT NOT NULL,
