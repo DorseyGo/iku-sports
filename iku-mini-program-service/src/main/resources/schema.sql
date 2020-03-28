@@ -95,3 +95,28 @@ CREATE TABLE IF NOT EXISTS `student`(
   `email` VARCHAR(32),
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+--
+-- article
+--
+CREATE TABLE IF NOT EXISTS `article`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(32) NOT NULL,
+  `cover` VARCHAR(255) DEFAULT NULL COMMENT 'the url of cover',
+  `create_time` DATETIME CURRENT_TIMESTAMP ,
+  `author` VARCHAR(24) DEFAULT NULL ,
+  `category_id` TINYINT(2) NOT NULL,
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+--
+-- article content
+--
+CREATE TABLE IF NOT EXISTS `article_content`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `material` VARCHAR(255) NOT NULL,
+  `material_type` CHAR(1) NOT NULL DEFAULT '0' COMMENT '0 for text, 1 for image, 2 for video',
+  `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `article_id` INT NOT NULL,
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
