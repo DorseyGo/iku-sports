@@ -1,5 +1,8 @@
 package com.iku.sports.mini.admin.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigInteger;
 
 /**
@@ -9,13 +12,15 @@ import java.math.BigInteger;
  * Description:
  * CopyRight: All rights reserved
  **/
+@Data
+@NoArgsConstructor
 public class Klass {
-   private Integer id;
+   private int id;
    private String title;
-   private Integer chapter;
+   private int chapter;
    private String content;
-   private BigInteger watches;
-   private Integer courseId;
-   private Integer teacherId;
+   private long watches;
+   private int courseId;
+   private int teacherId;
    private String videoUrl;
 }

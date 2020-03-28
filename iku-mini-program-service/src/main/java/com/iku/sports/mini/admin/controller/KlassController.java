@@ -29,7 +29,7 @@ public class KlassController {
     }
 
     @ResponseBody
-    @GetMapping("/api/getAllClass")
+    @GetMapping("/api/classes")
     public Response<List<Klass>> getAllclass() throws Exception {
         try {
             final List<Klass> klass = klassService.getAllClass();
