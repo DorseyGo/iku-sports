@@ -17,4 +17,5 @@ public class Klass {
    private BigInteger watches;
    private Integer courseId;
    private Integer teacherId;
+   private String videoUrl;
 }
