@@ -3,6 +3,7 @@ package com.iku.sports.mini.admin.service.impl;
 import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.repository.CourseClassRepository;
 import com.iku.sports.mini.admin.service.CourseClassService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -25,23 +26,29 @@ public class CourseClassServiceImpl implements CourseClassService {
         this.courseClassRepository = courseClassRepository;
     }
 
-    @Override
-    public List<CourseClass> getAllClasses() {
-        return courseClassRepository.getAllClass();
-    }
 
     @Override
-    public List<CourseClass> getTop3ClassesByCourseId(short courseId) {
-        return null;
+    public List<CourseClass> getFirst3ClassesByCourseId(short courseId) {
+        return courseClassRepository.getFirst3ClassesByCourseId(courseId);
     }
 
     @Override
     public List<CourseClass> paginateClasses(short courseId, int offset, int pageSize) {
-        return null;
+        return courseClassRepository.paginateClasses(courseId,offset,pageSize);
     }
 
     @Override
     public CourseClass getClassById(int id) {
-        return null;
+        return courseClassRepository.getClassById(id);
+    }
+
+    @Override
+    public List<CourseClass> getTop3PopularClasses(short categoryId) {
+        return courseClassRepository.getTop3PopularClasses(categoryId) ;
+    }
+
+    @Override
+    public List<CourseClass> getTop3ClassicByCategoryId(short categoryId, int days) {
+        return courseClassRepository.getTop3ClassicByCategoryId(categoryId,days);
     }
 }

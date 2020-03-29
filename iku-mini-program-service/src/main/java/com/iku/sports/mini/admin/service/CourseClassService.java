@@ -13,9 +13,12 @@ import java.util.List;
  * CopyRight: All rights reserved
  **/
 public interface CourseClassService {
-    List<CourseClass> getAllClasses();
-    List<CourseClass> getTop3ClassesByCourseId(short courseId);
+    List<CourseClass> getFirst3ClassesByCourseId(short courseId);
     List<CourseClass> paginateClasses(short courseId,int offset,int pageSize);
     CourseClass getClassById(int id);
+    List<CourseClass> getTop3PopularClasses(short categoryId);
+    List<CourseClass> getTop3ClassicByCategoryId(short categoryId,int days);
+
+
 
 }

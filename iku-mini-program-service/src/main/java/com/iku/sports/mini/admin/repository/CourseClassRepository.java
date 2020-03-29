@@ -2,6 +2,7 @@ package com.iku.sports.mini.admin.repository;
 
 import com.iku.sports.mini.admin.entity.CourseClass;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.jdbc.SQL;
@@ -20,9 +21,10 @@ import java.util.List;
  **/
 @Repository("courseClassRepository")
 public interface CourseClassRepository {
-    String TABLE = "class";
+    String CLASSTABLE = "class";
+    String COURSETABLE = "course";
 
-    @Results(id = "classRM",value = {
+    @Results(id = "courseClassRM",value = {
             @Result(property = "id", column = "id", jdbcType = JdbcType.INTEGER),
             @Result(property = "title", column = "title", jdbcType = JdbcType.VARCHAR),
             @Result(property = "chapter", column = "chapter", jdbcType = JdbcType.TINYINT),
@@ -32,12 +34,14 @@ public interface CourseClassRepository {
             @Result(property = "courseId", column = "course_id", jdbcType = JdbcType.TINYINT),
             @Result(property = "teacherId", column = "teacher_id", jdbcType = JdbcType.INTEGER)
     })
+    
+    @ResultMap("courseClassRM")
+    @SelectProvider(type = CourseSqlProvider.class,method = "getFirst3ClassesByCourseId")
+    List<CourseClass> getFirst3ClassesByCourseId(short courseId);
 
-    @SelectProvider(type = KlassSqlProvider.class,method = "getAllClasses")
-    List<CourseClass> getAllClass();
-
-    class KlassSqlProvider{
+    class CourseSqlProvider{
         static  final List<String> COLS = Arrays.asList("id","title","chapter","video_url","content","watches","course_id","teacher_id");
+
         public String getAllClass(){
             return new SQL(){
                 {
@@ -46,7 +50,16 @@ public interface CourseClassRepository {
                 }
             }.toString();
         }
+
+        public String getFirst3ClassesByCourseId(short courseId){
+            return new SQL(){
+                {
+                    SELECT()
+                }
+            }
+        }
     }
+
 
 
 }
