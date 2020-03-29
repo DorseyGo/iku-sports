@@ -62,7 +62,7 @@ public class CourseServiceImpl implements CourseService {
         final List<Course> courses = getCoursesByCategoryId(categoryId);
         courses.forEach(course -> {
             short courseId = course.getId();
-            List<CourseClass> courseClasses = courseClassService.getTop3ClassesByCourseId(courseId);
+            List<CourseClass> courseClasses = courseClassService.getFirst3ClassesByCourseId(courseId);
 
             levelClasses.put(courseId, courseClasses);
         });
