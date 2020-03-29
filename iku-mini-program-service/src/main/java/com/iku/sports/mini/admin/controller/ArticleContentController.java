@@ -26,10 +26,10 @@ public class ArticleContentController {
     @GetMapping("/api/articleContents")
     public Response<List<ArticleContent>> getArticleContentsByArticleId(String articleId, int pageNo, int pageSize)  {
         try {
-            List<ArticleContent> Articles = articleContentService.getArticleContentsByArticleId(articleId,pageNo,pageSize);
-            return new Response<List<ArticleContent>>().status(Response.SUCCESS).data(Articles);
+            List<ArticleContent> ArticleContents = articleContentService.getArticleContentsByArticleId(articleId,pageNo,pageSize);
+            return new Response<List<ArticleContent>>().status(Response.SUCCESS).data(ArticleContents);
         } catch (Exception e) {
-            logger.error("Fail to getArticleListByCategoryId.",e);
+            logger.error("Fail to getArticleContentsByArticleId.",e);
             return new Response<List<ArticleContent>>().status(Response.FAIL);
         }
     }
