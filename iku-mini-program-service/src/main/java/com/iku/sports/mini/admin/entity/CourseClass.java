@@ -3,10 +3,8 @@ package com.iku.sports.mini.admin.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigInteger;
-
 /**
- * File: Klass
+ * File: CourseClass
  * Author: Huanghz
  * Created: 2020/3/28
  * Description:
@@ -14,7 +12,7 @@ import java.math.BigInteger;
  **/
 @Data
 @NoArgsConstructor
-public class Klass {
+public class CourseClass {
    private int id;
    private String title;
    private int chapter;

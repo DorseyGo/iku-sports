@@ -1,7 +1,6 @@
 package com.iku.sports.mini.admin.repository;
 
-import com.iku.sports.mini.admin.entity.Klass;
-import com.sun.org.apache.bcel.internal.generic.Select;
+import com.iku.sports.mini.admin.entity.CourseClass;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -13,14 +12,14 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * File: KlassRepository
+ * File: CourseClassRepository
  * Author: Huanghz
  * Created: 2020/3/28
  * Description:
  * CopyRight: All rights reserved
  **/
-@Repository("klassRepository")
-public interface KlassRepository {
+@Repository("courseClassRepository")
+public interface CourseClassRepository {
     String TABLE = "class";
 
     @Results(id = "classRM",value = {
@@ -34,8 +33,8 @@ public interface KlassRepository {
             @Result(property = "teacherId", column = "teacher_id", jdbcType = JdbcType.INTEGER)
     })
 
-    @SelectProvider(type = KlassSqlProvider.class,method = "getAllClass")
-    List<Klass> getAllClass();
+    @SelectProvider(type = KlassSqlProvider.class,method = "getAllClasses")
+    List<CourseClass> getAllClass();
 
     class KlassSqlProvider{
         static  final List<String> COLS = Arrays.asList("id","title","chapter","video_url","content","watches","course_id","teacher_id");
