@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `class` (
   `id` INT(4) NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(64) NOT NULL,
   `chapter` TINYINT(3) DEFAULT '1' COMMENT 'chapter of class',
+  `cover` VARCHAR(255) DEFAULT NULL COMMENT 'the cover',
   `video_url` VARCHAR(255) COMMENT 'the video URL address',
   `content` VARCHAR(255) COMMENT 'the content',
   `watches` BIGINT(20) COMMENT 'the watches for this class',
