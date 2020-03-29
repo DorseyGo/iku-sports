@@ -6,10 +6,16 @@
  **/
 package com.iku.sports.mini.admin.service.impl;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.CacheStats;
+import com.google.common.cache.LoadingCache;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.iku.sports.mini.admin.entity.Category;
 import com.iku.sports.mini.admin.repository.CategoryRepository;
 import com.iku.sports.mini.admin.service.CategoryService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -18,28 +24,41 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ExecutionException;
 
+@Slf4j
 @Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
-    private static final Map<String, List<Category>> CACHE = Maps.newHashMapWithExpectedSize(1);
+    private final LoadingCache<String, List<Category>> cache;
     private static final String KEY_DEF = "categories";
     private final CategoryRepository categoryRepository;
 
     @Autowired
     public CategoryServiceImpl(@Qualifier("categoryRepository") final CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
+        cache = CacheBuilder.newBuilder().build(new CacheLoader<String, List<Category>>() {
+            @Override
+            public List<Category> load(String key) throws Exception {
+                return createValue(key);
+            }
+        });
     }
 
     @Override
     public List<Category> getAllCategories() {
-        List<Category> categories = CACHE.get(KEY_DEF);
-        if (categories != null) {
-            return categories;
+        try {
+            return cache.get(KEY_DEF);
+        } catch (ExecutionException e) {
+            log.error("Failed to fetch all categories", e);
+            return Collections.emptyList();
         }
+    }
 
-        categories = categoryRepository.findAll();
+    private List<Category> createValue(final String key) {
+        final List<Category> categories = categoryRepository.findAll();
         Collections.sort(categories);
-        CACHE.put(KEY_DEF, categories);
 
         return categories;
     }
