@@ -29,4 +29,9 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Activity> getFirst3Activities() {
         return activityRepository.findFirst3ByOrderByCreateTimeDesc();
     }
+
+    @Override
+    public List<Activity> getFirst3ActivitiesByCategoryId(final short categoryId) {
+        return activityRepository.findFirst3ByCategoryIdOrderByCreateTimeDesc(categoryId);
+    }
 }

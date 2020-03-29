@@ -7,10 +7,7 @@
 package com.iku.sports.mini.admin.repository;
 
 import com.iku.sports.mini.admin.entity.Activity;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
@@ -33,7 +30,8 @@ public interface ActivityRepository {
     List<Activity> findFirst3ByOrderByCreateTimeDesc();
 
     @ResultMap("activityRM")
-    List<Activity> findFirst3ByCategoryIdOrderByCreateTimeDesc(final short categoryId);
+    @SelectProvider(type = ActivitySQLProvider.class, method = "findFirst3ByOrderByCreateTimeDesc")
+    List<Activity> findFirst3ByCategoryIdOrderByCreateTimeDesc(@Param("categoryId") final short categoryId);
 
     // -----
     // SQL provider
@@ -41,25 +39,19 @@ public interface ActivityRepository {
     class ActivitySQLProvider {
         static final List<String> COLS = Arrays.asList("id", "image", "link");
 
-        public String findFirst3ByOrderByCreateTimeDesc() {
+        public String findFirst3ByOrderByCreateTimeDesc(final Map<String, Object> params) {
             return new SQL() {
                 {
                     SELECT(COLS.toArray(new String[COLS.size()]));
                     FROM(TABLE);
+                    if (params.get("categoryId") != null) {
+                        WHERE("category_id = #{categoryId}");
+                    }
+
                     ORDER_BY("create_time DESC LIMIT 0,3");
                 }
             }.toString();
         }
 
-        public String findFirst3ByCategoryIdOrderByCreateTimeDesc(final Map<String, Object> params) {
-            return new SQL() {
-                {
-                    SELECT(COLS.toArray(new String[COLS.size()]));
-                    FROM(TABLE);
-                    WHERE("category_id = #{categoryId}");
-                    ORDER_BY("create_time DESC LIMIT 0,3");
-                }
-            }.toString();
-        }
     }
 }

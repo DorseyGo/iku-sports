@@ -12,4 +12,6 @@ import java.util.List;
 
 public interface ActivityService {
     List<Activity> getFirst3Activities();
+
+    List<Activity> getFirst3ActivitiesByCategoryId(short categoryId);
 }

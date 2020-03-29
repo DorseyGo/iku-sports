@@ -7,6 +7,7 @@
 package com.iku.sports.mini.admin.repository;
 
 import com.iku.sports.mini.admin.entity.Course;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -26,8 +27,8 @@ public interface CourseRepository {
             @Result(property = "level", column = "level", jdbcType = JdbcType.CHAR),
             @Result(property = "fee", column = "fee", jdbcType = JdbcType.BIGINT)
     })
-    @SelectProvider(type = CourseSQLProvider.class, method = "findAll")
-    List<Course> findAll();
+    @SelectProvider(type = CourseSQLProvider.class, method = "findCoursesByCategoryId")
+    List<Course> findCoursesByCategoryId(@Param("categoryId") final short categoryId);
 
     // -----
     // SQL provider
@@ -35,11 +36,12 @@ public interface CourseRepository {
     class CourseSQLProvider {
         static final List<String> COLS = Arrays.asList("id", "level", "fee");
 
-        public String findAll() {
+        public String findCoursesByCategoryId() {
             return new SQL() {
                 {
                     SELECT(COLS.toArray(new String[COLS.size()]));
                     FROM(TABLE);
+                    WHERE("category_id = #{categoryId}");
                 }
             }.toString();
         }
