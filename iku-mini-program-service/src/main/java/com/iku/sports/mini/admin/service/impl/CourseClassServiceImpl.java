@@ -3,11 +3,11 @@ package com.iku.sports.mini.admin.service.impl;
 import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.repository.CourseClassRepository;
 import com.iku.sports.mini.admin.service.CourseClassService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,7 +20,7 @@ import java.util.List;
 @Service("courseClassService")
 public class CourseClassServiceImpl implements CourseClassService {
     private final CourseClassRepository courseClassRepository;
-
+    private final int pageSizeArrays[]={10,20,50,100};
     @Autowired
     public CourseClassServiceImpl(@Qualifier("courseClassRepository") CourseClassRepository courseClassRepository) {
         this.courseClassRepository = courseClassRepository;
@@ -28,27 +28,31 @@ public class CourseClassServiceImpl implements CourseClassService {
 
 
     @Override
-    public List<CourseClass> getFirst3ClassesByCourseId(short courseId) {
+    public List<CourseClass> getFirst3ClassesByCourseId(short courseId) throws Exception{
         return courseClassRepository.getFirst3ClassesByCourseId(courseId);
     }
 
     @Override
-    public List<CourseClass> paginateClasses(short courseId, int offset, int pageSize) {
+    public List<CourseClass> paginateClasses(short courseId, int offset, int pageSize) throws Exception{
+        int isExists = Arrays.binarySearch(pageSizeArrays,pageSize);
+        if (isExists <= 0 ){
+            pageSize = 20;
+        }
         return courseClassRepository.paginateClasses(courseId,offset,pageSize);
     }
 
     @Override
-    public CourseClass getClassById(int id) {
+    public CourseClass getClassById(int id) throws Exception{
         return courseClassRepository.getClassById(id);
     }
 
     @Override
-    public List<CourseClass> getTop3PopularClasses(short categoryId) {
+    public List<CourseClass> getTop3PopularClasses(short categoryId) throws Exception{
         return courseClassRepository.getTop3PopularClasses(categoryId) ;
     }
 
     @Override
-    public List<CourseClass> getTop3ClassicByCategoryId(short categoryId, int days) {
+    public List<CourseClass> getTop3ClassicByCategoryId(short categoryId, int days) throws Exception{
         return courseClassRepository.getTop3ClassicByCategoryId(categoryId,days);
     }
 }

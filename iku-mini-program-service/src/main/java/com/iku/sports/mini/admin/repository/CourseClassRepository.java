@@ -35,25 +35,25 @@ public interface CourseClassRepository {
 
     @ResultMap("courseClassRM")
     @SelectProvider(type = CourseClassSqlProvider.class,method = "getFirst3ClassesByCourseId")
-    List<CourseClass> getFirst3ClassesByCourseId(@Param("first3ClassCourseId") short courseId);
+    List<CourseClass> getFirst3ClassesByCourseId(@Param("first3ClassCourseId") short courseId) throws Exception;
 
     @ResultMap("courseClassRM")
     @SelectProvider(type = CourseClassSqlProvider.class,method = "paginateClasses")
     List<CourseClass> paginateClasses(@Param("paginateCourseId") short courseId,
                                       @Param("paginateOffset") int offset,
-                                      @Param("paginatePageSize") int pageSize);
+                                      @Param("paginatePageSize") int pageSize)throws Exception;
     @ResultMap("courseClassRM")
     @SelectProvider(type = CourseClassSqlProvider.class,method = "getClassById")
-    CourseClass getClassById(@Param("calssId") int id);
+    CourseClass getClassById(@Param("calssId") int id)throws Exception;
 
     @ResultMap("courseClassRM")
     @SelectProvider(type = CourseClassSqlProvider.class,method = "getTop3PopularClasses")
-    List<CourseClass> getTop3PopularClasses(@Param("popularId") short categoryId);
+    List<CourseClass> getTop3PopularClasses(@Param("popularId") short categoryId)throws Exception;
 
     @ResultMap("courseClassRM")
     @SelectProvider(type = CourseClassSqlProvider.class,method = "getTop3ClassicByCategoryId")
     List<CourseClass> getTop3ClassicByCategoryId(@Param("top3CategoryId") short categoryId,
-                                                 @Param("top3CategoryDays") int days);
+                                                 @Param("top3CategoryDays") int days)throws Exception;
 
     class CourseClassSqlProvider {
         static final List<String> ALLCOLS = Arrays.asList("id","title","cover","chapter","video_url","content","watches","course_id","teacher_id");

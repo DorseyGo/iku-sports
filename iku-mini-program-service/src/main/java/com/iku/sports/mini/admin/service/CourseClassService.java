@@ -13,11 +13,11 @@ import java.util.List;
  * CopyRight: All rights reserved
  **/
 public interface CourseClassService {
-    List<CourseClass> getFirst3ClassesByCourseId(short courseId);
-    List<CourseClass> paginateClasses(short courseId,int offset,int pageSize);
-    CourseClass getClassById(int id);
-    List<CourseClass> getTop3PopularClasses(short categoryId);
-    List<CourseClass> getTop3ClassicByCategoryId(short categoryId,int days);
+    List<CourseClass> getFirst3ClassesByCourseId(short courseId) throws Exception;
+    List<CourseClass> paginateClasses(short courseId,int offset,int pageSize) throws Exception;
+    CourseClass getClassById(int id) throws Exception;
+    List<CourseClass> getTop3PopularClasses(short categoryId) throws Exception;
+    List<CourseClass> getTop3ClassicByCategoryId(short categoryId,int days) throws Exception;
 
 
 
