@@ -60,7 +60,7 @@ public class CourseClassController {
     @GetMapping("/api/classes")
     public Response<List<CourseClass>> paginateClasses(@RequestParam("courseId") short courseId,
                                                        @RequestParam("offset") int offset,
-                                                       @RequestParam("pageSize") int pageSize)  throws Exception{
+                                                       @RequestParam("pageSize") int pageSize) {
         try{
             final List<CourseClass> courseClass = courseClassService.paginateClasses(courseId,offset,pageSize);
             return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClass);
@@ -72,7 +72,7 @@ public class CourseClassController {
 
     @ResponseBody
     @GetMapping("/api/classes/popular/category/{categoryId}")
-    public Response<List<CourseClass>> getTop3PopularClasses(@PathVariable("categoryId") short categoryId) throws Exception{
+    public Response<List<CourseClass>> getTop3PopularClasses(@PathVariable("categoryId") short categoryId){
         try{
             final List<CourseClass> courseClasses = courseClassService.getTop3PopularClasses(categoryId);
             return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClasses);
@@ -85,7 +85,7 @@ public class CourseClassController {
     @ResponseBody
     @GetMapping("/api/classes/top3/category")
     public Response<List<CourseClass>> getTop3ClassicByCategoryId(@RequestParam("categoryId") final short categoryId,
-                                                                  @RequestParam("days") final int days) throws Exception{
+                                                                  @RequestParam("days") final int days){
         try{
             final List<CourseClass> courseClasses = courseClassService.getTop3ClassicByCategoryId(categoryId,days);
             return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClasses);
