@@ -1,25 +1,82 @@
-<!--index.wxml-->
-<swiper class="slides">
-  <swiper-item wx:for="{{activities}}" wx:key="id">
-    <image src="{{item.image}}" />
-  </swiper-item>
-</swiper>
+<scroll-view scroll-y="{{true}}" class="container">
+  <swiper class="screen-swiper square-dot" indicator-dots="{{true}}" 
+    autoplay="{{true}}" interval="5000" duration="500" circular="{{true}}">
+    <swiper-item>
+      <image src="../../images/basketball_2x.png" mode="aspectFill"/>
+    </swiper-item>
+    <swiper-item>
+      <image src="../../images/swimming_2x.png" mode="aspectFill" />
+    </swiper-item>
+    <swiper-item>
+      <image src="../../images/tennies_2x.png" mode="aspectFill" />
+    </swiper-item>
+  </swiper>
 
-<view class="course">
-  <text class="title">课程</text>
-  <view class="grids">
-    <navigator url="/pages/course/course?category={{item.id}}" class="item" wx:for="{{categories}}" wx:key="id">
-      <image src="{{item.icon}}" />
-      <text>{{item.name}}</text>
-    </navigator>
+  <!-- course -->
+  <view class="card">
+    <scroll-view class="text-dark-gray nav">
+      <view class="nav-item text-white current">篮球</view>
+      <view class="nav-item">网球</view>
+      <view class="nav-item">游泳</view>
+    </scroll-view>
+    <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
+      <view class="padding-xl">
+        <view class="padding-xs text-xl">初级篮球技巧</view>
+        <view class="padding-xs text-xs">5433545人参加</view>
+        <view class="padding-xs text-normal padding-top">零基础.国际教练</view>
+      </view>
+    </view>
+    <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
+      <view class="padding-xl">
+        <view class="padding-xs text-xl">中级篮球技巧</view>
+        <view class="padding-xs text-xs">5433545人参加</view>
+        <view class="padding-xs text-normal padding-top">零基础.国际教练</view>
+      </view>
+    </view>
+    <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
+      <view class="padding-xl">
+        <view class="padding-xs text-xl">高级篮球技巧</view>
+        <view class="padding-xs text-xs">5433545人参加</view>
+        <view class="padding-xs text-normal padding-top">零基础.国际教练</view>
+      </view>
+    </view>
+
+    <!-- coach -->
+    <view class="bar">
+      <view class="action text-white">
+        <text class="icon-titles text-yellow">|</text>金牌教练
+      </view>
+    </view>
+
+    <scroll-view class="nav">
+      <view class="nav-lg-item bg-image bg-mask" style="background-image: url('../../images/coach_bg_selected_2x.png')">
+        <view></view>
+        <view class="">LBJ</view>
+        <view class="">国际教练 中国女篮教练</view>
+      </view>
+    </scroll-view>
+
+    <!-- article -->
+    <view class="bar">
+      <view class="action text-white">
+        <text class="icon-titles text-yellow">|</text>推文
+      </view>
+    </view>
+
+    <view class="bg-image bg-mask" style="background-image: url('../../images/article_2x.png')">
+      <view class="padding-xl">
+        <view class="padding-xs text-xl">高级篮球技巧</view>
+        <view class="padding-xs text-xs">5433545人参加</view>
+        <view class="padding-xs text-normal padding-top">零基础.国际教练</view>
+      </view>
+    </view>
+
+    <!-- great moment -->
+    <view class="bar">
+      <view class="action text-white">
+        <text class="icon-titles text-yellow">|</text>精彩瞬间
+      </view>
+    </view>
   </view>
-</view>
-
-<view class="great-moment">
-  <text class="title">精彩时刻</text>
-  <view></view>
-</view>
-<view class="attention">
-  <text class="title">实时关注</text>
-  <view ></view>
-</view>
+  
+</scroll-view>

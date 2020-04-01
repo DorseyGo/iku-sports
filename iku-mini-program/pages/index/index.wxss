@@ -1,63 +1,20 @@
-/**index.wxss**/
-.slides {
-  height: 380rpx;
-  background-color: aquamarine;
+.screen-swiper {
+  min-height: 268rpx;
+  margin: 0rpx 30rpx 0rpx;
 }
 
-.slides image {
+.screen-swiper image {
   height: 100%;
   width: 100%;
+  display: block;
+  margin: 0;
+  pointer-events: none;
 }
 
-.course text.title {
-  padding: 12rpx 8rpx;
-  font-size: 30rpx;
-}
-
-.course .grids {
-  display: flex;
-  flex-direction: row;
-}
-
-.course .grids .item {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 33.33333333333%;
-  height: 250rpx;
-  box-sizing: border-box;
-}
-
-.course .grids .item image {
-  height: 70rpx;
-  width: 70rpx;
-  background-color: blueviolet;
-}
-
-.course .grids .item text {
-  font-size: 24rpx;
-  margin-top: 20rpx;
-  color: #888;
-}
-
-.great-moment text.title {
-  padding: 12rpx 8rpx;
-  font-size: 30rpx;
-}
-
-.great-moment view {
-  height: 250rpx;
-  background-color: aliceblue;
-}
-
-.attention text.title {
-  padding: 12rpx 8rpx;
-  font-size: 30rpx;
-}
-
-.attention view {
-  height: 250rpx;
-  background-color: beige;
+.card {
+  width: 100%;
+  min-height: 424rpx;
+  margin: 30rpx 0rpx 0rpx;
+  border-radius: 52rpx 52rpx 0rpx 0rpx;
+  background: rgba(25, 25, 25, 1);
 }
