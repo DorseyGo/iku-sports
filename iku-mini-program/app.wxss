@@ -171,3 +171,11 @@ swiper.square-dot .wx-swiper-dot.wx-swiper-dot-active {
 .mg-left-xl {
   margin-left: 36rpx;
 }
+
+.width-half {
+  width: 50%;
+}
+
+.mg-left-half {
+  margin-left: 50%;
+}

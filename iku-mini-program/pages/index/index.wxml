@@ -65,6 +65,9 @@
             <image src="../../images/Icon_collect_clicked_2x.png" />
           </view>
         </view>
+        <view class="bottom mg-left-xl text-white">
+          <view >课程： {{count}}系列</view> >
+        </view>
       </view>
     </scroll-view>
 
@@ -76,7 +79,7 @@
     </view>
 
     <view class="bg-image bg-mask" style="background-image: url('../../images/article_2x.png')">
-      <view class="padding-xl">
+      <view class="padding-xl width-half mg-left-half text-white">
         <view class="padding-xs text-xl">高级篮球技巧</view>
         <view class="padding-xs text-xs">5433545人参加</view>
         <view class="padding-xs text-normal padding-top">零基础.国际教练</view>

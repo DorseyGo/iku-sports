@@ -52,15 +52,25 @@
 .content {
   position: absolute;
   z-index: 5;
-  margin-top: -220rpx;
+  top: 210rpx;
   padding: 10rpx 0rpx;
   border-bottom: 1rpx solid var(--white);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 360rpx;
 }
 
 .content .action image {
   height: 40rpx;
   width: 44rpx;
+}
+
+.bottom {
+  position: absolute;
+  z-index: 5;
+  bottom: 38rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
