@@ -21,23 +21,23 @@
     </scroll-view>
     <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
       <view class="padding-xl text-white">
-        <view class="padding-xs text-xl">初级篮球技巧</view>
-        <view class="padding-xs text-xs">5433545人参加</view>
-        <view class="padding-xs text-normal padding-top">零基础.国际教练</view>
+        <view class="text-xl">初级篮球技巧</view>
+        <view class="text-xs">5433545人参加</view>
+        <view class="text-normal padding-top">零基础.国际教练</view>
       </view>
     </view>
     <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
       <view class="padding-xl text-white">
-        <view class="padding-xs text-xl">中级篮球技巧</view>
-        <view class="padding-xs text-xs">5433545人参加</view>
-        <view class="padding-xs text-normal padding-top">零基础.国际教练</view>
+        <view class="text-xl">中级篮球技巧</view>
+        <view class="text-xs">5433545人参加</view>
+        <view class="text-normal padding-top">零基础.国际教练</view>
       </view>
     </view>
     <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
       <view class="padding-xl text-white">
-        <view class="padding-xs text-xl">高级篮球技巧</view>
-        <view class="padding-xs text-xs">5433545人参加</view>
-        <view class="padding-xs text-normal padding-top">零基础.国际教练</view>
+        <view class="text-xl">高级篮球技巧</view>
+        <view class="text-xs">5433545人参加</view>
+        <view class="text-normal padding-top">零基础.国际教练</view>
       </view>
     </view>
 
@@ -65,7 +65,7 @@
             <image src="../../images/Icon_collect_clicked_2x.png" />
           </view>
         </view>
-        <view class="bottom mg-left-xl text-white">
+        <view class="bottom mg-left-xl text-white text-normal">
           <view >课程： {{count}}系列</view> >
         </view>
       </view>
@@ -74,18 +74,18 @@
           <image src="" />
         </view>
         <view class="bottom-img">
-          <image src="../../images/coach_bg_selected_2x.png" />
+          <image src="../../images/coach_bg_2x.png" />
         </view>
         <view class="content mg-left-xl">
           <view class="action">
-            <view class="text-black text-lg">LBJ</view>
+            <view class="text-white text-lg">LBJ</view>
             <view class="text-dark-gray text-sm">国际教练 中国女篮教练</view>
           </view>
           <view class="action">
             <image src="../../images/Icon_collect_clicked_2x.png" />
           </view>
         </view>
-        <view class="bottom mg-left-xl text-white">
+        <view class="bottom mg-left-xl text-white text-normal">
           <view class="action" >课程： {{count}}系列</view>
           <view class="action">></view>
         </view>
@@ -101,9 +101,9 @@
 
     <view class="bg-image bg-mask" style="background-image: url('../../images/article_2x.png')">
       <view class="padding-xl width-half mg-left-half text-white">
-        <view class="padding-xs text-xl">高级篮球技巧</view>
-        <view class="padding-xs text-xs">5433545人参加</view>
-        <view class="padding-xs text-normal padding-top">零基础.国际教练</view>
+        <view class="text-xl">高级网球技巧</view>
+        <view class="text-xs">5433545人参加</view>
+        <view class="text-normal padding-top">零基础.国际教练</view>
       </view>
     </view>
 
@@ -113,6 +113,31 @@
         <text class="icon-titles text-yellow">|</text>精彩瞬间
       </view>
     </view>
+
+    <scroll-view scroll-x="{{true}}" class="scroll-slides">
+      <view class="presentation-slide mg-left">
+        <view class="image">
+          <image src="../../images/great_moment_2x.png" mode="widthFix" />
+          <image class="tag" src="../../images/player_2x.png" mode="aspectFill" />
+        </view>
+        <view class="info text-white">
+          <view class="padding-xs">标题</view>
+          <view class="padding-xs text-xs text-dark-gray">简介或者时间</view>
+        </view>
+      </view>
+      <view class="presentation-slide mg-left">
+        <view class="image">
+          <image src="../../images/great_moment_2x.png" mode="widthFix" />
+          <image class="tag" src="../../images/player_2x.png" mode="aspectFill" />
+        </view>
+        <view class="info text-white">
+          <view class="padding-xs">标题</view>
+          <view class="padding-xs text-xs text-dark-gray">简介或者时间</view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="bar"></view>
   </view>
   
 </scroll-view>
