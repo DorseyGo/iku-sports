@@ -23,18 +23,18 @@
     "list": [{
       "pagePath": "pages/index/index",
       "text": "首页",
-      "iconPath": "images/home.png",
-      "selectedIconPath": "images/home1.png"
+      "iconPath": "images/home_2x.png",
+      "selectedIconPath": "images/home_selected_2x.png"
     }, {
       "pagePath": "pages/students/students",
       "text": "课程",
-      "iconPath": "images/goodscar.png",
-      "selectedIconPath":"images/goodscar1.png"
+      "iconPath": "images/course_2x.png",
+      "selectedIconPath":"images/course_selected_2x.png"
     }, {
       "pagePath": "pages/about/about",
       "text": "我的",
-      "iconPath":"images/my.png",
-      "selectedIconPath": "images/my1.png"
+      "iconPath":"images/about_2x.png",
+      "selectedIconPath": "images/about_selected_2x.png"
     }]
   },
   "style": "v2",

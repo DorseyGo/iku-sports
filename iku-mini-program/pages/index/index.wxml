@@ -20,21 +20,21 @@
       <view class="nav-item">游泳</view>
     </scroll-view>
     <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
-      <view class="padding-xl">
+      <view class="padding-xl text-white">
         <view class="padding-xs text-xl">初级篮球技巧</view>
         <view class="padding-xs text-xs">5433545人参加</view>
         <view class="padding-xs text-normal padding-top">零基础.国际教练</view>
       </view>
     </view>
     <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
-      <view class="padding-xl">
+      <view class="padding-xl text-white">
         <view class="padding-xs text-xl">中级篮球技巧</view>
         <view class="padding-xs text-xs">5433545人参加</view>
         <view class="padding-xs text-normal padding-top">零基础.国际教练</view>
       </view>
     </view>
     <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
-      <view class="padding-xl">
+      <view class="padding-xl text-white">
         <view class="padding-xs text-xl">高级篮球技巧</view>
         <view class="padding-xs text-xs">5433545人参加</view>
         <view class="padding-xs text-normal padding-top">零基础.国际教练</view>
@@ -48,11 +48,23 @@
       </view>
     </view>
 
-    <scroll-view class="nav">
-      <view class="nav-lg-item bg-image bg-mask" style="background-image: url('../../images/coach_bg_selected_2x.png')">
-        <view></view>
-        <view class="">LBJ</view>
-        <view class="">国际教练 中国女篮教练</view>
+    <scroll-view class="scroll-slides">
+      <view class="slide mg-left">
+        <view class="top-img">
+          <image src="" />
+        </view>
+        <view class="bottom-img">
+          <image src="../../images/coach_bg_selected_2x.png" />
+        </view>
+        <view class="content mg-left-xl">
+          <view class="info">
+            <view class="text-black text-lg">LBJ</view>
+            <view class="text-dark-gray text-sm">国际教练 中国女篮教练</view>
+          </view>
+          <view class="action">
+            <image src="../../images/Icon_collect_clicked_2x.png" />
+          </view>
+        </view>
       </view>
     </scroll-view>
 
