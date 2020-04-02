@@ -21,13 +21,14 @@
 
 .slide {
   max-width: 500rpx;
+  display: inline-block;
 }
 
 .slide .top-img {
   height: 180rpx;
   width: 180rpx;
   box-sizing: border-box;
-  margin-top: -36rpx;
+  margin-top: 36rpx;
   margin-left: 36rpx;
   border: 2rpx solid #ccc;
   border-radius: 12rpx;
@@ -73,4 +74,5 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 18rpx;
 }

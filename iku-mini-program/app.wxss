@@ -162,6 +162,8 @@ swiper.square-dot .wx-swiper-dot.wx-swiper-dot-active {
 
 .scroll-slides {
   min-height: 268rpx;
+  white-space: nowrap;
+  display: flex;
 }
 
 .mg-left {

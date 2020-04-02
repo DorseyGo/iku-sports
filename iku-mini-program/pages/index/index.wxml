@@ -48,7 +48,7 @@
       </view>
     </view>
 
-    <scroll-view class="scroll-slides">
+    <scroll-view class="scroll-slides" scroll-x="{{true}}">
       <view class="slide mg-left">
         <view class="top-img">
           <image src="" />
@@ -67,6 +67,27 @@
         </view>
         <view class="bottom mg-left-xl text-white">
           <view >课程： {{count}}系列</view> >
+        </view>
+      </view>
+      <view class="slide mg-left">
+        <view class="top-img">
+          <image src="" />
+        </view>
+        <view class="bottom-img">
+          <image src="../../images/coach_bg_selected_2x.png" />
+        </view>
+        <view class="content mg-left-xl">
+          <view class="action">
+            <view class="text-black text-lg">LBJ</view>
+            <view class="text-dark-gray text-sm">国际教练 中国女篮教练</view>
+          </view>
+          <view class="action">
+            <image src="../../images/Icon_collect_clicked_2x.png" />
+          </view>
+        </view>
+        <view class="bottom mg-left-xl text-white">
+          <view class="action" >课程： {{count}}系列</view>
+          <view class="action">></view>
         </view>
       </view>
     </scroll-view>
