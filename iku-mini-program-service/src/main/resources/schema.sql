@@ -7,6 +7,7 @@ USE `iku`;
 CREATE TABLE IF NOT EXISTS `category` (
   `id` TINYINT(2) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(24) NOT NULL COMMENT 'the category name',
+  `display_name` VARCHAR(24) NOT NULL COMMENT 'the display name',
   `icon` VARCHAR(255) DEFAULT NULL COMMENT 'the icon for this category',
   `sequence` TINYINT(2) NOT NULL DEFAULT '0' COMMENT 'the sequence',
   `last_modified_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
