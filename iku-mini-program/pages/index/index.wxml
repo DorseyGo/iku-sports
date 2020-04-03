@@ -68,6 +68,9 @@
         <view class="bottom mg-left-xl text-white text-normal">
           <view >课程： {{count}}系列</view> >
         </view>
+        <view class="badge">
+          <image src="../../images/metal_2x.png" mode="aspectFill" />
+        </view>
       </view>
       <view class="slide mg-left">
         <view class="top-img">
@@ -88,6 +91,9 @@
         <view class="bottom mg-left-xl text-white text-normal">
           <view class="action" >课程： {{count}}系列</view>
           <view class="action">></view>
+        </view>
+        <view class="badge">
+          <image src="../../images/metal_2x.png" mode="aspectFill" />
         </view>
       </view>
     </scroll-view>

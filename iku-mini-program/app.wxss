@@ -216,7 +216,7 @@ swiper.square-dot .wx-swiper-dot.wx-swiper-dot-active {
 
 .tag {
   vertical-align: middle;
-  position: relative;
+  position: absolute;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -234,4 +234,19 @@ swiper.square-dot .wx-swiper-dot.wx-swiper-dot-active {
   position: absolute;
   top: calc(50% - 42rpx);
   left: calc(50% - 42rpx);
+}
+
+.badge {
+  vertical-align: middle;
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  top: 0;
+  right: 0;
+}
+
+.badge image {
+  width: 80rpx;
+  height: 80rpx;
 }
