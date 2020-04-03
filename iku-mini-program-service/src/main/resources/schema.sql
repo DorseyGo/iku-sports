@@ -50,17 +50,18 @@ CREATE TABLE IF NOT EXISTS `class` (
   `watches` BIGINT(20) COMMENT 'the watches for this class',
   `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `course_id` TINYINT(2) NOT NULL,
-  `teacher_id` INT(4) NOT NULL,
+  `coach_id` INT(4) NOT NULL,
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
 -- teacher
 --
-CREATE TABLE IF NOT EXISTS `teacher`(
+CREATE TABLE IF NOT EXISTS `coach`(
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(32) NOT NULL COMMENT 'the name of teacher',
   `heading_img_url` VARCHAR(255) DEFAULT NULL,
+  `title` VARCHAR(36) DEFAULT NULL,
   `gender` CHAR(1) NOT NULL DEFAULT 'U' COMMENT 'U for unknown, F for female, M for male',
   `age` INT(3) NOT NULL DEFAULT '0',
   `nationality` VARCHAR(30) NOT NULL DEFAULT 'CN' COMMENT 'the nationality, CN for China',

@@ -18,6 +18,7 @@ public class Category implements Comparable<Category> {
 
     private short id;
     private String name;
+    private String displayName;
     private String icon;
     private short sequence;
     private Date lastModifiedTime;
