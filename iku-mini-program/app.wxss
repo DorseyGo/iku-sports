@@ -227,10 +227,11 @@ swiper.square-dot .wx-swiper-dot.wx-swiper-dot-active {
 
 .presentation-slide .image {
   width: 100%;
+  position: relative;
 }
 
 .presentation-slide .image .tag {
   position: absolute;
-  top: calc(30.1% - 42rpx);
-  left: 239rpx;
+  top: calc(50% - 42rpx);
+  left: calc(50% - 42rpx);
 }
