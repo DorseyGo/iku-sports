@@ -5,6 +5,7 @@ const request  = require("../../utils/request");
 
 Page({
   data: {
+    curCategory: "basketball",
     categories: [],
     activities: []
   },

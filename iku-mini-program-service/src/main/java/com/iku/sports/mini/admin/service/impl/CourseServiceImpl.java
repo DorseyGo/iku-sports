@@ -6,6 +6,7 @@
  */
 package com.iku.sports.mini.admin.service.impl;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.iku.sports.mini.admin.entity.Activity;
 import com.iku.sports.mini.admin.entity.Category;
@@ -62,7 +63,12 @@ public class CourseServiceImpl implements CourseService {
         final List<Course> courses = getCoursesByCategoryId(categoryId);
         courses.forEach(course -> {
             short courseId = course.getId();
-            List<CourseClass> courseClasses = courseClassService.getFirst3ClassesByCourseId(courseId);
+            List<CourseClass> courseClasses = null;
+            try {
+                courseClasses = courseClassService.getFirst3ClassesByCourseId(courseId);
+            } catch (Exception e) {
+                courseClasses = Lists.newArrayListWithExpectedSize(0);
+            }
 
             levelClasses.put(courseId, courseClasses);
         });

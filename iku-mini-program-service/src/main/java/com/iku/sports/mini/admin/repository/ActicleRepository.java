@@ -33,7 +33,7 @@ public interface ActicleRepository {
 
     class ArticleSQLProvider{
         static final List<String> COLS = Arrays.asList("id", "title", "cover","create_time","author","category_id");
-        String getArticlesByCategoryId(final Map<String, Object> params){
+        public String getArticlesByCategoryId(final Map<String, Object> params){
             return new SQL(){
                 {
                     SELECT(COLS.toArray(new String[COLS.size()]));

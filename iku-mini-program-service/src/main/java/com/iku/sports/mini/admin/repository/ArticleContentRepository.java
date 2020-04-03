@@ -30,7 +30,7 @@ public interface ArticleContentRepository {
                                                        @Param("pageSize") int pageSize) throws Exception;
     class ArticleContentSQLProvider{
         static final List<String> COLS = Arrays.asList("id", "material", "material_type","create_time","article_id");
-        String getArticleContentsByArticleId(final Map<String, Object> params){
+        public String getArticleContentsByArticleId(final Map<String, Object> params){
             return new SQL(){
                 {
                     SELECT(COLS.toArray(new String[COLS.size()]));

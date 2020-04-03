@@ -32,8 +32,6 @@ public interface CourseClassRepository {
             @Result(property = "courseId", column = "course_id", jdbcType = JdbcType.TINYINT),
             @Result(property = "teacherId", column = "teacher_id", jdbcType = JdbcType.INTEGER)
     })
-
-    @ResultMap("courseClassRM")
     @SelectProvider(type = CourseClassSqlProvider.class,method = "getFirst3ClassesByCourseId")
     List<CourseClass> getFirst3ClassesByCourseId(@Param("first3ClassCourseId") short courseId) throws Exception;
 
