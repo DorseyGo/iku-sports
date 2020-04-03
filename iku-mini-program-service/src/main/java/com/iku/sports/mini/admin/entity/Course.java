@@ -14,7 +14,7 @@ import lombok.experimental.Tolerate;
 @Builder
 public class Course {
     private short id;
-
+    private String name;
     /**
      * 1, for junior
      * 2, for intermediate
@@ -22,6 +22,9 @@ public class Course {
      */
     private char level;
     private long fee;
+    private long joiner;
+    /* the background image url address */
+    private String backgroundImg;
 
     @Tolerate
     public Course() {}

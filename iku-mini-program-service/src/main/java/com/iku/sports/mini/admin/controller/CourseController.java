@@ -6,6 +6,7 @@
  */
 package com.iku.sports.mini.admin.controller;
 
+import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.model.Overview;
 import com.iku.sports.mini.admin.model.Response;
 import com.iku.sports.mini.admin.service.CourseService;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Slf4j
 @Controller
 public class CourseController {
@@ -26,6 +29,13 @@ public class CourseController {
     @Autowired
     public CourseController(@Qualifier("courseService") final CourseService courseService) {
         this.courseService = courseService;
+    }
+
+    @ResponseBody
+    @GetMapping("/api/courses/category/{categoryId}")
+    public Response<List<Course>> getCoursesByCategoryId(@PathVariable("categoryId") final short categoryId) {
+        final List<Course> courses = courseService.getCoursesByCategoryId(categoryId);
+        return new Response<List<Course>>().status(Response.SUCCESS).data(courses);
     }
 
     @ResponseBody

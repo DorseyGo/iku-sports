@@ -12,6 +12,8 @@ import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -27,11 +29,11 @@ public interface ActivityRepository {
             @Result(property = "link", column = "link", jdbcType = JdbcType.VARCHAR)
     })
     @SelectProvider(type = ActivitySQLProvider.class, method = "findFirst3ByOrderByCreateTimeDesc")
-    List<Activity> findFirst3ByOrderByCreateTimeDesc();
+    List<Activity> findFirst3ByOrderByCreateTimeDesc() throws SQLException;
 
     @ResultMap("activityRM")
     @SelectProvider(type = ActivitySQLProvider.class, method = "findFirst3ByOrderByCreateTimeDesc")
-    List<Activity> findFirst3ByCategoryIdOrderByCreateTimeDesc(@Param("categoryId") final short categoryId);
+    List<Activity> findFirst3ByCategoryIdOrderByCreateTimeDesc(@Param("categoryId") final short categoryId) throws SQLException;
 
     // -----
     // SQL provider
