@@ -16,11 +16,5 @@ Page({
         categories: res.data
       })
     })
-
-    request.get(`activities`).then(res => {
-      this.setData({
-        activities: res.data
-      })
-    })
   }
 })

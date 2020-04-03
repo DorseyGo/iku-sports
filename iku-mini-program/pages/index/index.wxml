@@ -15,9 +15,10 @@
   <!-- course -->
   <view class="card">
     <scroll-view class="text-dark-gray nav">
-      <view class="nav-item text-white current">篮球</view>
-      <view class="nav-item">网球</view>
-      <view class="nav-item">游泳</view>
+      <view class="nav-item {{curCategory == item.name ? 'text-white current' : ''}}"
+        wx:for="{{categories}}" wx:key="id">
+        {{item.displayName}}
+      </view>
     </scroll-view>
     <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
       <view class="padding-xl text-white">

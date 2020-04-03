@@ -44,7 +44,7 @@ public interface ActivityRepository {
                 {
                     SELECT(COLS.toArray(new String[COLS.size()]));
                     FROM(TABLE);
-                    if (params.get("categoryId") != null) {
+                    if (params != null && params.get("categoryId") != null) {
                         WHERE("category_id = #{categoryId}");
                     }
 
