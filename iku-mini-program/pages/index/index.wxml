@@ -67,13 +67,6 @@
         <view class="text-xl">{{item.title}}</view>
       </view>
     </view>
-    <!-- view class="bg-image bg-mask" style="background-image: url('../../images/article_2x.png')">
-      <view class="padding-xl width-half mg-left-half text-white">
-        <view class="text-xl">高级网球技巧</view>
-        <view class="text-xs">5433545人参加</view>
-        <view class="text-normal padding-top">零基础.国际教练</view>
-      </view>
-    </view -->
 
     <!-- great moment -->
     <view class="bar">
