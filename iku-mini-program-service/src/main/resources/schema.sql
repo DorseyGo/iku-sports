@@ -1,4 +1,4 @@
-CREATE DATABASE `iku`;
+CREATE DATABASE IF NOT EXISTS `iku`;
 USE `iku`;
 
 -- -----------------
@@ -6,7 +6,7 @@ USE `iku`;
 -- -----------------
 CREATE TABLE IF NOT EXISTS `category` (
   `id` TINYINT(2) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(24) NOT NULL COMMENT 'the category name',
+  `name` VARCHAR(24) NOT NULL UNIQUE COMMENT 'the category name',
   `display_name` VARCHAR(24) NOT NULL COMMENT 'the display name',
   `icon` VARCHAR(255) DEFAULT NULL COMMENT 'the icon for this category',
   `sequence` TINYINT(2) NOT NULL DEFAULT '0' COMMENT 'the sequence',
@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS `category` (
 CREATE TABLE IF NOT EXISTS `activity` (
   `id` INT(4) NOT NULL AUTO_INCREMENT,
   `image` VARCHAR(255) NOT NULL COMMENT 'the image represents the activity',
+  `title` VARCHAR(32) DEFAULT NULL COMMENT 'the brief of activity',
   `link` VARCHAR(24) DEFAULT NULL,
   `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP ,
   `category_id` TINYINT(2) NOT NULL DEFAULT '-1' COMMENT 'the category id',

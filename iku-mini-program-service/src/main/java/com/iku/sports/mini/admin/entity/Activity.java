@@ -18,6 +18,7 @@ public class Activity {
 
     private int id;
     private String image;
+    private String title;
     private String link;
     private Date createTime;
 

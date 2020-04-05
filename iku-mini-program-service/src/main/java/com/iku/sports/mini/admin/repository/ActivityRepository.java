@@ -26,6 +26,7 @@ public interface ActivityRepository {
     @Results(id = "activityRM", value = {
             @Result(property = "id", column = "id", jdbcType = JdbcType.TINYINT),
             @Result(property = "image", column = "image", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "title", column = "title", jdbcType = JdbcType.VARCHAR),
             @Result(property = "link", column = "link", jdbcType = JdbcType.VARCHAR)
     })
     @SelectProvider(type = ActivitySQLProvider.class, method = "findFirst3ByOrderByCreateTimeDesc")
@@ -39,7 +40,7 @@ public interface ActivityRepository {
     // SQL provider
     // -----
     class ActivitySQLProvider {
-        static final List<String> COLS = Arrays.asList("id", "image", "link");
+        static final List<String> COLS = Arrays.asList("id", "title", "image", "link");
 
         public String findFirst3ByOrderByCreateTimeDesc(final Map<String, Object> params) {
             return new SQL() {

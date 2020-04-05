@@ -37,6 +37,22 @@ swiper.square-dot .wx-swiper-dot.wx-swiper-dot-active {
   width: 30rpx;
 }
 
+swiper-item {
+  position: relative;
+}
+
+swiper-item .bottom-mask::after {
+  content: "";
+  border-radius: inherit;
+	width: 20%;
+	height: 47rpx;
+	display: block;
+	background-color: rgba(0, 0, 0, 0.3);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
 .nav {
   white-space: nowrap;
   font-size: 24rpx;
