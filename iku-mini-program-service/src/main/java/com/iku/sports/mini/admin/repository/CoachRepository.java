@@ -43,14 +43,14 @@ public interface CoachRepository {
     Coach getCoachById(@Param("coachId") int id) ;
 
     class CoachSqlProvider{
-        static List<String> simpleCols = Arrays.asList("name","heading_img_url","title","nationality","level");
-        static List<String> allCols = Arrays.asList("id","name","age","heading_img_url","title","gender","nationality","level","introduce");
+        static List<String> simpleCols = Arrays.asList("t.name","t.heading_img_url","t.title","t.nationality","t.level");
+        static List<String> allCols = Arrays.asList("t.id","t.name","t.age","t.heading_img_url","t.title","t.gender","t.nationality","t.level","t.introduce");
         public String getAllCoachesBriefs(){
             return new SQL(){
                 {
-                    SELECT(simpleCols.toArray(new String[simpleCols.size()])+"count(t1.id) as calsses");
+                    SELECT(simpleCols.toArray(new String[simpleCols.size()])+"count(t1.id) as classes");
                     FROM(COACHTABLE+" t");
-                    LEFT_OUTER_JOIN(COURSECLASSTABLE+" t1 on t.id = t1.coachid");
+                    LEFT_OUTER_JOIN(COURSECLASSTABLE+" t1 on t.id = t1.coach_id");
                     GROUP_BY(simpleCols.toArray(new String[simpleCols.size()]));
                     ORDER_BY("t.level desc");
                 }
@@ -70,13 +70,3 @@ public interface CoachRepository {
 
 
 }
-
-    /*REATE TABLE IF NOT EXISTS `coach`(
-        `id` INT NOT NULL AUTO_INCREMENT,
-        `name` VARCHAR(32) NOT NULL COMMENT 'the name of teacher',
-        `heading_img_url` VARCHAR(255) DEFAULT NULL,
-        `title` VARCHAR(36) DEFAULT NULL,
-        `gender` CHAR(1) NOT NULL DEFAULT 'U' COMMENT 'U for unknown, F for female, M for male',
-        `age` INT(3) NOT NULL DEFAULT '0',
-        `nationality` VARCHAR(30) NOT NULL DEFAULT 'CN' COMMENT 'the nationality, CN for China',
-        `level` TINYINT(2) NOT NULL DEFAULT '1*/
