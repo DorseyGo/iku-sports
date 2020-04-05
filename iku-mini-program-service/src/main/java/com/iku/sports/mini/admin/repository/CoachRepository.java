@@ -31,8 +31,8 @@ public interface CoachRepository {
             @Result(property = "gender",column = "gender",jdbcType = JdbcType.INTEGER),
             @Result(property = "age",column = "age",jdbcType = JdbcType.INTEGER),
             @Result(property = "nationality",column = "nationality",jdbcType = JdbcType.VARCHAR),
-            @Result(property = "level",column = "level",jdbcType = JdbcType.INTEGER,
-            @Result(property = "introduce",column = "introduce",jdbcType = JdbcType.VARCHAR))
+            @Result(property = "level",column = "level",jdbcType = JdbcType.INTEGER),
+            @Result(property = "introduce",column = "introduce",jdbcType = JdbcType.VARCHAR)
     })
 
     @SelectProvider(type = CoachSqlProvider.class,method = "getAllCoachesBriefs")
