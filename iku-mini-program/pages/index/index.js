@@ -8,6 +8,8 @@ Page({
     curCategory: "basketball",
     categories: [],
     courses: [],
+    coachInfos: [],
+    articles: [],
     activities: []
   },
 
@@ -29,6 +31,27 @@ Page({
     })
 
     this.loadCoursesByCategoryName()
+
+    /** request to fetch coach infos */
+    request.get(`coaches`).then(res => {
+      this.setData({
+        coachInfos: res.data
+      })
+    }, reason => {
+      console.log(reason)
+    }).catch(err => {
+      console.log(err)
+    })
+
+    request.get(`articles/first3`).then(res => {
+      this.setData({
+        articles: res.data
+      })
+    }, reason => {
+      console.log(reason)
+    }).catch(err => {
+      console.log(err)
+    })
   },
 
   loadCoursesByCategoryName: function() {

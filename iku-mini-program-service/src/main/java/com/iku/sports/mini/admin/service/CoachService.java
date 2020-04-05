@@ -13,6 +13,6 @@ import java.util.List;
  * CopyRight: All rights reserved
  **/
 public interface CoachService {
-    List<CoachInfo> getAllCoachesBriefs();
+    List<CoachInfo> getAllCoachInfos();
     Coach getCoachById(final int id);
 }

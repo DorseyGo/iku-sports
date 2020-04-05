@@ -30,50 +30,26 @@
     </view>
 
     <scroll-view class="scroll-slides" scroll-x="{{true}}">
-      <view class="slide mg-left">
+      <view class="slide mg-left" wx:for="{{coachInfos}}" wx:key="id">
         <view class="top-img">
-          <image src="" />
+          <image src="{{item.headingImgUrl}}" mode="aspectFill" />
         </view>
         <view class="bottom-img">
-          <image src="../../images/coach_bg_selected_2x.png" />
+          <image src="{{item.level == 4 ? '../../images/coach_bg_selected_2x.png' : '../../images/coach_bg_2x.png'}}" />
         </view>
         <view class="content mg-left-xl">
           <view class="info">
-            <view class="text-black text-lg">LBJ</view>
-            <view class="text-dark-gray text-sm">国际教练 中国女篮教练</view>
+            <view class="text-black text-lg">{{item.name}}</view>
+            <view class="text-dark-gray text-sm">{{item.title}}</view>
           </view>
           <view class="action">
-            <image src="../../images/Icon_collect_clicked_2x.png" />
+            <image src="{{item.level == 4 ? '../../images/Icon_collect_clicked_2x.png' : '../../images/Icon_collect_normal_2x.png'}}" />
           </view>
         </view>
-        <view class="bottom mg-left-xl text-white text-normal">
-          <view >课程： {{count}}系列</view> >
-        </view>
-        <view class="badge">
-          <image src="../../images/metal_2x.png" mode="aspectFill" />
-        </view>
-      </view>
-      <view class="slide mg-left">
-        <view class="top-img">
-          <image src="" />
-        </view>
-        <view class="bottom-img">
-          <image src="../../images/coach_bg_2x.png" />
-        </view>
-        <view class="content mg-left-xl">
-          <view class="action">
-            <view class="text-white text-lg">LBJ</view>
-            <view class="text-dark-gray text-sm">国际教练 中国女篮教练</view>
-          </view>
-          <view class="action">
-            <image src="../../images/Icon_collect_clicked_2x.png" />
-          </view>
-        </view>
-        <view class="bottom mg-left-xl text-white text-normal">
-          <view class="action" >课程： {{count}}系列</view>
-          <view class="action">></view>
-        </view>
-        <view class="badge">
+        <navigator url="" class="bottom mg-left-xl text-white text-normal">
+          <view >课程： {{item.numOfCoachClasses}}系列</view> >
+        </navigator>
+        <view wx:if="{{item.level == 4}}" class="badge">
           <image src="../../images/metal_2x.png" mode="aspectFill" />
         </view>
       </view>
@@ -86,18 +62,23 @@
       </view>
     </view>
 
-    <view class="bg-image bg-mask" style="background-image: url('../../images/article_2x.png')">
+    <view class="bg-image bg-mask" style="background-image: url('{{item.cover}}')" wx:for="{{articles}}" wx:key="id">
+      <view class="padding-xl width-half mg-left-half text-white">
+        <view class="text-xl">{{item.title}}</view>
+      </view>
+    </view>
+    <!-- view class="bg-image bg-mask" style="background-image: url('../../images/article_2x.png')">
       <view class="padding-xl width-half mg-left-half text-white">
         <view class="text-xl">高级网球技巧</view>
         <view class="text-xs">5433545人参加</view>
         <view class="text-normal padding-top">零基础.国际教练</view>
       </view>
-    </view>
+    </view -->
 
     <!-- great moment -->
     <view class="bar">
       <view class="action text-white">
-        <text class="icon-titles text-yellow">|</text>精彩瞬间
+        <text class="icon-titles text-yellow">|</text>热门视频
       </view>
     </view>
 

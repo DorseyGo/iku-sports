@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 @Builder
@@ -12,9 +12,9 @@ public class Article {
     private int id ;
     private String title;
     private String cover;
-    private Timestamp createTime;
+    private Date createTime;
     private String author;
-    private String categoryId;
+    private short categoryId;
 
     @Tolerate
     public Article(){}

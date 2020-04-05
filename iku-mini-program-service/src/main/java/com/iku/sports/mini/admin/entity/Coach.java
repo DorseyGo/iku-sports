@@ -2,6 +2,7 @@ package com.iku.sports.mini.admin.entity;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Tolerate;
 
 /**
  * File: Coach
@@ -16,11 +17,13 @@ public class Coach {
     private int id;
     private String name;
     private String title;
-    private String heading_img_url;
+    private String headingImgUrl;
     private String gender;
     private int age;
     private String nationality;
     private int level;
     private String introduce;
-    //private int courseTotalNum;
+
+    @Tolerate
+    public Coach() {}
 }

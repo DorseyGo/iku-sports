@@ -5,8 +5,6 @@ import com.iku.sports.mini.admin.model.CoachInfo;
 import com.iku.sports.mini.admin.model.Response;
 import com.iku.sports.mini.admin.service.CoachService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -27,7 +25,6 @@ import java.util.List;
 @Controller
 public class CoachController  {
     private  final CoachService coachService;
-    private Logger logger = LoggerFactory.getLogger(CoachController.class);
 
     @Autowired
     public CoachController(@Qualifier("coachService") final CoachService coachService){
@@ -35,25 +32,25 @@ public class CoachController  {
     }
 
     @ResponseBody
-    @GetMapping("/api/coaches/briefs")
+    @GetMapping("/api/coaches")
     public Response<List<CoachInfo>> getAllCoachesBriefs() {
         try {
-            final List<CoachInfo> coachInfos = coachService.getAllCoachesBriefs();
+            final List<CoachInfo> coachInfos = coachService.getAllCoachInfos();
             return new Response<List<CoachInfo>>().status(Response.SUCCESS).data(coachInfos);
         } catch (Exception e) {
-            logger.error("Fail to get about of all coaches.", e);
+            log.error("Fail to get about of all coaches.", e);
             return new Response<List<CoachInfo>>().status(Response.FAIL);
         }
     }
 
     @ResponseBody
-    @GetMapping("/api/coach/{coachid}")
-    public Response<Coach> getCoachById(@PathVariable("coachid")final int id){
+    @GetMapping("/api/coaches/{coachId}")
+    public Response<Coach> getCoachById(@PathVariable("coachId") final int id){
         try{
             final Coach coach = coachService.getCoachById(id);
             return new Response<Coach>().status(Response.SUCCESS).data(coach);
         }catch (Exception e){
-            logger.error("Fail to get coach by id:{}",id,e);
+            log.error("Fail to get coach by id:{}",id,e);
             return new Response<Coach>().status(Response.FAIL);
         }
     }
