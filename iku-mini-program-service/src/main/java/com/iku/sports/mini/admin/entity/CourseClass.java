@@ -19,6 +19,6 @@ public class CourseClass {
    private String content;
    private long watches;
    private int courseId;
-   private int teacherId;
+   private int coachId;
    private String videoUrl;
 }

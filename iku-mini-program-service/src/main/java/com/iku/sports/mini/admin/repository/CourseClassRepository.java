@@ -1,11 +1,13 @@
 package com.iku.sports.mini.admin.repository;
 
 import com.iku.sports.mini.admin.entity.CourseClass;
+import javafx.beans.binding.When;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +32,7 @@ public interface CourseClassRepository {
             @Result(property = "content", column = "content", jdbcType = JdbcType.VARCHAR),
             @Result(property = "watches", column = "watches", jdbcType = JdbcType.BIGINT),
             @Result(property = "courseId", column = "course_id", jdbcType = JdbcType.TINYINT),
-            @Result(property = "teacherId", column = "teacher_id", jdbcType = JdbcType.INTEGER)
+            @Result(property = "coachId", column = "coach_id", jdbcType = JdbcType.INTEGER)
     })
     @SelectProvider(type = CourseClassSqlProvider.class,method = "getFirst3ClassesByCourseId")
     List<CourseClass> getFirst3ClassesByCourseId(@Param("first3ClassCourseId") short courseId) throws Exception;
@@ -53,9 +55,24 @@ public interface CourseClassRepository {
     List<CourseClass> getTop3ClassicByCategoryId(@Param("top3CategoryId") short categoryId,
                                                  @Param("top3CategoryDays") int days)throws Exception;
 
+    @ResultMap("courseClassRM")
+    @SelectProvider(type = CourseClassSqlProvider.class,method = "getClassByCourseId")
+    List<CourseClass> getClassByCourseId(@Param("courseId") short courseId);
+
     class CourseClassSqlProvider {
-        static final List<String> ALLCOLS = Arrays.asList("id","title","cover","chapter","video_url","content","watches","course_id","teacher_id");
+        static final List<String> ALLCOLS = Arrays.asList("id","title","cover","chapter","video_url","content","watches","course_id","coach_id");
         static final List<String> SIMPLECOLS = Arrays.asList("t.id","t.title","t.cover","t.content","t.watches","t.course_id");
+
+        public String getClassByCourseId(final Map<String, Object> param){
+            return new SQL(){
+                {
+                    SELECT(ALLCOLS.toArray(new String[ALLCOLS.size()]));
+                    FROM(CLASSTABLE);
+                    WHERE("course_id = #{courseId}");
+                    ORDER_BY("watches desc");
+                }
+            }.toString();
+        }
 
         public String getTop3ClassicByCategoryId(final Map<String,Object> params){
             return new SQL(){

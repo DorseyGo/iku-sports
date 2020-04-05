@@ -57,6 +57,18 @@ public class CourseClassController {
     }
 
     @ResponseBody
+    @GetMapping("/api/classes/{courseId}")
+    public Response<List<CourseClass>> getFirstClassesByCourseId(@PathVariable("courseId") final short courseId){
+        try{
+            final List<CourseClass> courseClass = courseClassService.getClassesByCourseId(courseId);
+            return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClass);
+        }catch (Exception e){
+            log.error("Fail to get class by courseid.",e);
+            return new Response<List<CourseClass>>().status(Response.FAIL);
+        }
+    }
+
+    @ResponseBody
     @GetMapping("/api/classes")
     public Response<List<CourseClass>> paginateClasses(@RequestParam("courseId") short courseId,
                                                        @RequestParam("offset") int offset,

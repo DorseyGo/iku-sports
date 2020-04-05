@@ -62,4 +62,9 @@ public class CourseClassServiceImpl implements CourseClassService {
     public List<CourseClass> getTop3ClassicByCategoryId(short categoryId, int days) throws Exception {
         return courseClassRepository.getTop3ClassicByCategoryId(categoryId, days);
     }
+
+    @Override
+    public List<CourseClass> getClassesByCourseId(short courseId) throws Exception {
+        return courseClassRepository.getClassByCourseId(courseId);
+    }
 }
