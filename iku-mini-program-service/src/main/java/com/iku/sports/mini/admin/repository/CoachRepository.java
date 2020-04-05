@@ -31,7 +31,8 @@ public interface CoachRepository {
             @Result(property = "gender",column = "gender",jdbcType = JdbcType.INTEGER),
             @Result(property = "age",column = "age",jdbcType = JdbcType.INTEGER),
             @Result(property = "nationality",column = "nationality",jdbcType = JdbcType.VARCHAR),
-            @Result(property = "level",column = "level",jdbcType = JdbcType.INTEGER)
+            @Result(property = "level",column = "level",jdbcType = JdbcType.INTEGER,
+            @Result(property = "introduce",column = "introduce",jdbcType = JdbcType.VARCHAR))
     })
 
     @SelectProvider(type = CoachSqlProvider.class,method = "getAllCoachesBriefs")
@@ -43,13 +44,13 @@ public interface CoachRepository {
 
     class CoachSqlProvider{
         static List<String> simpleCols = Arrays.asList("name","heading_img_url","title","nationality","level");
-        static List<String> allCols = Arrays.asList("id","name","age","heading_img_url","title","gender","nationality","level");
+        static List<String> allCols = Arrays.asList("id","name","age","heading_img_url","title","gender","nationality","level","introduce");
         public String getAllCoachesBriefs(){
             return new SQL(){
                 {
                     SELECT(simpleCols.toArray(new String[simpleCols.size()])+"count(t1.id) as calsses");
                     FROM(COACHTABLE+" t");
-                    LEFT_OUTER_JOIN(COURSECLASSTABLE+" t1 on t.id = t1.cocahid");
+                    LEFT_OUTER_JOIN(COURSECLASSTABLE+" t1 on t.id = t1.coachid");
                     GROUP_BY(simpleCols.toArray(new String[simpleCols.size()]));
                     ORDER_BY("t.level desc");
                 }

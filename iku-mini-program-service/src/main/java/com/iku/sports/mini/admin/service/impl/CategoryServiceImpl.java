@@ -8,10 +8,7 @@ package com.iku.sports.mini.admin.service.impl;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
-import com.google.common.cache.CacheStats;
 import com.google.common.cache.LoadingCache;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.iku.sports.mini.admin.entity.Category;
 import com.iku.sports.mini.admin.repository.CategoryRepository;
 import com.iku.sports.mini.admin.service.CategoryService;
@@ -22,10 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 
 @Slf4j

@@ -1,8 +1,12 @@
 package com.iku.sports.mini.admin.controller;
 
 import com.iku.sports.mini.admin.entity.Coach;
+import com.iku.sports.mini.admin.model.CoachInfo;
 import com.iku.sports.mini.admin.model.Response;
+import com.iku.sports.mini.admin.service.CoachService;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -23,6 +27,7 @@ import java.util.List;
 @Controller
 public class CoachController  {
     private  final CoachService coachService;
+    private Logger logger = LoggerFactory.getLogger(CoachController.class);
 
     @Autowired
     public CoachController(@Qualifier("coachService") final CoachService coachService){
@@ -31,13 +36,13 @@ public class CoachController  {
 
     @ResponseBody
     @GetMapping("/api/coaches/briefs")
-    public Response<List<Coach>> getAllCoachesBriefs() {
+    public Response<List<CoachInfo>> getAllCoachesBriefs() {
         try {
-            final List<Coach> coach = coachService.getAllCoachesBriefs;
-            return new Response<List<Coach>>().status(Response.SUCCESS).data(coach);
+            final List<CoachInfo> coachInfos = coachService.getAllCoachesBriefs();
+            return new Response<List<CoachInfo>>().status(Response.SUCCESS).data(coachInfos);
         } catch (Exception e) {
-            log.error("Fail to get about of all coaches.", e);
-            return new Response<List<Coach>>().status(Response.FAIL);
+            logger.error("Fail to get about of all coaches.", e);
+            return new Response<List<CoachInfo>>().status(Response.FAIL);
         }
     }
 
@@ -48,21 +53,10 @@ public class CoachController  {
             final Coach coach = coachService.getCoachById(id);
             return new Response<Coach>().status(Response.SUCCESS).data(coach);
         }catch (Exception e){
-            log.error("Fail to get coach by id:{}",id,e);
+            logger.error("Fail to get coach by id:{}",id,e);
             return new Response<Coach>().status(Response.FAIL);
         }
     }
 
-    @ResponseBody
-    @GetMapping("/api/coach/classes/{coachid}")
-    public Response<int> getCoachNumOfCourseClasses(@PathVariable("coachid")final int id){
-        try{
-            final int num = coachService.getCoachNumOfCourseClasses(id);
-            return new Response<int>().status(Response.SUCCESS).data(num);
-        }catch (Exception e){
-            log.error("Fail to get Number of coaching courclasses by id:{}",id,e);
-            return new Response<int>().status(Response.FAIL);
-        }
-    }
 
 }
