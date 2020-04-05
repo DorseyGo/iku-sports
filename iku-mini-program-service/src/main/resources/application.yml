@@ -5,8 +5,10 @@ iku:
   mini-program:
     database:
       hostname: 127.0.0.1
-      port: 3306
+      port: 3307
       db-name: iku
+    static-resource-server: http://localhost:9080/static
+
 
 spring:
   output:
@@ -26,3 +28,8 @@ spring:
       validation-timeout: 1800
   jpa:
     show-sql: true
+  mvc:
+    static-path-pattern: /static/**
+logging:
+  level:
+    com.iku.sports.mini.admin.repository: debug

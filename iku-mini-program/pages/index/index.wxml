@@ -1,15 +1,8 @@
 <scroll-view scroll-y="{{true}}" class="container">
   <swiper class="screen-swiper square-dot" indicator-dots="{{true}}" 
     autoplay="{{true}}" interval="5000" duration="500" circular="{{true}}">
-    <swiper-item>
-      <image src="../../images/basketball_2x.png" mode="aspectFill"/>
-      <view class="bottom-mask text-normal text-white">标题</view>
-    </swiper-item>
-    <swiper-item>
-      <image src="../../images/swimming_2x.png" mode="aspectFill" />
-    </swiper-item>
-    <swiper-item>
-      <image src="../../images/tennies_2x.png" mode="aspectFill" />
+    <swiper-item wx:for="{{activities}}" wx:key="id">
+      <image src="{{item.image}}" mode="aspectFill"/>
     </swiper-item>
   </swiper>
 
@@ -17,28 +10,14 @@
   <view class="card">
     <scroll-view class="text-dark-gray nav">
       <view class="nav-item {{curCategory == item.name ? 'text-white current' : ''}}"
-        wx:for="{{categories}}" wx:key="id">
+        wx:for="{{categories}}" wx:key="id" bindtap = "navTo" data-cur="{{item.name}}" data-name="">
         {{item.displayName}}
       </view>
     </scroll-view>
-    <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
+    <view class="bg-image bg-mask" style="background-image: url('{{item.backgroundImg}}')" wx:for="{{courses}}" wx:key="id">
       <view class="padding-xl text-white">
-        <view class="text-xl">初级篮球技巧</view>
-        <view class="text-xs">5433545人参加</view>
-        <view class="text-normal padding-top">零基础.国际教练</view>
-      </view>
-    </view>
-    <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
-      <view class="padding-xl text-white">
-        <view class="text-xl">中级篮球技巧</view>
-        <view class="text-xs">5433545人参加</view>
-        <view class="text-normal padding-top">零基础.国际教练</view>
-      </view>
-    </view>
-    <view class="bg-image bg-mask" style="background-image: url('../../images/basketball_2x.png')">
-      <view class="padding-xl text-white">
-        <view class="text-xl">高级篮球技巧</view>
-        <view class="text-xs">5433545人参加</view>
+        <view class="text-xl">{{item.name}}</view>
+        <view class="text-xs">{{item.joiner}}人参加</view>
         <view class="text-normal padding-top">零基础.国际教练</view>
       </view>
     </view>

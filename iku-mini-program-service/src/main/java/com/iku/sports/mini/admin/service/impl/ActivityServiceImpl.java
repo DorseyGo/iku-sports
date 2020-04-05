@@ -7,15 +7,17 @@
 package com.iku.sports.mini.admin.service.impl;
 
 import com.google.common.collect.Lists;
+import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.entity.Activity;
+import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.ActivityRepository;
 import com.iku.sports.mini.admin.service.ActivityService;
+import com.iku.sports.mini.admin.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,16 +26,25 @@ import java.util.List;
 public class ActivityServiceImpl implements ActivityService {
 
     private final ActivityRepository activityRepository;
+    private final IkuSportsConfig config;
 
     @Autowired
-    public ActivityServiceImpl(@Qualifier("activityRepository") final ActivityRepository activityRepository) {
+    public ActivityServiceImpl(@Qualifier("activityRepository") final ActivityRepository activityRepository,
+            IkuSportsConfig config) {
         this.activityRepository = activityRepository;
+        this.config = config;
     }
 
     @Override
     public List<Activity> getFirst3Activities() {
         try {
-            return activityRepository.findFirst3ByOrderByCreateTimeDesc();
+            List<Activity> activities = activityRepository.findFirst3ByOrderByCreateTimeDesc();
+            activities.forEach(activity -> {
+                activity.setImage(Utils.join(config.getStaticResourceServer(),
+                                             activity.getImage(), Constants.FORWARD_SLASH));
+            });
+
+            return activities;
         } catch (SQLException e) {
             log.error("Failed to fetch first 3 activities", e);
             return Lists.newArrayListWithExpectedSize(0);

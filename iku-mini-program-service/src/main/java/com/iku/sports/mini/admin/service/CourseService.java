@@ -7,6 +7,7 @@
 package com.iku.sports.mini.admin.service;
 
 import com.iku.sports.mini.admin.entity.Course;
+import com.iku.sports.mini.admin.exception.ApiInvokedException;
 import com.iku.sports.mini.admin.model.Overview;
 
 import java.util.List;
@@ -14,5 +15,5 @@ import java.util.List;
 public interface CourseService {
     List<Course> getCoursesByCategoryId(final short categoryId);
 
-    Overview getCourseOverviewByCategoryId(final short categoryId) throws Exception;
+    List<Course> getCoursesByCategoryName(String categoryName) throws ApiInvokedException;
 }
