@@ -1,12 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/students/students",
     "pages/about/about",
     "pages/course/course",
-    "pages/course/list/list",
-    "pages/course/details/details",
-    "pages/article/list/list",
+    "pages/course/classes/list",
     "pages/article/details/details",
     "pages/logs/logs"
   ],
@@ -25,11 +22,6 @@
       "text": "首页",
       "iconPath": "images/home_2x.png",
       "selectedIconPath": "images/home_selected_2x.png"
-    }, {
-      "pagePath": "pages/students/students",
-      "text": "课程",
-      "iconPath": "images/course_2x.png",
-      "selectedIconPath":"images/course_selected_2x.png"
     }, {
       "pagePath": "pages/about/about",
       "text": "我的",
