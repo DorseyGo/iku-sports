@@ -72,6 +72,13 @@
 					"id": -1,
 					"name": "pages/index/index",
 					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/classes/list",
+					"pathName": "pages/course/classes/list",
 					"scene": null
 				}
 			]

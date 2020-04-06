@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 public class Course {
@@ -25,6 +27,11 @@ public class Course {
     private long joiner;
     /* the background image url address */
     private String backgroundImg;
+
+    /**
+     * The charge, which derived from field 'fee'
+     */
+    private BigDecimal charge;
 
     @Tolerate
     public Course() {}

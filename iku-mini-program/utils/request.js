@@ -14,7 +14,7 @@ const request = (uri, options) => {
                     return
                 }
 
-                reject(result.data)
+                reject(result.data.errorPhase)
             },
             fail: (error) => {reject(error.data)},
             complete: () => {

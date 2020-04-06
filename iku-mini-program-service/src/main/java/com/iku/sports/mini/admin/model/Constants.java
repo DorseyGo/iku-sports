@@ -8,4 +8,7 @@ package com.iku.sports.mini.admin.model;
 
 public interface Constants {
     String FORWARD_SLASH = "/";
+
+    /* retain how many numbers */
+    int DIVIDE_SCALE = 2;
 }

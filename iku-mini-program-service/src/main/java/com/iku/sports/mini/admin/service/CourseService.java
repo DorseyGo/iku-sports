@@ -16,4 +16,6 @@ public interface CourseService {
     List<Course> getCoursesByCategoryId(final short categoryId);
 
     List<Course> getCoursesByCategoryName(String categoryName) throws ApiInvokedException;
+
+    Course getCourseByCourseId(short courseId) throws ApiInvokedException;
 }

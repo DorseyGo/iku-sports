@@ -50,4 +50,16 @@ public class CourseController {
             return new Response<List<Course>>().status(Response.FAIL);
         }
     }
+
+    @ResponseBody
+    @GetMapping("/api/courses/{courseId}")
+    public Response<Course> getCourseById(@PathVariable("courseId") final short courseId) {
+        try {
+            final Course course = courseService.getCourseByCourseId(courseId);
+            return new Response<Course>().status(Response.SUCCESS).data(course);
+        } catch (ApiInvokedException e) {
+            log.error("Failed to get course by id: {}", courseId, e);
+            return new Response<Course>().status(Response.FAIL);
+        }
+    }
 }

@@ -37,6 +37,10 @@ public interface CourseRepository {
     @SelectProvider(type = CourseSQLProvider.class, method = "findCoursesByCategoryName")
     List<Course> findCoursesByCategoryName(@Param("categoryName") String categoryName) throws SQLException;
 
+    @ResultMap("courseRM")
+    @SelectProvider(type = CourseSQLProvider.class, method = "findCourseById")
+    Course findCourseById(@Param("courseId") final short courseId) throws SQLException;
+
     // -----
     // SQL provider
     // -----
@@ -62,6 +66,16 @@ public interface CourseRepository {
                     if (params.get("categoryName") != null) {
                         WHERE("t.name = #{categoryName}");
                     }
+                }
+            }.toString();
+        }
+
+        public String findCourseById(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT(COLS.toArray(new String[COLS.size()]));
+                    FROM(TABLE);
+                    WHERE("id = #{courseId}");
                 }
             }.toString();
         }
