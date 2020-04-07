@@ -1,0 +1,38 @@
+<scroll-view scroll-y="{{true}}" class="list menu-avatar">
+    <view class="list-item">
+        <view class="ik-avatar radius lg" style="background-image: url('../../../images/basketball_2x.png')"></view>
+        <view class="content">
+            <view class="text-white">
+                <text class="text-cut">运球</text>
+            </view>
+            <view class="text-dark-gray text-sm flex">
+                <text class="text-cut">运球技巧在于出其不意</text>
+            </view>
+        </view>
+        <view class="action">
+            <view class="text-dark-gray text-sm">阅读</view>
+            <view class="ik-tag round bg-red sm">120000</view>
+        </view>
+    </view>
+    <view class="list-item">
+        <view class="ik-avatar radius lg" style="background-image: url('../../../images/basketball_3x.png')"></view>
+        <view class="content">
+            <view class="text-white">
+                <text class="text-cut">防守</text>
+            </view>
+            <view class="text-dark-gray text-sm flex">
+                <text class="text-cut">防守技巧在于不动如山，动如脱兔</text>
+            </view>
+        </view>
+        <view class="action">
+            <view class="text-dark-gray text-sm">阅读</view>
+            <view class="ik-tag round bg-gray sm">120000</view>
+        </view>
+    </view>
+</scroll-view>
+<view class="ik-bar tab-bar bg-bg-color border shop">
+    <view class="action text-orange">
+        总计：{{course.charge}}
+    </view>
+    <view class="bg-red submit">购买</view>
+</view>
