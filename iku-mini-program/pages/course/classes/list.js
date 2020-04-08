@@ -15,7 +15,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    let courseId = options.courseId
+    let courseId = 1 //options.courseId
     /** request to fetch course by its id */
     request.get(`courses/` + courseId).then(res => {
       this.setData({
@@ -28,13 +28,18 @@ Page({
       /** if exception detected */
       console.log(err)
     })
+    let c = this.data.course
+    console.log(c)
+    wx.setNavigationBarTitle({   
+      title: 'zz'
+    })
   },
 
   /**
    * Lifecycle function--Called when page is initially rendered
    */
   onReady: function () {
-
+    
   },
 
   /**
