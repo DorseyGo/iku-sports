@@ -1,1 +1,140 @@
-/* pages/about/about.wxss */
+page {
+    background-color: #181818;
+}
+
+.about_my {
+    display: flex;
+    position: relative;
+    height: 324rpx;
+    width: 670rpx;
+    background-color: #232323;
+    margin-top: 44rpx;
+    margin-left: 40rpx;
+    margin-right: 40rpx;
+    margin-bottom: 60rpx;
+    border-radius: 20rpx;
+}
+
+.about_my image {
+    height: 100rpx;
+    width: 100rpx;
+    border-radius: 50%;
+    margin-top: 40rpx;
+    margin-left: 40rpx;
+}
+
+.nick_name {
+    position: absolute;
+    display: flex;
+    margin-top: 40rpx;
+    margin-left: 166rpx;
+    color: #FFFFFF;
+}
+
+.phone {
+    position: absolute;
+    display: flex;
+    margin-top: 106rpx;
+    margin-left: 166rpx;
+    font-size: 26rpx;
+    color: #959597;
+}
+
+.bind_phone {
+    position: absolute;
+    display: flex;
+    margin-top: 70rpx;
+    margin-left: 480rpx;
+    margin-right: 40rpx;
+    font-size: 24rpx;
+    border-radius: 22rpx;
+    background-color: #353621;
+    color: #FFC803;
+}
+
+.my_class_num {
+    position: absolute;
+    display: flex;
+    margin-top: 212rpx;
+    margin-left: 144rpx;
+    font-size: 30rpx;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.my_class {
+    position: absolute;
+    display: flex;
+    margin-top: 260rpx;
+    margin-left: 116rpx;
+    font-size: 26rpx;
+    color: #88888A;
+}
+
+.my_concern_num {
+    position: absolute;
+    display: flex;
+    margin-top: 212rpx;
+    margin-left: 486rpx;
+    font-size: 30rpx;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.my_concern {
+    position: absolute;
+    display: flex;
+    margin-top: 260rpx;
+    margin-left: 450rpx;
+    font-size: 26rpx;
+    color: #88888A;
+}
+
+.bar {
+    display: flex;
+    flex-direction: row;
+}
+
+.studied, .collected {
+    display: flex;
+    /* flex: 20%; */
+    justify-items: left;
+    font-size: 30rpx;
+    width: 120rpx;
+    color: #6A6A6C;
+}
+
+.studied {
+    margin-left: 42rpx;
+}
+
+.collected {
+    margin-right: 360rpx;
+    color: #FFFFFF;
+    border-bottom: 4rpx solid #FFC803
+}
+
+.course_list {
+    display: flex;
+}
+
+.image-size {
+    display: flex;
+    height: 220rpx;
+    width: 160rpx;
+    border-radius: 12rpx;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 60rpx 24rpx 0rpx 62rpx;
+}
+
+.paddings {
+    display: flex;
+    flex-direction: column;
+    margin: 60rpx 0rpx 0rpx 28rpx;
+}
+
+.padding-text {
+    padding: 60rpx 0 0 0;
+}

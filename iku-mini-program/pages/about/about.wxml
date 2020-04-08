@@ -1,2 +1,32 @@
-<!--pages/about/about.wxml-->
-<text>pages/about/about.wxml</text>
+<view class="about_my">
+    <image src="../../images/article_3x.png" mode="scaleToFill" />
+    <view class="nick_name">昵称很长很长</view>
+    <view class="phone">13800138000</view>
+    <view class="bind_phone">绑定手机号></view>
+    <view class="my_class_num">123</view>
+    <view class="my_class">我的课程</view>
+    <view class="my_concern_num">456</view>
+    <view class="my_concern">我的关注</view>
+</view>
+<view class="bar">
+    <view class="studied">已学课程</view>
+    <view class="collected">收藏课程</view>
+</view>
+<view class="course_list">
+    <view class="image-size" style="background-image: url('../../images/basketball_2x.png')"></view>
+    <view class="text-white paddings">
+        <view class="text-lg">已学课程</view>
+        <view class="text-sm">课程简介课程简介课程简介课程简介</view>
+        <view class="text-normal padding-text">51 课时</view>
+        <view class="text-xs">继续观看 如何三步上篮></view>
+    </view>
+</view>
+<view class="course_list">
+    <view class="image-size" style="background-image: url('../../images/basketball_2x.png')"></view>
+    <view class="text-white paddings">
+        <view class="text-lg">收藏课程</view>
+        <view class="text-sm">课程简介课程简介课程简介课程简介</view>
+        <view class="text-normal padding-text">51 课时 12234人已学习</view>
+        <view class="text-xs">￥199</view>
+    </view>
+</view>
