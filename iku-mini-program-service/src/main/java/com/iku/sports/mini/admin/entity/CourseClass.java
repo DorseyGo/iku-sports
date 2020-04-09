@@ -21,4 +21,5 @@ public class CourseClass {
    private int courseId;
    private int coachId;
    private String videoUrl;
+   private String cover;
 }

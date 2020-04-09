@@ -58,7 +58,7 @@ public class CourseClassController {
 
     @ResponseBody
     @GetMapping("/api/classes/{courseId}")
-    public Response<List<CourseClass>> getFirstClassesByCourseId(@PathVariable("courseId") final short courseId){
+    public Response<List<CourseClass>> getClassesByCourseId(@PathVariable("courseId") final short courseId){
         try{
             final List<CourseClass> courseClass = courseClassService.getClassesByCourseId(courseId);
             return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClass);

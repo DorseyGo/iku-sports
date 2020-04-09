@@ -32,7 +32,9 @@ public interface CourseClassRepository {
             @Result(property = "content", column = "content", jdbcType = JdbcType.VARCHAR),
             @Result(property = "watches", column = "watches", jdbcType = JdbcType.BIGINT),
             @Result(property = "courseId", column = "course_id", jdbcType = JdbcType.TINYINT),
-            @Result(property = "coachId", column = "coach_id", jdbcType = JdbcType.INTEGER)
+            @Result(property = "coachId", column = "coach_id", jdbcType = JdbcType.INTEGER),
+            @Result(property = "cover", column = "cover", jdbcType = JdbcType.VARCHAR)
+
     })
     @SelectProvider(type = CourseClassSqlProvider.class,method = "getFirst3ClassesByCourseId")
     List<CourseClass> getFirst3ClassesByCourseId(@Param("first3ClassCourseId") short courseId) throws Exception;
