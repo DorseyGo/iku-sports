@@ -6,7 +6,7 @@ Page({
    * Page initial data
    */
   data: {
-    curPage: 1,
+    curPage: 0,
     offset : 5,
     classes: [],
     course: {},
@@ -19,16 +19,14 @@ Page({
   onLoad: function (options) {
     let courseId = 1 //options.courseId
     
-    let pageStartNum = this.data.curPage
+    let pageStartNum = this.data.offset
 
-    let pageEndNum  = this.data.offset
+    let pageEndNum  = this.data.curPage
 
-    console.log("classes?courseId="+courseId+"&&offset="+pageEndNum+"&&pageSize="+pageStartNum")
     /** request to fetch course by its id */
     request.get(`classes?courseId=`+courseId+`&&offset=`+pageEndNum+`&&pageSize=`+pageStartNum).then( res =>{
       this.setData({
-        course: res.data,
-        title : res.data.name
+        classes: res.data
       })
     }, reason => {
       /** rejected */
@@ -38,9 +36,22 @@ Page({
       console.log(err)
     })
 
+    //get title 
+    request.get(`courses/`+courseId).then(
+      res =>{
+        this.setData({
+          course : res.data,
+          title : res.data.name
+        })
+    },reason => {
+      console.log(reason)
+    }).catch(err => {
+      console.log(err)
+    })
+    console.info(this.data.title)
     //set bar title
     wx.setNavigationBarTitle({   
-      title: this.data.title == null ? "爱酷体育":this.data.title
+      title: this.data.title
     })
   },
 
@@ -49,7 +60,7 @@ Page({
    */
   onReady: function () {
     wx.setNavigationBarTitle({   
-      title: this.data.title == null ? "爱酷体育":this.data.title
+      title: this.data.title
     })
 
   },
