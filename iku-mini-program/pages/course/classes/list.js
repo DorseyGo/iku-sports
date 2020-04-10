@@ -22,7 +22,7 @@ Page({
     let pageStartNum = this.data.offset
 
     let pageEndNum  = this.data.curPage
-
+    console.info('classes?courseId='+courseId+'&&offset='+pageEndNum+'&&pageSize='+pageStartNum)
     /** request to fetch course by its id */
     request.get(`classes?courseId=`+courseId+`&&offset=`+pageEndNum+`&&pageSize=`+pageStartNum).then( res =>{
       this.setData({
@@ -76,6 +76,7 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh: function (options) {
+    console.log("reach bottom")
     let courseId = 1 //options.courseId
 
     let pageStartNum = this.data.offset*this.data.curPage
@@ -85,7 +86,8 @@ Page({
     this.setData({
       curPage : this.data.curPage+1
     })
-    
+    console.info('classes?courseId='+courseId+'&&offset='+pageEndNum+'&&pageSize='+pageStartNum)
+
     request.get(`classes?courseId=`+courseId+`&&offset=`+pageEndNum+`&&pageSize=`+pageStartNum).then( res =>{
       this.setData({
         classes : res.data
@@ -97,6 +99,6 @@ Page({
    * Called when page reach bottom
    */
   onReachBottom: function () {
-
+    console.log("reach bottom")
   }
 })

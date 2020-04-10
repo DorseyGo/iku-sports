@@ -1,4 +1,4 @@
-<scroll-view scroll-y="{{true}}" class="list menu-avatar">
+<view scroll-y="{{true}}" class="list menu-avatar">
     <view class="list-item" wx:for="{{classes}}" wx:key="id">
         <view class="ik-avatar radius lg" style="background-image: url('{{item.cover}}')" ></view>
         <view class="content">
@@ -30,7 +30,7 @@
             <view class="ik-tag round bg-gray sm">120000</view>
         </view> 
     </view>-->
-</scroll-view>
+</view>
 <view class="ik-bar tab-bar bg-bg-color border shop">
     <view class="action text-orange">
         总计：{{course.charge}}
