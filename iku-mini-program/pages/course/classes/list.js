@@ -38,15 +38,12 @@ Page({
     
     setTitle(options) {
       let courseId = 1 //options.courseId
-      let statictitle = "";
       return request.get(`courses/` + courseId).then(
         res => {
           this.setData({
           course: res.data,
           title: res.data.name
           })
-          console.log(res.data.name)
-          statictitle: res.data.name
         }, reason => {
             console.log(reason)
         }).catch(err => {
