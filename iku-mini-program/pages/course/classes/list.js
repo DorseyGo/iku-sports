@@ -17,7 +17,7 @@ Page({
     chapter: 0
   },
 
-  loadData(options) {
+  loadData : function(options) {
     let courseId = 1 //options.courseId
     this.data.pageStartNum = this.data.curPage * this.data.offset
     this.data.pageEndNum = this.data.pageStartNum + this.data.offset
@@ -38,22 +38,22 @@ Page({
     
     setTitle(options) {
       let courseId = 1 //options.courseId
-      request.get(`courses/` + courseId).then(
+      let statictitle = "";
+      return request.get(`courses/` + courseId).then(
         res => {
           this.setData({
           course: res.data,
           title: res.data.name
           })
+          console.log(res.data.name)
+          statictitle: res.data.name
         }, reason => {
             console.log(reason)
         }).catch(err => {
              console.log(err)
        })
-        //set bar title
-        wx.setNavigationBarTitle({
-            title: this.data.title
-        })
     },
+
 
     GetInformation(options){
       let courseId = 1 //options.courseId
@@ -71,28 +71,18 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
-    onLoad: function (options) {
+    onLoad: function () {
+
       this.loadData()
 
-      this.setTitle()
-
       this.GetInformation()
+
+      this.setTitle().then(() =>{
+        wx.setNavigationBarTitle({
+          title: this.data.title,
+        })
+      })
   },
-
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
-    
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
-  },
-
   /**
    * Page event handler function--Called when user drop down
    */
@@ -110,9 +100,19 @@ Page({
     wx.showLoading({
       title: 'Loading...',
     })
-    this.loadData().then(() => {
-      wx.hideLoading()
-    })
+
+    if(this.data.totalNum > this.data.pageEndNum){
+      this.loadData().then(() => {
+        wx.hideLoading()
+      })
+    }else{
+      wx.showToast({
+        title: '客官，已经到底了～',
+        icon: "none"
+      })
+    }
+      
+
     
   }
 })
