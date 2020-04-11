@@ -10,7 +10,6 @@ Page({
     offset : 10,
     classes : [],
     course : {},
-    title : "",
     pageStartNum: 0,
     pageEndNum: 0,
     totalNum: 0,
@@ -42,7 +41,6 @@ Page({
         res => {
           this.setData({
           course: res.data,
-          title: res.data.name
           })
         }, reason => {
             console.log(reason)
@@ -76,7 +74,7 @@ Page({
 
       this.setTitle().then(() =>{
         wx.setNavigationBarTitle({
-          title: this.data.title,
+          title: this.data.course.name,
         })
       })
   },
