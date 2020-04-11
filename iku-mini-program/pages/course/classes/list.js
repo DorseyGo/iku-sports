@@ -6,62 +6,84 @@ Page({
    * Page initial data
    */
   data: {
-    curPage: 0,
-    offset : 5,
-    classes: [],
-    course: {},
-    title :""
+    curPage : 0,
+    offset : 10,
+    classes : [],
+    course : {},
+    title : "",
+    pageStartNum: 0,
+    pageEndNum: 0,
+    totalNum: 0,
+    chapter: 0
   },
 
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad: function (options) {
+  loadData(options) {
     let courseId = 1 //options.courseId
-    
-    let pageStartNum = this.data.offset
-
-    let pageEndNum  = this.data.curPage
-    console.info('classes?courseId='+courseId+'&&offset='+pageEndNum+'&&pageSize='+pageStartNum)
-    /** request to fetch course by its id */
-    request.get(`classes?courseId=`+courseId+`&&offset=`+pageEndNum+`&&pageSize=`+pageStartNum).then( res =>{
+    this.data.pageStartNum = this.data.curPage * this.data.offset
+    this.data.pageEndNum = this.data.pageStartNum + this.data.offset
+    return request.get(`classes?courseId=` + courseId + `&&pageSize=` + this.data.pageEndNum + `&&offset=` + this.data.pageStartNum ).then(res => {
       this.setData({
-        classes: res.data
+        classes: this.data.curPage === 0 ? res.data:this.data.classes.concat(res.data),
+        curPage: ++this.data.curPage,
+        offset: this.data.offset * this.data.curPage
       })
     }, reason => {
-      /** rejected */
+     /** rejected */
       console.log(reason)
-    }).catch(err => {
+   }).catch(err => {
       /** if exception detected */
       console.log(err)
     })
-
-    //get title 
-    request.get(`courses/`+courseId).then(
-      res =>{
-        this.setData({
-          course : res.data,
-          title : res.data.name
+    },
+    
+    setTitle(options) {
+      let courseId = 1 //options.courseId
+      request.get(`courses/` + courseId).then(
+        res => {
+          this.setData({
+          course: res.data,
+          title: res.data.name
+          })
+        }, reason => {
+            console.log(reason)
+        }).catch(err => {
+             console.log(err)
+       })
+        //set bar title
+        wx.setNavigationBarTitle({
+            title: this.data.title
         })
-    },reason => {
-      console.log(reason)
-    }).catch(err => {
-      console.log(err)
-    })
-    console.info(this.data.title)
-    //set bar title
-    wx.setNavigationBarTitle({   
-      title: this.data.title
-    })
+    },
+
+    GetInformation(options){
+      let courseId = 1 //options.courseId
+      request.get(`classes/count/` + courseId).then(res =>{
+        this.setData({
+          totalNum: res.data.totalCnt,
+          chapter: res.data.chapter
+        })
+      },reason =>{
+        console.log(reason)
+      }).catch(err =>{
+        console.log(err)
+      })
+    },
+  /**
+   * Lifecycle function--Called when page load
+   */
+    onLoad: function (options) {
+      this.loadData()
+
+      this.setTitle()
+
+      this.GetInformation()
   },
 
   /**
    * Lifecycle function--Called when page is initially rendered
    */
   onReady: function () {
-    wx.setNavigationBarTitle({   
-      title: this.data.title
-    })
+    
 
   },
 
@@ -69,36 +91,28 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
   },
 
   /**
    * Page event handler function--Called when user drop down
    */
-  onPullDownRefresh: function (options) {
-    console.log("reach bottom")
-    let courseId = 1 //options.courseId
-
-    let pageStartNum = this.data.offset*this.data.curPage
-
-    let pageEndNum  = this.data.offset*this.data.curPage+this.data.offset
-
+  onPullDownRefresh: function () {
     this.setData({
-      curPage : this.data.curPage+1
+      curPage : 0
     })
-    console.info('classes?courseId='+courseId+'&&offset='+pageEndNum+'&&pageSize='+pageStartNum)
-
-    request.get(`classes?courseId=`+courseId+`&&offset=`+pageEndNum+`&&pageSize=`+pageStartNum).then( res =>{
-      this.setData({
-        classes : res.data
-      })
-    })
+    this.loadData().then(() => wx.stopPullDownRefresh())
   },
 
   /**
    * Called when page reach bottom
    */
   onReachBottom: function () {
-    console.log("reach bottom")
+    wx.showLoading({
+      title: 'Loading...',
+    })
+    this.loadData().then(() => {
+      wx.hideLoading()
+    })
+    
   }
 })

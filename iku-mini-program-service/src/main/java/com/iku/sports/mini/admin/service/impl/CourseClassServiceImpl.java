@@ -2,6 +2,7 @@ package com.iku.sports.mini.admin.service.impl;
 
 import com.google.common.collect.Lists;
 import com.iku.sports.mini.admin.entity.CourseClass;
+import com.iku.sports.mini.admin.model.ClassCount;
 import com.iku.sports.mini.admin.repository.CourseClassRepository;
 import com.iku.sports.mini.admin.service.CourseClassService;
 import lombok.extern.slf4j.Slf4j;
@@ -66,5 +67,10 @@ public class CourseClassServiceImpl implements CourseClassService {
     @Override
     public List<CourseClass> getClassesByCourseId(short courseId) throws Exception {
         return courseClassRepository.getClassByCourseId(courseId);
+    }
+
+    @Override
+    public ClassCount getTotalNumMoneyByCourseId(int courseId) throws Exception {
+        return courseClassRepository.getTotalNumMoneyByCourseId(courseId);
     }
 }

@@ -2,7 +2,7 @@
     <view class="list-item" wx:for="{{classes}}" wx:key="id">
         <view class="ik-avatar radius lg" style="background-image: url('{{item.cover}}')" ></view>
         <view class="content">
-            <view class="text-white">
+            <view class="text-black">
                 <text class="text-cut">{{item.title}}</text>
             </view>
             <view class="text-dark-gray text-sm flex">
@@ -33,7 +33,7 @@
 </view>
 <view class="ik-bar tab-bar bg-bg-color border shop">
     <view class="action text-orange">
-        总计：{{course.charge}}
+        总计：{{ chapter }}
     </view>
     <view class="bg-red submit">购买</view>
 </view>

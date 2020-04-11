@@ -1,6 +1,7 @@
 package com.iku.sports.mini.admin.controller;
 
 import com.iku.sports.mini.admin.entity.CourseClass;
+import com.iku.sports.mini.admin.model.ClassCount;
 import com.iku.sports.mini.admin.model.Response;
 import com.iku.sports.mini.admin.service.CourseClassService;
 import lombok.extern.slf4j.Slf4j;
@@ -104,6 +105,18 @@ public class CourseClassController {
         }catch (Exception e){
             log.error("Fail to get top3 class by CategoryId.",e);
             return new Response<List<CourseClass>>().status(Response.FAIL);
+        }
+    }
+
+    @ResponseBody
+    @GetMapping("/api/classes/count/{courseId}")
+    public Response<ClassCount> getTotalNumMoneyByCourseId(@PathVariable("courseId") final int courseId){
+        try{
+            final ClassCount classCount = courseClassService.getTotalNumMoneyByCourseId(courseId);
+            return new Response<ClassCount>().status(Response.SUCCESS).data(classCount);
+        }catch (Exception e){
+            log.error("Fail to get quantity and amount.",e);
+            return new Response<ClassCount>().status(Response.FAIL);
         }
     }
 }

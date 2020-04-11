@@ -2,6 +2,7 @@ package com.iku.sports.mini.admin.service;
 
 
 import com.iku.sports.mini.admin.entity.CourseClass;
+import com.iku.sports.mini.admin.model.ClassCount;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface CourseClassService {
     List<CourseClass> getTop3ClassicByCategoryId(short categoryId,int days) throws Exception;
 
     List<CourseClass> getClassesByCourseId(short courseId) throws Exception;
+
+    ClassCount getTotalNumMoneyByCourseId(int courseId) throws Exception;
 }

@@ -1,6 +1,7 @@
 package com.iku.sports.mini.admin.repository;
 
 import com.iku.sports.mini.admin.entity.CourseClass;
+import com.iku.sports.mini.admin.model.ClassCount;
 import javafx.beans.binding.When;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
@@ -61,9 +62,26 @@ public interface CourseClassRepository {
     @SelectProvider(type = CourseClassSqlProvider.class,method = "getClassByCourseId")
     List<CourseClass> getClassByCourseId(@Param("courseId") short courseId);
 
+    @Results(id = "courseClassCountRM",value = {
+            @Result(property = "totalCnt",column = "totalCnt",jdbcType = JdbcType.INTEGER),
+            @Result(property = "chapter",column = "chapter",jdbcType = JdbcType.DOUBLE)
+    })
+    @SelectProvider(type = CourseClassSqlProvider.class,method = "getTotalNumMoneyByCourseId")
+    ClassCount getTotalNumMoneyByCourseId(@Param("courseId") int courseId);
+
     class CourseClassSqlProvider {
         static final List<String> ALLCOLS = Arrays.asList("id","title","cover","chapter","video_url","content","watches","course_id","coach_id");
         static final List<String> SIMPLECOLS = Arrays.asList("t.id","t.title","t.cover","t.content","t.watches","t.course_id");
+
+        public String getTotalNumMoneyByCourseId(final Map<String,Object> param){
+            return new SQL(){
+                {
+                    SELECT("count(1) totalCnt,sum(chapter) chapter");
+                    FROM(CLASSTABLE);
+                    WHERE("course_id = #{courseId}");
+                }
+            }.toString();
+        }
 
         public String getClassByCourseId(final Map<String, Object> param){
             return new SQL(){
