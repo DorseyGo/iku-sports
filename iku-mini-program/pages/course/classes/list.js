@@ -52,7 +52,7 @@ Page({
     },
 
 
-    GetInformation(options){
+    GetSummaryInformation(options){
       let courseId = 1 //options.courseId
       request.get(`classes/count/` + courseId).then(res =>{
         this.setData({
@@ -72,7 +72,7 @@ Page({
 
       this.loadData()
 
-      this.GetInformation()
+      this.GetSummaryInformation()
 
       this.setTitle().then(() =>{
         wx.setNavigationBarTitle({
