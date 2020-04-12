@@ -4,6 +4,7 @@
     "pages/about/about",
     "pages/course/course",
     "pages/course/classes/list",
+    "pages/course/classes/detail/details",
     "pages/article/details/details",
     "pages/logs/logs"
   ],

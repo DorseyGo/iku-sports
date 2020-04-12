@@ -138,3 +138,7 @@ page {
 .padding-text {
     padding: 60rpx 0 0 0;
 }
+
+.text_color{
+    color: #FFC803;
+}

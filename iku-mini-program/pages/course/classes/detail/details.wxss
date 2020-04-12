@@ -1,0 +1,8 @@
+page {
+    background-color: #181818;
+}
+
+.container, video{
+    height: 30%;
+    margin: 20rpx,50rpx,20rpx,20rpx;
+}

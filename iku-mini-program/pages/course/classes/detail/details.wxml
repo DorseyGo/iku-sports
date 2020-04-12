@@ -1,0 +1,5 @@
+<scroll-view>
+    <view class="container">
+        <video class="video" src="../../images/great_moment_2x.png"></video>
+    </view>
+</scroll-view>
