@@ -7,7 +7,8 @@ Page({
    */
   data: {
     curPage : 0,
-    offset : 10,
+    offset : 1,
+    pageSize : 10,
     classes : [],
     course : {},
     pageStartNum: 0,
@@ -18,14 +19,15 @@ Page({
 
   loadData : function(options) {
     let courseId = 1 //options.courseId
-    this.data.pageStartNum = this.data.curPage * this.data.offset
-    this.data.pageEndNum = this.data.pageStartNum + this.data.offset
-    return request.get(`classes?courseId=` + courseId + `&&pageSize=` + this.data.pageEndNum + `&&offset=` + this.data.pageStartNum ).then(res => {
+    this.data.pageStartNum = this.data.offset
+    return request.get(`classes?courseId=` + courseId + `&&pageSize=` + this.data.pageSize + `&&offset=` + this.data.pageStartNum ).then(res => {
       this.setData({
         classes: this.data.curPage === 0 ? res.data:this.data.classes.concat(res.data),
         curPage: ++this.data.curPage,
-        offset: this.data.offset * this.data.curPage
+        offset: this.data.curPage * (++this.data.pageSize)+1
       })
+      ,
+      console.log("curpage:"+ this.data.curPage+",offset:"+this.data.offset)
     }, reason => {
      /** rejected */
       console.log(reason)
@@ -83,7 +85,8 @@ Page({
    */
   onPullDownRefresh: function () {
     this.setData({
-      curPage : 0
+      curPage : 0,
+      offset :0
     })
     this.loadData().then(() => wx.stopPullDownRefresh())
   },
@@ -96,7 +99,7 @@ Page({
       title: 'Loading...',
     })
 
-    if(this.data.totalNum > this.data.pageEndNum){
+    if(this.data.totalNum > this.data.offset){
       this.loadData().then(() => {
         wx.hideLoading()
       })
