@@ -1,11 +1,11 @@
 <scroll-view scroll-y="{{true}}" class="list menu-avatar">
     <view class="list-items" wx:for="{{classes}}" wx:key="id">
-        <view class="image-size" style="background-image: url('{{item.cover}}')" ></view>
+        <view class="image-size" style="background-image: url('{{item.cover}}')"></view>
         <view class="content">
             <view class="text-white">
                 <text class="text-cut">{{item.title}}</text>
             </view>
-            <view class="text-dark-gray text-sm flex pos" >
+            <view class="text-dark-gray text-sm flex pos">
                 <text class="text-cut">{{item.content}}</text>
             </view>
         </view>
@@ -14,8 +14,7 @@
             <view class="ik-tag round bg-red sm pos">{{item.watches}}</view>
         </view>
     </view>
-<!-- 
-    <view class="list-item">
+    <!-- <view class="list-item">
         <view class="ik-avatar radius lg" style="background-image: url('../../../images/basketball_3x.png')"></view>
         <view class="content">
             <view class="text-white">
@@ -29,11 +28,9 @@
             <view class="text-dark-gray text-sm">阅读</view>
             <view class="ik-tag round bg-gray sm">120000</view>
         </view> 
-    </view>-->
+    </view> -->
 </scroll-view>
-<view class="ik-bar tab-bar bg-bg-color border shop">
-    <view class="action text-orange">
-        总计：{{ chapter }}
-    </view>
+<view class="ik-bar tab-bar bg-bg-color border shop bottom-view">
+    <view class="action text-orange">总计：{{ chapter }}</view>
     <view class="bg-red submit">购买</view>
 </view>

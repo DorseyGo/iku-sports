@@ -36,3 +36,9 @@
 .pos {
     padding-top: 10rpx;
 }
+
+.bottom-view {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
