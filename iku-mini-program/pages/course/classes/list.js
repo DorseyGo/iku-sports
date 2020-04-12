@@ -14,13 +14,13 @@ Page({
     pageStartNum: 0,
     pageEndNum: 0,
     totalNum: 0,
-    chapter: 0
+    chapter: 0,
+    courseId: 1
   },
 
-  loadData : function(options) {
-    let courseId = options.courseId
+  loadData : function() {
     this.data.pageStartNum = this.data.offset
-    return request.get(`classes?courseId=` + courseId + `&&pageSize=` + this.data.pageSize + `&&offset=` + this.data.pageStartNum ).then(res => {
+    return request.get(`classes?courseId=` + this.data.courseId + `&pageSize=` + this.data.pageSize + `&offset=` + this.data.pageStartNum ).then(res => {
       this.setData({
         classes: this.data.curPage === 0 ? res.data:this.data.classes.concat(res.data),
         curPage: ++this.data.curPage,
@@ -37,9 +37,8 @@ Page({
     })
     },
     
-    setTitle(options) {
-      let courseId = options.courseId
-      return request.get(`courses/` + courseId).then(
+    setTitle() {
+      return request.get(`courses/` + this.data.courseId).then(
         res => {
           this.setData({
           course: res.data,
@@ -52,9 +51,8 @@ Page({
     },
 
 
-    GetSummaryInformation(options){
-      let courseId = options.courseId
-      request.get(`classes/count/` + courseId).then(res =>{
+    GetSummaryInformation(){
+      request.get(`classes/count/` + this.data.courseId).then(res =>{
         this.setData({
           totalNum: res.data.totalCnt,
           chapter: res.data.chapter
@@ -68,7 +66,11 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
-    onLoad: function () {
+    onLoad: function (options) {
+      let courseId = options.courseId
+      this.setData({
+        courseId: courseId
+      })
 
       this.loadData()
 
