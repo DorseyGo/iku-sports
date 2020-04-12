@@ -26,8 +26,6 @@ Page({
         curPage: ++this.data.curPage,
         offset: this.data.curPage * (++this.data.pageSize)+1
       })
-      ,
-      console.log("curpage:"+ this.data.curPage+",offset:"+this.data.offset)
     }, reason => {
      /** rejected */
       console.log(reason)

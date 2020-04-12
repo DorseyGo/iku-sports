@@ -1,46 +1,44 @@
 // pages/course/classes/detail/details.js
+const request  = require("../../../../utils/request");
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    classId : 1,
+    class : {}
   },
-
+  
+  loadData: function(){
+    let classId = this.data.classId
+      return request.get(`class/`+classId).then(res => {
+        this.setData({
+          class : res.data
+        })
+      },reason =>{
+        console.log(reason)
+      }).catch(err =>{
+        console.log(err)
+      })
+  }
+  ,
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let optionsClassId = options.classId //options.classId
+    let that = this
+    this.setData({
+      classId : options.id
+    })
 
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+    this.loadData().then(() =>{
+      wx.setNavigationBarTitle({
+        title: this.data.class.title
+      })   
+    })
   },
 
   /**

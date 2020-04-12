@@ -45,7 +45,7 @@ public interface CourseClassRepository {
                                       @Param("paginatePageSize") int pageSize)throws Exception;
     @ResultMap("courseClassRM")
     @SelectProvider(type = CourseClassSqlProvider.class,method = "getClassById")
-    CourseClass getClassById(@Param("calssId") int id)throws Exception;
+    CourseClass getClassById(@Param("classId") int id)throws Exception;
 
     @ResultMap("courseClassRM")
     @SelectProvider(type = CourseClassSqlProvider.class,method = "getTop3PopularClasses")
