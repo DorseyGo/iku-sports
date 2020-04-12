@@ -119,4 +119,16 @@ public class CourseClassController {
             return new Response<ClassCount>().status(Response.FAIL);
         }
     }
+
+    @ResponseBody
+    @GetMapping("/api/class/updateWatches/{id}")
+    public Response setClassWatchesById(@PathVariable("id") final int id){
+        try{
+            courseClassService.setClassWatchesById(id);
+            return new Response().status(Response.SUCCESS);
+        }catch (Exception e){
+            log.error("Fail to set watches of calss by id:{}",id,e);
+            return new Response().status(Response.FAIL);
+        }
+    }
 }

@@ -27,4 +27,6 @@ public interface CourseClassService {
     List<CourseClass> getClassesByCourseId(short courseId) throws Exception;
 
     ClassCount getTotalNumMoneyByCourseId(int courseId) throws Exception;
+
+    void setClassWatchesById(int id) throws Exception;
 }

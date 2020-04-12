@@ -73,4 +73,9 @@ public class CourseClassServiceImpl implements CourseClassService {
     public ClassCount getTotalNumMoneyByCourseId(int courseId) throws Exception {
         return courseClassRepository.getTotalNumMoneyByCourseId(courseId);
     }
+
+    @Override
+    public void setClassWatchesById(int id) throws Exception {
+         courseClassRepository.setClassWatchesById(id);
+    }
 }

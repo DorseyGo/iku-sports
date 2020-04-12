@@ -8,7 +8,8 @@ Page({
    */
   data: {
     classId : 1,
-    class : {}
+    class : {},
+    watchNumAstrict : 0
   },
   
   loadData: function(){
@@ -22,6 +23,22 @@ Page({
       }).catch(err =>{
         console.log(err)
       })
+  }
+  ,
+  setWatches: function(){
+    if( this.data.watchNumAstrict === 0 ){
+      request.get(`class/updateWatches/`+this.data.classId).then(res => {
+        this.setData({
+          watchNumAstrict : 1
+        })
+      },reason =>{
+        console.log(reason)
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+    // Rload calss Information
+    this.loadData()    
   }
   ,
   /**

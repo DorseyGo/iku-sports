@@ -67,9 +67,23 @@ public interface CourseClassRepository {
     @SelectProvider(type = CourseClassSqlProvider.class,method = "getTotalNumMoneyByCourseId")
     ClassCount getTotalNumMoneyByCourseId(@Param("courseId") int courseId);
 
+    @ResultMap("courseClassRM")
+    @UpdateProvider(type = CourseClassSqlProvider.class, method = "setClassWatchesById")
+    void setClassWatchesById(@Param("id") int id);
+
     class CourseClassSqlProvider {
         static final List<String> ALLCOLS = Arrays.asList("id","title","cover","chapter","video_url","content","watches","course_id","coach_id");
         static final List<String> SIMPLECOLS = Arrays.asList("T.id","T.title","T.cover","T.content","T.watches","T.course_id");
+
+        public String setClassWatchesById(final Map<String,Object> param){
+            return new SQL(){
+                {
+                    UPDATE(CLASSTABLE);
+                    SET("watches = watches + 1");
+                    WHERE("id = #{id}");
+                }
+            }.toString();
+        }
 
         public String getTotalNumMoneyByCourseId(final Map<String,Object> param){
             return new SQL(){

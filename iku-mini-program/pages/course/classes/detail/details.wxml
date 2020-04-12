@@ -5,7 +5,7 @@
        ></video> -->
 
     <video class="video" src="http://localhost:9080/static/video/1586663251730963.mp4" 
-        custom-cache="{{false}}" controls="{{true}}" show-muted-btn="{{true}}"
+        custom-cache="{{false}}" controls="{{true}}" show-muted-btn="{{true}}" bindtap="setWatches"
        ></video>
 </view>
 <scroll-view>
