@@ -2,7 +2,47 @@ page {
     background-color: #181818;
 }
 
-.container, video{
-    height: 30%;
-    margin: 20rpx,50rpx,20rpx,20rpx;
+.video-dit {
+    display: flex;
+    height: 30vh;
+    width: 100vh;
+    margin-top: 20rpx;
+}
+
+.video {
+    height: 100%;
+    margin-left: 25rpx;
+    margin-right: 20rpx;
+    border-radius: 16rpx;
+}
+
+.title {
+    display: flex;
+    margin-top: 30rpx;
+    margin-left: 25rpx;
+    margin-right: 25rpx;
+}
+
+.comment {
+    display: flex;
+    margin-left: 25rpx;
+    margin-right: 25rpx;
+    margin-bottom: 20rpx;
+}
+
+.video-information {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20rpx;
+}
+
+.view_num {
+    display: flex;
+    margin-left: 25rpx;
+}
+
+.colleged {
+    display: flex;
+    margin-left: 45vw;
+    margin-right: 15rpx;
 }

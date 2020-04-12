@@ -1,5 +1,18 @@
+<view class="video-dit">
+    <video class="video" src="../../../views/1586663251730963.mp4"></video>
+</view>
 <scroll-view>
-    <view class="container">
-        <video class="video" src="../../images/great_moment_2x.png"></video>
+    <view class="video-information">
+        <view class="view_num text-yellow text-lg">
+            观看人次：
+            <text>123</text>
+        </view>
+        <view class="colleged text-yellow text-lg">收藏</view>
+    </view>
+    <view class="description">
+        <view class="title text-xl text-white  text-cut">篮球教学视频第一讲</view>
+        <text class="comment text-white text-normal">
+            健身是一种体育项目，如各种徒手健美操、韵律操、形体操以及各种自抗力动作,体操可以增强力量、柔韧性，增加耐力，提高协调，控制身体各部分的能力，从而使身体强健。
+        </text>
     </view>
 </scroll-view>
