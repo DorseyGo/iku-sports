@@ -2,7 +2,7 @@
     <view class="list-item" wx:for="{{classes}}" wx:key="id">
         <view class="ik-avatar radius lg" style="background-image: url('{{item.cover}}')" ></view>
         <view class="content">
-            <view class="text-black">
+            <view class="text-white">
                 <text class="text-cut">{{item.title}}</text>
             </view>
             <view class="text-dark-gray text-sm flex">
