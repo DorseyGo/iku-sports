@@ -18,7 +18,7 @@ Page({
   },
 
   loadData : function(options) {
-    let courseId = 1 //options.courseId
+    let courseId = options.courseId
     this.data.pageStartNum = this.data.offset
     return request.get(`classes?courseId=` + courseId + `&&pageSize=` + this.data.pageSize + `&&offset=` + this.data.pageStartNum ).then(res => {
       this.setData({
@@ -38,7 +38,7 @@ Page({
     },
     
     setTitle(options) {
-      let courseId = 1 //options.courseId
+      let courseId = options.courseId
       return request.get(`courses/` + courseId).then(
         res => {
           this.setData({
@@ -53,7 +53,7 @@ Page({
 
 
     GetSummaryInformation(options){
-      let courseId = 1 //options.courseId
+      let courseId = options.courseId
       request.get(`classes/count/` + courseId).then(res =>{
         this.setData({
           totalNum: res.data.totalCnt,
