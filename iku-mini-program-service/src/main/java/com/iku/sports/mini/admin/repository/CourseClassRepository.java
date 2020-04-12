@@ -2,13 +2,11 @@ package com.iku.sports.mini.admin.repository;
 
 import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.model.ClassCount;
-import javafx.beans.binding.When;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
-import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +69,7 @@ public interface CourseClassRepository {
 
     class CourseClassSqlProvider {
         static final List<String> ALLCOLS = Arrays.asList("id","title","cover","chapter","video_url","content","watches","course_id","coach_id");
-        static final List<String> SIMPLECOLS = Arrays.asList("t.id","t.title","t.cover","t.content","t.watches","t.course_id");
+        static final List<String> SIMPLECOLS = Arrays.asList("T.id","T.title","T.cover","T.content","T.watches","T.course_id");
 
         public String getTotalNumMoneyByCourseId(final Map<String,Object> param){
             return new SQL(){

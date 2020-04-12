@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `student`(
   `name` VARCHAR(32) NOT NULL COMMENT 'the name',
   `age` TINYINT(3) NOT NULL DEFAULT '0',
   `gender` CHAR(1) DEFAULT 'U' COMMENT 'U for unknown, F for female, M for male',
-  `telphone` VARCHAR(32),
+  `telephone` VARCHAR(32),
   `email` VARCHAR(32),
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
