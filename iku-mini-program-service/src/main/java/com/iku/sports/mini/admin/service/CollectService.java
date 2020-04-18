@@ -17,4 +17,6 @@ public interface CollectService {
     void delCollect(int id) throws Exception;
 
     List<Collect> getCollectByStudentId(int studentId,int collectType) throws Exception;
+
+    Integer getCollectSummaryByStudentId(int studentId) throws Exception;
 }

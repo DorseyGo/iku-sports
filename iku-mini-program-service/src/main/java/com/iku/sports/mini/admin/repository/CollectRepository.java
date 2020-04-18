@@ -40,11 +40,26 @@ public interface CollectRepository {
     @ResultMap("collectRM")
     @SelectProvider(type = CollectSQLProvider.class, method = "getCollectByStudentIdCollectType")
     List<Collect> getCollectByStudentIdCollectType(@Param("studentId") int studentId,@Param("collectType") int collectType);
+
+    @ResultMap("collectRM")
+    @SelectProvider(type = CollectSQLProvider.class, method = "getCollectSummaryByStudentId")
+    Integer getCollectSummaryByStudentId(@Param("studentId") int studentId);
+
     //SQL provider
     class CollectSQLProvider {
         static String TABLE = "collect";
 
         static final List<String> ALL_COLS = Arrays.asList("id","student_id","collect_id","collect_type");
+
+        public String getCollectSummaryByStudentId(final Map<String, Object> param){
+            return new SQL(){
+                {
+                    SELECT("IFNULL(count(1),0)");
+                    FROM(TABLE);
+                    WHERE("student_id = #{studentId}");
+                }
+            }.toString();
+        }
 
         public String getCollectByStudentIdCollectType(final Map<String, Object> param){
             return new SQL(){

@@ -5,6 +5,7 @@ import com.iku.sports.mini.admin.model.Response;
 import com.iku.sports.mini.admin.service.CollectService;
 import com.sun.org.apache.regexp.internal.RE;
 import lombok.extern.slf4j.Slf4j;
+import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,6 +69,18 @@ public class CollectController {
         }catch (Exception e){
             log.error("Fail to get collects by studentId:{}",studentId,e);
             return new Response<List<Collect>>().status(Response.FAIL);
+        }
+    }
+
+    @ResponseBody
+    @GetMapping("/api/collect/summary/{studentId}")
+    public Response<Integer> getCollectSummaryByStudentId(@PathVariable("studentId") final int studentId){
+        try{
+            final Integer totalRecord = collectService.getCollectSummaryByStudentId(studentId);
+            return new Response<Integer>().status(Response.SUCCESS).data(totalRecord);
+    }catch (Exception e){
+            log.error("Fail to get total collection by studentId:{}",studentId,e);
+            return new Response<Integer>().status(Response.FAIL);
         }
     }
 

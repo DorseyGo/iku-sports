@@ -20,6 +20,8 @@ public class CollectServiceImpl implements CollectService {
 
     private final CollectRepository collectRepository;
 
+    private Integer totalNum;
+
     public CollectServiceImpl(@Qualifier("collectRepository") CollectRepository collectRepository) {
         this.collectRepository = collectRepository;
     }
@@ -40,5 +42,15 @@ public class CollectServiceImpl implements CollectService {
             return collectRepository.getCollectByStudentId(studentId);
         }
         return collectRepository.getCollectByStudentIdCollectType(studentId,collectType);
+    }
+
+    @Override
+    public Integer getCollectSummaryByStudentId(int studentId) throws Exception {
+        totalNum = collectRepository.getCollectSummaryByStudentId(studentId);
+        if(totalNum == null ){
+            return 0;
+        }else{
+            return totalNum;
+        }
     }
 }
