@@ -5,16 +5,17 @@ page {
 .video-dit {
     display: flex;
     height: 30vh;
-    width: 100vh;
+    width: 100%;
     margin-top: 20rpx;
 }
 
-.video {
-    height: 100%;
+ .video {
+    width: 100%;
+    height: 28vh;
     margin-left: 25rpx;
     margin-right: 20rpx;
     border-radius: 16rpx;
-}
+} 
 
 .title {
     display: flex;
