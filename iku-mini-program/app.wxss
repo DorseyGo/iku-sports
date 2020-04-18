@@ -6,6 +6,8 @@ page {
  --orange: #f37b1d;
  --yellow: #ffc600;
  --red: #FF0000;
+ background-color: #252626;
+
 }
 
 .container, scroll-view.list {

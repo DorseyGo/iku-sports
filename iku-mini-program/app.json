@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/about/about",
     "pages/course/course",
+    "pages/course/coach/coach",
     "pages/course/classes/list",
     "pages/course/classes/detail/details",
     "pages/article/details/details",

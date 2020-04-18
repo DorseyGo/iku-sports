@@ -107,6 +107,20 @@
 					"id": -1,
 					"name": "pages/course/classes/list",
 					"pathName": "pages/course/classes/list",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/coach/coach.wxml",
+					"pathName": "pages/course/coach/coach.wxml",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/coach/coach",
+					"pathName": "pages/course/coach/coach",
 					"scene": null
 				}
 			]
