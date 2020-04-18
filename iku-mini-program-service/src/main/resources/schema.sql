@@ -127,3 +127,15 @@ CREATE TABLE IF NOT EXISTS `article_content`(
   `article_id` INT NOT NULL,
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+--
+-- collect
+--
+ CREATE TABLE `collect` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `student_id` int NOT NULL,
+  `collect_id` int NOT NULL,
+  `collect_type` int DEFAULT '0' COMMENT '1 for video , 2 for article , 3 for course',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

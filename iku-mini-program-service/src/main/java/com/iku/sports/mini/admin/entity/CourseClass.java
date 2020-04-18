@@ -1,7 +1,9 @@
 package com.iku.sports.mini.admin.entity;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Tolerate;
 
 /**
  * File: CourseClass
@@ -11,7 +13,7 @@ import lombok.NoArgsConstructor;
  * CopyRight: All rights reserved
  **/
 @Data
-@NoArgsConstructor
+@Builder
 public class CourseClass {
    private int id;
    private String title;
@@ -22,4 +24,7 @@ public class CourseClass {
    private int coachId;
    private String videoUrl;
    private String cover;
+
+   @Tolerate
+   public CourseClass(){};
 }
