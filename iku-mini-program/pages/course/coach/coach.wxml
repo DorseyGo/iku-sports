@@ -30,8 +30,7 @@
         <view class="class-image" style="background-image: url('../../../images/basketball_2x.png')"></view>
         <view class="class-info">
             <text class="class-title">第1节 运球基础</text>
-            <text class="class-intr">
-                课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介
+            <text class="class-intr">课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介
             </text>
             <view class="class-v">
                 <text class="text-sz">51</text>

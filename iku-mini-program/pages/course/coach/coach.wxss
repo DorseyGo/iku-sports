@@ -94,7 +94,7 @@
 .attention {
     display: flex;
     height: 40rpx;
-    width: 200rpx;
+    width: 100rpx;
     border: 1rpx solid #847749;
     border-radius: 22rpx;
     margin-right: 24rpx;
@@ -103,7 +103,7 @@
 
 .attention text {
     display: flex;
-    margin-left: 33rpx;
+    margin-left: 20rpx;
     font-size: 24rpx;
     color: #FFC803;
 }
@@ -159,7 +159,7 @@
 
 .class-intr {
     font-size: 24rpx;
-    height: 70rpx;
+    height: 69rpx;
     color: #5F6166;
     padding-top: 10rpx;
     padding-bottom: 60rpx;
