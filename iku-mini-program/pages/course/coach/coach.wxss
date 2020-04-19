@@ -81,13 +81,12 @@
     margin-bottom: 20rpx;
     font-size: 24rpx;
     color: #767676;
-    height: 65rpx;
     color: #5F6166;
     text-overflow:ellipsis;
     display: -webkit-box;
     word-break: break-all;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 4;
     overflow: hidden;
 }
 
