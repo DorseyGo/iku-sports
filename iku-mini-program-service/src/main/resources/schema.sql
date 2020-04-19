@@ -94,12 +94,16 @@ CREATE TABLE IF NOT EXISTS `order`(
 -- the student
 --
 CREATE TABLE IF NOT EXISTS `student`(
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `id` VARCHAR(32) NOT NULL ,
+  `open_id` VARCHAR(32) NOT NULL ,
+  `session_key` VARCHAR(64) NOT NULL ,
   `name` VARCHAR(32) NOT NULL COMMENT 'the name',
-  `age` TINYINT(3) NOT NULL DEFAULT '0',
-  `gender` CHAR(1) DEFAULT 'U' COMMENT 'U for unknown, F for female, M for male',
-  `telephone` VARCHAR(32),
-  `email` VARCHAR(32),
+  `avatar_url` VARCHAR(255) DEFAULT NULL COMMENT 'the heading image url',
+  `gender` CHAR(1) DEFAULT 'U' COMMENT '0 for unknown, 2 for female, 1 for male',
+  `telephone` VARCHAR(32) DEFAULT NULL ,
+  `province` VARCHAR(32) DEFAULT NULL ,
+  `city` VARCHAR(32) DEFAULT NULL ,
+  `country` VARCHAR(32) DEFAULT NULL ,
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 

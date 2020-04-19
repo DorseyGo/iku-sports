@@ -29,6 +29,11 @@ public class Response<T> implements Serializable {
         return this;
     }
 
+    public Response<T> errorPhase(final String errorPhase) {
+        this.errorPhase = errorPhase;
+        return this;
+    }
+
     public Response<T> data(final T data) {
         this.data = data;
         return this;

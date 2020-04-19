@@ -49,6 +49,15 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>me.chanjar</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>me.chanjar</groupId>
+            <artifactId>weixin-java-common</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

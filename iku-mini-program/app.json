@@ -7,6 +7,7 @@
     "pages/course/classes/list",
     "pages/course/classes/detail/details",
     "pages/article/details/details",
+    "pages/authorize/authorize",
     "pages/logs/logs"
   ],
   "window": {
