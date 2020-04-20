@@ -80,9 +80,8 @@ public interface CoachRepository {
             return new SQL() {
                 {
                     SELECT(COLS.toArray(new String[COLS.size()]));
-                    FROM(COACH_TABLE);
+                    FROM(COACH_TABLE+" t");
                     WHERE("id = #{coachId}");
-                    ORDER_BY("level desc");
                 }
             }.toString();
         }

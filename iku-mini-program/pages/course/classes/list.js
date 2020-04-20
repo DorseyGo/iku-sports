@@ -19,12 +19,12 @@ Page({
   },
 
   loadData : function() {
-    this.data.pageStartNum = this.data.offset
+    this.data.pageStartNum = this.data.offset - 1
     return request.get(`classes?courseId=` + this.data.courseId + `&pageSize=` + this.data.pageSize + `&offset=` + this.data.pageStartNum ).then(res => {
       this.setData({
         classes: this.data.curPage === 0 ? res.data:this.data.classes.concat(res.data),
         curPage: ++this.data.curPage,
-        offset: this.data.curPage * (++this.data.pageSize)+1
+        offset: this.data.curPage * (++this.data.pageSize) + 1
       })
     }, reason => {
      /** rejected */
@@ -111,6 +111,15 @@ Page({
     }
       
 
+    
+  },
+
+  onShow: function(){
+    this.setData({
+      curPage: 0,
+      offset: 1
+    })
+    this.loadData()
     
   }
 })

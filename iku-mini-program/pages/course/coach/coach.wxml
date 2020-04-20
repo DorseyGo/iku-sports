@@ -11,13 +11,13 @@
         </swiper-item>
     </swiper>
     <view class="about_my">
-        <image src="../../../images/article_3x.png" mode="scantofill" />
+        <image src="{{coach.heading_img_url}}" mode="scantofill" />
     </view>
     <view class="coach-info">
         <view class="coach-m">
-            <view class="coach-name">科特.威尔.布朗</view>
-            <view class="coach-sex">男 | 美国，前中国女篮总教练</view>
-            <view class="coach-intr">拥有30年专业篮球教练能力介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介</view>
+            <view class="coach-name">{{coach.name}}</view>
+            <view class="coach-sex">{{(coach.gender === "M")? "男" : "女"}}</view>
+            <view class="coach-intr">{{coach.title}}</view>
         </view>
         <view class="attention">
             <text>关注</text>
@@ -26,11 +26,11 @@
 </view>
 <scroll-view class="course-list">
     <text class="title">课程</text>
-    <view class="classes">
-        <view class="class-image" style="background-image: url('../../../images/basketball_2x.png')"></view>
+    <view class="classes" wx:for="{{class}}" wx:key="id">
+        <view class="class-image" style="background-image: url('{{item.cover}}')"></view>
         <view class="class-info">
-            <text class="class-title">第1节 运球基础</text>
-            <text class="class-intr">课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介课程简介
+            <text class="class-title">{{item.title}}</text>
+            <text class="class-intr">{{item.content}}
             </text>
             <view class="class-v">
                 <text class="text-sz">51</text>
@@ -40,7 +40,7 @@
             </view>
         </view>
     </view>
-    <view class="classes">
+    <!-- <view class="classes">
         <view class="class-image" style="background-image: url('../../../images/basketball_2x.png')"></view>
         <view class="class-info">
             <text class="class-title">第2节 运球进阶</text>
@@ -65,5 +65,6 @@
                 <text class="text-szb">人已学习</text>
             </view>
         </view>
-    </view>
+    </view> -->
+
 </scroll-view>

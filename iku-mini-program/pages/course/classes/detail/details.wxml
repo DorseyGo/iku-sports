@@ -1,12 +1,13 @@
 <view class="video-dit">
 
-    <!-- <video class="video" src="{{class.videoUrl}}"
+    <video class="video" id="{{class.id}}" src="{{class.videoUrl}}"
         custom-cache="{{false}}" controls="{{true}}" show-muted-btn="{{true}}"
-       ></video> -->
+        bindplay="setWatches"
+       ></video> 
 
-    <video class="video" src="http://localhost:9080/static/video/1586663251730963.mp4" 
-        custom-cache="{{false}}" controls="{{true}}" show-muted-btn="{{true}}" bindtap="setWatches"
-       ></video>
+    <!-- <video class="video" src="http://localhost:9080/static/video/1586663251730963.mp4" 
+        custom-cache="{{false}}" controls="{{true}}" show-muted-btn="{{true}}" bindplay="setWatches"
+       ></video> -->
 </view>
 <scroll-view>
     <view class="video-information">
@@ -14,7 +15,9 @@
             观看人次：
             <text>{{class.watches}}</text>
         </view>
-        <view class="colleged text-yellow text-lg">收藏</view>
+        <view class="colleged text-yellow text-lg" id = "favoriteview" >
+            <button bindtap = "favoriteAction">{{(totalNumOffavorite == 0 )? "收藏" : "已收藏"}}</button>
+        </view>
     </view>
     <view class="description">
         <view class="title text-xl text-white  text-cut">{{class.title}}</view>

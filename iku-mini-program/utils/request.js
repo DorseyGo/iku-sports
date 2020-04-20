@@ -4,8 +4,9 @@ const request = (uri, options) => {
     return new Promise((resolve, reject) => {
         wx.request({
             url: `${config.api.url}${uri}`,
-            data: options.method === 'GET' ? options.data : JSON.stringify(options.data),
-            header: {'content-type':'application/json'},
+            data: (options.method === 'GET') ? options.data : JSON.stringify(options.data),
+            header: options.method === 'GET' ?{'content-type':'application/json'} 
+                : {'content-type':'application/json'},
             method: options.method,
             dataType: 'json',
             success: (result)=>{
