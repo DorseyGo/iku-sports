@@ -93,7 +93,7 @@
 .attention {
     display: flex;
     height: 40rpx;
-    width: 100rpx;
+    width: 125rpx;
     border: 1rpx solid #847749;
     border-radius: 22rpx;
     margin-right: 24rpx;

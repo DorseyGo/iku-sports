@@ -81,7 +81,8 @@ Page({
       request.post(`favorite/add`,params).then(res =>{
         this.setData({
           totalNumOffavorite: 1
-        })
+        });
+        this.requestShowToast();
       },reason => {
         console.log(reason)
       }).catch(err => {
@@ -91,14 +92,19 @@ Page({
       request.post(`favorite/del`,params).then(res => {
         this.setData({
           totalNumOffavorite: 0
-        })
+        });
+        this.requestShowToast();
       },reason =>{
         console.log(reason)
       }).catch(err => {
         console.log(err)
       })
     }
-
+  },
+  /**
+   * showToast of request
+   */
+  requestShowToast: function () {
     if( this.data.totalNumOffavorite === 0 ){
       wx.showToast({
         title: '取消收藏',
@@ -112,7 +118,8 @@ Page({
         duration: 1500
       })
     }
-  },
+  }
+  ,
 
   /**
    * 生命周期函数--监听页面加载
@@ -138,17 +145,7 @@ Page({
   },
 
   onReady: function(){
-    this.loadData().then(() =>{
-      wx.setNavigationBarTitle({
-        title: this.data.class.title
-      }) 
-      let params = {
-        favoriteId:this.data.class.classId,
-        favoriteType:this.data.favoriteType,
-        userId:this.data.userId
-       }
-      this.favoriteSummaryInformation(params)  
-    })
+    
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作

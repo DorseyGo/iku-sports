@@ -30,7 +30,7 @@
     </view>
 
     <scroll-view class="scroll-slides" scroll-x="{{true}}">
-      <view class="slide mg-left" wx:for="{{coachInfos}}" wx:key="id">
+      <view class="slide mg-left" wx:for="{{coachInfos}}" wx:key="id" url= "../course/coach/coach?coachId={{item.id}}">
         <view class="top-img">
           <image src="{{item.headingImgUrl}}" mode="aspectFill" />
         </view>

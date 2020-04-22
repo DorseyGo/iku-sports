@@ -16,7 +16,7 @@
             <text>{{class.watches}}</text>
         </view>
         <view class="colleged text-yellow text-lg" id = "favoriteview" >
-            <button bindtap = "favoriteAction">{{(totalNumOffavorite == 0 )? "收藏" : "已收藏"}}</button>
+            <text bindtap = "favoriteAction">{{(totalNumOffavorite == 0 )? "收藏" : "已收藏"}}</text>
         </view>
     </view>
     <view class="description">
