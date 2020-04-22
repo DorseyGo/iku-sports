@@ -26,6 +26,16 @@ public class IkuSportsConfig {
     private String appId;
     private String secret;
     private String token;
+    private String salt;
+    private String mchId;
+    private long expiryInDays;
+    private String key;
+
+    /**
+     * ip address that can be accessed by external app
+     */
+    private String machineIpAddr;
+    private String notifyUrlAddr;
 
     @Tolerate
     public IkuSportsConfig() {}

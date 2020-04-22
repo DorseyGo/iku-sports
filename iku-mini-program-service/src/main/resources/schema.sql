@@ -80,23 +80,23 @@ CREATE TABLE IF NOT EXISTS `coach`(
 CREATE TABLE IF NOT EXISTS `order`(
   `id` VARCHAR(32) NOT NULL,
   `fee` BIGINT(20) NOT NULL DEFAULT '0' COMMENT 'the original fee',
-  `discount` FLOAT NOT NULL DEFAULT '0' COMMENT 'the discount',
+  `discount` FLOAT NOT NULL DEFAULT '1.00f' COMMENT 'the discount',
   `money_paid` BIGINT(20) NOT NULL DEFAULT '0' COMMENT 'money paid by user',
   `paid_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `refund_money` BIGINT(20) NOT NULL DEFAULT '0',
   `status` CHAR(1) DEFAULT '0' COMMENT '0 for unpaid, 1 for paid, 2 for refund, 3 for cancel',
   `course_id` TINYINT(2) NOT NULL,
-  `student_id` BIGINT NOT NULL,
+  `user_id` CHAR(32) NOT NULL,
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
 -- the student
 --
-CREATE TABLE IF NOT EXISTS `student`(
-  `id` VARCHAR(32) NOT NULL ,
+CREATE TABLE IF NOT EXISTS `user`(
+  `id` CHAR(32) NOT NULL ,
   `open_id` VARCHAR(32) NOT NULL ,
-  `session_key` VARCHAR(64) NOT NULL ,
+  `token` CHAR(32) NOT NULL ,
   `name` VARCHAR(32) NOT NULL COMMENT 'the name',
   `avatar_url` VARCHAR(255) DEFAULT NULL COMMENT 'the heading image url',
   `gender` CHAR(1) DEFAULT 'U' COMMENT '0 for unknown, 2 for female, 1 for male',
