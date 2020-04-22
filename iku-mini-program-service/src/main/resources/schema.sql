@@ -133,13 +133,13 @@ CREATE TABLE IF NOT EXISTS `article_content`(
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
--- collect
+-- favorite
 --
- CREATE TABLE `collect` (
+CREATE TABLE `favorite` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `student_id` int NOT NULL,
-  `collect_id` int NOT NULL,
-  `collect_type` int DEFAULT '0' COMMENT '1 for video , 2 for article , 3 for course',
+  `user_id` int NOT NULL,
+  `favorite_id` int NOT NULL,
+  `favorite_type` int DEFAULT '1' COMMENT '1 for video , 2 for article , 3 for course, 4 for coach',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8

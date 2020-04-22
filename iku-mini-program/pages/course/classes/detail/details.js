@@ -12,7 +12,7 @@ Page({
     favorite : {},
     favoriteType: 1,
     watchNumAstrict: 0,
-    studentId: 1,
+    userId: 1,
     totalNumOffavorite: 0,
     favoriteText: "收藏"
   },
@@ -53,7 +53,7 @@ Page({
     // obtian identity information
     // let app =  getApp();
     // this.setData({
-    //   studentId: app.studentId    
+    //   userId: app.userId    
     // })
     return request.post(`favorite/summary`,params).then(res =>{
       this.setData({
@@ -72,14 +72,13 @@ Page({
    */
   favoriteAction: function(){
     let params = {
-      favoriteId:this.data.classId,
+      favoriteId:this.data.class.classId,
       favoriteType:this.data.favoriteType,
-      studentId:this.data.studentId
+      userId:this.data.userId
     }
     this.favoriteSummaryInformation(params)
     if (this.data.totalNumOffavorite === 0 ){
       request.post(`favorite/add`,params).then(res =>{
-        //empty
         this.setData({
           totalNumOffavorite: 1
         })
@@ -99,17 +98,26 @@ Page({
         console.log(err)
       })
     }
+
+    if( this.data.totalNumOffavorite === 0 ){
+      wx.showToast({
+        title: '取消收藏',
+        icon: 'none',
+        duration: 1500
+      })
+    }else{
+      wx.showToast({
+        title: '已收藏',
+        icon: 'none',
+        duration: 1500
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let params = {
-      favoriteId:this.data.classId,
-      favoriteType:this.data.favoriteType,
-      studentId:this.data.studentId
-     }
     this.setData({
       classId : options.id
     })
@@ -117,29 +125,30 @@ Page({
     this.loadData().then(() =>{
       wx.setNavigationBarTitle({
         title: this.data.class.title
-      })   
+      }) 
+      let params = {
+        favoriteId:this.data.class.classId,
+        favoriteType:this.data.favoriteType,
+        userId:this.data.userId
+       }
+      this.favoriteSummaryInformation(params)  
     })
 
-    this.favoriteSummaryInformation(params).then(() =>{
-      this.setData({
-        favoriteText : (this.data.totalNumOffavorite == 0)? "收藏" : "已收藏"
-      })
-    })
+    
   },
 
   onReady: function(){
-    let params = {
-      favoriteId:this.data.classId,
-      favoriteType:this.data.favoriteType,
-      studentId:this.data.studentId
-     }
-    this.loadData()
-    this.favoriteSummaryInformation(params).then(() =>{
-      this.setData({
-        favoriteText : (this.data.totalNumOffavorite == 0)? "收藏" : "已收藏"
-      })
+    this.loadData().then(() =>{
+      wx.setNavigationBarTitle({
+        title: this.data.class.title
+      }) 
+      let params = {
+        favoriteId:this.data.class.classId,
+        favoriteType:this.data.favoriteType,
+        userId:this.data.userId
+       }
+      this.favoriteSummaryInformation(params)  
     })
-    
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
