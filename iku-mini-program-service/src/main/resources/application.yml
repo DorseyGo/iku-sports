@@ -8,7 +8,14 @@ iku:
       port: 3307
       db-name: iku
     static-resource-server: http://localhost:9080/static
-
+    salt: 85f39a5014284b6caedd766f78b13388
+    app-id: ENC()
+    secret: ENC()
+    token: ENC()
+    mch-id: ENC()
+    expiry-in-days: 1
+    machine-ip-addr:
+    notify-url-addr: https://${iku.mini-program.machine-ip-addr}:${server.port}/api/payment/notification
 
 spring:
   output:
@@ -18,7 +25,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url:  jdbc:mysql://${iku.mini-program.database.hostname}:${iku.mini-program.database.port}/${iku.mini-program.database.db-name}?useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=GMT%2B8
     username: root
-    password: engine
+    password: ENC(f8wyX1QMvhqW2JadWsnq/Q==)
     hikari:
       maximum-pool-size: 200
       minimum-idle: 5

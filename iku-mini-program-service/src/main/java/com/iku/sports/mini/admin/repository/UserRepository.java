@@ -6,11 +6,17 @@
  */
 package com.iku.sports.mini.admin.repository;
 
+import com.google.common.collect.Lists;
 import com.iku.sports.mini.admin.entity.User;
-import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
+import org.apache.ibatis.type.JdbcType;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
 
 @Repository("userRepository")
 public interface UserRepository {
@@ -20,10 +26,20 @@ public interface UserRepository {
     @InsertProvider(type = UserSQLProvider.class, method = "save")
     void save(User user) throws DataAccessException;
 
+    @Results(id = "simpleUserRM", value = {
+            @Result(property = "id", column = "id", jdbcType = JdbcType.CHAR),
+            @Result(property = "openId", column = "open_id", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "token", column = "token", jdbcType = JdbcType.CHAR)
+    })
+    @SelectProvider(type = UserSQLProvider.class, method = "findUserByToken")
+    User findUserByToken(@NotNull @Param("token") String token);
+
     // ----
     // SQL provider
     // ----
     class UserSQLProvider {
+        private static List<String> COLS = Lists.newArrayList("id", "open_id", "token");
+
         public String save(final User user) {
             return new SQL() {
                 {
@@ -36,8 +52,8 @@ public interface UserRepository {
                         VALUES("open_id", "#{openId}");
                     }
 
-                    if (user.getSessionKey() != null) {
-                        VALUES("session_key", "#{sessionKey}");
+                    if (user.getToken() != null) {
+                        VALUES("token", "#{token}");
                     }
 
                     if (user.getAvatarUrl() != null) {
@@ -61,6 +77,16 @@ public interface UserRepository {
                     }
 
                     VALUES("gender", "#{gender}");
+                }
+            }.toString();
+        }
+
+        public String findOpenIdByToken(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT(COLS.toArray(new String[COLS.size()]));
+                    FROM(TABLE);
+                    WHERE("token = #{token}");
                 }
             }.toString();
         }

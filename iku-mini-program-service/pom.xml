@@ -58,6 +58,13 @@
             <groupId>me.chanjar</groupId>
             <artifactId>weixin-java-common</artifactId>
         </dependency>
+
+        <!-- -->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>${jasypt-spring-boot.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

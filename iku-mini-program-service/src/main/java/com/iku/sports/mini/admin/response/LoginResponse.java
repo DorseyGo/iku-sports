@@ -15,8 +15,8 @@ import lombok.experimental.Tolerate;
 @Builder
 public class LoginResponse {
 
-    @JsonProperty("session_key")
-    private String userId;
+    @JsonProperty("token")
+    private String token;
 
     @Tolerate
     public LoginResponse() {

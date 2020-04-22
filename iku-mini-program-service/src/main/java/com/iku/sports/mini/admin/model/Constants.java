@@ -11,4 +11,9 @@ public interface Constants {
 
     /* retain how many numbers */
     int DIVIDE_SCALE = 2;
+    String SUCCESS = "SUCCESS";
+    int LEN_32 = 32;
+    String PREFIX_PREPAY_ID = "prepay_id=";
+    String OK = "OK";
+    String FAIL = "FAIL";
 }
