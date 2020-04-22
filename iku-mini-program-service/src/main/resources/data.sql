@@ -34,3 +34,7 @@ values ('aa',1,'/images/basketball_2x.png',null,'aa',1,1,1),
 
 
 SELECT t.id, t.title, t.cover, t.content, t.watches, t.course_id FROM class T WHERE (course_id=1) ORDER BY T.create_time desc,T.watches desc limit 1,10
+
+
+
+SELECT IFNULL(count(1),0) FROM collect WHERE (student_id = 1 AND collect_type = 1)
