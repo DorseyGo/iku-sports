@@ -1,28 +1,10 @@
-<view class="coach">
-    <swiper class="screen-swiper" indicator-dots="{{true}}" autoplay="{{true}}" interval="5000" duration="500" circular="{{true}}">
-        <swiper-item>
-            <image class="image" mode="scaleToFill" src="../../../images/basketball_1_2x.png"></image>
-        </swiper-item>
-        <swiper-item>
-            <image class="image" mode="scaleToFill" src="../../../images/tennies_2_2x.png"></image>
-        </swiper-item>
-        <swiper-item>
-            <image class="image" mode="scaleToFill" src="../../../images/swimming_3_2x.png"></image>
-        </swiper-item>
-    </swiper>
-    <view class="about_my">
-        <image src="{{coach.heading_img_url}}" mode="scantofill" />
-    </view>
-    <view class="coach-info">
-        <view class="coach-m">
-            <view class="coach-name">{{coach.name}}</view>
-            <view class="coach-sex">{{(coach.gender === "M")? "男" : "女"}}</view>
-            <view class="coach-intr">{{coach.title}}</view>
+<view class="container">
+    <view class="header-img">
+        <image src="" />
+        <view class="thumbnail">
+            <image src="" />
         </view>
-        <view class="attention">
-            <text bindtap = "favoriteAction">{{(totalNumOffavorite === 0)? "关注":"已关注"}}</text>
-        </view>
-    </view>
+    </view>    
 </view>
 <scroll-view class="course-list">
     <text class="title">课程</text>

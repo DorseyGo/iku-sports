@@ -443,3 +443,22 @@ swiper-item .bottom-mask::after {
   margin: 0;
   overflow: initial;
 }
+
+/* header image*/
+view.header-img {
+  height: 422rpx;
+}
+
+view.favourite {
+  height: 40rpx;
+  width: 125rpx;
+  border: 1rpx solid rgba(255, 200, 3, 1);
+  background: rgba(255, 200, 3, 0.1);
+  border-radius: 22rpx;
+  margin-right: 24rpx;
+  margin-top: 134rpx;
+  justify-content: center;
+  font-size: 24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+}

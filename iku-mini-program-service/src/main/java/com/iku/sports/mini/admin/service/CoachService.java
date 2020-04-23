@@ -1,6 +1,7 @@
 package com.iku.sports.mini.admin.service;
 
 import com.iku.sports.mini.admin.entity.Coach;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.CoachInfo;
 
 import java.util.List;
@@ -14,5 +15,5 @@ import java.util.List;
  **/
 public interface CoachService {
     List<CoachInfo> getAllCoachInfos();
-    Coach getCoachById(final int id);
+    Coach getCoachById(final int id) throws ApiServiceException;
 }

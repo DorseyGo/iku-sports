@@ -121,6 +121,14 @@
 					"id": -1,
 					"name": "pages/course/coach/coach",
 					"pathName": "pages/course/coach/coach",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 11,
+					"name": "pages/course/coach/coach",
+					"pathName": "pages/course/coach/coach",
+					"query": "coachId=2",
 					"scene": null
 				}
 			]

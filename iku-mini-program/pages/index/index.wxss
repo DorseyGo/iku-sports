@@ -3,6 +3,10 @@
   margin: 0rpx 30rpx 0rpx;
 }
 
+.screen-swiper swiper-item {
+  border-radius: 10rpx;
+}
+
 .screen-swiper image {
   height: 100%;
   width: 100%;

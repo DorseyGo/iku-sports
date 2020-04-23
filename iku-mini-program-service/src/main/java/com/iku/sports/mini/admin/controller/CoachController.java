@@ -1,6 +1,7 @@
 package com.iku.sports.mini.admin.controller;
 
 import com.iku.sports.mini.admin.entity.Coach;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.CoachInfo;
 import com.iku.sports.mini.admin.model.Response;
 import com.iku.sports.mini.admin.service.CoachService;
@@ -23,11 +24,11 @@ import java.util.List;
  **/
 @Slf4j
 @Controller
-public class CoachController  {
-    private  final CoachService coachService;
+public class CoachController {
+    private final CoachService coachService;
 
     @Autowired
-    public CoachController(@Qualifier("coachService") final CoachService coachService){
+    public CoachController(@Qualifier("coachService") final CoachService coachService) {
         this.coachService = coachService;
     }
 
@@ -45,14 +46,9 @@ public class CoachController  {
 
     @ResponseBody
     @GetMapping("/api/coaches/{coachId}")
-    public Response<Coach> getCoachById(@PathVariable("coachId") final int id){
-        try{
-            final Coach coach = coachService.getCoachById(id);
-            return new Response<Coach>().status(Response.SUCCESS).data(coach);
-        }catch (Exception e){
-            log.error("Fail to get coach by id:{}",id,e);
-            return new Response<Coach>().status(Response.FAIL);
-        }
+    public Response<Coach> getCoachById(@PathVariable("coachId") final int id) throws ApiServiceException {
+        final Coach coach = coachService.getCoachById(id);
+        return new Response<Coach>().status(Response.SUCCESS).data(coach);
     }
 
 }

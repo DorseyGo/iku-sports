@@ -4,11 +4,6 @@
     margin-bottom: 10rpx;
 }
 
-.screen-swiper {
-    display: flex;
-    flex: 1;
-}
-
 .image {
     display: block;
     height: 100%;
