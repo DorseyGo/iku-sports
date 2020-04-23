@@ -2,6 +2,7 @@ package com.iku.sports.mini.admin.service.impl;
 
 import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.entity.Coach;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.CoachInfo;
 import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.CoachRepository;
@@ -38,7 +39,7 @@ public class CoachServiceImpl implements CoachService {
         final List<CoachInfo> coachInfos = coachRepository.getAllCoachesBriefs();
         coachInfos.forEach(coachInfo -> {
             coachInfo.setHeadingImgUrl(Utils.join(config.getStaticResourceServer(), coachInfo.getHeadingImgUrl(),
-                                                  Constants.FORWARD_SLASH));
+                    Constants.FORWARD_SLASH));
         });
 
         return coachInfos;

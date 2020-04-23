@@ -5,16 +5,16 @@ iku:
   mini-program:
     database:
       hostname: 127.0.0.1
-      port: 3307
+      port: 3306
       db-name: iku
     static-resource-server: http://localhost:9080/static
     salt: 85f39a5014284b6caedd766f78b13388
-    app-id: ENC()
-    secret: ENC()
-    token: ENC()
-    mch-id: ENC()
+    app-id: 123123a
+    secret: 123a
+    token: 1231asdfsa
+    mch-id: 123ddasdeggasd
     expiry-in-days: 1
-    machine-ip-addr:
+    machine-ip-addr: 127.0.0.1
     notify-url-addr: https://${iku.mini-program.machine-ip-addr}:${server.port}/api/payment/notification
 
 spring:
@@ -40,3 +40,6 @@ spring:
 logging:
   level:
     com.iku.sports.mini.admin.repository: debug
+jasypt:
+  encryptor:
+    password: ${iku.mini-program.salt}

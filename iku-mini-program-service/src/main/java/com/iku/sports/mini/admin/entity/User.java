@@ -14,9 +14,9 @@ import lombok.experimental.Tolerate;
 @Builder
 public class User {
 
-    private char[] id;
+    private String id;
     private String openId;
-    private char[] token;
+    private String token;
     private String nickName;
     private String avatarUrl;
 

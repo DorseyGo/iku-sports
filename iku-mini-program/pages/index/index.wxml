@@ -30,7 +30,7 @@
     </view>
 
     <scroll-view class="scroll-slides" scroll-x="{{true}}">
-      <view class="slide mg-left" wx:for="{{coachInfos}}" wx:key="id" url= "../course/coach/coach?coachId={{item.id}}">
+      <navigator url="../course/coach/coach?coachId={{item.id}}"  class="slide mg-left" wx:for="{{coachInfos}}" wx:key="id" url= "../course/coach/coach?coachId={{item.id}}">
         <view class="top-img">
           <image src="{{item.headingImgUrl}}" mode="aspectFill" />
         </view>
@@ -46,13 +46,13 @@
             <image src="{{item.level == 4 ? '../../images/Icon_collect_clicked_2x.png' : '../../images/Icon_collect_normal_2x.png'}}" />
           </view>
         </view>
-        <navigator url="" class="bottom mg-left-xl text-white text-normal">
+        <view class="bottom mg-left-xl text-white text-normal">
           <view >课程： {{item.numOfCoachClasses}}系列</view> >
-        </navigator>
+        </view>
         <view wx:if="{{item.level == 4}}" class="badge">
           <image src="../../images/metal_2x.png" mode="aspectFill" />
         </view>
-      </view>
+      </navigator>
     </scroll-view>
 
     <!-- article -->

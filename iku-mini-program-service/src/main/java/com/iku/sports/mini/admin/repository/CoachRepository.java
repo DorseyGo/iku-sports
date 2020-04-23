@@ -6,6 +6,7 @@ import com.iku.sports.mini.admin.model.CoachInfo;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
@@ -29,10 +30,7 @@ public interface CoachRepository {
             @Result(property = "name", column = "name", jdbcType = JdbcType.VARCHAR),
             @Result(property = "headingImgUrl", column = "heading_img_url", jdbcType = JdbcType.VARCHAR),
             @Result(property = "title", column = "title", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "gender", column = "gender", jdbcType = JdbcType.INTEGER),
-            @Result(property = "nationality", column = "nationality", jdbcType = JdbcType.VARCHAR),
             @Result(property = "level", column = "level", jdbcType = JdbcType.INTEGER),
-            @Result(property = "introduce", column = "introduce", jdbcType = JdbcType.VARCHAR),
             @Result(property = "numOfCoachClasses", column = "classes", jdbcType = JdbcType.INTEGER)
     })
     @SelectProvider(type = CoachSqlProvider.class, method = "getAllCoachInfos")
@@ -50,14 +48,14 @@ public interface CoachRepository {
             @Result(property = "introduce", column = "introduce", jdbcType = JdbcType.VARCHAR)
     })
     @SelectProvider(type = CoachSqlProvider.class, method = "getCoachById")
-    Coach getCoachById(@Param("coachId") int id);
+    Coach getCoachById(@Param("coachId") int id) throws DataAccessException;
 
     class CoachSqlProvider {
-        static final List<String> SIMPLE_COLS = Arrays.asList("t.name", "t.heading_img_url", "t.title", "t.nationality",
-                                                              "t.level");
+        static final List<String> SIMPLE_COLS = Arrays
+                .asList("t.id", "t.name", "t.heading_img_url", "t.title", "t.level");
         static final List<String> SIMPLE_COLS_WITH_COUNT = Lists.newArrayList(SIMPLE_COLS);
         static final List<String> COLS = Arrays.asList("t.id", "t.name", "t.age", "t.heading_img_url", "t.title",
-                                                       "t.gender", "t.nationality", "t.level", "t.introduce");
+                "t.gender", "t.nationality", "t.level", "t.introduce");
 
         static {
             SIMPLE_COLS_WITH_COUNT.add("count(t1.id) as classes");
@@ -80,7 +78,7 @@ public interface CoachRepository {
             return new SQL() {
                 {
                     SELECT(COLS.toArray(new String[COLS.size()]));
-                    FROM(COACH_TABLE+" t");
+                    FROM(COACH_TABLE + " t");
                     WHERE("id = #{coachId}");
                 }
             }.toString();

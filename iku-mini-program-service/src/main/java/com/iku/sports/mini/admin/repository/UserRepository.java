@@ -27,9 +27,9 @@ public interface UserRepository {
     void save(User user) throws DataAccessException;
 
     @Results(id = "simpleUserRM", value = {
-            @Result(property = "id", column = "id", jdbcType = JdbcType.CHAR),
+            @Result(property = "id", column = "id", javaType = String.class, jdbcType = JdbcType.CHAR),
             @Result(property = "openId", column = "open_id", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "token", column = "token", jdbcType = JdbcType.CHAR)
+            @Result(property = "token", column = "token", javaType = String.class, jdbcType = JdbcType.CHAR)
     })
     @SelectProvider(type = UserSQLProvider.class, method = "findUserByToken")
     User findUserByToken(@NotNull @Param("token") String token);
@@ -81,7 +81,7 @@ public interface UserRepository {
             }.toString();
         }
 
-        public String findOpenIdByToken(final Map<String, Object> params) {
+        public String findUserByToken(final Map<String, Object> params) {
             return new SQL() {
                 {
                     SELECT(COLS.toArray(new String[COLS.size()]));

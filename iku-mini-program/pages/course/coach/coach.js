@@ -19,7 +19,7 @@ Page({
    * get coash information
    */
   getCoach : function() {
-    return request.get(`coaches/`+ this.data.coachId).then(res =>{
+    request.get(`coaches/`+ this.data.coachId).then(res =>{
       this.setData({
         coach: res.data
       })
@@ -30,8 +30,9 @@ Page({
       console.log(err)
     })
   },
+
   favoriteSummaryInformation: function(params){
-    return request.post(`favorite/summary`,params).then(res =>{
+    request.post(`favorite/summary`,params).then(res =>{
       this.setData({
         totalNumOffavorite: res.data
       },reason =>{
@@ -43,7 +44,7 @@ Page({
   },
   favoriteAction: function(){
     let params = {
-      favoriteId:this.data.coach.coachId,
+      favoriteId: this.data.coachId,
       favoriteType:this.data.favoriteType,
       userId:this.data.userId
     }
@@ -111,10 +112,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.coachId = options.coachId
-    this.getCoach().then(() =>{
-      
+    console.log(options.coachId)
+    this.setData({
+      coachId: options.coachId
     })
+
+    this.getCoach()
     this.getCoachClass()
   },
 
@@ -122,27 +125,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
 
   },
 

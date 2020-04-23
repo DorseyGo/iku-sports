@@ -14,7 +14,7 @@ Page({
   },
 
   onLoad: function () {
-    app.onGetSetting()
+    // app.onGetSetting()
     /** request to fetch categories */
     request.get(`categories`).then(res => {
       this.setData({

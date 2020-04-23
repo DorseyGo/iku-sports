@@ -25,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.common.util.http.SimpleGetRequestExecutor;
 import me.chanjar.weixin.mp.api.WxMpService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final LoadingCache<String, String> cache;
 
+    @Autowired
     public UserServiceImpl(@Qualifier("wxMpService") WxMpService wxMpService,
             IkuSportsConfig config, @Qualifier("userRepository") UserRepository userRepository) {
         this.wxMpService = wxMpService;
@@ -82,9 +84,9 @@ public class UserServiceImpl implements UserService {
         final String token = Utils.genUniqueStr();
 
         userRepository.save(User.builder()
-                .id(userId.toCharArray())
+                .id(userId)
                 .openId(resp.getOpenId())
-                .token(token.toCharArray())
+                .token(token)
                 .build());
 
         return token;

@@ -16,7 +16,7 @@ public class Order {
     private String orderId;
     private int fee;
     private short courseId;
-    private char[] userId;
+    private String userId;
     private float discount;
     private int moneyPaid;
     private long refundMoney;
