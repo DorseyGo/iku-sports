@@ -32,6 +32,6 @@
     <view class="empty"></view>
 
     <view class="next-link mg-left-xl margin-top-30rpx text-sm">
-        <navigator >继续观看 第{{class.chapter+1}}节</navigator>
+        <navigator url="../detail/details?classId={{class.nextClassId}}">继续观看 第{{class.nextChapter}}节</navigator>
     </view>
 </view>
