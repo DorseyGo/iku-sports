@@ -2,12 +2,16 @@ package com.iku.sports.mini.admin.service.impl;
 
 import com.google.common.collect.Lists;
 import com.iku.sports.mini.admin.entity.CourseClass;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
+import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.model.ClassCount;
+import com.iku.sports.mini.admin.model.ClassOverview;
 import com.iku.sports.mini.admin.repository.CourseClassRepository;
 import com.iku.sports.mini.admin.service.CourseClassService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,8 +54,13 @@ public class CourseClassServiceImpl implements CourseClassService {
     }
 
     @Override
-    public CourseClass getClassById(int id) throws Exception {
-        return courseClassRepository.getClassById(id);
+    public ClassOverview getClassOverviewById(int id) throws ApiServiceException {
+        try {
+            return courseClassRepository.getClassOverviewById(id);
+        } catch (DataAccessException e) {
+            log.error("Failed to get class overview by id: {}", id, e);
+            throw new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR);
+        }
     }
 
     @Override

@@ -19,15 +19,20 @@ Page({
   
   loadData: function(){
     let classId = this.data.classId
-      return request.get(`class/`+classId).then(res => {
-        this.setData({
-          class : res.data
-        })
-      },reason =>{
-        console.log(reason)
-      }).catch(err =>{
-        console.log(err)
+    request.get(`class/`+classId).then(res => {
+      this.setData({
+        class : res.data
       })
+
+      wx.setNavigationBarTitle({
+        title: res.data.classTitle
+      });
+        
+    }, reason =>{
+      console.log(reason)
+    }).catch(err =>{
+      console.log(err)
+    })
   }
   ,
   /**
@@ -126,26 +131,18 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      classId : options.id
+      classId : options.classId
     })
 
-    this.loadData().then(() =>{
-      wx.setNavigationBarTitle({
-        title: this.data.class.title
-      }) 
-      let params = {
-        favoriteId:this.data.class.classId,
-        favoriteType:this.data.favoriteType,
-        userId:this.data.userId
-       }
-      this.favoriteSummaryInformation(params)  
-    })
-
-    
+    this.loadData()    
   },
 
   onReady: function(){
-    
+    if (this.data.class) {
+      wx.setNavigationBarTitle({
+        title: this.data.class.classTitle
+      })
+    }
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作

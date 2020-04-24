@@ -105,6 +105,9 @@ swiper-item .bottom-mask::after {
 
 .text-sm {
   font-size: 20rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  line-height: 28rpx;
 }
 
 .text-xs {
@@ -250,8 +253,16 @@ swiper-item .bottom-mask::after {
   margin-right: 40rpx;
 }
 
+.margin-right-78rpx {
+  margin-right: 78rpx;
+}
+
 .mg-bottom {
   margin-bottom: 36rpx;
+}
+
+.margin-top-30rpx {
+  margin-top: 30rpx;
 }
 
 .width-half {
@@ -530,4 +541,32 @@ view.empty {
   width: 100%;
   height: 10rpx;
   background:rgba(21,21,21,1);
+}
+
+/* video */
+view.video {
+  width: 100%;
+  height: 422rpx;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.video video {
+  width: 100%;
+  height: 100%;
+}
+
+view.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+view.next-link {
+  min-height: 80rpx;
+  width: calc(100% - 28rpx - 46rpx);
+  background:rgba(255,200,3,0.05);
+  border-radius: 10rpx;
+  text-align: center;
+  padding: 30rpx 0rpx;
+  text-align: center;
+  color: rgba(255,200,3,1);
 }

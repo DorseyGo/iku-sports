@@ -1,10 +1,13 @@
 package com.iku.sports.mini.admin.repository;
 
+import com.google.common.collect.Lists;
 import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.model.ClassCount;
+import com.iku.sports.mini.admin.model.ClassOverview;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
@@ -22,6 +25,7 @@ import java.util.Map;
 public interface CourseClassRepository {
     String CLASSTABLE = "class";
     String COURSETABLE = "course";
+    String TABLE_COACH = "coach";
 
     @Results(id = "courseClassRM",value = {
             @Result(property = "id", column = "id", jdbcType = JdbcType.INTEGER),
@@ -43,9 +47,20 @@ public interface CourseClassRepository {
     List<CourseClass> paginateClasses(@Param("paginateCourseId") short courseId,
                                       @Param("paginateOffset") int offset,
                                       @Param("paginatePageSize") int pageSize)throws Exception;
-    @ResultMap("courseClassRM")
-    @SelectProvider(type = CourseClassSqlProvider.class,method = "getClassById")
-    CourseClass getClassById(@Param("classId") int id)throws Exception;
+
+    @Results(id = "coRM", value = {
+            @Result(property = "classId", column = "id", jdbcType = JdbcType.INTEGER),
+            @Result(property = "nextClassId", column = "next_id", jdbcType = JdbcType.INTEGER),
+            @Result(property = "classTitle", column = "title", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "chapter", column = "chapter", jdbcType = JdbcType.INTEGER),
+            @Result(property = "nextChapter", column = "next_chapter", jdbcType = JdbcType.INTEGER),
+            @Result(property = "videoUrl", column = "video_url", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "content", column = "content", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "numSeries", column = "num_series", jdbcType = JdbcType.INTEGER),
+            @Result(property = "coachName", column = "name", jdbcType = JdbcType.VARCHAR)
+    })
+    @SelectProvider(type = CourseClassSqlProvider.class, method = "getClassOverviewById")
+    ClassOverview getClassOverviewById(@Param("classId") int id) throws DataAccessException;
 
     @ResultMap("courseClassRM")
     @SelectProvider(type = CourseClassSqlProvider.class,method = "getTop3PopularClasses")
@@ -74,6 +89,17 @@ public interface CourseClassRepository {
     class CourseClassSqlProvider {
         static final List<String> ALLCOLS = Arrays.asList("id","title","cover","chapter","video_url","content","watches","course_id","coach_id");
         static final List<String> SIMPLECOLS = Arrays.asList("T.id","T.title","T.cover","T.content","T.watches","T.course_id");
+
+        static final List<String> COLS_CLASS = Lists.newArrayList("c.id", "c.title", "c.chapter", "c.video_url", "c.content");
+        static final List<String> COLS_COACH = Lists.newArrayList("ch.name");
+
+
+        static {
+            COLS_CLASS.addAll(COLS_COACH);
+            COLS_CLASS.add("(SELECT COUNT(c1.id) FROM class c1 WHERE c1.course_id = c.course_id) num_series");
+            COLS_CLASS.add("(SELECT c2.id FROM class c2 WHERE c2.chapter > c.chapter ORDER BY c2.chapter DESC LIMIT 0,1) next_id");
+            COLS_CLASS.add("(SELECT c3.chapter FROM class c3 WHERE c3.chapter > c.chapter ORDER BY c3.chapter DESC LIMIT 0,1) next_chapter");
+        }
 
         public String setClassWatchesById(final Map<String,Object> param){
             return new SQL(){
@@ -138,15 +164,14 @@ public interface CourseClassRepository {
                 }
             }.toString();
         }
-        public String getClassById(final Map<String,Object> param){
+
+        public String getClassOverviewById(final Map<String,Object> param){
             return new SQL(){
                 {
-                    SELECT(ALLCOLS.toArray(new String[ALLCOLS.size()]));
-                    FROM(CLASSTABLE+" T");
-                    if (param.get("classId") != null){
-                        WHERE(" T.ID = #{classId}");
-                    }
-                    ORDER_BY("T.create_time desc,T.watches desc");
+                    SELECT(COLS_CLASS.toArray(new String[COLS_CLASS.size()]));
+                    FROM(CLASSTABLE + " c");
+                    INNER_JOIN(TABLE_COACH + " ch ON ch.id = c.coach_id");
+                    WHERE("c.id = #{classId}");
                 }
             }.toString();
         }

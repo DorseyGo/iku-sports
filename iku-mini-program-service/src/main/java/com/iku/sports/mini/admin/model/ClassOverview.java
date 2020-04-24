@@ -1,5 +1,5 @@
 /**
- * File: Overview
+ * File: ClassOverview
  * Author: DorSey Q F TANG
  * Created: 2020/3/21 23:16
  * CopyRight: All rights reserved
@@ -19,20 +19,19 @@ import java.util.Map;
 
 @Data
 @Builder
-public class Overview {
-    private String categoryName;
-    private List<Activity> activities;
+public class ClassOverview {
+    private int classId;
+    private String classTitle;
+    private int chapter;
+    private String videoUrl;
+    private String content;
+    private int numSeries;
+    private String coachName;
 
-    @Builder.Default
-    private List<CourseClass> top3Populars = Lists.newArrayList();
-
-    @Builder.Default
-    private List<CourseClass> top3Classics = Lists.newArrayList();
-    /* level & classes */
-
-    @Builder.Default
-    private Map<Short, List<CourseClass>> courseClasses = Maps.newHashMap();
+    // ----
+    private int nextClassId;
+    private int nextChapter;
 
     @Tolerate
-    public Overview() {}
+    public ClassOverview() {}
 }

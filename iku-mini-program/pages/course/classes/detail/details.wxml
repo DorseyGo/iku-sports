@@ -1,28 +1,37 @@
-<view class="video-dit">
-
-    <video class="video" id="{{class.id}}" src="{{class.videoUrl}}"
-        custom-cache="{{false}}" controls="{{true}}" show-muted-btn="{{true}}"
-        bindplay="setWatches"
-       ></video> 
-
-    <!-- <video class="video" src="http://localhost:9080/static/video/1586663251730963.mp4" 
-        custom-cache="{{false}}" controls="{{true}}" show-muted-btn="{{true}}" bindplay="setWatches"
-       ></video> -->
-</view>
-<scroll-view>
-    <view class="video-information">
-        <view class="view_num text-yellow text-lg">
-            观看人次：
-            <text>{{class.watches}}</text>
-        </view>
-        <view class="colleged text-yellow text-lg" id = "favoriteview" >
-            <text bindtap = "favoriteAction">{{(totalNumOffavorite == 0 )? "收藏" : "已收藏"}}</text>
+<view class="container">
+    <view class="video">
+        <video id="{{class.id}}" src="{{class.videoUrl}}"
+            custom-cache="{{false}}" controls="{{true}}" show-muted-btn="{{true}}"
+            bindplay="setWatches" object-fit="cover" style="width: 100%;">
+        </video>
+    </view>
+    <view class="iku-head">
+        <view class="action text-xl text-white mg-left-xl">{{class.classTitle}}</view>
+        <view class="action margin-right-40rpx">
+            <view class="favourite text-normal">
+                收藏
+            </view>
         </view>
     </view>
-    <view class="description">
-        <view class="title text-xl text-white  text-cut">{{class.title}}</view>
-        <text class="comment text-white text-normal">
+
+    <view class="iku-title flex-between">
+        <view class="action text-sm-26rpx mg-left-xl text-light-white">
+            基础课程 {{class.numSeries}}课时 
+        </view>
+        <view class="action text-sm-26rpx margin-right-78rpx text-light-white">
+            {{class.coachName}}教练
+        </view>
+    </view>
+
+    <view class="iku-info margin-top-30rpx">
+        <view class="action text-normal text-light-white mg-left-xl">
             {{class.content}}
-            </text>
+        </view>
     </view>
-</scroll-view>
+
+    <view class="empty"></view>
+
+    <view class="next-link mg-left-xl margin-top-30rpx text-sm">
+        <navigator >继续观看 第{{class.chapter+1}}节</navigator>
+    </view>
+</view>

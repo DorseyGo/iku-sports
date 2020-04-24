@@ -1,7 +1,9 @@
 package com.iku.sports.mini.admin.controller;
 
 import com.iku.sports.mini.admin.entity.CourseClass;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.ClassCount;
+import com.iku.sports.mini.admin.model.ClassOverview;
 import com.iku.sports.mini.admin.model.Response;
 import com.iku.sports.mini.admin.service.CourseClassService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,14 +37,9 @@ public class CourseClassController {
 
     @ResponseBody
     @GetMapping("/api/class/{id}")
-    public Response<CourseClass> getClassById(@PathVariable("id") int id){
-        try{
-            final CourseClass courseClass = courseClassService.getClassById(id);
-            return new Response<CourseClass>().status(Response.SUCCESS).data(courseClass);
-        }catch (Exception e){
-            log.error("Fail to get class by id.",e);
-            return new Response<CourseClass>().status(Response.FAIL);
-        }
+    public Response<ClassOverview> getClassById(@PathVariable("id") final int id) throws ApiServiceException {
+        final ClassOverview overview = courseClassService.getClassOverviewById(id);
+        return new Response<ClassOverview>().status(Response.SUCCESS).data(overview);
     }
 
     @ResponseBody

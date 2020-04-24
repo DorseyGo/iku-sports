@@ -2,7 +2,9 @@ package com.iku.sports.mini.admin.service;
 
 
 import com.iku.sports.mini.admin.entity.CourseClass;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.ClassCount;
+import com.iku.sports.mini.admin.model.ClassOverview;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ public interface CourseClassService {
 
     List<CourseClass> paginateClasses(short courseId,int offset,int pageSize) throws Exception;
 
-    CourseClass getClassById(int id) throws Exception;
+    ClassOverview getClassOverviewById(final int id) throws ApiServiceException;
 
     List<CourseClass> getTop3PopularClasses(short categoryId) throws Exception;
 
