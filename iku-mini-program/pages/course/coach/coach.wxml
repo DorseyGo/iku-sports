@@ -1,7 +1,9 @@
 <view class="container">
     <view class="header-img">
         <image class="cover" src="{{coach.headingImgUrl}}" mode="aspectFill" />
-        <view class="thumbnail" style="background-image: url('{{coach.headingImgUrl}}')"></view>
+        <view class="thumbnail">
+            <image src="{{coach.headingImgUrl}}" mode="aspectFill" />
+        </view>
     </view>
 
     <view class="iku-head">

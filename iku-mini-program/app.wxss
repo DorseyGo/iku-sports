@@ -484,8 +484,8 @@ view.header-img view.thumbnail {
 }
 
 view.thumbnail image {
-  height: 180rpx;
-  width: 180rpx;
+  width: 100%;
+  height: 100%;
   border-radius: 90rpx;
 }
 
