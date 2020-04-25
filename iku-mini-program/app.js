@@ -4,15 +4,21 @@ const server  = require("./utils/server");
 
 App({
   onLaunch: function () {
+    /*
     server.chkSession(() => {
 
       wx.login({
         timeout: 10000,
         success: (result) => {
-          request.get(`user/login`, {
+          request.post(`user/login`, {
             code: result.code
           }).then(res => {
             wx.setStorageSync('iku_sports_session', res.data.session_key)
+          }, reason => {
+            wx.showToast({
+              title: reason,
+              icon: 'none'
+            });
           })
         },
         fail: () => {
@@ -20,7 +26,7 @@ App({
         }
       })
 
-    })
+    }) */
   },
 
   onGetSetting: () => {

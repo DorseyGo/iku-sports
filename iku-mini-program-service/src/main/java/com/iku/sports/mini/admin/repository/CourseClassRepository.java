@@ -9,6 +9,7 @@ import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,6 +53,7 @@ public interface CourseClassRepository {
             @Result(property = "classId", column = "id", jdbcType = JdbcType.INTEGER),
             @Result(property = "nextClassId", column = "next_id", jdbcType = JdbcType.INTEGER),
             @Result(property = "classTitle", column = "title", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "nextClassTitle", column = "next_title", jdbcType = JdbcType.VARCHAR),
             @Result(property = "chapter", column = "chapter", jdbcType = JdbcType.INTEGER),
             @Result(property = "nextChapter", column = "next_chapter", jdbcType = JdbcType.INTEGER),
             @Result(property = "videoUrl", column = "video_url", jdbcType = JdbcType.VARCHAR),
@@ -86,6 +88,16 @@ public interface CourseClassRepository {
     @UpdateProvider(type = CourseClassSqlProvider.class, method = "setClassWatchesById")
     void setClassWatchesById(@Param("id") int id);
 
+    @Results(id = "simpleClassRM", value = {
+            @Result(property = "id", column = "id", jdbcType = JdbcType.INTEGER),
+            @Result(property = "title", column = "title", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "cover", column = "cover", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "content", column = "content", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "watches", column = "watches", jdbcType = JdbcType.INTEGER)
+    })
+    @SelectProvider(type = CourseClassSqlProvider.class, method = "findFirst2ByClassId")
+    List<CourseClass> findFirst2ByClassId(@Param("relatedClassId") final int relatedClassId);
+
     class CourseClassSqlProvider {
         static final List<String> ALLCOLS = Arrays.asList("id","title","cover","chapter","video_url","content","watches","course_id","coach_id");
         static final List<String> SIMPLECOLS = Arrays.asList("T.id","T.title","T.cover","T.content","T.watches","T.course_id");
@@ -93,12 +105,14 @@ public interface CourseClassRepository {
         static final List<String> COLS_CLASS = Lists.newArrayList("c.id", "c.title", "c.chapter", "c.video_url", "c.content");
         static final List<String> COLS_COACH = Lists.newArrayList("ch.name");
 
+        static final List<String> SIMPLE_COLS_CLASS = Lists.newArrayList("c.id", "c.title", "c.cover", "c.content", "c.watches");
 
         static {
             COLS_CLASS.addAll(COLS_COACH);
             COLS_CLASS.add("(SELECT COUNT(c1.id) FROM class c1 WHERE c1.course_id = c.course_id) num_series");
-            COLS_CLASS.add("(SELECT c2.id FROM class c2 WHERE c2.chapter > c.chapter ORDER BY c2.chapter DESC LIMIT 0,1) next_id");
-            COLS_CLASS.add("(SELECT c3.chapter FROM class c3 WHERE c3.chapter > c.chapter ORDER BY c3.chapter DESC LIMIT 0,1) next_chapter");
+            COLS_CLASS.add("(SELECT c2.id FROM class c2 WHERE c2.chapter > c.chapter ORDER BY c2.chapter ASC LIMIT 0,1) next_id");
+            COLS_CLASS.add("(SELECT c3.chapter FROM class c3 WHERE c3.chapter > c.chapter ORDER BY c3.chapter ASC LIMIT 0,1) next_chapter");
+            COLS_CLASS.add("(SELECT c4.title FROM class c4 WHERE c4.chapter > c.chapter ORDER BY c4.chapter ASC LIMIT 0,1) next_title");
         }
 
         public String setClassWatchesById(final Map<String,Object> param){
@@ -203,6 +217,18 @@ public interface CourseClassRepository {
                     ORDER_BY("T.course_id DESC LIMIT 0,3");
 
 
+                }
+            }.toString();
+        }
+
+        public String findFirst2ByClassId(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT(SIMPLE_COLS_CLASS.toArray(new String[SIMPLE_COLS_CLASS.size()]));
+                    FROM(CLASSTABLE + " c");
+                    INNER_JOIN(CLASSTABLE + " c1 ON c.course_id = c1.course_id");
+                    WHERE("c1.id = #{relatedClassId} AND c.id != #{relatedClassId}");
+                    ORDER_BY("c.watches DESC LIMIT 2");
                 }
             }.toString();
         }

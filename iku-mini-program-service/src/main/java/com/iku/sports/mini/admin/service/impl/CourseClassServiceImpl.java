@@ -1,13 +1,16 @@
 package com.iku.sports.mini.admin.service.impl;
 
 import com.google.common.collect.Lists;
+import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.model.ClassCount;
 import com.iku.sports.mini.admin.model.ClassOverview;
+import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.CourseClassRepository;
 import com.iku.sports.mini.admin.service.CourseClassService;
+import com.iku.sports.mini.admin.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,10 +32,13 @@ public class CourseClassServiceImpl implements CourseClassService {
     private final CourseClassRepository courseClassRepository;
     private final List<Integer> ALLOWED_PAGE_SIZES = Lists.newArrayList(10, 20, 50, 100);
     static final int DEFAULT_PAGE_SIZE = 10;
+    private final IkuSportsConfig config;
 
     @Autowired
-    public CourseClassServiceImpl(@Qualifier("courseClassRepository") CourseClassRepository courseClassRepository) {
+    public CourseClassServiceImpl(@Qualifier("courseClassRepository") CourseClassRepository courseClassRepository,
+            IkuSportsConfig config) {
         this.courseClassRepository = courseClassRepository;
+        this.config = config;
     }
 
 
@@ -45,7 +51,7 @@ public class CourseClassServiceImpl implements CourseClassService {
     public List<CourseClass> paginateClasses(short courseId, int offset, int pageSize) throws Exception {
         if (!ALLOWED_PAGE_SIZES.contains(pageSize)) {
             log.info("Page size fallback, due to passed-in page size: {}, not contained in: {}",
-                    pageSize, ALLOWED_PAGE_SIZES);
+                     pageSize, ALLOWED_PAGE_SIZES);
 
             pageSize = DEFAULT_PAGE_SIZE;
         }
@@ -85,6 +91,17 @@ public class CourseClassServiceImpl implements CourseClassService {
 
     @Override
     public void setClassWatchesById(int id) throws Exception {
-         courseClassRepository.setClassWatchesById(id);
+        courseClassRepository.setClassWatchesById(id);
+    }
+
+    @Override
+    public List<CourseClass> getPromotionsById(int relatedClassId) throws ApiServiceException {
+        final List<CourseClass> classes = courseClassRepository.findFirst2ByClassId(relatedClassId);
+        classes.forEach(courseClass -> {
+            courseClass.setCover(
+                    Utils.join(config.getStaticResourceServer(), courseClass.getCover(), Constants.FORWARD_SLASH));
+        });
+
+        return classes;
     }
 }

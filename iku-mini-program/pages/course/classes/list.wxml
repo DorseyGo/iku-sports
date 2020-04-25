@@ -1,5 +1,5 @@
 <scroll-view scroll-y="{{true}}" class="list menu-avatar">
-    <navigator url="./detail/details?id={{item.id}}" hover-class="navigator-hover" open-type="navigate" wx:for="{{classes}}" wx:key="id" >
+    <navigator url="./detail/details?classId={{item.id}}" hover-class="navigator-hover" open-type="navigate" wx:for="{{classes}}" wx:key="id" >
         <view class="list-items" >
             <view class="image-size" style="background-image: url('{{item.cover}}')"></view>
             <view class="content">

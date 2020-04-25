@@ -570,3 +570,63 @@ view.next-link {
   text-align: center;
   color: rgba(255,200,3,1);
 }
+
+/* uniform list */
+view.iku-list {
+  overflow: hidden;
+  min-height: 220rpx;
+}
+
+.iku-list .iku-item {
+  position: relative;
+  display: flex;
+  padding-right: 10rpx;
+  height: 220rpx;
+  background-color: var(--background-color);
+  justify-content: flex-end;
+  align-items: center;
+  transition: all .6s ease-in-out 0s;
+  transform: translateX(0rpx);
+}
+
+.iku-list .iku-item .content {
+  position: absolute;
+  left: 248rpx;
+  line-height: 1.6em;
+  width: calc(100% - 160rpx - 30rpx - 80rpx - 20rpx);
+  height: 100%;
+}
+
+.iku-list .iku-item .iku-avatar {
+  position: absolute;
+  left: 30rpx;
+}
+
+.iku-avatar {
+  font-variant: small-caps;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+  color: var(--white);
+  white-space: nowrap;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  vertical-align: middle;
+  width: 160rpx;
+  height: 220rpx;
+}
+
+/* flex attribute */
+.flex {
+  display: flex;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0rpx;
+}

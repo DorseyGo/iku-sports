@@ -30,6 +30,7 @@ public class ClassOverview {
 
     // ----
     private int nextClassId;
+    private String nextClassTitle;
     private int nextChapter;
 
     @Tolerate

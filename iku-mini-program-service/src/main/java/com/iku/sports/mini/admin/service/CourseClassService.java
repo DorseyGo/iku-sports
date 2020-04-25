@@ -31,4 +31,13 @@ public interface CourseClassService {
     ClassCount getTotalNumMoneyByCourseId(int courseId) throws Exception;
 
     void setClassWatchesById(int id) throws Exception;
+
+    /**
+     *
+     * @param relatedClassId
+     * @return
+     * @throws ApiServiceException
+     * @Author: DorSey
+     */
+    List<CourseClass> getPromotionsById(int relatedClassId) throws ApiServiceException;
 }

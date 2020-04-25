@@ -19,7 +19,7 @@
             基础课程 {{class.numSeries}}课时 
         </view>
         <view class="action text-sm-26rpx margin-right-78rpx text-light-white">
-            {{class.coachName}}教练
+            {{class.coachName}} 教练
         </view>
     </view>
 
@@ -32,6 +32,31 @@
     <view class="empty"></view>
 
     <view class="next-link mg-left-xl margin-top-30rpx text-sm">
-        <navigator url="../detail/details?classId={{class.nextClassId}}">继续观看 第{{class.nextChapter}}节</navigator>
+        <navigator url="../detail/details?classId={{class.nextClassId}}">
+            继续观看 第{{class.nextChapter}}节 {{class.nextClassTitle}}
+        </navigator>
+    </view>
+
+    <view class="iku-title flex-between margin-top-30rpx">
+        <view class="action text-sm-26rpx mg-left-xl text-light-white">
+            系列课程
+        </view>
+    </view>
+
+    <view class="iku-list">
+        <navigator url="../detail/details?classId={{item.id}}" class="iku-item margin-top-30rpx" wx:for="{{promotions}}" wx:key="id">
+            <view class="iku-avatar radius" style="background-image: url('{{item.cover}}')"></view>
+            <view class="content">
+                <view class="text-white text-xl">
+                    <text class="text-cut">{{item.title}}</text>
+                </view>
+                <view class="text-light-white text-sm-26rpx flex">
+                   <text class="text-cut">{{item.content}}</text>
+                </view>
+                <view class="bottom text-normal text-light-white">
+                    <text class="text-yellow">{{item.watches}}</text> 已观看
+                </view>
+            </view>
+        </navigator>
     </view>
 </view>

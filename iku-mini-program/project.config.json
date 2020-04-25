@@ -90,10 +90,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 6,
 					"name": "pages/course/classes/detail/details",
 					"pathName": "pages/course/classes/detail/details",
-					"query": "",
+					"query": "classId=1",
 					"scene": null
 				},
 				{
@@ -129,6 +129,13 @@
 					"name": "pages/course/coach/coach",
 					"pathName": "pages/course/coach/coach",
 					"query": "coachId=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/classes/detail/details",
+					"pathName": "pages/course/classes/detail/details",
+					"query": "classId=1",
 					"scene": null
 				},
 				{
