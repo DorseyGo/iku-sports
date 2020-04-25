@@ -8,6 +8,7 @@
     "pages/course/classes/detail/details",
     "pages/article/details/details",
     "pages/authorize/authorize",
+    "pages/access/access",
     "pages/logs/logs"
   ],
   "window": {

@@ -1,0 +1,10 @@
+<view class="access-v">
+    <view class="about_my">
+        <image src="../../images/article_3x.png" mode="scantofill" />
+    </view>
+    <text class="tx">确认授权登录后，
+    将获取微信头像、昵称信息！</text>
+    <button class="access">
+        <text>授权登录</text>
+    </button>
+</view>
