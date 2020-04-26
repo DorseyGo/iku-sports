@@ -1,8 +1,44 @@
 <view class="container">
     <view class="about mg-left-xl margin-top-22rpx">
         <view class="iku-item">
-            <image src="../../images/article_3x.png" mode="scantofill" />
+            <image class="round sm" src="../../images/basketball_3x.png" mode="aspectFill" />
+            <view class="content">
+                <view class="text-white text-xl">测试人员</view>
+                <view class="text-sm-26rpx text-dark-gray">10086</view>
+            </view>
+        </view>
+
+        <view class="iku-item flex top-border-dark-gray text-white text-sm-26rpx">
+            <view class="item flex-sub">
+                <text>134</text>
+                <text>我的课程</text>
+            </view>
+            <view class="item flex-sub">
+                <text>134</text>
+                <text>我的关注</text>
+            </view>
         </view>
     </view>
     
+    <view class="flex text-center tab mg-left-16rpx margin-top-lg text-dark-gray text-sm-26rpx">
+        <view class="tab-item {{showLearned ? 'cur text-white': ''}}" bindtap="toggleLearned">已学课程</view>
+        <view class="tab-item {{showLearned ? '' : 'cur text-white'}}" bindtap="toggleLearned">收藏课程</view>
+    </view>
+
+    <view class="iku-list">
+        <navigator url="../course/classes/detail/details?classId={{item.id}}" class="iku-item margin-top-30rpx" wx:for="{{promotions}}" wx:key="id">
+            <view class="iku-avatar radius" style="background-image: url('{{item.cover}}')"></view>
+            <view class="content">
+                <view class="text-white text-xl">
+                    <text class="text-cut">{{item.title}}</text>
+                </view>
+                <view class="text-light-white text-sm-26rpx flex">
+                   <text class="text-cut">{{item.content}}</text>
+                </view>
+                <view class="bottom text-normal text-light-white">
+                    <text class="text-yellow">{{item.watches}}</text> 已观看
+                </view>
+            </view>
+        </navigator>
+    </view>
 </view>

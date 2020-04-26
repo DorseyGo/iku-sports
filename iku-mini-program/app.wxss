@@ -249,6 +249,10 @@ swiper-item .bottom-mask::after {
   margin-left: 36rpx;
 }
 
+.mg-left-16rpx {
+  margin-left: 16rpx;
+}
+
 .margin-right-40rpx {
   margin-right: 40rpx;
 }
@@ -263,6 +267,10 @@ swiper-item .bottom-mask::after {
 
 .margin-top-30rpx {
   margin-top: 30rpx;
+}
+
+.margin-top-lg {
+  margin-top: 60rpx;
 }
 
 .margin-top-22rpx {
@@ -362,6 +370,11 @@ swiper-item .bottom-mask::after {
   width: 96rpx;
   height: 96rpx;
   font-size: 2em;
+}
+
+.sm {
+  width: 100rpx;
+  height: 100rpx;
 }
 
 .radius {
@@ -641,4 +654,57 @@ view.about {
   width: calc(100% - 36rpx - 36rpx);
   border-radius: 20rpx;
   background:rgba(34,35,36,1);
+}
+
+.about .iku-item {
+  min-height: 162rpx;
+  width: 100%;
+  position: relative;
+  display: flex;
+  padding-right: 10rpx;
+  justify-content: flex-end;
+  align-items: center;
+  transition: all .6s ease-in-out 0s;
+  transform: translateX(0rpx);
+}
+
+.about .iku-item image {
+  position: absolute;
+  left: 40rpx;
+}
+
+.about .iku-item .content {
+  position: absolute;
+  left: 166rpx;
+}
+
+view.tab {
+  min-height: 100rpx;
+  width: calc(100% - 36rpx - 36rpx);
+}
+
+.flex-sub {
+  flex: 1;
+}
+
+.tab .tab-item {
+  height: 90rpx;
+  display: inline-block;
+  line-height: 90rpx;
+  margin: 0 10rpx;
+  padding: 0 10rpx;
+}
+
+.tab .tab-item.cur {
+  border-bottom: 4rpx solid var(--yellow);
+}
+
+.top-border-dark-gray {
+  border-top: 1rpx solid rgba(255,255,255, 0.1);
+}
+
+.item.flex-sub text {
+  display: block;
+  text-align: center;
+  padding: 4rpx 0;
 }
