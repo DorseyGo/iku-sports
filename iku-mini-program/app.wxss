@@ -1,5 +1,5 @@
 page {
- --background-color: #252626;
+ --background-color: rgba(25,25,25,1);
  --white: #FFFFFF;
  --dark-gray: #666666;
  --black: #000;
@@ -263,6 +263,10 @@ swiper-item .bottom-mask::after {
 
 .margin-top-30rpx {
   margin-top: 30rpx;
+}
+
+.margin-top-22rpx {
+  margin-top: 22rpx;
 }
 
 .width-half {
@@ -629,4 +633,12 @@ view.iku-list {
 .bottom {
   position: absolute;
   bottom: 0rpx;
+}
+
+/** about */
+view.about {
+  min-height: 324rpx;
+  width: calc(100% - 36rpx - 36rpx);
+  border-radius: 20rpx;
+  background:rgba(34,35,36,1);
 }

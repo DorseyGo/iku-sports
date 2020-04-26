@@ -1,6 +1,5 @@
 // pages/course/classes/detail/details.js
 const request  = require("../../../../utils/request");
-
 Page({
 
   /**
@@ -9,7 +8,8 @@ Page({
   data: {
     classId : 1,
     class : {},
-    promotions: {}
+    promotions: {},
+    favorite: false
   },
   
   loadData: function(){
@@ -17,12 +17,7 @@ Page({
     request.get(`classes/`+classId).then(res => {
       this.setData({
         class : res.data
-      })
-
-      wx.setNavigationBarTitle({
-        title: res.data.classTitle
-      });
-        
+      })        
     }, reason =>{
       console.log(reason)
     }).catch(err =>{
@@ -30,7 +25,7 @@ Page({
     })
   },
 
-  loadPromotions: () => {
+  loadPromotions: function() {
     let classId = this.data.classId
     request.get(`classes/` + classId + `/promotions`).then(res => {
       this.setData({
@@ -39,6 +34,22 @@ Page({
     }, reason => {
 
     });
+  },
+
+  /**
+   * add favorite
+   */
+  addFavorite: function() {
+    request.post(`favorite`, {
+      token: wx.getStorageInfoSync("token"),
+      favoriteId: this.data.classId,
+      favoriteType: 2
+    }).then((res) => {
+      wx.showToast({
+        title: '收藏成功',
+        icon: 'success'
+      });
+    })
   },
 
   /**
@@ -55,29 +66,10 @@ Page({
 
   onReady: function(){
     if (this.data.class) {
+      let title = this.data.class.classTitle
       wx.setNavigationBarTitle({
-        title: this.data.class.classTitle
+        title: title
       })
     }
-  },
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

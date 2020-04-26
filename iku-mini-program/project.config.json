@@ -144,6 +144,12 @@
 					"pathName": "pages/course/classes/detail/details",
 					"query": "classId=1",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/about/about",
+					"pathName": "pages/about/about",
+					"scene": null
 				}
 			]
 		}

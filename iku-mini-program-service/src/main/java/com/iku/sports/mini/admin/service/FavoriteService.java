@@ -1,6 +1,7 @@
 package com.iku.sports.mini.admin.service;
 
 import com.iku.sports.mini.admin.entity.Favorite;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
 
 import java.util.List;
 
@@ -12,11 +13,5 @@ import java.util.List;
  * CopyRight: All rights reserved
  **/
 public interface FavoriteService {
-    void addFavorite(int favoriteId, int favoriteType, String userId) throws Exception;
-
-    void delFavorite(int favoriteId, int favoriteType, String userId) throws Exception;
-
-    List<Favorite> getFavoriteByUserId(String userId, int favoriteType) throws Exception;
-
-    Integer getFavoriteSummary(int favoriteId, int favoriteType, String userId) throws Exception;
+    void addFavorite(String token, int favoriteId, int favoriteType) throws ApiServiceException;
 }

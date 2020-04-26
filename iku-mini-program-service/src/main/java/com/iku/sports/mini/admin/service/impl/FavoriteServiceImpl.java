@@ -1,12 +1,17 @@
 package com.iku.sports.mini.admin.service.impl;
 
-import com.iku.sports.mini.admin.entity.Favorite;
+import com.iku.sports.mini.admin.entity.User;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
+import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.repository.FavoriteRepository;
 import com.iku.sports.mini.admin.service.FavoriteService;
+import com.iku.sports.mini.admin.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * File: Coach
@@ -15,42 +20,31 @@ import java.util.List;
  * Description:
  * CopyRight: All rights reserved
  **/
+@Transactional
 @Service("favoriteService")
 public class FavoriteServiceImpl implements FavoriteService {
 
     private final FavoriteRepository favoriteRepository;
+    private final UserService userService;
 
-    private Integer totalNum;
-
-    public FavoriteServiceImpl(@Qualifier("favoriteRepository") FavoriteRepository favoriteRepository) {
+    @Autowired
+    public FavoriteServiceImpl(
+            @Qualifier("favoriteRepository") FavoriteRepository favoriteRepository,
+            @Qualifier("userService") UserService userService) {
         this.favoriteRepository = favoriteRepository;
+        this.userService = userService;
     }
 
-    @Override
-    public void addFavorite(int favoriteId, int favoriteType, String userId) throws Exception {
-        favoriteRepository.addFavorite(favoriteId,favoriteType,userId);
-    }
 
     @Override
-    public void delFavorite(int favoriteId, int favoriteType, String userId) throws Exception {
-        favoriteRepository.delFavorite(favoriteId, favoriteType, userId);
-    }
-
-    @Override
-    public List<Favorite> getFavoriteByUserId(String userId, int favoriteType) throws Exception {
-        if(favoriteType == 0 ){
-            return favoriteRepository.getFavoriteByStudentId(userId);
+    @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
+    public void addFavorite(String token, int favoriteId, int favoriteType) throws ApiServiceException,
+            DataAccessException {
+        final User user = userService.getUserByToken(token);
+        if (user == null) {
+            throw new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR);
         }
-        return favoriteRepository.getFavoriteByStudentIdFavoriteType(userId,favoriteType);
-    }
 
-    @Override
-    public Integer getFavoriteSummary(int favoriteId, int favoriteType, String userId) throws Exception {
-        totalNum = favoriteRepository.getFavoriteSummary(favoriteId, favoriteType, userId);
-        if(totalNum == null ){
-            return 0;
-        }else{
-            return totalNum;
-        }
+        favoriteRepository.insert(user.getId(), favoriteId, favoriteType);
     }
 }

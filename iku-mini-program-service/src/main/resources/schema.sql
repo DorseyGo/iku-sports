@@ -139,7 +139,7 @@ CREATE TABLE `favorite` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `favorite_id` int NOT NULL,
-  `favorite_type` int DEFAULT '1' COMMENT '1 for video , 2 for article , 3 for course, 4 for coach',
+  `favorite_type` int DEFAULT '1' COMMENT '1 for article , 2 for class, 3 for coach',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8

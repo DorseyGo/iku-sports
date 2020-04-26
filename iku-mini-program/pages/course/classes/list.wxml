@@ -1,23 +1,23 @@
-<scroll-view scroll-y="{{true}}" class="list menu-avatar">
-    <navigator url="./detail/details?classId={{item.id}}" hover-class="navigator-hover" open-type="navigate" wx:for="{{classes}}" wx:key="id" >
-        <view class="list-items" >
-            <view class="image-size" style="background-image: url('{{item.cover}}')"></view>
+<view class="container">
+    <view class="iku-list">
+        <navigator url="../classes/detail/details?classId={{item.id}}" class="iku-item margin-top-30rpx" wx:for="{{classes}}" wx:key="id">
+            <view class="iku-avatar radius" style="background-image: url('{{item.cover}}')"></view>
             <view class="content">
-                <view class="text-white">
+                <view class="text-white text-xl">
                     <text class="text-cut">{{item.title}}</text>
                 </view>
-                <view class="text-dark-gray text-sm flex pos">
-                    <text class="text-cut">{{item.content}}</text>
+                <view class="text-light-white text-sm-26rpx flex">
+                   <text class="text-cut">{{item.content}}</text>
+                </view>
+                <view class="bottom text-normal text-light-white">
+                    <text class="text-yellow">{{item.watches}}</text> 已观看
                 </view>
             </view>
-            <view class="action">
-                <view class="text-dark-gray text-sm">阅读</view>
-                <view class="ik-tag round bg-red sm pos">{{item.watches}}</view>
-            </view>
-        </view>
-    </navigator>
-</scroll-view>
-<view class="ik-bar tab-bar bg-bg-color border shop bottom-view">
-    <view class="action text-orange">总计：{{ chapter }}</view>
-    <view class="bg-red submit">购买</view>
+        </navigator>
+    </view>
+
+    <view class="ik-bar tab-bar bg-bg-color border shop">
+        <view class="action text-orange">总计：{{course.charge}}</view>
+        <view class="bg-red submit">购买</view>
+    </view>
 </view>
