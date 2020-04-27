@@ -23,7 +23,7 @@ Page({
    */
   onLoad: function (options) {
     let token = 123
-    let favorite = (showLearned) ? 1 : 2
+    let favorite = (this.data.showLearned) ? 1 : 2
     request.post(`favorite/` + favorite + "/classes", {
       token: token
     }).then(res => {

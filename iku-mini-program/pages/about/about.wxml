@@ -11,16 +11,16 @@
         <view class="iku-item flex top-border-dark-gray text-white text-sm-26rpx">
             <view class="item flex-sub">
                 <text>134</text>
-                <text>我的课程</text>
+                <text class="text-dark-gray">我的课程</text>
             </view>
             <view class="item flex-sub">
                 <text>134</text>
-                <text>我的关注</text>
+                <text class="text-dark-gray">我的关注</text>
             </view>
         </view>
     </view>
     
-    <view class="flex text-center tab mg-left-16rpx margin-top-lg text-dark-gray text-sm-26rpx">
+    <view class="flex text-center tab mg-left-16rpx margin-top-lg text-dark-gray text-sm-30rpx">
         <view class="tab-item {{showLearned ? 'cur text-white': ''}}" bindtap="toggleLearned">已学课程</view>
         <view class="tab-item {{showLearned ? '' : 'cur text-white'}}" bindtap="toggleLearned">收藏课程</view>
     </view>
