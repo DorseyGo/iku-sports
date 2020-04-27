@@ -26,7 +26,7 @@
     </view>
 
     <view class="iku-list">
-        <navigator url="../course/classes/detail/details?classId={{item.id}}" class="iku-item margin-top-30rpx" wx:for="{{promotions}}" wx:key="id">
+        <navigator url="../course/classes/detail/details?classId={{item.id}}" class="iku-item margin-top-30rpx" wx:for="{{classes}}" wx:key="id">
             <view class="iku-avatar radius" style="background-image: url('{{item.cover}}')"></view>
             <view class="content">
                 <view class="text-white text-xl">

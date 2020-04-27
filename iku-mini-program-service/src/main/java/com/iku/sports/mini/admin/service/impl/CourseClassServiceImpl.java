@@ -12,6 +12,7 @@ import com.iku.sports.mini.admin.repository.CourseClassRepository;
 import com.iku.sports.mini.admin.service.CourseClassService;
 import com.iku.sports.mini.admin.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
+import org.checkerframework.checker.signedness.qual.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
@@ -51,7 +52,7 @@ public class CourseClassServiceImpl implements CourseClassService {
     public List<CourseClass> paginateClasses(short courseId, int offset, int pageSize) throws Exception {
         if (!ALLOWED_PAGE_SIZES.contains(pageSize)) {
             log.info("Page size fallback, due to passed-in page size: {}, not contained in: {}",
-                     pageSize, ALLOWED_PAGE_SIZES);
+                    pageSize, ALLOWED_PAGE_SIZES);
 
             pageSize = DEFAULT_PAGE_SIZE;
         }
@@ -103,5 +104,18 @@ public class CourseClassServiceImpl implements CourseClassService {
         });
 
         return classes;
+    }
+
+    @Override
+    public List<CourseClass> getClassesByUserIdAndFavoriteType(String userId, int favoriteType) throws
+            ApiServiceException {
+        final List<CourseClass> courseClasses = courseClassRepository
+                .findClassesByUserIdAndFavoriteType(userId, favoriteType);
+        courseClasses.forEach(courseClass -> {
+            courseClass.setCover(
+                    Utils.join(config.getStaticResourceServer(), courseClass.getCover(), Constants.FORWARD_SLASH));
+        });
+
+        return courseClasses;
     }
 }

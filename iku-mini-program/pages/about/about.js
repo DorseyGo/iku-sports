@@ -8,7 +8,7 @@ Page({
    */
   data: {
     showLearned: true,
-    classes: null
+    classes: []
   },
 
   toggleLearned: function() {
@@ -24,8 +24,9 @@ Page({
   onLoad: function (options) {
     let token = 123
     let favorite = (this.data.showLearned) ? 1 : 2
-    request.post(`favorite/` + favorite + "/classes", {
-      token: token
+    request.post(`favorite/classes", {
+      token: token,
+      favoriteType: favorite
     }).then(res => {
       this.setData({
         classes: res.data

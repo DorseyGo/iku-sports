@@ -17,7 +17,11 @@ Page({
     request.get(`classes/`+classId).then(res => {
       this.setData({
         class : res.data
-      })        
+      })
+      
+      wx.setNavigationBarTitle({
+        title: res.data.classTitle
+      })
     }, reason =>{
       console.log(reason)
     }).catch(err =>{
@@ -65,7 +69,7 @@ Page({
   },
 
   onReady: function(){
-    if (this.data.class) {
+    if (this.data.class.classTitle) {
       let title = this.data.class.classTitle
       wx.setNavigationBarTitle({
         title: title

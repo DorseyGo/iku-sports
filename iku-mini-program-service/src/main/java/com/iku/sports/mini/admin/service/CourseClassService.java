@@ -40,4 +40,6 @@ public interface CourseClassService {
      * @Author: DorSey
      */
     List<CourseClass> getPromotionsById(int relatedClassId) throws ApiServiceException;
+
+    List<CourseClass> getClassesByUserIdAndFavoriteType(String userId, int favoriteType) throws ApiServiceException;
 }

@@ -1,19 +1,18 @@
 package com.iku.sports.mini.admin.controller;
 
+import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.ClassCount;
 import com.iku.sports.mini.admin.model.ClassOverview;
 import com.iku.sports.mini.admin.model.Response;
+import com.iku.sports.mini.admin.request.GetFavoriteClassesRequest;
 import com.iku.sports.mini.admin.service.CourseClassService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -142,5 +141,15 @@ public class CourseClassController {
             @PathVariable("relatedClassId") final int relatedClassId) throws ApiServiceException {
         final List<CourseClass> promotions = courseClassService.getPromotionsById(relatedClassId);
         return new Response<List<CourseClass>>().data(promotions);
+    }
+
+    @ResponseBody
+    @PostMapping("/api/favorite/classes")
+    public Response<List<CourseClass>> getFavoriteClasses(@RequestBody GetFavoriteClassesRequest request) throws
+            ApiServiceException {
+        final List<CourseClass> courseClasses = courseClassService
+                .getClassesByUserIdAndFavoriteType(request.getUserId(), request.getFavoriteType());
+
+        return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClasses);
     }
 }
