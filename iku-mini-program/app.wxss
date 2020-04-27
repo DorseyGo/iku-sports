@@ -233,7 +233,7 @@ swiper-item .bottom-mask::after {
 
 .bar .action:first-child {
   margin-left: 30rpx;
-  font-size: 24rpx;
+  font-size: 34rpx;
 }
 
 .bar .action>text[class*="icon-"] {

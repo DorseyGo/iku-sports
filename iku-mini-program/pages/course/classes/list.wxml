@@ -6,11 +6,11 @@
                 <view class="text-white text-xl">
                     <text class="text-cut">{{item.title}}</text>
                 </view>
-                <view class="text-light-white text-sm-26rpx flex">
+                <view class="text-dark-gray text-sm-26rpx flex">
                    <text class="text-cut">{{item.content}}</text>
                 </view>
-                <view class="bottom text-normal text-light-white">
-                    <text class="text-yellow">{{item.watches}}</text> 已观看
+                <view class="bottom text-normal text-dark-gray">
+                    <text class="text-yellow">{{item.watches}}</text> 人已观看
                 </view>
             </view>
         </navigator>
