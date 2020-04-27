@@ -24,7 +24,7 @@ Page({
   onLoad: function (options) {
     let token = 123
     let favorite = (this.data.showLearned) ? 1 : 2
-    request.post(`favorite/classes", {
+    request.post(`favorite/classes`, {
       token: token,
       favoriteType: favorite
     }).then(res => {
@@ -32,12 +32,5 @@ Page({
         classes: res.data
       })
     })
-  },
-
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
-
   }
 })
