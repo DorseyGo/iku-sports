@@ -70,11 +70,6 @@ public class PaymentServiceImpl implements PaymentService {
         }
 
         final Order order = orderService.getOrderById(request.getOrderNo());
-        if (order == null) {
-            log.error("No order found for order number: {}", request.getOrderNo());
-            throw new ApiServiceException(IkuSportsError.ORDER_NOT_FOUND_ERROR);
-        }
-
         if (order.getMoneyPaid() <= 0) {
             log.error("Order error, money should be paid is: {}", order.getMoneyPaid());
             throw new ApiServiceException(IkuSportsError.ORDER_ERROR);

@@ -10,6 +10,7 @@ import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.entity.Order;
 import com.iku.sports.mini.admin.entity.User;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
+import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.repository.OrderRepository;
 import com.iku.sports.mini.admin.request.NewOrderRequest;
 import com.iku.sports.mini.admin.service.OrderService;
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 @Slf4j
 @Transactional
@@ -64,9 +66,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrderById(@NotNull String orderId) throws ApiServiceException {
-        final Order order = orderRepository.findOrderById(orderId);
-        order.setMoneyPaid((int) (order.getFee() * order.getDiscount()));
-
-        return order;
+        try {
+            return Optional.ofNullable(orderRepository.findOrderById(orderId))
+                    .map(o -> {
+                        o.setMoneyPaid((int) (o.getFee() * o.getDiscount()));
+                        return o;
+                    })
+                    .orElseThrow(() -> new ApiServiceException(IkuSportsError.ORDER_NOT_FOUND_ERROR));
+        } catch (DataAccessException e) {
+            log.error("Failed to retrieve order by id: {}", orderId, e);
+            throw new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR);
+        }
     }
 }

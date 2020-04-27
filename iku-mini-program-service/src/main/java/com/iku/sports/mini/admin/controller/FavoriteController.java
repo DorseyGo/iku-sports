@@ -19,7 +19,7 @@ import java.util.List;
  * Description:
  * CopyRight: All rights reserved
  **/
-@Controller
+@RestController
 @Slf4j
 public class FavoriteController {
 
@@ -29,7 +29,6 @@ public class FavoriteController {
         this.favoriteService = favoriteService;
     }
 
-    @ResponseBody
     @PostMapping("/api/favorite")
     public Response<String> addFavorite(@RequestBody FavoriteRequest favoriteRequest) throws ApiServiceException {
         favoriteService.addFavorite(favoriteRequest.getToken(), favoriteRequest.getFavoriteId(),

@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -21,7 +22,7 @@ public class NewOrderRequest {
 
     /* who new this order */
     @JsonProperty("token")
-    @NotNull
+    @NotEmpty
     private String token;
 
     /* product */

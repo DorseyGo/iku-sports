@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 /**
  * File: ${FILE_NAME}
  * Author: Huanghz
@@ -15,9 +18,11 @@ import lombok.experimental.Tolerate;
 @Data
 @Builder
 public class FavoriteRequest {
-
+    @Min(1)
     private int favoriteId;
+    @Min(1)
     private int favoriteType;
+    @NotEmpty
     private String token;
 
     @Tolerate

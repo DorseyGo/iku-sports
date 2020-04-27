@@ -3,6 +3,8 @@ package com.iku.sports.mini.admin.service.impl;
 import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.entity.Article;
 import com.iku.sports.mini.admin.exception.ApiInvokedException;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
+import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.ActicleRepository;
 import com.iku.sports.mini.admin.service.ArticleService;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("articleService")
 public class ArticleServiceImpl implements ArticleService {
@@ -26,7 +29,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     public List<Article> getArticlesByCategoryId(String categoryId, int pageNo, int pageSize) throws Exception {
-        return acticleRepository.getArticlesByCategoryId(categoryId, pageNo, pageSize);
+        return Optional.ofNullable(acticleRepository.getArticlesByCategoryId(categoryId, pageNo, pageSize))
+                .orElseThrow(() -> new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR));
     }
 
     @Override

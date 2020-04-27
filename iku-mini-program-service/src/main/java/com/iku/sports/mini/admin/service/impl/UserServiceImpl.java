@@ -34,7 +34,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -91,7 +93,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public String getOpenIdByUserId(String userId) throws ApiServiceException {
         try {
-            return cache.get(userId);
+            return cache.get(userId, () -> {
+                User user = getUserById(userId);
+                return user.getOpenId();
+            });
         } catch (ExecutionException e) {
             log.error("Failed to fetch open id by user id: {}", userId, e);
             throw new ApiServiceException(IkuSportsError.OPEN_ID_NOT_FOUND_ERROR);
@@ -101,9 +106,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(@NotNull String userId) throws ApiServiceException {
         try {
-            User user = userRepository.findUserByUserId(userId);
-
-            return user;
+            return Optional.ofNullable(userRepository.findUserByUserId(userId))
+                        .orElseThrow(() -> new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR));
         } catch (DataAccessException e) {
             log.error("Failed to retrieve user by id: {}", userId, e);
             throw new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR);

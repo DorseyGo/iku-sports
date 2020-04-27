@@ -16,6 +16,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * File: Coach
@@ -37,7 +38,6 @@ public class CoachServiceImpl implements CoachService {
         this.config = config;
     }
 
-
     @Override
     public List<CoachInfo> getAllCoachInfos() {
         final List<CoachInfo> coachInfos = coachRepository.getAllCoachesBriefs();
@@ -52,11 +52,13 @@ public class CoachServiceImpl implements CoachService {
     @Override
     public Coach getCoachById(int id) throws ApiServiceException {
         try {
-            final Coach coach = coachRepository.getCoachById(id);
-            coach.setHeadingImgUrl(
-                    Utils.join(config.getStaticResourceServer(), coach.getHeadingImgUrl(), Constants.FORWARD_SLASH));
-
-            return coach;
+            return Optional.ofNullable(coachRepository.getCoachById(id))
+                    .map(coach -> {
+                        coach.setHeadingImgUrl(
+                                Utils.join(config.getStaticResourceServer(), coach.getHeadingImgUrl(), Constants.FORWARD_SLASH));
+                        return coach;
+                    })
+                    .orElseThrow(() -> new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR));
         } catch (DataAccessException e) {
             log.error("Failed to find coach by Id: {}", id, e);
             throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);

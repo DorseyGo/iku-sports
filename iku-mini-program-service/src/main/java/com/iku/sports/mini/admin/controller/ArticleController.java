@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -26,8 +28,10 @@ public class ArticleController {
     }
 
     @ResponseBody
-    @GetMapping("/api/articles")
-    public Response<List<Article>> getArticlesByCategoryId(String categoryId,int pageNo,int pageSize)  {
+    @GetMapping("/api/articles/{categoryId}")
+    public Response<List<Article>> getArticlesByCategoryId(@PathVariable("categoryId") String categoryId,
+                                                           @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
+                                                           @RequestParam(name = "pageSize", defaultValue = "5") int pageSize)  {
         try {
             List<Article> Articles = articleService.getArticlesByCategoryId(categoryId,pageNo,pageSize);
             return new Response<List<Article>>().status(Response.SUCCESS).data(Articles);
