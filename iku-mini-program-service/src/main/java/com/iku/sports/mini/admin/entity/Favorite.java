@@ -1,5 +1,7 @@
 package com.iku.sports.mini.admin.entity;
 
+import com.iku.sports.mini.admin.exception.ApiServiceException;
+import com.iku.sports.mini.admin.exception.IkuSportsError;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
@@ -28,6 +30,17 @@ public class Favorite {
         private final int code;
         FavoriteType(final int code) {
             this.code = code;
+        }
+
+        public static FavoriteType typeOf(final int code) throws ApiServiceException {
+            FavoriteType[] types = FavoriteType.values();
+            for (int index = 0; index < types.length; index++) {
+                if (types[index].code == code) {
+                    return types[index];
+                }
+            }
+
+            throw new ApiServiceException(IkuSportsError.FAVORITE_TYPE_NOT_SUPPORTED_ERR);
         }
 
         public int getCode() {

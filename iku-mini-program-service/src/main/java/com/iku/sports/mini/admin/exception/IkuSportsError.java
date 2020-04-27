@@ -12,7 +12,8 @@ public enum IkuSportsError {
             "登录失败"), OPEN_ID_NOT_FOUND_ERROR(
             10001, "Open ID找不到"), ORDER_NOT_FOUND_ERROR(10002, "找不到相关订单"), ORDER_ERROR(10003,
             "订单信息错误"), REQ_WX_API_ERROR(
-            1002, "请求微信API失败"), XML_PARSE_ERROR(10004, "XML解析失败"), REQ_RESOURCE_NOT_FOUND_ERR(10005, "请求资源找不到");
+            1002, "请求微信API失败"), XML_PARSE_ERROR(10004, "XML解析失败"), REQ_RESOURCE_NOT_FOUND_ERR(10005, "请求资源找不到"), FAVORITE_TYPE_NOT_SUPPORTED_ERR(
+            10006, "收藏类型不存在");
 
     private final int code;
     private final String message;

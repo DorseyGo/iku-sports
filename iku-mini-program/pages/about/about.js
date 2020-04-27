@@ -16,21 +16,26 @@ Page({
     this.setData({
       showLearned: showLearned
     })
+
+    this.loadClasses()
+  },
+
+  loadClasses: function() {
+    let token = 123
+    let favorite = (this.data.showLearned) ? 1 : 2
+    request.get(`favorite/${favorite}/classes`, {
+      token: token
+    }).then(res => {
+      this.setData({
+        classes: res.data
+      })
+    })
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    let token = 123
-    let favorite = (this.data.showLearned) ? 1 : 2
-    request.post(`favorite/classes`, {
-      token: token,
-      favoriteType: favorite
-    }).then(res => {
-      this.setData({
-        classes: res.data
-      })
-    })
+    this.loadClasses()
   }
 })

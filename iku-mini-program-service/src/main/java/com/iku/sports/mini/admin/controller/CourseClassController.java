@@ -2,6 +2,7 @@ package com.iku.sports.mini.admin.controller;
 
 import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.entity.CourseClass;
+import com.iku.sports.mini.admin.entity.Favorite;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.ClassCount;
 import com.iku.sports.mini.admin.model.ClassOverview;
@@ -144,11 +145,13 @@ public class CourseClassController {
     }
 
     @ResponseBody
-    @PostMapping("/api/favorite/classes")
-    public Response<List<CourseClass>> getFavoriteClasses(@RequestBody GetFavoriteClassesRequest request) throws
+    @GetMapping("/api/favorite/{favoriteType}/classes")
+    public Response<List<CourseClass>> getFavoriteClasses(@PathVariable("favoriteType") final int favoriteType,
+            @RequestParam("token") final String userId) throws
             ApiServiceException {
+        Favorite.FavoriteType.typeOf(favoriteType);
         final List<CourseClass> courseClasses = courseClassService
-                .getClassesByUserIdAndFavoriteType(request.getUserId(), request.getFavoriteType());
+                .getClassesByUserIdAndFavoriteType(userId, favoriteType);
 
         return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClasses);
     }
