@@ -18,12 +18,16 @@ public class User {
     private String openId;
     private String nickName;
     private String avatarUrl;
+    private String telephone;
 
     @Builder.Default
     private char gender = '0';
     private String province;
     private String city;
     private String country;
+
+    private int numAttentions;
+    private int numCourses;
 
     @Tolerate
     public User() {

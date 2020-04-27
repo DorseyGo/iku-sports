@@ -6,6 +6,7 @@ import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +28,10 @@ public interface FavoriteRepository {
     void insert(@Param("userId") String userId, @Param("favoriteId") int favoriteId,
             @Param("favoriteType") int favoriteType) throws DataAccessException;
 
+    @SelectProvider(type = FavoriteSQLProvider.class, method = "countFavorites")
+    int countFavorites(@Param("userId") String userId, @Param("favoriteId") int favoriteId,
+            @Param("favoriteType") int favoriteType) throws DataAccessException;
+
     //SQL provider
     class FavoriteSQLProvider {
         static final List<String> ALL_COLS = Arrays.asList("id", "user_id", "favorite_id", "favorite_type");
@@ -46,6 +51,20 @@ public interface FavoriteRepository {
 
         }
 
+        public String countFavorites(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT("COUNT(1)");
+                    FROM(TABLE);
+                    if (params.get("userId") != null) {
+                        WHERE("user_id = #{userId}");
+                    }
+
+                    WHERE("favorite_id = #{favoriteId}");
+                    WHERE("favorite_type = #{favoriteType}");
+                }
+            }.toString();
+        }
     }
 
 }

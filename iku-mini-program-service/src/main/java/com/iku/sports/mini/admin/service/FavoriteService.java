@@ -14,4 +14,6 @@ import java.util.List;
  **/
 public interface FavoriteService {
     void addFavorite(String token, int favoriteId, int favoriteType) throws ApiServiceException;
+
+    boolean existsFavorite(String userId, int favoriteId, int favoriteType) throws ApiServiceException;
 }

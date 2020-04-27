@@ -9,7 +9,10 @@
     <view class="iku-head">
         <view class="action text-xl text-white mg-left-xl">{{coach.name}}</view>
         <view class="action margin-right-40rpx">
-            <view class="favourite text-normal">
+            <view wx:if="{{coach.favorite}}" class="favourite text-normal">
+                已关注
+            </view>
+            <view wx:else class="favourite text-normal" bindtap = "addFavorite">
                 关注
             </view>
         </view>

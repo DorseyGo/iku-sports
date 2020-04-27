@@ -9,7 +9,8 @@ Page({
   data: {
     showLearned: true,
     classes: [],
-    user: {}
+    user: {},
+    userId: "e9b6ea6f672086252a83a48be2198d63"
   },
 
   toggleLearned: function() {
@@ -22,7 +23,7 @@ Page({
   },
 
   loadClasses: function() {
-    let token = 123
+    let token = this.data.userId
     let favorite = (this.data.showLearned) ? 1 : 2
     request.get(`favorite/${favorite}/classes`, {
       token: token
@@ -34,7 +35,7 @@ Page({
   },
 
   loadUser: function() {
-    let token = 123
+    let token = this.data.userId
     request.get(`users/${token}`).then(res => {
       this.setData({
         user: res.data

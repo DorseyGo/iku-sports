@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -46,8 +47,12 @@ public class CoachController {
 
     @ResponseBody
     @GetMapping("/api/coaches/{coachId}")
-    public Response<Coach> getCoachById(@PathVariable("coachId") final int id) throws ApiServiceException {
+    public Response<Coach> getCoachById(@PathVariable("coachId") final int id,
+            @RequestParam("token") final String userId) throws ApiServiceException {
         final Coach coach = coachService.getCoachById(id);
+        final boolean isFavorited = coachService.isCoachFavoritedByUserId(id, userId);
+        coach.setFavorite(isFavorited);
+
         return new Response<Coach>().status(Response.SUCCESS).data(coach);
     }
 

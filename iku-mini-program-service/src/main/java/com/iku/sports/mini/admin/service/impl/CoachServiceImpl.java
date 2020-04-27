@@ -1,13 +1,16 @@
 package com.iku.sports.mini.admin.service.impl;
 
+import com.google.common.base.Strings;
 import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.entity.Coach;
+import com.iku.sports.mini.admin.entity.Favorite;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.model.CoachInfo;
 import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.CoachRepository;
 import com.iku.sports.mini.admin.service.CoachService;
+import com.iku.sports.mini.admin.service.FavoriteService;
 import com.iku.sports.mini.admin.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +32,14 @@ import java.util.List;
 public class CoachServiceImpl implements CoachService {
     private final CoachRepository coachRepository;
     private final IkuSportsConfig config;
+    private final FavoriteService favoriteService;
 
     @Autowired
     public CoachServiceImpl(@Qualifier("coachRepository") CoachRepository coachRepository,
-            IkuSportsConfig config) {
+            IkuSportsConfig config, FavoriteService favoriteService) {
         this.coachRepository = coachRepository;
         this.config = config;
+        this.favoriteService = favoriteService;
     }
 
 
@@ -61,5 +66,14 @@ public class CoachServiceImpl implements CoachService {
             log.error("Failed to find coach by Id: {}", id, e);
             throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
         }
+    }
+
+    @Override
+    public boolean isCoachFavoritedByUserId(int id, String userId) throws ApiServiceException {
+        if (Strings.isNullOrEmpty(userId)) {
+            throw new ApiServiceException(IkuSportsError.USER_REQUIRED_ERR);
+        }
+
+        return favoriteService.existsFavorite(userId, id, Favorite.FavoriteType.FOR_COACH.getCode());
     }
 }

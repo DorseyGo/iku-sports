@@ -9,7 +9,9 @@ Page({
     classId : 1,
     class : {},
     promotions: {},
-    favorite: false
+    favorite: false,
+    favoriteType: 2,
+    userId: "e9b6ea6f672086252a83a48be2198d63"
   },
   
   loadData: function(){
@@ -29,30 +31,52 @@ Page({
     })
   },
 
+  checkFavoriteExistence: function() {
+    request.get(`favorite`, {
+      token: this.data.userId,
+      favoriteId: this.data.classId,
+      favoriteType: this.data.favoriteType
+    }).then(res => {
+      this.setData({
+        favorite: res.data
+      })
+    })
+  },
+
   loadPromotions: function() {
     let classId = this.data.classId
     request.get(`classes/` + classId + `/promotions`).then(res => {
       this.setData({
         promotions: res.data
       })
-    }, reason => {
-
-    });
+    })
   },
 
   /**
    * add favorite
    */
   addFavorite: function() {
+    let userId = this.data.userId;
     request.post(`favorite`, {
-      token: wx.getStorageInfoSync("token"),
+      token: userId,
       favoriteId: this.data.classId,
       favoriteType: 2
     }).then((res) => {
       wx.showToast({
         title: '收藏成功',
         icon: 'success'
-      });
+      })
+
+      this.setData({
+        favorite: true
+      })
+    })
+  },
+
+  incrWatches: function() {
+    let classId = this.data.classId
+    request.post(`classes/${classId}`).then(res => {
+      // empty
     })
   },
 
@@ -66,6 +90,7 @@ Page({
 
     this.loadData()
     this.loadPromotions()
+    this.checkFavoriteExistence();
   },
 
   onReady: function(){

@@ -16,9 +16,14 @@ import lombok.experimental.Tolerate;
 @Builder
 public class FavoriteRequest {
 
+    @JsonProperty("favoriteId")
     private int favoriteId;
+
+    @JsonProperty("favoriteType")
     private int favoriteType;
-    private String token;
+
+    @JsonProperty("token")
+    private String userId;
 
     @Tolerate
     public FavoriteRequest() {

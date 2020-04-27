@@ -31,10 +31,4 @@ values ('aa',1,'/images/basketball_2x.png',null,'aa',1,1,1),
 ('tt',1,'/images/basketball_2x.png',null,'aa',1,1,12),
 ('yy',1,'/images/basketball_2x.png',null,'aa',1,1,13);
 
-
-
-SELECT t.id, t.title, t.cover, t.content, t.watches, t.course_id FROM class T WHERE (course_id=1) ORDER BY T.create_time desc,T.watches desc limit 1,10
-
-
-
-SELECT IFNULL(count(1),0) FROM collect WHERE (student_id = 1 AND collect_type = 1)
+INSERT INTO `user`(id, open_id, name, avatar_url, telphone) VALUES ('e9b6ea6f672086252a83a48be2198d63', 'e9b6ea6f672086252a83a48be2198d62', '总有貂民想害朕', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587985947544&di=5c9b1ac88b8bfcf91d1438cd7ca856df&imgtype=0&src=http%3A%2F%2Fku.90sjimg.com%2Felement_origin_min_pic%2F16%2F07%2F13%2F145785de9b44c59.jpg', '1008601');

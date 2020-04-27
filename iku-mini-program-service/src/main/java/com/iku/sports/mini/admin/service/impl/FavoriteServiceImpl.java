@@ -1,5 +1,6 @@
 package com.iku.sports.mini.admin.service.impl;
 
+import com.google.common.base.Strings;
 import com.iku.sports.mini.admin.entity.User;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
@@ -38,13 +39,17 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     @Override
     @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
-    public void addFavorite(String token, int favoriteId, int favoriteType) throws ApiServiceException,
+    public void addFavorite(String userId, int favoriteId, int favoriteType) throws ApiServiceException,
             DataAccessException {
-        final User user = userService.getUserById(token);
-        if (user == null) {
-            throw new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR);
+        if (Strings.isNullOrEmpty(userId)) {
+            throw new ApiServiceException(IkuSportsError.USER_REQUIRED_ERR);
         }
 
-        favoriteRepository.insert(user.getId(), favoriteId, favoriteType);
+        favoriteRepository.insert(userId, favoriteId, favoriteType);
+    }
+
+    @Override
+    public boolean existsFavorite(String userId, int favoriteId, int favoriteType) throws ApiServiceException {
+        return (favoriteRepository.countFavorites(userId, favoriteId, favoriteType) > 0);
     }
 }

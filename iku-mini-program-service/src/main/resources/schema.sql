@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `article_content`(
 --
 CREATE TABLE `favorite` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
+  `user_id` VARCHAR(32) NOT NULL,
   `favorite_id` int NOT NULL,
   `favorite_type` int DEFAULT '1' COMMENT '1 for article , 2 for class, 3 for coach',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,

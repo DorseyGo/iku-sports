@@ -1,20 +1,20 @@
 <view class="container">
     <view class="about mg-left-xl margin-top-22rpx">
         <view class="iku-item">
-            <image class="round sm" src="../../images/basketball_3x.png" mode="aspectFill" />
+            <image class="round sm" src="{{user.avatarUrl}}" mode="aspectFill" />
             <view class="content">
-                <view class="text-white text-xl">测试人员</view>
-                <view class="text-sm-26rpx text-dark-gray">10086</view>
+                <view class="text-white text-xl">{{user.nickName}}</view>
+                <view class="text-sm-26rpx text-dark-gray">{{user.telephone}}</view>
             </view>
         </view>
 
         <view class="iku-item flex top-border-dark-gray text-white text-sm-26rpx">
             <view class="item flex-sub">
-                <text>134</text>
+                <text class="text-normal">{{user.numCourses}}</text>
                 <text class="text-dark-gray">我的课程</text>
             </view>
             <view class="item flex-sub">
-                <text>134</text>
+                <text class="text-normal">{{user.numAttentions}}</text>
                 <text class="text-dark-gray">我的关注</text>
             </view>
         </view>
@@ -25,7 +25,7 @@
         <view class="tab-item {{showLearned ? '' : 'cur text-white'}}" bindtap="toggleLearned">收藏课程</view>
     </view>
 
-    <view class="iku-list">
+    <view class="iku-list margin-top-22rpx">
         <navigator url="../course/classes/detail/details?classId={{item.id}}" class="iku-item margin-top-30rpx" wx:for="{{classes}}" wx:key="id">
             <view class="iku-avatar radius" style="background-image: url('{{item.cover}}')"></view>
             <view class="content">

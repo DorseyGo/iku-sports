@@ -24,6 +24,11 @@ public class Coach {
     private int level;
     private String introduce;
 
+    // --------
+    // whether favourited by current user.
+    // --------
+    private boolean favorite;
+
     @Tolerate
     public Coach() {}
 }

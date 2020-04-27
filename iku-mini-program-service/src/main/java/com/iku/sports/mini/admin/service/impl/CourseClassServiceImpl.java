@@ -1,5 +1,6 @@
 package com.iku.sports.mini.admin.service.impl;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.entity.CourseClass;
@@ -11,12 +12,15 @@ import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.CourseClassRepository;
 import com.iku.sports.mini.admin.service.CourseClassService;
 import com.iku.sports.mini.admin.utils.Utils;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.signedness.qual.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,6 +32,7 @@ import java.util.List;
  * CopyRight: All rights reserved
  **/
 @Slf4j
+@Transactional
 @Service("courseClassService")
 public class CourseClassServiceImpl implements CourseClassService {
     private final CourseClassRepository courseClassRepository;
@@ -63,7 +68,13 @@ public class CourseClassServiceImpl implements CourseClassService {
     @Override
     public ClassOverview getClassOverviewById(int id) throws ApiServiceException {
         try {
-            return courseClassRepository.getClassOverviewById(id);
+            ClassOverview overview = courseClassRepository.getClassOverviewById(id);
+            if (overview.getVideoUrl() != null) {
+                overview.setVideoUrl(
+                        Utils.join(config.getStaticResourceServer(), overview.getVideoUrl(), Constants.FORWARD_SLASH));
+            }
+
+            return overview;
         } catch (DataAccessException e) {
             log.error("Failed to get class overview by id: {}", id, e);
             throw new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR);
@@ -91,16 +102,19 @@ public class CourseClassServiceImpl implements CourseClassService {
     }
 
     @Override
-    public void setClassWatchesById(int id) throws Exception {
-        courseClassRepository.setClassWatchesById(id);
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = DataAccessException.class)
+    public void incrementWatchesByClassId(int id) throws ApiServiceException, DataAccessException {
+        courseClassRepository.incrementWatchesByClassId(id);
     }
 
     @Override
     public List<CourseClass> getPromotionsById(int relatedClassId) throws ApiServiceException {
         final List<CourseClass> classes = courseClassRepository.findFirst2ByClassId(relatedClassId);
         classes.forEach(courseClass -> {
-            courseClass.setCover(
-                    Utils.join(config.getStaticResourceServer(), courseClass.getCover(), Constants.FORWARD_SLASH));
+            if (!Strings.isNullOrEmpty(courseClass.getCover())) {
+                courseClass.setCover(
+                        Utils.join(config.getStaticResourceServer(), courseClass.getCover(), Constants.FORWARD_SLASH));
+            }
         });
 
         return classes;
@@ -112,8 +126,11 @@ public class CourseClassServiceImpl implements CourseClassService {
         final List<CourseClass> courseClasses = courseClassRepository
                 .findClassesByUserIdAndFavoriteType(userId, favoriteType);
         courseClasses.forEach(courseClass -> {
-            courseClass.setCover(
-                    Utils.join(config.getStaticResourceServer(), courseClass.getCover(), Constants.FORWARD_SLASH));
+            if (!Strings.isNullOrEmpty(courseClass.getCover())) {
+
+                courseClass.setCover(
+                        Utils.join(config.getStaticResourceServer(), courseClass.getCover(), Constants.FORWARD_SLASH));
+            }
         });
 
         return courseClasses;
@@ -124,8 +141,10 @@ public class CourseClassServiceImpl implements CourseClassService {
         final List<CourseClass> courseClasses = courseClassRepository
                 .findClassesByCoachId(coachId);
         courseClasses.forEach(courseClass -> {
-            courseClass.setCover(
-                    Utils.join(config.getStaticResourceServer(), courseClass.getCover(), Constants.FORWARD_SLASH));
+            if (!Strings.isNullOrEmpty(courseClass.getCover())) {
+                courseClass.setCover(
+                        Utils.join(config.getStaticResourceServer(), courseClass.getCover(), Constants.FORWARD_SLASH));
+            }
         });
 
         return courseClasses;

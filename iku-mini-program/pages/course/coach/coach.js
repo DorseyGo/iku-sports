@@ -9,10 +9,8 @@ Page({
     coachId : 0,
     coach : {},
     classes : {},
-    favoriteType: 4,
-    userId:"1",
-    isFavorite: 0,
-    totalNumOffavorite: 0
+    favoriteType: 3,
+    userId: "e9b6ea6f672086252a83a48be2198d63"
   },
 
   /**
@@ -23,76 +21,9 @@ Page({
       this.setData({
         coach: res.data
       })
-      
-    },reason => {
-      console.log(reason)
-    }).catch(err => {   
-      console.log(err)
     })
   },
 
-  favoriteSummaryInformation: function(params){
-    request.post(`favorite/summary`,params).then(res =>{
-      this.setData({
-        totalNumOffavorite: res.data
-      },reason =>{
-        console.log(reason)
-      })
-    }).catch(err =>{
-      console.log(err)
-    })
-  },
-  favoriteAction: function(){
-    let params = {
-      favoriteId: this.data.coachId,
-      favoriteType:this.data.favoriteType,
-      userId:this.data.userId
-    }
-    this.favoriteSummaryInformation(params)
-    if (this.data.totalNumOffavorite === 0 ){
-      request.post(`favorite/add`,params).then(res =>{
-        this.setData({
-          totalNumOffavorite: 1
-        });
-        this.requestShowToast()
-      },reason => {
-        console.log(reason)
-      }).catch(err => {
-        console.log(err)
-      })
-    }else{
-      request.post(`favorite/del`,params).then(res => {
-        this.setData({
-          totalNumOffavorite: 0
-        });
-        this.requestShowToast()
-      },reason =>{
-        console.log(reason)
-      }).catch(err => {
-        console.log(err)
-      })
-    }
-  }
-  ,
-  /**
-   * showToast of request
-   */
-  requestShowToast: function () {
-    if( this.data.totalNumOffavorite === 0 ){
-      wx.showToast({
-        title: '取消关注',
-        icon: 'none',
-        duration: 1500
-      })
-    }else{
-      wx.showToast({
-        title: '已关注',
-        icon: 'none',
-        duration: 1500
-      })
-    }
-  }
-  ,
   /**
    * get coaching
    */
@@ -103,8 +34,22 @@ Page({
         classes: res.data
       })
     })
-  }
-  ,
+  },
+
+  addFavorite: function() {
+    let userId = this.data.userId
+    request.post(`favorite`, {
+      token: userId,
+      favoriteType: this.data.favoriteType,
+      favoriteId: this.data.coachId
+    }).then(res => {
+      wx.showToast({
+        title: '关注成功',
+        icon: 'success'
+      });
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -122,27 +67,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
 })

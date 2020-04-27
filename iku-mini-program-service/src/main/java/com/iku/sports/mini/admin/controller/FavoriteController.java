@@ -32,10 +32,17 @@ public class FavoriteController {
     @ResponseBody
     @PostMapping("/api/favorite")
     public Response<String> addFavorite(@RequestBody FavoriteRequest favoriteRequest) throws ApiServiceException {
-        favoriteService.addFavorite(favoriteRequest.getToken(), favoriteRequest.getFavoriteId(),
+        favoriteService.addFavorite(favoriteRequest.getUserId(), favoriteRequest.getFavoriteId(),
                 favoriteRequest.getFavoriteType());
 
         return new Response<String>().status(Response.SUCCESS);
     }
 
+    @ResponseBody
+    @GetMapping("/api/favorite")
+    public Response<Boolean> existsFavorite(@RequestParam("token") final String userId, @RequestParam("favoriteId") final int favoriteId,
+            @RequestParam("favoriteType") final int favoriteType) throws ApiServiceException {
+        boolean exists = favoriteService.existsFavorite(userId, favoriteId, favoriteType);
+        return new Response<Boolean>().status(Response.SUCCESS).data(exists);
+    }
 }

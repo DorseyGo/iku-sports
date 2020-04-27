@@ -125,15 +125,10 @@ public class CourseClassController {
     }
 
     @ResponseBody
-    @GetMapping("/api/class/updateWatches/{id}")
-    public Response setClassWatchesById(@PathVariable("id") final int id) {
-        try {
-            courseClassService.setClassWatchesById(id);
-            return new Response().status(Response.SUCCESS);
-        } catch (Exception e) {
-            log.error("Fail to set watches of calss by id:{}", id, e);
-            return new Response().status(Response.FAIL);
-        }
+    @PostMapping("/api/classes/{classId}")
+    public Response<String> setClassWatchesById(@PathVariable("classId") final int id) throws ApiServiceException {
+        courseClassService.incrementWatchesByClassId(id);
+        return new Response<String>().status(Response.SUCCESS);
     }
 
     @ResponseBody

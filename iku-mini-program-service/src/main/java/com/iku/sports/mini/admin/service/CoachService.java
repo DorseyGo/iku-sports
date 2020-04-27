@@ -16,4 +16,6 @@ import java.util.List;
 public interface CoachService {
     List<CoachInfo> getAllCoachInfos();
     Coach getCoachById(final int id) throws ApiServiceException;
+
+    boolean isCoachFavoritedByUserId(int id, String userId) throws ApiServiceException;
 }

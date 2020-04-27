@@ -30,7 +30,7 @@ public interface CourseClassService {
 
     ClassCount getTotalNumMoneyByCourseId(int courseId) throws Exception;
 
-    void setClassWatchesById(int id) throws Exception;
+    void incrementWatchesByClassId(int id) throws ApiServiceException;
 
     /**
      *

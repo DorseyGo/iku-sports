@@ -86,9 +86,8 @@ public interface CourseClassRepository {
     @SelectProvider(type = CourseClassSqlProvider.class, method = "getTotalNumMoneyByCourseId")
     ClassCount getTotalNumMoneyByCourseId(@Param("courseId") int courseId);
 
-    @ResultMap("courseClassRM")
-    @UpdateProvider(type = CourseClassSqlProvider.class, method = "setClassWatchesById")
-    void setClassWatchesById(@Param("id") int id);
+    @UpdateProvider(type = CourseClassSqlProvider.class, method = "incrementWatchesByClassId")
+    void incrementWatchesByClassId(@Param("classId") int id) throws DataAccessException;
 
     /**
      *
@@ -144,12 +143,12 @@ public interface CourseClassRepository {
                          "0,1) next_title");
         }
 
-        public String setClassWatchesById(final Map<String, Object> param) {
+        public String incrementWatchesByClassId(final Map<String, Object> param) {
             return new SQL() {
                 {
                     UPDATE(CLASSTABLE);
                     SET("watches = watches + 1");
-                    WHERE("id = #{id}");
+                    WHERE("id = #{classId}");
                 }
             }.toString();
         }
