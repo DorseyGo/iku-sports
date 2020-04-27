@@ -24,8 +24,8 @@ Page({
 
   loadClasses: function() {
     let token = this.data.userId
-    let favorite = (this.data.showLearned) ? 1 : 2
-    request.get(`favorite/${favorite}/classes`, {
+    let reqUrl = (this.data.showLearned) ? `watched/classes` : `favorite/classes`
+    request.get(`${reqUrl}`, {
       token: token
     }).then(res => {
       this.setData({

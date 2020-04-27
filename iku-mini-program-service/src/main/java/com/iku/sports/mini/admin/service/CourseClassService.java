@@ -16,19 +16,10 @@ import java.util.List;
  * CopyRight: All rights reserved
  **/
 public interface CourseClassService {
-    List<CourseClass> getFirst3ClassesByCourseId(short courseId) throws Exception;
 
     List<CourseClass> paginateClasses(short courseId,int offset,int pageSize) throws Exception;
 
     ClassOverview getClassOverviewById(final int id) throws ApiServiceException;
-
-    List<CourseClass> getTop3PopularClasses(short categoryId) throws Exception;
-
-    List<CourseClass> getTop3ClassicByCategoryId(short categoryId,int days) throws Exception;
-
-    List<CourseClass> getClassesByCourseId(short courseId) throws Exception;
-
-    ClassCount getTotalNumMoneyByCourseId(int courseId) throws Exception;
 
     void incrementWatchesByClassId(int id) throws ApiServiceException;
 
@@ -44,4 +35,8 @@ public interface CourseClassService {
     List<CourseClass> getClassesByUserIdAndFavoriteType(String userId, int favoriteType) throws ApiServiceException;
 
     List<CourseClass> getClassesByCoachId(int coachId) throws ApiServiceException;
+
+    List<CourseClass> getClassesByUserId(String userId) throws ApiServiceException;
+
+    void saveWatchedClasses(String userId, int classId) throws ApiServiceException;
 }

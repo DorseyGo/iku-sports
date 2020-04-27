@@ -78,6 +78,13 @@ Page({
     request.post(`classes/${classId}`).then(res => {
       // empty
     })
+
+    request.post(`watched/class`, {
+      classId: classId,
+      token: this.data.userId
+    }).then(res => {
+      
+    })
   },
 
   /**

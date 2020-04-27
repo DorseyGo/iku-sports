@@ -6,15 +6,12 @@ import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
-import com.iku.sports.mini.admin.model.ClassCount;
 import com.iku.sports.mini.admin.model.ClassOverview;
 import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.CourseClassRepository;
 import com.iku.sports.mini.admin.service.CourseClassService;
 import com.iku.sports.mini.admin.utils.Utils;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.signedness.qual.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
@@ -49,11 +46,6 @@ public class CourseClassServiceImpl implements CourseClassService {
 
 
     @Override
-    public List<CourseClass> getFirst3ClassesByCourseId(short courseId) throws Exception {
-        return courseClassRepository.getFirst3ClassesByCourseId(courseId);
-    }
-
-    @Override
     public List<CourseClass> paginateClasses(short courseId, int offset, int pageSize) throws Exception {
         if (!ALLOWED_PAGE_SIZES.contains(pageSize)) {
             log.info("Page size fallback, due to passed-in page size: {}, not contained in: {}",
@@ -68,7 +60,7 @@ public class CourseClassServiceImpl implements CourseClassService {
     @Override
     public ClassOverview getClassOverviewById(int id) throws ApiServiceException {
         try {
-            ClassOverview overview = courseClassRepository.getClassOverviewById(id);
+            ClassOverview overview = courseClassRepository.findClassOverviewById(id);
             if (overview.getVideoUrl() != null) {
                 overview.setVideoUrl(
                         Utils.join(config.getStaticResourceServer(), overview.getVideoUrl(), Constants.FORWARD_SLASH));
@@ -82,26 +74,6 @@ public class CourseClassServiceImpl implements CourseClassService {
     }
 
     @Override
-    public List<CourseClass> getTop3PopularClasses(short categoryId) throws Exception {
-        return courseClassRepository.getTop3PopularClasses(categoryId);
-    }
-
-    @Override
-    public List<CourseClass> getTop3ClassicByCategoryId(short categoryId, int days) throws Exception {
-        return courseClassRepository.getTop3ClassicByCategoryId(categoryId, days);
-    }
-
-    @Override
-    public List<CourseClass> getClassesByCourseId(short courseId) throws Exception {
-        return courseClassRepository.getClassByCourseId(courseId);
-    }
-
-    @Override
-    public ClassCount getTotalNumMoneyByCourseId(int courseId) throws Exception {
-        return courseClassRepository.getTotalNumMoneyByCourseId(courseId);
-    }
-
-    @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = DataAccessException.class)
     public void incrementWatchesByClassId(int id) throws ApiServiceException, DataAccessException {
         courseClassRepository.incrementWatchesByClassId(id);
@@ -109,44 +81,87 @@ public class CourseClassServiceImpl implements CourseClassService {
 
     @Override
     public List<CourseClass> getPromotionsById(int relatedClassId) throws ApiServiceException {
-        final List<CourseClass> classes = courseClassRepository.findFirst2ByClassId(relatedClassId);
-        classes.forEach(courseClass -> {
-            if (!Strings.isNullOrEmpty(courseClass.getCover())) {
-                courseClass.setCover(
-                        Utils.join(config.getStaticResourceServer(), courseClass.getCover(), Constants.FORWARD_SLASH));
-            }
-        });
+        try {
+            final List<CourseClass> classes = courseClassRepository.findFirst2ByClassId(relatedClassId);
+            classes.forEach(courseClass -> {
+                if (!Strings.isNullOrEmpty(courseClass.getCover())) {
+                    courseClass.setCover(
+                            Utils.join(config.getStaticResourceServer(), courseClass.getCover(),
+                                    Constants.FORWARD_SLASH));
+                }
+            });
 
-        return classes;
+            return classes;
+        } catch (DataAccessException e) {
+            log.error("Failed to get promotions by related class ID: {}", relatedClassId, e);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+        }
     }
 
     @Override
     public List<CourseClass> getClassesByUserIdAndFavoriteType(String userId, int favoriteType) throws
             ApiServiceException {
-        final List<CourseClass> courseClasses = courseClassRepository
-                .findClassesByUserIdAndFavoriteType(userId, favoriteType);
-        courseClasses.forEach(courseClass -> {
-            if (!Strings.isNullOrEmpty(courseClass.getCover())) {
+        try {
+            final List<CourseClass> courseClasses = courseClassRepository
+                    .findClassesByUserIdAndFavoriteType(userId, favoriteType);
+            courseClasses.forEach(courseClass -> {
+                if (!Strings.isNullOrEmpty(courseClass.getCover())) {
 
-                courseClass.setCover(
-                        Utils.join(config.getStaticResourceServer(), courseClass.getCover(), Constants.FORWARD_SLASH));
-            }
-        });
+                    courseClass.setCover(
+                            Utils.join(config.getStaticResourceServer(), courseClass.getCover(),
+                                    Constants.FORWARD_SLASH));
+                }
+            });
 
-        return courseClasses;
+            return courseClasses;
+        } catch (DataAccessException e) {
+            log.error("Failed to get class by user id: {} and favorite type: {}", userId, favoriteType, e);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+        }
     }
 
     @Override
     public List<CourseClass> getClassesByCoachId(int coachId) throws ApiServiceException {
-        final List<CourseClass> courseClasses = courseClassRepository
-                .findClassesByCoachId(coachId);
-        courseClasses.forEach(courseClass -> {
-            if (!Strings.isNullOrEmpty(courseClass.getCover())) {
-                courseClass.setCover(
-                        Utils.join(config.getStaticResourceServer(), courseClass.getCover(), Constants.FORWARD_SLASH));
-            }
-        });
+        try {
+            final List<CourseClass> courseClasses = courseClassRepository
+                    .findClassesByCoachId(coachId);
+            courseClasses.forEach(courseClass -> {
+                if (!Strings.isNullOrEmpty(courseClass.getCover())) {
+                    courseClass.setCover(
+                            Utils.join(config.getStaticResourceServer(), courseClass.getCover(),
+                                    Constants.FORWARD_SLASH));
+                }
+            });
 
-        return courseClasses;
+            return courseClasses;
+        } catch (DataAccessException e) {
+            log.error("Failed to retrieve course class by coach ID: {}", coachId, e);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+        }
+    }
+
+    @Override
+    public List<CourseClass> getClassesByUserId(String userId) throws ApiServiceException {
+        try {
+            final List<CourseClass> courseClasses = courseClassRepository.findWatchedClassesByUserId(userId);
+            courseClasses.forEach(courseClass -> {
+                if (!Strings.isNullOrEmpty(courseClass.getCover())) {
+                    courseClass.setCover(
+                            Utils.join(config.getStaticResourceServer(), courseClass.getCover(),
+                                    Constants.FORWARD_SLASH));
+                }
+            });
+
+            return courseClasses;
+        } catch (DataAccessException e) {
+            log.error("Failed to retrieve watched classes by user Id: {}", userId, e);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
+    public void saveWatchedClasses(String userId, int classId) throws ApiServiceException {
+        courseClassRepository.saveWatchedClasses(userId, classId);
     }
 }
