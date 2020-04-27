@@ -42,4 +42,6 @@ public interface CourseClassService {
     List<CourseClass> getPromotionsById(int relatedClassId) throws ApiServiceException;
 
     List<CourseClass> getClassesByUserIdAndFavoriteType(String userId, int favoriteType) throws ApiServiceException;
+
+    List<CourseClass> getClassesByCoachId(int coachId) throws ApiServiceException;
 }

@@ -118,10 +118,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 10,
 					"name": "pages/course/coach/coach",
 					"pathName": "pages/course/coach/coach",
-					"query": "",
+					"query": "coachId=2",
 					"scene": null
 				},
 				{
@@ -149,6 +149,7 @@
 					"id": -1,
 					"name": "pages/about/about",
 					"pathName": "pages/about/about",
+					"query": "",
 					"scene": null
 				}
 			]

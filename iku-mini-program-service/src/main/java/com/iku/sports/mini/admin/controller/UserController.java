@@ -7,6 +7,7 @@
 package com.iku.sports.mini.admin.controller;
 
 import com.google.common.base.Strings;
+import com.iku.sports.mini.admin.entity.User;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.model.Response;
@@ -16,10 +17,7 @@ import com.iku.sports.mini.admin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
@@ -32,6 +30,7 @@ public class UserController {
     @ResponseBody
     @PostMapping("/api/user/login")
     public Response<LoginResponse> login(@RequestBody final LoginRequest request) throws ApiServiceException {
+        /* returns the user ID as token to the front-end */
         final String token = userService.doLoginAndReturnToken(request.getCode());
         if (Strings.isNullOrEmpty(token)) {
             throw new ApiServiceException(IkuSportsError.LOGIN_ERROR);
@@ -39,7 +38,14 @@ public class UserController {
 
         return new Response<LoginResponse>().status(Response.SUCCESS)
                 .data(LoginResponse.builder()
-                              .token(token)
-                              .build());
+                        .token(token)
+                        .build());
+    }
+
+    @ResponseBody
+    @GetMapping("/api/users/{userId}")
+    public Response<User> getUserById(@PathVariable("userId") final String userId) throws ApiServiceException {
+        User user = userService.getUserById(userId);
+        return new Response<User>().status(Response.SUCCESS).data(user);
     }
 }

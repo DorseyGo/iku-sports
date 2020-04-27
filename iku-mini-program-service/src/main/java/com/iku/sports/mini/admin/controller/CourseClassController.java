@@ -155,4 +155,11 @@ public class CourseClassController {
 
         return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClasses);
     }
+
+    @ResponseBody
+    @GetMapping("/api/coaches/{coachId}/classes")
+    public Response<List<CourseClass>> getClassesByCoachId(@PathVariable("coachId") final int coachId) throws ApiServiceException {
+        final List<CourseClass> courseClasses = courseClassService.getClassesByCoachId(coachId);
+        return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClasses);
+    }
 }

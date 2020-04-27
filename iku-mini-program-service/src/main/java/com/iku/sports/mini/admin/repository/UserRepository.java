@@ -28,17 +28,16 @@ public interface UserRepository {
 
     @Results(id = "simpleUserRM", value = {
             @Result(property = "id", column = "id", javaType = String.class, jdbcType = JdbcType.CHAR),
-            @Result(property = "openId", column = "open_id", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "token", column = "token", javaType = String.class, jdbcType = JdbcType.CHAR)
+            @Result(property = "openId", column = "open_id", jdbcType = JdbcType.VARCHAR)
     })
-    @SelectProvider(type = UserSQLProvider.class, method = "findUserByToken")
-    User findUserByToken(@NotNull @Param("token") String token);
+    @SelectProvider(type = UserSQLProvider.class, method = "findUserByUserId")
+    User findUserByUserId(@NotNull @Param("userId") String userId);
 
     // ----
     // SQL provider
     // ----
     class UserSQLProvider {
-        private static List<String> COLS = Lists.newArrayList("id", "open_id", "token");
+        private static List<String> COLS = Lists.newArrayList("id", "open_id");
 
         public String save(final User user) {
             return new SQL() {
@@ -50,10 +49,6 @@ public interface UserRepository {
 
                     if (user.getOpenId() != null) {
                         VALUES("open_id", "#{openId}");
-                    }
-
-                    if (user.getToken() != null) {
-                        VALUES("token", "#{token}");
                     }
 
                     if (user.getAvatarUrl() != null) {
@@ -81,12 +76,14 @@ public interface UserRepository {
             }.toString();
         }
 
-        public String findUserByToken(final Map<String, Object> params) {
+        public String findUserByUserId(final Map<String, Object> params) {
             return new SQL() {
                 {
                     SELECT(COLS.toArray(new String[COLS.size()]));
                     FROM(TABLE);
-                    WHERE("token = #{token}");
+                    if (params.get("userId") != null) {
+                        WHERE("id = #{userId}");
+                    }
                 }
             }.toString();
         }

@@ -97,14 +97,11 @@ Page({
    * get coaching
    */
   getCoachClass : function(){
-    request.get(`classes/`+ this.data.coachId).then(res =>{
+    let coachId = this.data.coachId
+    request.get(`coaches/${coachId}/classes/`).then(res =>{
       this.setData({
         classes: res.data
-      }),reason =>{
-        console.log(reason)
-      }
-      }).catch(err =>{
-        console.log(err)
+      })
     })
   }
   ,

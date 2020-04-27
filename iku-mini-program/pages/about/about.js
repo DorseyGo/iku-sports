@@ -8,7 +8,8 @@ Page({
    */
   data: {
     showLearned: true,
-    classes: []
+    classes: [],
+    user: {}
   },
 
   toggleLearned: function() {
@@ -32,10 +33,20 @@ Page({
     })
   },
 
+  loadUser: function() {
+    let token = 123
+    request.get(`users/${token}`).then(res => {
+      this.setData({
+        user: res.data
+      })
+    })
+  },
+
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    this.loadUser()
     this.loadClasses()
   }
 })

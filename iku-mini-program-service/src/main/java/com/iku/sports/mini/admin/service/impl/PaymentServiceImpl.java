@@ -63,7 +63,7 @@ public class PaymentServiceImpl implements PaymentService {
             throw new ApiServiceException(IkuSportsError.SYS_PARAMS_MISSED);
         }
 
-        final String openId = userService.getOpenIdByToken(request.getToken());
+        final String openId = userService.getOpenIdByUserId(request.getToken());
         if (Strings.isNullOrEmpty(openId)) {
             log.error("No open ID found for token: {}", request.getToken());
             throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);

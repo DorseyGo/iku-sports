@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public interface UserService {
     String doLoginAndReturnToken(final String code) throws ApiServiceException;
 
-    String getOpenIdByToken(final String token) throws ApiServiceException;
+    String getOpenIdByUserId(final String token) throws ApiServiceException;
 
-    User getUserByToken(@NotNull String token);
+    User getUserById(@NotNull String token) throws ApiServiceException;
 }

@@ -1,5 +1,5 @@
 <view class="container">
-    <view class="iku-list">
+    <scroll-view class="iku-list">
         <navigator url="../classes/detail/details?classId={{item.id}}" class="iku-item margin-top-30rpx" wx:for="{{classes}}" wx:key="id">
             <view class="iku-avatar radius" style="background-image: url('{{item.cover}}')"></view>
             <view class="content">
@@ -14,10 +14,10 @@
                 </view>
             </view>
         </navigator>
-    </view>
+    </scroll-view>
 
     <view class="ik-bar tab-bar bg-bg-color border shop">
-        <view class="action text-orange">总计：{{course.charge}}</view>
+        <view class="action text-orange">总计：{{course.charge}}元</view>
         <view class="bg-red submit">购买</view>
     </view>
 </view>

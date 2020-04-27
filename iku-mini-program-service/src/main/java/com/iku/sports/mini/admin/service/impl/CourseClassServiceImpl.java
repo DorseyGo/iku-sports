@@ -118,4 +118,16 @@ public class CourseClassServiceImpl implements CourseClassService {
 
         return courseClasses;
     }
+
+    @Override
+    public List<CourseClass> getClassesByCoachId(int coachId) throws ApiServiceException {
+        final List<CourseClass> courseClasses = courseClassRepository
+                .findClassesByCoachId(coachId);
+        courseClasses.forEach(courseClass -> {
+            courseClass.setCover(
+                    Utils.join(config.getStaticResourceServer(), courseClass.getCover(), Constants.FORWARD_SLASH));
+        });
+
+        return courseClasses;
+    }
 }

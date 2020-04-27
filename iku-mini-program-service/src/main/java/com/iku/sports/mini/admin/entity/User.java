@@ -16,7 +16,6 @@ public class User {
 
     private String id;
     private String openId;
-    private String token;
     private String nickName;
     private String avatarUrl;
 

@@ -42,7 +42,7 @@
 
     <view class="iku-title flex-between margin-top-30rpx">
         <view class="action text-sm-26rpx mg-left-xl text-light-white">
-            系列课程
+            人气课程
         </view>
     </view>
 

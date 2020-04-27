@@ -33,21 +33,20 @@
       </view>
     </view>
 
-    <scroll-view class="course-list">
-        <navigator wx:for="{{classes}}" wx:key="id" url="../classes/detail/details?id={{item.id}}">
-            <view class="classes"> 
-                <view class="class-image" style="background-image: url('{{item.cover}}')"></view>
-                <view class="class-info">
-                    <text class="class-title">{{item.title}}</text>
-                    <text class="class-intr">{{item.content}}</text>
-                    <view class="class-v">
-                        <text class="text-sz">51</text>
-                        <text class="text-szb">课时</text>
-                        <text class="text-sz">{{item.watches}}</text>
-                        <text class="text-szb">人已学习</text>
-                    </view>
+    <view class="iku-list">
+        <navigator url="../classes/detail/details?classId={{item.id}}" class="iku-item margin-top-30rpx" wx:for="{{classes}}" wx:key="id">
+            <view class="iku-avatar radius" style="background-image: url('{{item.cover}}')"></view>
+            <view class="content">
+                <view class="text-white text-xl">
+                    <text class="text-cut">{{item.title}}</text>
+                </view>
+                <view class="text-light-white text-sm-26rpx flex">
+                   <text class="text-cut">{{item.content}}</text>
+                </view>
+                <view class="bottom text-normal text-light-white">
+                    <text class="text-yellow">{{item.watches}}</text> 已观看
                 </view>
             </view>
         </navigator>
-    </scroll-view>   
+    </view> 
 </view>

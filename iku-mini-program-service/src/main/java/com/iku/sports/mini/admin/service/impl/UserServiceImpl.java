@@ -64,8 +64,8 @@ public class UserServiceImpl implements UserService {
                 });
     }
 
-    private String createValue(final String token) {
-        User user = userRepository.findUserByToken(token);
+    private String createValue(final String userId) {
+        User user = userRepository.findUserByUserId(userId);
         return (user == null) ? null : user.getOpenId();
     }
 
@@ -78,33 +78,36 @@ public class UserServiceImpl implements UserService {
         }
 
         final GetOpenIdAndSessionKeyResponse resp = getOpenIdAndSessionKey(code);
-        final String userId = UUID.randomUUID()
-                .toString()
-                .replaceAll("-", "");
-        final String token = Utils.genUniqueStr();
+        final String userId = Utils.genUniqueStr();
 
         userRepository.save(User.builder()
                 .id(userId)
                 .openId(resp.getOpenId())
-                .token(token)
                 .build());
 
-        return token;
+        return userId;
     }
 
     @Override
-    public String getOpenIdByToken(String token) throws ApiServiceException {
+    public String getOpenIdByUserId(String userId) throws ApiServiceException {
         try {
-            return cache.get(token);
+            return cache.get(userId);
         } catch (ExecutionException e) {
-            log.error("Failed to fetch open id by token {}", token, e);
+            log.error("Failed to fetch open id by user id: {}", userId, e);
             throw new ApiServiceException(IkuSportsError.OPEN_ID_NOT_FOUND_ERROR);
         }
     }
 
     @Override
-    public User getUserByToken(@NotNull String token) {
-        return userRepository.findUserByToken(token);
+    public User getUserById(@NotNull String userId) throws ApiServiceException {
+        try {
+            User user = userRepository.findUserByUserId(userId);
+
+            return user;
+        } catch (DataAccessException e) {
+            log.error("Failed to retrieve user by id: {}", userId, e);
+            throw new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR);
+        }
     }
 
     private GetOpenIdAndSessionKeyResponse getOpenIdAndSessionKey(String code) throws ApiServiceException {

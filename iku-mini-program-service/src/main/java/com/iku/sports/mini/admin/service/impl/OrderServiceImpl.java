@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = DataAccessException.class)
     public Order saveAndReturn(NewOrderRequest request) throws ApiServiceException, DataAccessException {
         final String orderNo = Utils.genUniqueStr();
-        User user = userService.getUserByToken(request.getToken());
+        User user = userService.getUserById(request.getToken());
 
         Order order = Order.builder()
                 .orderId(orderNo)

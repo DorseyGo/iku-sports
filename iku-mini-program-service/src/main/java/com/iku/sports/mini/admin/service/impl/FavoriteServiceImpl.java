@@ -40,7 +40,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
     public void addFavorite(String token, int favoriteId, int favoriteType) throws ApiServiceException,
             DataAccessException {
-        final User user = userService.getUserByToken(token);
+        final User user = userService.getUserById(token);
         if (user == null) {
             throw new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR);
         }

@@ -113,6 +113,10 @@ public interface CourseClassRepository {
     List<CourseClass> findClassesByUserIdAndFavoriteType(@Param("userId") String userId,
             @Param("favoriteType") int favoriteType) throws DataAccessException;
 
+    @ResultMap("simpleClassRM")
+    @SelectProvider(type = CourseClassSqlProvider.class, method = "findClassesByCoachId")
+    List<CourseClass> findClassesByCoachId(@Param("coachId") int coachId) throws DataAccessException;
+
     class CourseClassSqlProvider {
         static final List<String> ALLCOLS = Arrays
                 .asList("id", "title", "cover", "chapter", "video_url", "content", "watches", "course_id", "coach_id");
@@ -269,6 +273,16 @@ public interface CourseClassRepository {
                     }
 
                     WHERE("favorite_type = #{favoriteType}");
+                }
+            }.toString();
+        }
+
+        public String findClassesByCoachId(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT(SIMPLE_COLS_CLASS.toArray(new String[SIMPLE_COLS_CLASS.size()]));
+                    FROM(CLASSTABLE + " c");
+                    WHERE("c.coach_id = #{coachId}");
                 }
             }.toString();
         }
