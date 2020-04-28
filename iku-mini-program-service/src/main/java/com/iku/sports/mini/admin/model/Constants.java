@@ -16,4 +16,6 @@ public interface Constants {
     String PREFIX_PREPAY_ID = "prepay_id=";
     String OK = "OK";
     String FAIL = "FAIL";
+
+    int DEFAULT_PAGE_SIZE = 5;
 }

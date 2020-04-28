@@ -3,7 +3,6 @@ package com.iku.sports.mini.admin.service;
 
 import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
-import com.iku.sports.mini.admin.model.ClassCount;
 import com.iku.sports.mini.admin.model.ClassOverview;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
  **/
 public interface CourseClassService {
 
-    List<CourseClass> paginateClasses(short courseId,int offset,int pageSize) throws Exception;
+    List<CourseClass> paginateClasses(short courseId, int curPage) throws ApiServiceException;
 
     ClassOverview getClassOverviewById(final int id) throws ApiServiceException;
 
@@ -39,4 +38,6 @@ public interface CourseClassService {
     List<CourseClass> getClassesByUserId(String userId) throws ApiServiceException;
 
     void saveWatchedClasses(String userId, int classId) throws ApiServiceException;
+
+    boolean existsWatchedHis(String userId, int classId) throws ApiServiceException;
 }

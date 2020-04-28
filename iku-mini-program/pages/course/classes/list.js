@@ -1,94 +1,64 @@
 // pages/course/classes/list.js
-const request  = require("../../../utils/request");
+const request = require("../../../utils/request");
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    curPage : 0,
-    offset : 1,
-    pageSize : 10,
-    classes : [],
-    course : {},
-    pageStartNum: 0,
-    pageEndNum: 0,
-    totalNum: 0,
-    chapter: 0,
-    courseId: 1
+    curPage: 1,
+    classes: [],
+    courseId: 0,
+    course: {}
   },
 
-  loadData : function() {
-    this.data.pageStartNum = this.data.offset - 1
-    return request.get(`classes?courseId=` + this.data.courseId + `&pageSize=` + this.data.pageSize + `&offset=` + this.data.pageStartNum ).then(res => {
+  loadData: function () {
+    let courseId = this.data.courseId
+    request.get(`courses/${courseId}/classes`, {
+      curPage: this.data.curPage
+    }).then(res => {
       this.setData({
-        classes: this.data.curPage === 0 ? res.data:this.data.classes.concat(res.data),
         curPage: ++this.data.curPage,
-        offset: this.data.curPage * (++this.data.pageSize) + 1
+        classes: res.data
       })
-    }, reason => {
-     /** rejected */
-      console.log(reason)
-   }).catch(err => {
-      /** if exception detected */
-      console.log(err)
     })
-    },
-    
-    setTitle() {
-      return request.get(`courses/` + this.data.courseId).then(
-        res => {
-          this.setData({
-          course: res.data,
-          })
-        }, reason => {
-            console.log(reason)
-        }).catch(err => {
-             console.log(err)
-       })
-    },
+  },
 
-
-    GetSummaryInformation(){
-      request.get(`classes/count/` + this.data.courseId).then(res =>{
-        this.setData({
-          totalNum: res.data.totalCnt,
-          chapter: res.data.chapter
-        })
-      },reason =>{
-        console.log(reason)
-      }).catch(err =>{
-        console.log(err)
+  loadCourse: function() {
+    let courseId = this.data.courseId
+    request.get(`courses/${courseId}`).then(res => {
+      this.setData({
+        course: res.data
       })
-    },
+
+      wx.setNavigationBarTitle({
+        title: res.data.name
+      });
+    })
+  },
+
   /**
    * Lifecycle function--Called when page load
    */
-    onLoad: function (options) {
-      let courseId = options.courseId
-      this.setData({
-        courseId: courseId
-      })
+  onLoad: function (options) {
+    let courseId = options.courseId
+    this.setData({
+      courseId: courseId
+    })
 
-      this.loadData()
-
-      this.GetSummaryInformation()
-
-      this.setTitle().then(() =>{
-        wx.setNavigationBarTitle({
-          title: this.data.course.name,
-        })
-      })
+    this.loadData()
+    this.loadCourse()
   },
+
   /**
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh: function () {
     this.setData({
-      curPage : 0,
-      offset :0
+      curPage: 1
     })
-    this.loadData().then(() => wx.stopPullDownRefresh())
+
+    this.loadData()
   },
 
   /**
@@ -99,27 +69,24 @@ Page({
       title: 'Loading...',
     })
 
-    if(this.data.totalNum > this.data.offset){
-      this.loadData().then(() => {
-        wx.hideLoading()
-      })
-    }else{
-      wx.showToast({
-        title: '客官，已经到底了～',
-        icon: "none"
-      })
+    this.loadData()
+    console.log(this.data.classes.length)
+    if (this.data.classes.length == 0) {
+      wx.showLoading({
+        title: '客官，已到底了',
+        mask: true
+      });
+    } else {
+      wx.hideLoading();
     }
-      
-
-    
   },
 
-  onShow: function(){
-    this.setData({
-      curPage: 0,
-      offset: 1
-    })
-    this.loadData()
-    
+  onShow: function () {
+    if (this.data.course.name) {
+      wx.setNavigationBarTitle({
+        title: this.data.course.name
+      });
+        
+    }
   }
 })

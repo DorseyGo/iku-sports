@@ -42,18 +42,12 @@ public class CourseClassController {
     }
 
     @ResponseBody
-    @GetMapping("/api/classes")
-    public Response<List<CourseClass>> paginateClasses(@RequestParam("courseId") short courseId,
-            @RequestParam("offset") int offset,
-            @RequestParam("pageSize") int pageSize) {
-        try {
-            final List<CourseClass> courseClass = courseClassService.paginateClasses(courseId, offset, pageSize);
-            return new Response<List<CourseClass>>().status(Response.SUCCESS)
-                    .data(courseClass);
-        } catch (Exception e) {
-            log.error("Fail to get paginateclasses.", e);
-            return new Response<List<CourseClass>>().status(Response.FAIL);
-        }
+    @GetMapping("/api/courses/{courseId}/classes")
+    public Response<List<CourseClass>> paginateClasses(@PathVariable("courseId") short courseId,
+            @RequestParam(value = "curPage", defaultValue = "1", required = false) int curPage) throws
+            ApiServiceException {
+        final List<CourseClass> courseClasses = courseClassService.paginateClasses(courseId, curPage);
+        return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClasses);
     }
 
     @ResponseBody
@@ -102,7 +96,10 @@ public class CourseClassController {
     @PostMapping("/api/watched/class")
     public Response<String> addWatchedClassesByUserId(@RequestBody AddWatchedClassesRequest request) throws
             ApiServiceException {
-        courseClassService.saveWatchedClasses(request.getUserId(), request.getClassId());
+        if (!courseClassService.existsWatchedHis(request.getUserId(), request.getClassId())) {
+            courseClassService.saveWatchedClasses(request.getUserId(), request.getClassId());
+        }
+
         return new Response<String>().status(Response.SUCCESS);
     }
 }

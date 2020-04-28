@@ -10,6 +10,7 @@ import com.iku.sports.mini.admin.model.ClassOverview;
 import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.CourseClassRepository;
 import com.iku.sports.mini.admin.service.CourseClassService;
+import com.iku.sports.mini.admin.service.WatchedClassHisService;
 import com.iku.sports.mini.admin.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,29 +33,41 @@ import java.util.List;
 @Transactional
 @Service("courseClassService")
 public class CourseClassServiceImpl implements CourseClassService {
+
+    private static final List<Integer> ALLOWED_PAGE_SIZES = Lists.newArrayList(5, 10, 20);
+
     private final CourseClassRepository courseClassRepository;
-    private final List<Integer> ALLOWED_PAGE_SIZES = Lists.newArrayList(10, 20, 50, 100);
-    static final int DEFAULT_PAGE_SIZE = 10;
     private final IkuSportsConfig config;
+    private final WatchedClassHisService watchedClassHisService;
 
     @Autowired
     public CourseClassServiceImpl(@Qualifier("courseClassRepository") CourseClassRepository courseClassRepository,
-            IkuSportsConfig config) {
+            IkuSportsConfig config,
+            @Qualifier("watchedClassHisService") WatchedClassHisService watchedClassHisService) {
         this.courseClassRepository = courseClassRepository;
         this.config = config;
+        this.watchedClassHisService = watchedClassHisService;
     }
 
 
     @Override
-    public List<CourseClass> paginateClasses(short courseId, int offset, int pageSize) throws Exception {
+    public List<CourseClass> paginateClasses(short courseId, int curPage) throws ApiServiceException {
+        int pageSize = config.getPageSize();
         if (!ALLOWED_PAGE_SIZES.contains(pageSize)) {
             log.info("Page size fallback, due to passed-in page size: {}, not contained in: {}",
                     pageSize, ALLOWED_PAGE_SIZES);
 
-            pageSize = DEFAULT_PAGE_SIZE;
+            pageSize = Constants.DEFAULT_PAGE_SIZE;
         }
 
-        return courseClassRepository.paginateClasses(courseId, offset, pageSize);
+        final int offset = Utils.paginateOffset(curPage, pageSize);
+        try {
+            return courseClassRepository.paginateClasses(courseId, offset, pageSize);
+        } catch (DataAccessException e) {
+            log.error("Failed to pagination the classes by course id: {}, offset: {}, page size: {}", courseId, offset,
+                    pageSize, e);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+        }
     }
 
     @Override
@@ -163,5 +176,10 @@ public class CourseClassServiceImpl implements CourseClassService {
     @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
     public void saveWatchedClasses(String userId, int classId) throws ApiServiceException {
         courseClassRepository.saveWatchedClasses(userId, classId);
+    }
+
+    @Override
+    public boolean existsWatchedHis(String userId, int classId) throws ApiServiceException {
+        return watchedClassHisService.existsWatchedHis(userId, classId);
     }
 }

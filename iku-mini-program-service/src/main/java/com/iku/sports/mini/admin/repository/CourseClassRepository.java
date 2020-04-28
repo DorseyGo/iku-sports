@@ -42,7 +42,7 @@ public interface CourseClassRepository {
     @SelectProvider(type = CourseClassSqlProvider.class, method = "paginateClasses")
     List<CourseClass> paginateClasses(@Param("paginateCourseId") short courseId,
             @Param("paginateOffset") int offset,
-            @Param("paginatePageSize") int pageSize) throws Exception;
+            @Param("paginatePageSize") int pageSize) throws DataAccessException;
 
     @Results(id = "coRM", value = {
             @Result(property = "classId", column = "id", jdbcType = JdbcType.INTEGER),

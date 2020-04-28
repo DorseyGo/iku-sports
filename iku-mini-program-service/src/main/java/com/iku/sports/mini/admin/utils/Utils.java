@@ -177,4 +177,7 @@ public class Utils {
         }
     }
 
+    public static int paginateOffset(int curPage, int pageSize) {
+        return (curPage - 1) * pageSize;
+    }
 }

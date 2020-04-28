@@ -145,10 +145,8 @@ CREATE TABLE `favorite` (
 
 DROP TABLE IF EXISTS `class_watched_his`;
 CREATE TABLE `class_watched_his` (
-  `id` INT NOT NULL AUTO_INCREMENT,
   `class_id` INT NOT NULL COMMENT 'the class ID',
-  `user_id` INT NOT NULL COMMENT 'the user id',
+  `user_id` VARCHAR(32) NOT NULL COMMENT 'the user id',
   `watch_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  KEY `indx_user_class_id` (`class_id`, `user_id`),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`class_id`, `user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;

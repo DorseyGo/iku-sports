@@ -31,6 +31,9 @@ public class IkuSportsConfig {
     private long expiryInDays;
     private String key;
 
+    @Builder.Default
+    private int pageSize = 10;
+
     /**
      * ip address that can be accessed by external app
      */
