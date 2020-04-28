@@ -14,7 +14,8 @@
         {{item.displayName}}
       </view>
     </scroll-view>
-    <navigator url="../course/classes/list?courseId={{item.id}}" class="bg-image bg-mask" style="background-image: url('{{item.backgroundImg}}')" wx:for="{{courses}}" wx:key="id">
+    <navigator url="../course/classes/list?courseId={{item.id}}" class="bg-image bg-mask" 
+      style="background-image: url('/images/{{item.categoryName}}_2x.png')" wx:for="{{courses}}" wx:key="id">
       <view class="padding-xl text-white">
         <view class="text-xl">{{item.name}}</view>
         <view class="text-xs">{{item.joiner}}人参加</view>

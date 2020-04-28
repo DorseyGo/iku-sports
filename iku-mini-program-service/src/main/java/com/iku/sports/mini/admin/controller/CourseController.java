@@ -8,6 +8,7 @@ package com.iku.sports.mini.admin.controller;
 
 import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.exception.ApiInvokedException;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.Response;
 import com.iku.sports.mini.admin.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
@@ -41,25 +42,16 @@ public class CourseController {
 
     @ResponseBody
     @GetMapping("/api/courses/category")
-    public Response<List<Course>> getCoursesByCategoryName(@RequestParam("name") final String categoryName) {
-        try {
-            final List<Course> courses = courseService.getCoursesByCategoryName(categoryName);
-            return new Response<List<Course>>().status(Response.SUCCESS).data(courses);
-        } catch (ApiInvokedException e) {
-            log.error("Failed to get courses by category name: {}", categoryName, e);
-            return new Response<List<Course>>().status(Response.FAIL);
-        }
+    public Response<List<Course>> getCoursesByCategoryName(@RequestParam("name") final String categoryName) throws
+            ApiServiceException {
+        final List<Course> courses = courseService.getCoursesByCategoryName(categoryName);
+        return new Response<List<Course>>().status(Response.SUCCESS).data(courses);
     }
 
     @ResponseBody
     @GetMapping("/api/courses/{courseId}")
-    public Response<Course> getCourseById(@PathVariable("courseId") final short courseId) {
-        try {
-            final Course course = courseService.getCourseByCourseId(courseId);
-            return new Response<Course>().status(Response.SUCCESS).data(course);
-        } catch (ApiInvokedException e) {
-            log.error("Failed to get course by id: {}", courseId, e);
-            return new Response<Course>().status(Response.FAIL);
-        }
+    public Response<Course> getCourseById(@PathVariable("courseId") final short courseId) throws ApiServiceException {
+        final Course course = courseService.getCourseByCourseId(courseId);
+        return new Response<Course>().status(Response.SUCCESS).data(course);
     }
 }

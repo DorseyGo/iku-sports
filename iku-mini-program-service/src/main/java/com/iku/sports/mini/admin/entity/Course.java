@@ -27,6 +27,7 @@ public class Course {
     private long joiner;
     /* the background image url address */
     private String backgroundImg;
+    private String categoryName;
 
     /**
      * The charge, which derived from field 'fee'

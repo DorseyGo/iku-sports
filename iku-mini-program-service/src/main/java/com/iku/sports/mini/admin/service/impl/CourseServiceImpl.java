@@ -9,12 +9,15 @@ package com.iku.sports.mini.admin.service.impl;
 import com.google.common.base.Strings;
 import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.exception.ApiInvokedException;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
+import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.CourseRepository;
 import com.iku.sports.mini.admin.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -39,21 +42,26 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getCoursesByCategoryName(String categoryName) throws ApiInvokedException {
+    public List<Course> getCoursesByCategoryName(String categoryName) throws ApiServiceException {
         if (Strings.isNullOrEmpty(categoryName)) {
-            throw new ApiInvokedException("Category name not specified");
+            throw new ApiServiceException(IkuSportsError.SYS_PARAMS_MISSED);
         }
 
         try {
-            return courseRepository.findCoursesByCategoryName(categoryName);
-        } catch (SQLException e) {
+            List<Course> courses = courseRepository.findCoursesByCategoryName(categoryName);
+            courses.forEach(course -> {
+                course.setCategoryName(categoryName);
+            });
+
+            return courses;
+        } catch (DataAccessException e) {
             log.error("Failed to find course by category name: {}", categoryName, e);
-            throw new ApiInvokedException(e);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
         }
     }
 
     @Override
-    public Course getCourseByCourseId(short courseId) throws ApiInvokedException {
+    public Course getCourseByCourseId(short courseId) throws ApiServiceException {
         try {
             final Course course = courseRepository.findCourseById(courseId);
             course.setCharge(BigDecimal.valueOf(course.getFee())
@@ -61,9 +69,9 @@ public class CourseServiceImpl implements CourseService {
                                              BigDecimal.ROUND_HALF_UP));
 
             return course;
-        } catch (SQLException e) {
+        } catch (DataAccessException e) {
             log.error("Failed to find course by id: {}", courseId);
-            throw new ApiInvokedException(e);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
         }
     }
 

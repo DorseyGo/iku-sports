@@ -10,8 +10,10 @@ import com.iku.sports.mini.admin.entity.Course;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
@@ -35,11 +37,11 @@ public interface CourseRepository {
 
     @ResultMap("courseRM")
     @SelectProvider(type = CourseSQLProvider.class, method = "findCoursesByCategoryName")
-    List<Course> findCoursesByCategoryName(@Param("categoryName") String categoryName) throws SQLException;
+    List<Course> findCoursesByCategoryName(@Param("categoryName") String categoryName) throws DataAccessException;
 
     @ResultMap("courseRM")
     @SelectProvider(type = CourseSQLProvider.class, method = "findCourseById")
-    Course findCourseById(@Param("courseId") final short courseId) throws SQLException;
+    Course findCourseById(@Param("courseId") final short courseId) throws DataAccessException;
 
     // -----
     // SQL provider
