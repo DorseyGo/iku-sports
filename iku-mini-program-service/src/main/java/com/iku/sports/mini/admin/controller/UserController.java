@@ -36,8 +36,7 @@ public class UserController {
             throw new ApiServiceException(IkuSportsError.LOGIN_ERROR);
         }
 
-        return new Response<LoginResponse>().status(Response.SUCCESS)
-                .data(LoginResponse.builder()
+        return Response.ok(LoginResponse.builder()
                         .token(token)
                         .build());
     }
@@ -46,6 +45,6 @@ public class UserController {
     @GetMapping("/api/users/{userId}")
     public Response<User> getUserById(@PathVariable("userId") final String userId) throws ApiServiceException {
         User user = userService.getUserById(userId);
-        return new Response<User>().status(Response.SUCCESS).data(user);
+        return Response.ok(user);
     }
 }

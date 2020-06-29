@@ -7,7 +7,6 @@
 package com.iku.sports.mini.admin.controller;
 
 import com.iku.sports.mini.admin.entity.Course;
-import com.iku.sports.mini.admin.exception.ApiInvokedException;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.Response;
 import com.iku.sports.mini.admin.service.CourseService;
@@ -37,7 +36,7 @@ public class CourseController {
     @GetMapping("/api/courses/category/{categoryId}")
     public Response<List<Course>> getCoursesByCategoryId(@PathVariable("categoryId") final short categoryId) {
         final List<Course> courses = courseService.getCoursesByCategoryId(categoryId);
-        return new Response<List<Course>>().status(Response.SUCCESS).data(courses);
+        return Response.ok(courses);
     }
 
     @ResponseBody
@@ -45,13 +44,13 @@ public class CourseController {
     public Response<List<Course>> getCoursesByCategoryName(@RequestParam("name") final String categoryName) throws
             ApiServiceException {
         final List<Course> courses = courseService.getCoursesByCategoryName(categoryName);
-        return new Response<List<Course>>().status(Response.SUCCESS).data(courses);
+        return Response.ok(courses);
     }
 
     @ResponseBody
     @GetMapping("/api/courses/{courseId}")
     public Response<Course> getCourseById(@PathVariable("courseId") final short courseId) throws ApiServiceException {
         final Course course = courseService.getCourseByCourseId(courseId);
-        return new Response<Course>().status(Response.SUCCESS).data(course);
+        return Response.ok(course);
     }
 }

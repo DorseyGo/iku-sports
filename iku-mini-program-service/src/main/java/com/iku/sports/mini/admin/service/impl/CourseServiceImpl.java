@@ -8,7 +8,6 @@ package com.iku.sports.mini.admin.service.impl;
 
 import com.google.common.base.Strings;
 import com.iku.sports.mini.admin.entity.Course;
-import com.iku.sports.mini.admin.exception.ApiInvokedException;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.model.Constants;
@@ -21,7 +20,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.List;
 
 @Slf4j

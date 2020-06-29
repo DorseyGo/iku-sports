@@ -32,13 +32,13 @@ public class ActivityController {
     @GetMapping("/api/activities")
     public Response<List<Activity>> getFirst3Activities() {
         final List<Activity> activities = activityService.getFirst3Activities();
-        return new Response<List<Activity>>().status(Response.SUCCESS).data(activities);
+        return Response.ok(activities);
     }
 
     @ResponseBody
     @GetMapping("/api/activities/category/{categoryId}")
     public Response<List<Activity>> getFirst3ActivitiesByCategoryId(@PathVariable("categoryId") final short categoryId) {
         final List<Activity> activities = activityService.getFirst3ActivitiesByCategoryId(categoryId);
-        return new Response<List<Activity>>().status(Response.SUCCESS).data(activities);
+        return Response.ok(activities);
     }
 }

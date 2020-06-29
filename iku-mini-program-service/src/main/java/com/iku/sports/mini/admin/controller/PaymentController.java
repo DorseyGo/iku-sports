@@ -60,7 +60,7 @@ public class PaymentController {
         PrepaymentResponse response = (PrepaymentResponse) prepayment;
         response.setSign(sign);
 
-        return new Response<PrepaymentResponse>().status(Response.SUCCESS).data(response);
+        return Response.ok(response);
     }
 
     @GetMapping("/api/payment/notification")

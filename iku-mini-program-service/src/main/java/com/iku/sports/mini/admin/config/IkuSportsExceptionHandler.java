@@ -18,6 +18,6 @@ public class IkuSportsExceptionHandler {
     @ResponseBody
     @ExceptionHandler({ApiServiceException.class})
     public Response<String> handleApiServiceException(final ApiServiceException ex) {
-        return new Response<String>().status(ex.getCode()).errorPhase(ex.getMessage());
+        return Response.fail(ex.getCode(), ex.getMessage());
     }
 }

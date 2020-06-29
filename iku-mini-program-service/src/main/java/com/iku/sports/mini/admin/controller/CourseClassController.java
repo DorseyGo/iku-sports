@@ -37,8 +37,7 @@ public class CourseClassController {
     @GetMapping("/api/classes/{id}")
     public Response<ClassOverview> getClassById(@PathVariable("id") final int id) throws ApiServiceException {
         final ClassOverview overview = courseClassService.getClassOverviewById(id);
-        return new Response<ClassOverview>().status(Response.SUCCESS)
-                .data(overview);
+        return Response.ok(overview);
     }
 
     @ResponseBody
@@ -47,14 +46,7 @@ public class CourseClassController {
             @RequestParam(value = "curPage", defaultValue = "1", required = false) int curPage) throws
             ApiServiceException {
         final List<CourseClass> courseClasses = courseClassService.paginateClasses(courseId, curPage);
-        return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClasses);
-    }
-
-    @ResponseBody
-    @PostMapping("/api/classes/{classId}")
-    public Response<String> setClassWatchesById(@PathVariable("classId") final int id) throws ApiServiceException {
-        courseClassService.incrementWatchesByClassId(id);
-        return new Response<String>().status(Response.SUCCESS);
+        return Response.ok(courseClasses);
     }
 
     @ResponseBody
@@ -62,7 +54,7 @@ public class CourseClassController {
     public Response<List<CourseClass>> getPromotions(
             @PathVariable("relatedClassId") final int relatedClassId) throws ApiServiceException {
         final List<CourseClass> promotions = courseClassService.getPromotionsById(relatedClassId);
-        return new Response<List<CourseClass>>().data(promotions);
+        return Response.ok(promotions);
     }
 
     @ResponseBody
@@ -73,7 +65,7 @@ public class CourseClassController {
         final List<CourseClass> courseClasses = courseClassService
                 .getClassesByUserIdAndFavoriteType(userId, Favorite.FavoriteType.FOR_CLASS.getCode());
 
-        return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClasses);
+        return Response.ok(courseClasses);
     }
 
     @ResponseBody
@@ -81,7 +73,7 @@ public class CourseClassController {
     public Response<List<CourseClass>> getClassesByCoachId(@PathVariable("coachId") final int coachId) throws
             ApiServiceException {
         final List<CourseClass> courseClasses = courseClassService.getClassesByCoachId(coachId);
-        return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClasses);
+        return Response.ok(courseClasses);
     }
 
     @ResponseBody
@@ -89,7 +81,7 @@ public class CourseClassController {
     public Response<List<CourseClass>> getWatchedClassesByUserId(@RequestParam("token") final String userId) throws
             ApiServiceException {
         final List<CourseClass> courseClasses = courseClassService.getClassesByUserId(userId);
-        return new Response<List<CourseClass>>().status(Response.SUCCESS).data(courseClasses);
+        return Response.ok(courseClasses);
     }
 
     @ResponseBody
@@ -100,6 +92,6 @@ public class CourseClassController {
             courseClassService.saveWatchedClasses(request.getUserId(), request.getClassId());
         }
 
-        return new Response<String>().status(Response.SUCCESS);
+        return Response.ok();
     }
 }

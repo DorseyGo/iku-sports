@@ -29,6 +29,6 @@ public class OrderController {
     @PostMapping("/api/order")
     public Response<Order> order(@RequestBody NewOrderRequest request) throws ApiServiceException {
         final Order order = orderService.saveAndReturn(request);
-        return new Response<Order>().status(Response.SUCCESS).data(order);
+        return Response.ok(order);
     }
 }

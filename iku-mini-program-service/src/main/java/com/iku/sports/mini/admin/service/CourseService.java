@@ -7,7 +7,6 @@
 package com.iku.sports.mini.admin.service;
 
 import com.iku.sports.mini.admin.entity.Course;
-import com.iku.sports.mini.admin.exception.ApiInvokedException;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 
 import java.util.List;

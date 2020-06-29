@@ -35,7 +35,7 @@ public class FavoriteController {
         favoriteService.addFavorite(favoriteRequest.getUserId(), favoriteRequest.getFavoriteId(),
                 favoriteRequest.getFavoriteType());
 
-        return new Response<String>().status(Response.SUCCESS);
+        return Response.ok();
     }
 
     @ResponseBody
@@ -43,6 +43,6 @@ public class FavoriteController {
     public Response<Boolean> existsFavorite(@RequestParam("token") final String userId, @RequestParam("favoriteId") final int favoriteId,
             @RequestParam("favoriteType") final int favoriteType) throws ApiServiceException {
         boolean exists = favoriteService.existsFavorite(userId, favoriteId, favoriteType);
-        return new Response<Boolean>().status(Response.SUCCESS).data(exists);
+        return Response.ok(exists);
     }
 }

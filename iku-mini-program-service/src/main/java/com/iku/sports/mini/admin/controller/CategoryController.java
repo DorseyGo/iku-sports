@@ -32,6 +32,6 @@ public class CategoryController {
     public Response<List<Category>> getAllCategories() {
         final List<Category> categories = categoryService.getAllCategories();
 
-        return new Response<List<Category>>().status(Response.SUCCESS).data(categories);
+        return Response.ok(categories);
     }
 }

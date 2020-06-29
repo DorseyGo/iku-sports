@@ -14,8 +14,11 @@ import lombok.experimental.Tolerate;
 import java.io.Serializable;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
+/**
+ * The response entity, which represents the info responded.
+ *
+ * @param <T>
+ */
 public class Response<T> implements Serializable {
     private int statusCode;
     private String errorPhase;
@@ -24,18 +27,28 @@ public class Response<T> implements Serializable {
     public static final int SUCCESS = 0;
     public static final int FAIL = 1;
 
-    public Response<T> status(final int statusCode) {
+    /**
+     * Sole constructor of {@link Response}, with status code, error phase and data specified.
+     *
+     * @param statusCode the status code.
+     * @param errorPhase the error phase.
+     * @param data the data.
+     */
+    private Response(final int statusCode, final String errorPhase, final T data) {
         this.statusCode = statusCode;
-        return this;
-    }
-
-    public Response<T> errorPhase(final String errorPhase) {
         this.errorPhase = errorPhase;
-        return this;
+        this.data = data;
     }
 
-    public Response<T> data(final T data) {
-        this.data = data;
-        return this;
+    public static <T> Response<T> ok(final T data) {
+        return new Response<>(SUCCESS, null, data);
+    }
+
+    public static <T> Response<T> ok() {
+        return new Response<>(SUCCESS, null, null);
+    }
+
+    public static <T> Response<T> fail(final int statusCode, final String errorPhase) {
+        return new Response<>(statusCode, errorPhase, null);
     }
 }

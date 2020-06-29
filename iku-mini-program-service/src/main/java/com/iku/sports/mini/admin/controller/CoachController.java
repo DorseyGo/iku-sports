@@ -34,18 +34,6 @@ public class CoachController {
     }
 
     @ResponseBody
-    @GetMapping("/api/coaches")
-    public Response<List<CoachInfo>> getAllCoachesBriefs() {
-        try {
-            final List<CoachInfo> coachInfos = coachService.getAllCoachInfos();
-            return new Response<List<CoachInfo>>().status(Response.SUCCESS).data(coachInfos);
-        } catch (Exception e) {
-            log.error("Fail to get about of all coaches.", e);
-            return new Response<List<CoachInfo>>().status(Response.FAIL);
-        }
-    }
-
-    @ResponseBody
     @GetMapping("/api/coaches/{coachId}")
     public Response<Coach> getCoachById(@PathVariable("coachId") final int id,
             @RequestParam("token") final String userId) throws ApiServiceException {
@@ -53,7 +41,7 @@ public class CoachController {
         final boolean isFavorited = coachService.isCoachFavoritedByUserId(id, userId);
         coach.setFavorite(isFavorited);
 
-        return new Response<Coach>().status(Response.SUCCESS).data(coach);
+        return Response.ok(coach);
     }
 
 }
