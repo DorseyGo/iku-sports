@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `sequence` TINYINT(2) NOT NULL DEFAULT '0' COMMENT 'the sequence',
   `last_modified_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 -- -----------------
 -- activities
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP ,
   `category_id` TINYINT(2) NOT NULL DEFAULT '-1' COMMENT 'the category id',
   PRIMARY KEY (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 --
 -- the course
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `course` (
   `fee` BIGINT(20) NOT NULL DEFAULT '0',
   `category_id` TINYINT(2) NOT NULL,
   PRIMARY KEY (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 --
 -- the class
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `class` (
   `course_id` TINYINT(2) NOT NULL,
   `coach_id` INT(4) NOT NULL,
   PRIMARY KEY (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 --
 -- teacher
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `coach`(
   `level` TINYINT(2) NOT NULL DEFAULT '1' COMMENT '1 for junior, 2 for middle, 3 for HIGHER, 4 for senior',
   `introduce` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 --
 -- order
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `order`(
   `course_id` TINYINT(2) NOT NULL,
   `user_id` CHAR(32) NOT NULL,
   PRIMARY KEY (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 --
 -- the student
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `user`(
   `city` VARCHAR(32) DEFAULT NULL ,
   `country` VARCHAR(32) DEFAULT NULL ,
   PRIMARY KEY (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 --
 -- article
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `article`(
   `author` VARCHAR(24) DEFAULT NULL ,
   `category_id` TINYINT(2) NOT NULL,
   PRIMARY KEY (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 --
 -- article content
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `article_content`(
   `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `article_id` INT NOT NULL,
   PRIMARY KEY (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 --
 -- favorite
@@ -141,7 +141,7 @@ CREATE TABLE `favorite` (
   `favorite_type` int DEFAULT '1' COMMENT '1 for article , 2 for class, 3 for coach',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=UTF8MB4;
 
 DROP TABLE IF EXISTS `class_watched_his`;
 CREATE TABLE `class_watched_his` (
@@ -149,4 +149,4 @@ CREATE TABLE `class_watched_his` (
   `user_id` VARCHAR(32) NOT NULL COMMENT 'the user id',
   `watch_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`class_id`, `user_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
