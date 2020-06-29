@@ -1,0 +1,70 @@
+<!--pages/item-list/item-list.wxml-->
+<view>
+  <view>
+    <text>推广活动区域</text>
+  </view>
+
+  <view class="goods_item_container">
+    <block>
+      <navigator class="goods_item">
+        <!-- 左侧图片容器 -->
+        <view class="goods_img_wrap">
+          <image mode="widthFix" src="http://image1.suning.cn/uimg/b2c/newcatentries/0070134290-000000000149003877_1_800x800.jpg"></image>
+        </view>
+
+        <!-- 右侧商品容器 -->
+        <view class="goods_info_wrap">
+          <view class="goods_name">D羊肉夹馍套餐（肉夹馍一个）</view>
+          <view class="goods_price">
+            ￥9.9
+            <text class="goods_price_dash">￥20</text>
+          </view>
+          <view class="sold_info">
+            月售135
+            <!--<image></image>-->
+          </view>
+        </view>
+      </navigator>
+      
+      <navigator class="goods_item">
+        <!-- 左侧图片容器 -->
+        <view class="goods_img_wrap">
+          <image mode="widthFix" src="http://image1.suning.cn/uimg/b2c/newcatentries/0070134290-000000000149003877_1_800x800.jpg"></image>
+        </view>
+
+        <!-- 右侧商品容器 -->
+        <view class="goods_info_wrap">
+          <view class="goods_name">D羊肉夹馍套餐（肉夹馍一个）</view>
+          <view class="goods_price">
+            ￥9.9
+            <text class="goods_price_dash">￥20</text>
+          </view>
+          <view class="sold_info">
+            月售135
+            <!--<image></image>-->
+          </view>
+        </view>
+      </navigator>
+
+      <navigator class="goods_item">
+        <!-- 左侧图片容器 -->
+        <view class="goods_img_wrap">
+          <image mode="widthFix" src="http://image1.suning.cn/uimg/b2c/newcatentries/0070134290-000000000149003877_1_800x800.jpg"></image>
+        </view>
+
+        <!-- 右侧商品容器 -->
+        <view class="goods_info_wrap">
+          <view class="goods_name">D羊肉夹馍套餐（肉夹馍一个）</view>
+          <view class="goods_price">
+            ￥9.9
+            <text class="goods_price_dash">￥20</text>
+          </view>
+          <view class="sold_info">
+            月售135
+            <!--<image></image>-->
+          </view>
+        </view>
+      </navigator>
+    </block>
+  </view>
+</view>

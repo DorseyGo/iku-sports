@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/item-list/item-list",
     "pages/index/index",
     "pages/about/about",
     "pages/course/course",
@@ -13,7 +14,7 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#262728",
+    "navigationBarBackgroundColor": "#FFA500",
     "navigationBarTitleText": "爱酷体育",
     "navigationBarTextStyle": "white"
   },
