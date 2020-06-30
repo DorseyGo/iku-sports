@@ -6,28 +6,39 @@
  */
 package com.iku.sports.mini.admin.exception;
 
+import java.util.Locale;
+
+/**
+ * Enumeration, which enumerates all available errors.
+ */
 public enum IkuSportsError {
+    INTERNAL_ERR(500, "系统内部错误");
 
-    SYS_PARAMS_MISSED(1001, "请求参数错误"), INTERNAL_ERROR(500, "服务器内部错误"), LOGIN_ERROR(1000,
-            "登录失败"), OPEN_ID_NOT_FOUND_ERROR(
-            10001, "Open ID找不到"), ORDER_NOT_FOUND_ERROR(10002, "找不到相关订单"), ORDER_ERROR(10003,
-            "订单信息错误"), REQ_WX_API_ERROR(
-            1002, "请求微信API失败"), XML_PARSE_ERROR(10004, "XML解析失败"), REQ_RESOURCE_NOT_FOUND_ERR(10005, "请求资源找不到"), FAVORITE_TYPE_NOT_SUPPORTED_ERR(
-            10006, "收藏类型不存在"), USER_REQUIRED_ERR(1002, "用户信息不存在");
+    private final int errorCode;
+    private final String errorMessage;
 
-    private final int code;
-    private final String message;
-
-    IkuSportsError(final int code, final String message) {
-        this.code = code;
-        this.message = message;
+    /**
+     * Default constructor of {@link IkuSportsError}, with error code and message specified.
+     *
+     * @param errorCode    the error code.
+     * @param errorMessage the error message.
+     */
+    IkuSportsError(final int errorCode, final String errorMessage) {
+        this.errorCode = errorCode;
+        this.errorMessage = errorMessage;
     }
 
-    public int getCode() {
-        return code;
+    public int getErrorCode() {
+        return errorCode;
     }
 
-    public String getMessage() {
-        return message;
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(Locale.ROOT, "{errorCode: %d, errorMessage: %s}",
+                errorCode, errorMessage);
     }
 }

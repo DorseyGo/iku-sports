@@ -19,13 +19,11 @@ import java.util.List;
  *
  * @param <T>
  */
+@Data
 public class Response<T> implements Serializable {
     private int statusCode;
     private String errorPhase;
     private T data;
-
-    public static final int SUCCESS = 0;
-    public static final int FAIL = 1;
 
     /**
      * Sole constructor of {@link Response}, with status code, error phase and data specified.
@@ -41,14 +39,15 @@ public class Response<T> implements Serializable {
     }
 
     public static <T> Response<T> ok(final T data) {
-        return new Response<>(SUCCESS, null, data);
+        return new Response<>(Constants.OK_REQ, null, data);
     }
 
     public static <T> Response<T> ok() {
-        return new Response<>(SUCCESS, null, null);
+        return new Response<>(Constants.OK_REQ, null, null);
     }
 
     public static <T> Response<T> fail(final int statusCode, final String errorPhase) {
         return new Response<>(statusCode, errorPhase, null);
     }
+
 }

@@ -64,14 +64,14 @@ public class CoachServiceImpl implements CoachService {
             return coach;
         } catch (DataAccessException e) {
             log.error("Failed to find coach by Id: {}", id, e);
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
     }
 
     @Override
     public boolean isCoachFavoritedByUserId(int id, String userId) throws ApiServiceException {
         if (Strings.isNullOrEmpty(userId)) {
-            throw new ApiServiceException(IkuSportsError.USER_REQUIRED_ERR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
         return favoriteService.existsFavorite(userId, id, Favorite.FavoriteType.FOR_COACH.getCode());

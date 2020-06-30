@@ -40,7 +40,7 @@ public class Favorite {
                 }
             }
 
-            throw new ApiServiceException(IkuSportsError.FAVORITE_TYPE_NOT_SUPPORTED_ERR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
         public int getCode() {

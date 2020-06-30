@@ -66,7 +66,7 @@ public class CourseClassServiceImpl implements CourseClassService {
         } catch (DataAccessException e) {
             log.error("Failed to pagination the classes by course id: {}, offset: {}, page size: {}", courseId, offset,
                     pageSize, e);
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
     }
 
@@ -82,7 +82,7 @@ public class CourseClassServiceImpl implements CourseClassService {
             return overview;
         } catch (DataAccessException e) {
             log.error("Failed to get class overview by id: {}", id, e);
-            throw new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
     }
 
@@ -107,7 +107,7 @@ public class CourseClassServiceImpl implements CourseClassService {
             return classes;
         } catch (DataAccessException e) {
             log.error("Failed to get promotions by related class ID: {}", relatedClassId, e);
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
     }
 
@@ -129,7 +129,7 @@ public class CourseClassServiceImpl implements CourseClassService {
             return courseClasses;
         } catch (DataAccessException e) {
             log.error("Failed to get class by user id: {} and favorite type: {}", userId, favoriteType, e);
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
     }
 
@@ -149,7 +149,7 @@ public class CourseClassServiceImpl implements CourseClassService {
             return courseClasses;
         } catch (DataAccessException e) {
             log.error("Failed to retrieve course class by coach ID: {}", coachId, e);
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
     }
 
@@ -168,7 +168,7 @@ public class CourseClassServiceImpl implements CourseClassService {
             return courseClasses;
         } catch (DataAccessException e) {
             log.error("Failed to retrieve watched classes by user Id: {}", userId, e);
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
     }
 

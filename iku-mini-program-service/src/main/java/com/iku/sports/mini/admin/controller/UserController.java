@@ -33,7 +33,7 @@ public class UserController {
         /* returns the user ID as token to the front-end */
         final String token = userService.doLoginAndReturnToken(request.getCode());
         if (Strings.isNullOrEmpty(token)) {
-            throw new ApiServiceException(IkuSportsError.LOGIN_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
         return Response.ok(LoginResponse.builder()

@@ -13,27 +13,16 @@ import lombok.experimental.Tolerate;
 import java.math.BigDecimal;
 
 @Data
-@Builder
 public class Course {
+
+    // -------------------------
+    // Fields
+    // -------------------------
     private short id;
     private String name;
-    /**
-     * 1, for junior
-     * 2, for intermediate
-     * 3, for senior
-     */
     private char level;
-    private long fee;
-    private long joiner;
-    /* the background image url address */
-    private String backgroundImg;
-    private String categoryName;
+    private String avatar;
+    private BigDecimal fee;
+    private int numClasses;
 
-    /**
-     * The charge, which derived from field 'fee'
-     */
-    private BigDecimal charge;
-
-    @Tolerate
-    public Course() {}
 }

@@ -14,15 +14,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Slf4j
-@Controller
+@RestController
 public class CourseController {
 
     private final CourseService courseService;
@@ -32,25 +29,17 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @ResponseBody
-    @GetMapping("/api/courses/category/{categoryId}")
-    public Response<List<Course>> getCoursesByCategoryId(@PathVariable("categoryId") final short categoryId) {
+    /**
+     * Fetch the list of courses according to the specific category.
+     *
+     * @param categoryId the category ID, which specified the category.
+     * @return the list of courses.
+     */
+    @GetMapping("/category/{categoryId}/courses")
+    public Response<List<Course>> getCoursesByCategoryId(@PathVariable("categoryId") final short categoryId) throws
+            ApiServiceException {
         final List<Course> courses = courseService.getCoursesByCategoryId(categoryId);
         return Response.ok(courses);
     }
 
-    @ResponseBody
-    @GetMapping("/api/courses/category")
-    public Response<List<Course>> getCoursesByCategoryName(@RequestParam("name") final String categoryName) throws
-            ApiServiceException {
-        final List<Course> courses = courseService.getCoursesByCategoryName(categoryName);
-        return Response.ok(courses);
-    }
-
-    @ResponseBody
-    @GetMapping("/api/courses/{courseId}")
-    public Response<Course> getCourseById(@PathVariable("courseId") final short courseId) throws ApiServiceException {
-        final Course course = courseService.getCourseByCourseId(courseId);
-        return Response.ok(course);
-    }
 }

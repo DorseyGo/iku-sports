@@ -55,29 +55,29 @@ public class PaymentServiceImpl implements PaymentService {
         }
 
         log.error("Failed to prepay the order: {}, due to error: {}", request.getOrderNo(), result.getErr_code_des());
-        throw new ApiServiceException(IkuSportsError.REQ_WX_API_ERROR);
+        throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
     }
 
     private GetPrepayIdRequest validateAndCreatePaymentReq(final PaymentRequest request) throws ApiServiceException {
         if (Strings.isNullOrEmpty(request.getOrderNo()) || Strings.isNullOrEmpty(request.getToken())) {
-            throw new ApiServiceException(IkuSportsError.SYS_PARAMS_MISSED);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
         final String openId = userService.getOpenIdByUserId(request.getToken());
         if (Strings.isNullOrEmpty(openId)) {
             log.error("No open ID found for token: {}", request.getToken());
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
         final Order order = orderService.getOrderById(request.getOrderNo());
         if (order == null) {
             log.error("No order found for order number: {}", request.getOrderNo());
-            throw new ApiServiceException(IkuSportsError.ORDER_NOT_FOUND_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
         if (order.getMoneyPaid() <= 0) {
             log.error("Order error, money should be paid is: {}", order.getMoneyPaid());
-            throw new ApiServiceException(IkuSportsError.ORDER_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
         log.info("==> try to pay the order by weixin payment: {}", order.getOrderId());
