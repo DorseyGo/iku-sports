@@ -1,54 +1,34 @@
 //app.js
 const request  = require("./utils/request");
-const server  = require("./utils/server");
+const env  = require("./utils/env");
 
 App({
   onLaunch: function () {
-    /*
-    server.chkSession(() => {
-
+    env.chkSession(
       wx.login({
-        timeout: 10000,
-        success: (result) => {
-          request.post(`user/login`, {
-            code: result.code
-          }).then(res => {
-            wx.setStorageSync('iku_sports_session', res.data.session_key)
-          }, reason => {
-            wx.showToast({
-              title: reason,
-              icon: 'none'
-            });
-          })
+        success: (result)=>{
+          if (result.code) {
+            /** request to login and fetch the openid and session key */
+            request.post(`user/login`, {
+              code: result.code
+            }).then(res => {
+              /** succeed */
+              if (res.data.token) {
+                wx.setStorageSync('token', res.data.token);
+              }
+            })
+          }
         },
-        fail: () => {
-          console.log('Failed to login within use wx.login API')
+        fail: ()=>{
+          /** fail to login */
+          wx.showToast({
+            title: '登录失败，请检查网络是否已打开',
+            icon: 'none'
+          });
         }
       })
-
-    }) */
+    )
   },
-
-  onGetSetting: () => {
-    wx.getSetting({
-      success: (result) => {
-        if (result.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: (result) => {
-              console.log(result)  
-            }
-          })
-        } else {
-          wx.reLaunch({
-            url: '/pages/authorize/authorize'
-          });
-            
-        }
-      }
-    });
-      
-  },
-  
 
   globalData: {
     userInfo: null
