@@ -25,10 +25,4 @@ public class OrderController {
     public OrderController(
             @Qualifier("orderService") final OrderService orderService) {this.orderService = orderService;}
 
-    @ResponseBody
-    @PostMapping("/api/order")
-    public Response<Order> order(@RequestBody NewOrderRequest request) throws ApiServiceException {
-        final Order order = orderService.saveAndReturn(request);
-        return Response.ok(order);
-    }
 }

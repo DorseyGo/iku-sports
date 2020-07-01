@@ -16,6 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 public interface Constants {
     String FORWARD_SLASH = "/";
     int OK_REQ = 200;
+    int UNKNOWN_FAIL = 400;
+
+    /* configurations for WeChat */
+    String URL_JS_CODE_2_SESSION = "https://api.weixin.qq.com/sns/jscode2session";
 
     /* retain how many numbers */
     int DIVIDE_SCALE = 2;

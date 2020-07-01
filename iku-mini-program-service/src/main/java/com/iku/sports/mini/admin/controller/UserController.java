@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class UserController {
 
     private final UserService userService;
@@ -27,24 +27,15 @@ public class UserController {
     @Autowired
     public UserController(@Qualifier("userService") UserService userService) {this.userService = userService;}
 
-    @ResponseBody
-    @PostMapping("/api/user/login")
-    public Response<LoginResponse> login(@RequestBody final LoginRequest request) throws ApiServiceException {
-        /* returns the user ID as token to the front-end */
-        final String token = userService.doLoginAndReturnToken(request.getCode());
-        if (Strings.isNullOrEmpty(token)) {
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
-        }
-
-        return Response.ok(LoginResponse.builder()
-                        .token(token)
-                        .build());
-    }
-
-    @ResponseBody
-    @GetMapping("/api/users/{userId}")
-    public Response<User> getUserById(@PathVariable("userId") final String userId) throws ApiServiceException {
-        User user = userService.getUserById(userId);
-        return Response.ok(user);
+    /**
+     * Login, and fetch openID and session key from WeChat server.
+     *
+     * @param code the code, according to which the open ID and session key can be fetched.
+     * @return the token which implies the open ID and session key.
+     */
+    @RequestMapping("/user/login")
+    public Response<String> login(@RequestParam("code") final String code) throws ApiServiceException {
+        final String token = userService.doLoginAndReturnToken(code);
+        return Response.ok(token);
     }
 }

@@ -24,8 +24,9 @@ public class JSCode2SessionParams implements QueryParams {
     @Params(key = "js_code")
     private String jsCode;
 
+    @Builder.Default
     @Params(key = "grant_type")
-    private String grantType;
+    private String grantType = "authorization_code";
 
     @Tolerate
     public JSCode2SessionParams() {

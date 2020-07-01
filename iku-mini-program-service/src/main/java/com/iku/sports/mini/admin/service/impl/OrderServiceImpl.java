@@ -30,43 +30,4 @@ import javax.validation.constraints.NotNull;
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderRepository orderRepository;
-    private final IkuSportsConfig config;
-    private final UserService userService;
-
-    @Autowired
-    public OrderServiceImpl(
-            @Qualifier("orderRepository") final OrderRepository orderRepository,
-            IkuSportsConfig config,
-            @Qualifier("userService") final UserService userService) {
-        this.orderRepository = orderRepository;
-        this.config = config;
-        this.userService = userService;
-    }
-
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = DataAccessException.class)
-    public Order saveAndReturn(NewOrderRequest request) throws ApiServiceException, DataAccessException {
-        final String orderNo = Utils.genUniqueStr();
-        User user = userService.getUserById(request.getToken());
-
-        Order order = Order.builder()
-                .orderId(orderNo)
-                .userId((user == null) ? null : user.getId())
-                .courseId(request.getCourseId())
-                .discount(request.getDiscount())
-                .fee((int) (request.getFee() * 100))
-                .build();
-
-        orderRepository.save(order);
-        return order;
-    }
-
-    @Override
-    public Order getOrderById(@NotNull String orderId) throws ApiServiceException {
-        final Order order = orderRepository.findOrderById(orderId);
-        order.setMoneyPaid((int) (order.getFee() * order.getDiscount()));
-
-        return order;
-    }
 }

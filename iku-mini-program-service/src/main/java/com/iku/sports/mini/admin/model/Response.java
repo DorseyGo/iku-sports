@@ -6,8 +6,7 @@
  **/
 package com.iku.sports.mini.admin.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -16,11 +15,7 @@ import java.io.Serializable;
  *
  * @param <T>
  */
-<<<<<<< HEAD
-@Getter
-=======
 @Data
->>>>>>> b660d8a464d3a603c663db93fed27cda1668c4bb
 public class Response<T> implements Serializable {
     private int statusCode;
     private String errorPhase;
@@ -51,10 +46,7 @@ public class Response<T> implements Serializable {
         return new Response<>(statusCode, errorPhase, null);
     }
 
-<<<<<<< HEAD
     public static <T> Response<T> fail(final String msg) {
-        return new Response<>(FAIL, msg, null);
+        return new Response<>(Constants.UNKNOWN_FAIL, msg, null);
     }
-=======
->>>>>>> b660d8a464d3a603c663db93fed27cda1668c4bb
 }

@@ -12,16 +12,20 @@ import lombok.Data;
 import lombok.experimental.Tolerate;
 
 @Data
-@Builder
 public class GetOpenIdAndSessionKeyResponse {
 
     @JsonProperty("openid")
     private String openId;
+
     @JsonProperty("session_key")
     private String sessionKey;
 
-    @Tolerate
-    public GetOpenIdAndSessionKeyResponse() {
-        // empty
-    }
+    @JsonProperty("unionid")
+    private String unionId;
+
+    @JsonProperty("errcode")
+    private int errorCode;
+
+    @JsonProperty("errmsg")
+    private String errorMessage;
 }

@@ -10,5 +10,4 @@ import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.request.PaymentRequest;
 
 public interface PaymentService {
-    String pay(PaymentRequest request) throws ApiServiceException;
 }
