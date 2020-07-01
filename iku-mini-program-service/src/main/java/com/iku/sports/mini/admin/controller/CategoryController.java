@@ -7,6 +7,7 @@
 package com.iku.sports.mini.admin.controller;
 
 import com.iku.sports.mini.admin.entity.Category;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.Response;
 import com.iku.sports.mini.admin.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -27,9 +29,14 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @ResponseBody
+    /**
+     * Returns a list of all categories.
+     *
+     * @return all categories.
+     * @throws ApiServiceException if any errors detected during process.
+     */
     @GetMapping("/api/categories")
-    public Response<List<Category>> getAllCategories() {
+    public Response<List<Category>> getAllCategories() throws ApiServiceException {
         final List<Category> categories = categoryService.getAllCategories();
 
         return Response.ok(categories);

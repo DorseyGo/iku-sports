@@ -34,7 +34,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -74,7 +73,7 @@ public class UserServiceImpl implements UserService {
     public String doLoginAndReturnToken(String code) throws ApiServiceException, DataAccessException {
         if (Strings.isNullOrEmpty(code)) {
             log.error("Code required");
-            throw new ApiServiceException(IkuSportsError.SYS_PARAMS_MISSED);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
         final GetOpenIdAndSessionKeyResponse resp = getOpenIdAndSessionKey(code);
@@ -94,7 +93,7 @@ public class UserServiceImpl implements UserService {
             return cache.get(userId);
         } catch (ExecutionException e) {
             log.error("Failed to fetch open id by user id: {}", userId, e);
-            throw new ApiServiceException(IkuSportsError.OPEN_ID_NOT_FOUND_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
     }
 
@@ -106,7 +105,7 @@ public class UserServiceImpl implements UserService {
             return user;
         } catch (DataAccessException e) {
             log.error("Failed to retrieve user by id: {}", userId, e);
-            throw new ApiServiceException(IkuSportsError.REQ_RESOURCE_NOT_FOUND_ERR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
     }
 
@@ -136,7 +135,7 @@ public class UserServiceImpl implements UserService {
             return mapper.readValue(result.getBytes(), resp);
         } catch (WxErrorException | IOException e) {
             log.error("Failed to issue request to {}", URL_JS_CODE_2_SESSION, e);
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
     }
 }

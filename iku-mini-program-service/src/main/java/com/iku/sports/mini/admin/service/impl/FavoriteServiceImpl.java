@@ -1,7 +1,6 @@
 package com.iku.sports.mini.admin.service.impl;
 
 import com.google.common.base.Strings;
-import com.iku.sports.mini.admin.entity.User;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.repository.FavoriteRepository;
@@ -42,7 +41,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     public void addFavorite(String userId, int favoriteId, int favoriteType) throws ApiServiceException,
             DataAccessException {
         if (Strings.isNullOrEmpty(userId)) {
-            throw new ApiServiceException(IkuSportsError.USER_REQUIRED_ERR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
         favoriteRepository.insert(userId, favoriteId, favoriteType);

@@ -12,11 +12,16 @@ package com.iku.sports.mini.admin.exception;
 public class ApiServiceException extends Exception {
     private final int code;
 
+    /**
+     * Constructor of {@link ApiServiceException}, with error specified.
+     *
+     * @param error the error with code and message specified.
+     */
     public ApiServiceException(final IkuSportsError error) {
-        this(error.getCode(), error.getMessage());
+        this(error.getErrorCode(), error.getErrorMessage());
     }
 
-    public ApiServiceException(final int code, final String message) {
+    private ApiServiceException(final int code, final String message) {
         super(message);
         this.code = code;
     }

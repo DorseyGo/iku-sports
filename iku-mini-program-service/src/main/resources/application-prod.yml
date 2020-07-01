@@ -1,8 +1,3 @@
-server:
-  port: 9080
-  servlet:
-    context-path: /sports
-
 iku:
   mini-program:
     database:
@@ -20,14 +15,11 @@ iku:
     notify-url-addr: https://${iku.mini-program.machine-ip-addr}:${server.port}/api/payment/notification
 
 spring:
-  output:
-    ansi:
-      enabled: always
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url:  jdbc:mysql://${iku.mini-program.database.hostname}:${iku.mini-program.database.port}/${iku.mini-program.database.db-name}?useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=GMT%2B8
     username: root
-    #password: ENC(f8wyX1QMvhqW2JadWsnq/Q==)
+    password: ENC(Ttz1NbjvTyBlmMDtO33x9J7Kckzp6NvU/+SdBT18sqg=)
     hikari:
       maximum-pool-size: 200
       minimum-idle: 5
@@ -35,14 +27,6 @@ spring:
       connection-timeout: 1800
       idle-timeout: 1800
       validation-timeout: 1800
-    password: qwer1234
-  jpa:
-    show-sql: true
-  mvc:
-    static-path-pattern: /static/**
 logging:
   level:
     com.iku.sports.mini.admin.repository: debug
-jasypt:
-  encryptor:
-    password: ${iku.mini-program.salt}

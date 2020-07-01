@@ -34,7 +34,7 @@ public class WatchedClassHisServiceImpl implements WatchedClassHisService {
             return (watchedClassHisRepository.countByUserIdAndClassId(userId, classId) > 0);
         } catch (DataAccessException e) {
             log.error("Failed to count the history via user id: {} and class id: {}", userId, classId, e);
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
     }
 }

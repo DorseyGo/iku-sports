@@ -28,7 +28,7 @@ public class XMLUtils {
             obj = (T) unmarshaller.unmarshal(reader);
         } catch (JAXBException e) {
             log.error("Failed to parse the xml: {} to class: {}", xml, clazz.getName());
-            throw new ApiServiceException(IkuSportsError.XML_PARSE_ERROR);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
         return obj;
