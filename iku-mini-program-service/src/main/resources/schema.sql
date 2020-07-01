@@ -96,7 +96,8 @@ CREATE TABLE IF NOT EXISTS `order`(
 CREATE TABLE IF NOT EXISTS `user`(
   `id` CHAR(32) NOT NULL ,
   `open_id` VARCHAR(32) NOT NULL ,
-  `name` VARCHAR(32) NOT NULL COMMENT 'the name',
+  `session_key` VARCHAR(64) NOT NULL ,
+  `name` CHAR(32) DEFAULT NULL COMMENT 'the name',
   `avatar_url` VARCHAR(255) DEFAULT NULL COMMENT 'the heading image url',
   `gender` CHAR(1) DEFAULT 'U' COMMENT '0 for unknown, 2 for female, 1 for male',
   `telephone` VARCHAR(32) DEFAULT NULL ,

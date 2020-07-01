@@ -16,21 +16,17 @@ public class User {
 
     private String id;
     private String openId;
-    private String nickName;
-    private String avatarUrl;
+    private String sessionKey;
+    private String name;
+    private String avatar;
+    private char gender;
     private String telephone;
-
-    @Builder.Default
-    private char gender = '0';
     private String province;
     private String city;
     private String country;
 
-    private int numAttentions;
-    private int numCourses;
-
     @Tolerate
     public User() {
-        // empty
+        // empty for initilization.
     }
 }

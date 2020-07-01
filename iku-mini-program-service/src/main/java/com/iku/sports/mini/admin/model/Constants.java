@@ -18,6 +18,8 @@ public interface Constants {
     int OK_REQ = 0;
     int FAIL_REQ = -1;
 
+    /* configurations for WeChat */
+    String URL_JS_CODE_2_SESSION = "https://api.weixin.qq.com/sns/jscode2session";
     /* retain how many numbers */
     int DIVIDE_SCALE = 2;
     String SUCCESS = "SUCCESS";

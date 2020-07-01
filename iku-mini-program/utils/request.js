@@ -15,12 +15,12 @@ const request = (uri, options) => {
                     return
                 }
 
-                reject(result.data.errorPhase)
+                wx.showToast({
+                    title: result.data.errorPhase,
+                    icon: 'none'
+                });
             },
-            fail: (error) => {reject(error.data)},
-            complete: () => {
-                console.log("Request to uri completed");
-            }
+            fail: (error) => {reject(error.data)}
         });
     });
 }

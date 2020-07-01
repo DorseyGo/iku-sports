@@ -6,15 +6,19 @@
  */
 package com.iku.sports.mini.admin.service;
 
-import com.iku.sports.mini.admin.entity.User;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 
-import javax.validation.constraints.NotNull;
-
+/**
+ * The service, which declares the service provided for <tt>user</tt>-kind request.
+ */
 public interface UserService {
+
+    /**
+     * Login to WeChat server, and store the open ID and session key into the underlying database.
+     *
+     * @param code the code.
+     * @return the token, which indicates the open ID and session key.
+     * @throws ApiServiceException if any error detected during the process.
+     */
     String doLoginAndReturnToken(final String code) throws ApiServiceException;
-
-    String getOpenIdByUserId(final String token) throws ApiServiceException;
-
-    User getUserById(@NotNull String token) throws ApiServiceException;
 }

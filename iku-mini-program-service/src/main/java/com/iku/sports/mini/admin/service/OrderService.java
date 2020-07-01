@@ -13,7 +13,5 @@ import com.iku.sports.mini.admin.request.NewOrderRequest;
 import javax.validation.constraints.NotNull;
 
 public interface OrderService {
-    Order saveAndReturn(NewOrderRequest request) throws ApiServiceException;
 
-    Order getOrderById(@NotNull String orderId) throws ApiServiceException;
 }

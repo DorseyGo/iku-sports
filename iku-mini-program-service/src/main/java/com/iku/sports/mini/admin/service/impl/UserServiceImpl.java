@@ -6,25 +6,19 @@
  */
 package com.iku.sports.mini.admin.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.entity.User;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
+import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.UserRepository;
 import com.iku.sports.mini.admin.request.JSCode2SessionParams;
-import com.iku.sports.mini.admin.request.QueryParams;
 import com.iku.sports.mini.admin.response.GetOpenIdAndSessionKeyResponse;
 import com.iku.sports.mini.admin.service.UserService;
+import com.iku.sports.mini.admin.service.WxApiService;
 import com.iku.sports.mini.admin.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.exception.WxErrorException;
-import me.chanjar.weixin.common.util.http.SimpleGetRequestExecutor;
-import me.chanjar.weixin.mp.api.WxMpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
@@ -32,110 +26,48 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.NotNull;
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-
 @Slf4j
+@Transactional
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    static final String URL_JS_CODE_2_SESSION = "https://api.weixin.qq.com/sns/jscode2session";
-    private final WxMpService wxMpService;
+    private final WxApiService wxApiService;
     private final IkuSportsConfig config;
-    private final ObjectMapper mapper = new ObjectMapper();
     private final UserRepository userRepository;
-    private final LoadingCache<String, String> cache;
 
     @Autowired
-    public UserServiceImpl(@Qualifier("wxMpService") WxMpService wxMpService,
-            IkuSportsConfig config, @Qualifier("userRepository") UserRepository userRepository) {
-        this.wxMpService = wxMpService;
+    public UserServiceImpl(@Qualifier("wxApiService") WxApiService wxApiService, IkuSportsConfig config,
+                           @Qualifier("userRepository") UserRepository userRepository) {
+        this.wxApiService = wxApiService;
         this.config = config;
         this.userRepository = userRepository;
-        cache = CacheBuilder.newBuilder().expireAfterWrite(config.getExpiryInDays(), TimeUnit.DAYS)
-                .expireAfterAccess(config.getExpiryInDays(), TimeUnit.DAYS).build(new CacheLoader<String, String>() {
-                    @Override
-                    public String load(String key) throws Exception {
-                        return createValue(key);
-                    }
-                });
-    }
-
-    private String createValue(final String userId) {
-        User user = userRepository.findUserByUserId(userId);
-        return (user == null) ? null : user.getOpenId();
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = DataAccessException.class)
-    public String doLoginAndReturnToken(String code) throws ApiServiceException, DataAccessException {
+    public String doLoginAndReturnToken(final String code) throws ApiServiceException {
         if (Strings.isNullOrEmpty(code)) {
-            log.error("Code required");
+            log.error("==> Required code, but it's null or empty");
             throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
-        final GetOpenIdAndSessionKeyResponse resp = getOpenIdAndSessionKey(code);
-        final String userId = Utils.genUniqueStr();
+        final GetOpenIdAndSessionKeyResponse resp = wxApiService.get(Constants.URL_JS_CODE_2_SESSION,
+                JSCode2SessionParams.builder().appId(config.getAppId())
+                        .secret(config.getSecret()).jsCode(code).build(), GetOpenIdAndSessionKeyResponse.class);
 
-        userRepository.save(User.builder()
-                .id(userId)
-                .openId(resp.getOpenId())
-                .build());
-
-        return userId;
-    }
-
-    @Override
-    public String getOpenIdByUserId(String userId) throws ApiServiceException {
-        try {
-            return cache.get(userId);
-        } catch (ExecutionException e) {
-            log.error("Failed to fetch open id by user id: {}", userId, e);
+        if (resp.getErrorCode() != 0) {
+            log.error("==> Failed to get open id and session key, due to error: {}", resp.getErrorMessage());
             throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
+
+        return saveOpenIdAndSessionKey(resp.getOpenId(), resp.getSessionKey());
     }
 
-    @Override
-    public User getUserById(@NotNull String userId) throws ApiServiceException {
-        try {
-            User user = userRepository.findUserByUserId(userId);
+    @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
+    public String saveOpenIdAndSessionKey(String openId, String sessionKey) throws DataAccessException {
+        final String id = Utils.genUniqueStr();
+        final User user = User.builder().id(id).openId(openId).sessionKey(sessionKey).build();
+        userRepository.save(user);
 
-            return user;
-        } catch (DataAccessException e) {
-            log.error("Failed to retrieve user by id: {}", userId, e);
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
-        }
-    }
-
-    private GetOpenIdAndSessionKeyResponse getOpenIdAndSessionKey(String code) throws ApiServiceException {
-        QueryParams queryParams = JSCode2SessionParams.builder()
-                .appId(config.getAppId())
-                .jsCode(code)
-                .secret(config.getSecret())
-                .build();
-
-        GetOpenIdAndSessionKeyResponse resp = get(URL_JS_CODE_2_SESSION, queryParams,
-                GetOpenIdAndSessionKeyResponse.class);
-
-        log.debug("OpenId And session key: {}", resp);
-        return resp;
-    }
-
-    /**
-     * Issue a request to get the open ID.
-     *
-     * @throws ApiServiceException
-     */
-    private <T> T get(final String uri, final QueryParams queryParams, final Class<T> resp) throws ApiServiceException {
-        try {
-            final String result = wxMpService.execute(new SimpleGetRequestExecutor(), uri,
-                    Utils.genQueryParams(queryParams));
-            return mapper.readValue(result.getBytes(), resp);
-        } catch (WxErrorException | IOException e) {
-            log.error("Failed to issue request to {}", URL_JS_CODE_2_SESSION, e);
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
-        }
+        return id;
     }
 }
