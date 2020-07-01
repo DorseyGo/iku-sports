@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * The controller, which service the request to <tt>activity</tt> resources.
+ */
 @RestController
 public class ActivityController {
 
@@ -31,14 +34,14 @@ public class ActivityController {
     }
 
     @WebLog(response = false)
-    @GetMapping("/api/activities")
+    @GetMapping("/activities")
     public Response<List<Activity>> getFirst3Activities() {
         final List<Activity> activities = activityService.getFirst3Activities();
         return Response.ok(activities);
     }
 
     @WebLog(response = false)
-    @GetMapping("/api/activities/category/{categoryId}")
+    @GetMapping("/activities/category/{categoryId}")
     public Response<List<Activity>> getFirst3ActivitiesByCategoryId(@PathVariable("categoryId") final short categoryId) {
         final List<Activity> activities = activityService.getFirst3ActivitiesByCategoryId(categoryId);
         return Response.ok(activities);

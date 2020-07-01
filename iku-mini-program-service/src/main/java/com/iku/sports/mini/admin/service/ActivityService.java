@@ -10,6 +10,9 @@ import com.iku.sports.mini.admin.entity.Activity;
 
 import java.util.List;
 
+/**
+ * The service, which provides business logic for serving <tt>activity</tt> resource request.
+ */
 public interface ActivityService {
     List<Activity> getFirst3Activities();
 
