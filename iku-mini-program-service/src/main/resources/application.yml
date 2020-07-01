@@ -1,5 +1,7 @@
 server:
   port: 9080
+  servlet:
+    context-path: /sports
 
 iku:
   mini-program:
@@ -25,7 +27,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url:  jdbc:mysql://${iku.mini-program.database.hostname}:${iku.mini-program.database.port}/${iku.mini-program.database.db-name}?useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=GMT%2B8
     username: root
-    password: ENC(f8wyX1QMvhqW2JadWsnq/Q==)
+    #password: ENC(f8wyX1QMvhqW2JadWsnq/Q==)
     hikari:
       maximum-pool-size: 200
       minimum-idle: 5
@@ -33,6 +35,7 @@ spring:
       connection-timeout: 1800
       idle-timeout: 1800
       validation-timeout: 1800
+    password: qwer1234
   jpa:
     show-sql: true
   mvc:

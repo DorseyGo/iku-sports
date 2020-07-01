@@ -8,16 +8,26 @@ package com.iku.sports.mini.admin.config;
 
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
+@Slf4j
 public class IkuSportsExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler({ApiServiceException.class})
     public Response<String> handleApiServiceException(final ApiServiceException ex) {
         return Response.fail(ex.getCode(), ex.getMessage());
+    }
+
+    @ResponseBody
+    @ExceptionHandler({Exception.class})
+    public Response<String> handleUnknownException(final Exception ex) {
+        log.error("error occurs when request", ex);
+
+        return Response.fail("网络异常，请稍后重试");
     }
 }

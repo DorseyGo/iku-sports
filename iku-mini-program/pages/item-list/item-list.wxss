@@ -43,3 +43,12 @@
   font-size: 30rpx;
   text-decoration: line-through;
 }
+
+.nodata {
+  background-color: #EDEDED;
+  font-size: 20rpx;
+  width: 100%;
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+}

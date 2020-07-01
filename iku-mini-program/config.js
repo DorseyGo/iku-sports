@@ -1,6 +1,6 @@
 const config = {
     api : {
-        url: 'http://localhost:9080/api/'
+        url: 'http://localhost:9080/sports/api/'
     }
 }
 

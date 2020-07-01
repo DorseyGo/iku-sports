@@ -6,19 +6,17 @@
  **/
 package com.iku.sports.mini.admin.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Tolerate;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * The response entity, which represents the info responded.
  *
  * @param <T>
  */
+@Getter
 public class Response<T> implements Serializable {
     private int statusCode;
     private String errorPhase;
@@ -50,5 +48,9 @@ public class Response<T> implements Serializable {
 
     public static <T> Response<T> fail(final int statusCode, final String errorPhase) {
         return new Response<>(statusCode, errorPhase, null);
+    }
+
+    public static <T> Response<T> fail(final String msg) {
+        return new Response<>(FAIL, msg, null);
     }
 }
