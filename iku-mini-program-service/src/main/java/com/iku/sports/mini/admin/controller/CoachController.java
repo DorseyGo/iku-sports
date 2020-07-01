@@ -1,5 +1,6 @@
 package com.iku.sports.mini.admin.controller;
 
+import com.iku.sports.mini.admin.annotation.WebLog;
 import com.iku.sports.mini.admin.entity.Coach;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.CoachInfo;
@@ -9,10 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ import java.util.List;
  * CopyRight: All rights reserved
  **/
 @Slf4j
-@Controller
+@RestController
 public class CoachController {
     private final CoachService coachService;
 
@@ -33,7 +31,7 @@ public class CoachController {
         this.coachService = coachService;
     }
 
-    @ResponseBody
+    @WebLog
     @GetMapping("/api/coaches/{coachId}")
     public Response<Coach> getCoachById(@PathVariable("coachId") final int id,
             @RequestParam("token") final String userId) throws ApiServiceException {

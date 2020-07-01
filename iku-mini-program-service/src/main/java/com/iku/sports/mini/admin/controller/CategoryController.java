@@ -6,6 +6,7 @@
  **/
 package com.iku.sports.mini.admin.controller;
 
+import com.iku.sports.mini.admin.annotation.WebLog;
 import com.iku.sports.mini.admin.entity.Category;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.Response;
@@ -35,6 +36,7 @@ public class CategoryController {
      * @return all categories.
      * @throws ApiServiceException if any errors detected during process.
      */
+    @WebLog(response = false)
     @GetMapping("/api/categories")
     public Response<List<Category>> getAllCategories() throws ApiServiceException {
         final List<Category> categories = categoryService.getAllCategories();

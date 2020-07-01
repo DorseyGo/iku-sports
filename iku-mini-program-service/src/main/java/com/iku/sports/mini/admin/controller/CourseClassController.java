@@ -1,5 +1,6 @@
 package com.iku.sports.mini.admin.controller;
 
+import com.iku.sports.mini.admin.annotation.WebLog;
 import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.entity.Favorite;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
@@ -23,7 +24,7 @@ import java.util.List;
  * CopyRight: All rights reserved
  **/
 @Slf4j
-@Controller
+@RestController
 public class CourseClassController {
 
     private final CourseClassService courseClassService;
@@ -33,14 +34,14 @@ public class CourseClassController {
         this.courseClassService = courseClassService;
     }
 
-    @ResponseBody
+    @WebLog
     @GetMapping("/api/classes/{id}")
     public Response<ClassOverview> getClassById(@PathVariable("id") final int id) throws ApiServiceException {
         final ClassOverview overview = courseClassService.getClassOverviewById(id);
         return Response.ok(overview);
     }
 
-    @ResponseBody
+    @WebLog(response = false)
     @GetMapping("/api/courses/{courseId}/classes")
     public Response<List<CourseClass>> paginateClasses(@PathVariable("courseId") short courseId,
             @RequestParam(value = "curPage", defaultValue = "1", required = false) int curPage) throws
@@ -49,7 +50,7 @@ public class CourseClassController {
         return Response.ok(courseClasses);
     }
 
-    @ResponseBody
+    @WebLog(response = false)
     @GetMapping("/api/classes/{relatedClassId}/promotions")
     public Response<List<CourseClass>> getPromotions(
             @PathVariable("relatedClassId") final int relatedClassId) throws ApiServiceException {
@@ -57,7 +58,7 @@ public class CourseClassController {
         return Response.ok(promotions);
     }
 
-    @ResponseBody
+    @WebLog(response = false)
     @GetMapping("/api/favorite/classes")
     public Response<List<CourseClass>> getFavoriteClasses(
             @RequestParam("token") final String userId) throws
@@ -68,7 +69,7 @@ public class CourseClassController {
         return Response.ok(courseClasses);
     }
 
-    @ResponseBody
+    @WebLog(response = false)
     @GetMapping("/api/coaches/{coachId}/classes")
     public Response<List<CourseClass>> getClassesByCoachId(@PathVariable("coachId") final int coachId) throws
             ApiServiceException {
@@ -76,7 +77,7 @@ public class CourseClassController {
         return Response.ok(courseClasses);
     }
 
-    @ResponseBody
+    @WebLog(response = false)
     @GetMapping("/api/watched/classes")
     public Response<List<CourseClass>> getWatchedClassesByUserId(@RequestParam("token") final String userId) throws
             ApiServiceException {
@@ -84,7 +85,7 @@ public class CourseClassController {
         return Response.ok(courseClasses);
     }
 
-    @ResponseBody
+    @WebLog
     @PostMapping("/api/watched/class")
     public Response<String> addWatchedClassesByUserId(@RequestBody AddWatchedClassesRequest request) throws
             ApiServiceException {

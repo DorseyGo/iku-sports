@@ -6,6 +6,7 @@
  **/
 package com.iku.sports.mini.admin.controller;
 
+import com.iku.sports.mini.admin.annotation.WebLog;
 import com.iku.sports.mini.admin.entity.Activity;
 import com.iku.sports.mini.admin.model.Response;
 import com.iku.sports.mini.admin.service.ActivityService;
@@ -15,10 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class ActivityController {
 
     private final ActivityService activityService;
@@ -28,14 +30,14 @@ public class ActivityController {
         this.activityService = activityService;
     }
 
-    @ResponseBody
+    @WebLog(response = false)
     @GetMapping("/api/activities")
     public Response<List<Activity>> getFirst3Activities() {
         final List<Activity> activities = activityService.getFirst3Activities();
         return Response.ok(activities);
     }
 
-    @ResponseBody
+    @WebLog(response = false)
     @GetMapping("/api/activities/category/{categoryId}")
     public Response<List<Activity>> getFirst3ActivitiesByCategoryId(@PathVariable("categoryId") final short categoryId) {
         final List<Activity> activities = activityService.getFirst3ActivitiesByCategoryId(categoryId);

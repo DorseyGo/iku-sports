@@ -6,6 +6,7 @@
  */
 package com.iku.sports.mini.admin.controller;
 
+import com.iku.sports.mini.admin.annotation.WebLog;
 import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.Response;
@@ -35,6 +36,7 @@ public class CourseController {
      * @param categoryId the category ID, which specified the category.
      * @return the list of courses.
      */
+    @WebLog(response = false)
     @GetMapping("/category/{categoryId}/courses")
     public Response<List<Course>> getCoursesByCategoryId(@PathVariable("categoryId") final short categoryId) throws
             ApiServiceException {

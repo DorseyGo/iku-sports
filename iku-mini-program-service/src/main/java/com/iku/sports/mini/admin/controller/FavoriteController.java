@@ -1,5 +1,6 @@
 package com.iku.sports.mini.admin.controller;
 
+import com.iku.sports.mini.admin.annotation.WebLog;
 import com.iku.sports.mini.admin.entity.Favorite;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.Response;
@@ -19,7 +20,7 @@ import java.util.List;
  * Description:
  * CopyRight: All rights reserved
  **/
-@Controller
+@RestController
 @Slf4j
 public class FavoriteController {
 
@@ -29,7 +30,7 @@ public class FavoriteController {
         this.favoriteService = favoriteService;
     }
 
-    @ResponseBody
+    @WebLog
     @PostMapping("/api/favorite")
     public Response<String> addFavorite(@RequestBody FavoriteRequest favoriteRequest) throws ApiServiceException {
         favoriteService.addFavorite(favoriteRequest.getUserId(), favoriteRequest.getFavoriteId(),
@@ -38,7 +39,7 @@ public class FavoriteController {
         return Response.ok();
     }
 
-    @ResponseBody
+    @WebLog
     @GetMapping("/api/favorite")
     public Response<Boolean> existsFavorite(@RequestParam("token") final String userId, @RequestParam("favoriteId") final int favoriteId,
             @RequestParam("favoriteType") final int favoriteType) throws ApiServiceException {

@@ -7,6 +7,7 @@
 package com.iku.sports.mini.admin.controller;
 
 import com.google.common.base.Strings;
+import com.iku.sports.mini.admin.annotation.WebLog;
 import com.iku.sports.mini.admin.entity.User;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
@@ -19,7 +20,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class UserController {
 
     private final UserService userService;
@@ -27,7 +28,7 @@ public class UserController {
     @Autowired
     public UserController(@Qualifier("userService") UserService userService) {this.userService = userService;}
 
-    @ResponseBody
+    @WebLog
     @PostMapping("/api/user/login")
     public Response<LoginResponse> login(@RequestBody final LoginRequest request) throws ApiServiceException {
         /* returns the user ID as token to the front-end */
@@ -41,7 +42,7 @@ public class UserController {
                         .build());
     }
 
-    @ResponseBody
+    @WebLog
     @GetMapping("/api/users/{userId}")
     public Response<User> getUserById(@PathVariable("userId") final String userId) throws ApiServiceException {
         User user = userService.getUserById(userId);

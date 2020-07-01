@@ -10,9 +10,13 @@ import java.util.Locale;
 
 /**
  * Enumeration, which enumerates all available errors.
+ * 错误代码
+ * 错误代码[1000, 2000)，统一返回前端错误信息 网络异常，请稍后重试；
+ * 错误代码[2000, 3000)，原样返回错误代码对应的异常信息
+ *
  */
 public enum IkuSportsError {
-    INTERNAL_ERR(500, "系统内部错误");
+    INTERNAL_ERR(2000, "系统内部错误");
 
     private final int errorCode;
     private final String errorMessage;

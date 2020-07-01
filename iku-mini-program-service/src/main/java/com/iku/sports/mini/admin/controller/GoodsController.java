@@ -1,5 +1,6 @@
 package com.iku.sports.mini.admin.controller;
 
+import com.iku.sports.mini.admin.annotation.WebLog;
 import com.iku.sports.mini.admin.entity.Goods;
 import com.iku.sports.mini.admin.model.Paging;
 import com.iku.sports.mini.admin.model.Response;
@@ -17,6 +18,7 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
+    @WebLog(response = false)
     @GetMapping("/api/goods/list")
     public Response<Paging<Goods>> goods(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                          @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {

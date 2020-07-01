@@ -15,7 +15,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 public interface Constants {
     String FORWARD_SLASH = "/";
-    int OK_REQ = 200;
+    int OK_REQ = 0;
+    int FAIL_REQ = -1;
 
     /* retain how many numbers */
     int DIVIDE_SCALE = 2;

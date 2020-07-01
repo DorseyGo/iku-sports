@@ -20,7 +20,14 @@ public class IkuSportsExceptionHandler {
     @ResponseBody
     @ExceptionHandler({ApiServiceException.class})
     public Response<String> handleApiServiceException(final ApiServiceException ex) {
-        return Response.fail(ex.getCode(), ex.getMessage());
+        log.error(ex.getMessage(), ex);
+
+        int errorCode = ex.getCode();
+        if (errorCode < 2000) {
+            return Response.fail("网络异常，请稍后重试");
+        }
+
+        return Response.fail(ex.getMessage());
     }
 
     @ResponseBody

@@ -6,6 +6,7 @@
  */
 package com.iku.sports.mini.admin.controller;
 
+import com.iku.sports.mini.admin.annotation.WebLog;
 import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.*;
@@ -45,6 +46,7 @@ public class PaymentController {
         this.config = config;
     }
 
+    @WebLog
     @ResponseBody
     @PostMapping("/api/payment")
     public Response<PrepaymentResponse> prepay(@RequestBody PaymentRequest request) throws ApiServiceException {

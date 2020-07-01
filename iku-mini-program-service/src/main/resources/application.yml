@@ -1,5 +1,7 @@
 server:
   port: 9080
+  servlet:
+    context-path: /sports
 
 iku:
   mini-program:
@@ -38,9 +40,9 @@ spring:
     show-sql: true
   mvc:
     static-path-pattern: /static/**
-logging:
-  level:
-    com.iku.sports.mini.admin.repository: debug
+  application:
+    name: iku-sports
+
 jasypt:
   encryptor:
     password: ${iku.mini-program.salt}
