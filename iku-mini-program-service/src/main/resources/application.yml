@@ -1,7 +1,5 @@
 server:
   port: 9080
-  servlet:
-    context-path: /sports
 
 iku:
   mini-program:
