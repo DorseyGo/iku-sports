@@ -6,12 +6,12 @@ page {
  --orange: #f37b1d;
  --yellow: #ffc600;
  --red: #FF0000;
- --light-white: rgba(255,255,255,1); 
+ --light-white: rgba(255, 255, 255, 0.8); 
 }
 
 .container, scroll-view.list {
-  height: 100vh;
-  background-color: var(--background-color);
+  height: 100%;
+  background-color: var(--dark-gray);
 }
 
 swiper, view {

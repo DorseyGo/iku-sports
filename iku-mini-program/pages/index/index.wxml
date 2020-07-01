@@ -8,25 +8,10 @@
 
   <!-- course -->
   <view class="card">
-    <scroll-view class="text-dark-gray nav">
-      <view class="nav-item {{curCategory == item.name ? 'text-white current' : ''}}"
-        wx:for="{{categories}}" wx:key="id" bindtap = "navTo" data-cur="{{item.name}}" data-name="">
-        {{item.displayName}}
-      </view>
-    </scroll-view>
-    <navigator url="../course/classes/list?courseId={{item.id}}" class="bg-image bg-mask" 
-      style="background-image: url('/images/{{item.categoryName}}_2x.png')" wx:for="{{courses}}" wx:key="id">
-      <view class="padding-xl text-white">
-        <view class="text-xl">{{item.name}}</view>
-        <view class="text-xs">{{item.joiner}}人参加</view>
-        <view class="text-normal padding-top">零基础.国际教练</view>
-      </view>
-    </navigator>
-
     <!-- coach -->
-    <view class="bar">
+    <view class="bar margin-top-30rpx">
       <view class="action text-white">
-        <text class="icon-titles text-yellow">|</text>金牌教练
+        <text class="icon-titles text-yellow">|</text>球技交流
       </view>
     </view>
 
