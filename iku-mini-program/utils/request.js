@@ -16,7 +16,7 @@ const request = (uri, options) => {
                 }
 
                 wx.showToast({
-                    title: result.data.errorPhase,
+                    title: result.data.errorPhase || '请求错误，请稍后重试',
                     icon: 'none'
                 });
             },

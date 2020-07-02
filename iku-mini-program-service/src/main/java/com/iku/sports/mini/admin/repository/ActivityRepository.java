@@ -10,6 +10,7 @@ import com.iku.sports.mini.admin.entity.Activity;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLDataException;
@@ -30,7 +31,7 @@ public interface ActivityRepository {
             @Result(property = "link", column = "link", jdbcType = JdbcType.VARCHAR)
     })
     @SelectProvider(type = ActivitySQLProvider.class, method = "findFirst3ByOrderByCreateTimeDesc")
-    List<Activity> findFirst3ByOrderByCreateTimeDesc() throws SQLException;
+    List<Activity> findFirst3ByOrderByCreateTimeDesc() throws DataAccessException;
 
     @ResultMap("activityRM")
     @SelectProvider(type = ActivitySQLProvider.class, method = "findFirst3ByOrderByCreateTimeDesc")

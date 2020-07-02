@@ -3,14 +3,6 @@
     "pages/appoint/appoint",
     "pages/index/index",
     "pages/about/about",
-    "pages/course/course",
-    "pages/course/coach/coach",
-    "pages/course/classes/list",
-    "pages/course/classes/detail/details",
-    "pages/article/details/details",
-    "pages/authorize/authorize",
-    "pages/access/access",
-    "pages/logs/logs",
     "pages/item-list/item-list"
   ],
   "window": {
@@ -20,23 +12,20 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "backgroundColor": "#2E2E30",
-    "color": "#61605D",
-    "selectedColor": "#FFC600",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "images/home_2x.png",
-        "selectedIconPath": "images/home_selected_2x.png"
-      },
-      {
-        "pagePath": "pages/about/about",
-        "text": "我的",
-        "iconPath": "images/about_2x.png",
-        "selectedIconPath": "images/about_selected_2x.png"
-      }
-    ]
+    "backgroundColor": "#FFA500",
+    "color": "#EEE",
+    "selectedColor": "#FFF",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "images/home.png",
+      "selectedIconPath": "images/home_selected.png"
+    }, {
+      "pagePath": "pages/about/about",
+      "text": "我的",
+      "iconPath":"images/my.png",
+      "selectedIconPath": "images/my_selected.png"
+    }]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
