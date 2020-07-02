@@ -50,7 +50,7 @@ public interface CourseRepository {
                 {
                     SELECT(REQ_COLS.toArray(new String[REQ_COLS.size()]));
                     FROM(TABLE);
-                    INNER_JOIN(TABLE_CLASS + " ON c.id = cl.course_id");
+                    LEFT_OUTER_JOIN(TABLE_CLASS + " ON c.id = cl.course_id");
                     WHERE("c.category_id = #{categoryId}");
                     GROUP_BY("c.id");
                 }
