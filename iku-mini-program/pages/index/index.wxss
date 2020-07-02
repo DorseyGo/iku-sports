@@ -1,6 +1,6 @@
 .screen-swiper {
+  margin: 10rpx 24rpx;
   min-height: 268rpx;
-  margin: 0rpx 30rpx 0rpx;
 }
 
 .screen-swiper swiper-item {
@@ -13,14 +13,6 @@
   display: block;
   margin: 0;
   pointer-events: none;
-}
-
-.card {
-  width: 100%;
-  min-height: 424rpx;
-  margin: 30rpx 0rpx 0rpx;
-  border-radius: 52rpx 52rpx 0rpx 0rpx;
-  background: rgba(255, 255, 255, 0.7);
 }
 
 .slide {

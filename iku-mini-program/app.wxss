@@ -11,7 +11,7 @@ page {
 
 .container, scroll-view.list {
   height: 100%;
-  background-color: var(--dark-gray);
+  background-color: var(--white);
 }
 
 swiper, view {
@@ -223,7 +223,6 @@ swiper-item .bottom-mask::after {
 }
 
 .bar {
-  margin-top: 30rpx;
   position: relative;
   min-height: 30rpx;
   align-items: center;
@@ -281,6 +280,11 @@ swiper-item .bottom-mask::after {
 
 .margin-top-22rpx {
   margin-top: 22rpx;
+}
+
+.margin-left-right-24rpx {
+  margin-left: 24rpx;
+  margin-right: 24rpx;
 }
 
 .width-half {
@@ -604,7 +608,7 @@ view.iku-list {
   position: relative;
   display: flex;
   padding-right: 10rpx;
-  height: 220rpx;
+  /* height: 220rpx; */
   background-color: var(--background-color);
   justify-content: flex-end;
   align-items: center;
@@ -713,4 +717,55 @@ view.tab {
   display: block;
   text-align: center;
   padding: 4rpx 0;
+}
+
+/** ------------------------ */
+/** Layout */
+/** ------------------------ */
+/** grid */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid.col-2 navigator {
+  width: 50%;
+}
+
+.iku-list.grid {
+  background-color: var(--white);
+  text-align: center;
+  min-height: 120rpx;
+}
+
+.iku-list.grid.no-border {
+  padding: 8rpx 10rpx;
+}
+
+.iku-list.grid.no-border .iku-item {
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
+}
+
+.iku-list.grid .iku-item {
+  position: relative;
+  display: flex;
+  padding: 20rpx 0 30rpx;
+  transition-duration: 0s;
+  flex-direction: column;
+  background-color: var(--white);
+}
+
+.iku-list.grid .iku-item image {
+  height: 60rpx;
+  width: 60rpx;
+}
+
+.border-2rpx {
+  border: 1rpx solid rgba(225, 225, 225, 0.6);
+}
+
+/* card */
+.card {
+  min-height: 340rpx;
 }

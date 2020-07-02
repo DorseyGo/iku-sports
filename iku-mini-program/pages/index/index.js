@@ -3,72 +3,57 @@
 const app = getApp()
 const request  = require("../../utils/request");
 
+const def_activities = [
+  {
+    id: 1,
+    image: '../../images/basketball_2_2x.png'
+  }
+]
+
+const def_categories = [
+  {
+    id: 1,
+    avatar: '../../images/home.png',
+    displayName: '篮球'
+  },
+  {
+    id: 2,
+    avatar: '../../images/my.png',
+    displayName: '网球'
+  }
+]
+
 Page({
   data: {
-    curCategory: "basketball",
-    categories: [],
-    courses: [],
-    coachInfos: [],
-    articles: [],
-    activities: []
+    activities: [],
+    categories: []
   },
 
   onLoad: function () {
-    // app.onGetSetting()
-    /** request to fetch categories */
+    /** request to fetch activities */
+    request.get(`activities`).then(res => {
+      this.setData({
+        activities: res.data
+      })
+    })
+
+    if (this.data.activities.length == 0) {
+      this.setData({
+        activities: def_activities
+      })
+    }
+
     request.get(`categories`).then(res => {
       this.setData({
         categories: res.data
       })
     })
 
-    /** request to fetch activities */
-    request.get(`activities`).then(res => {
+    if (this.data.categories || this.data.categories.length == 0) {
       this.setData({
-        activities: res.data
+        categories: def_categories
       })
-    }).catch(err => {
-      console.log(err)
-    })
-
-    this.loadCoursesByCategoryName()
-
-    /** request to fetch coach infos */
-    request.get(`coaches`).then(res => {
-      this.setData({
-        coachInfos: res.data
-      })
-    }, reason => {
-      console.log(reason)
-    }).catch(err => {
-      console.log(err)
-    })
-
-    request.get(`articles/first3`).then(res => {
-      this.setData({
-        articles: res.data
-      })
-    }, reason => {
-      console.log(reason)
-    }).catch(err => {
-      console.log(err)
-    })
-  },
-
-  loadCoursesByCategoryName: function() {
-    /** request to fetch courses by category name */
-    request.get(`courses/category?name=` + this.data.curCategory).then(res => {
-      this.setData({
-        courses: res.data
-      })
-    }, reason => {
-      console.log("rejected")
-      this.setData({
-        courses: []
-      })
-    }).catch(err => {
-      console.log(err)
-    }).re
+    }
   },
 
   navTo: function(e) {
