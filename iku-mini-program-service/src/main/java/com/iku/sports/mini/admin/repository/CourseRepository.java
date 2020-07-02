@@ -29,7 +29,6 @@ public interface CourseRepository {
             @Result(property = "id", column = "id", jdbcType = JdbcType.TINYINT),
             @Result(property = "name", column = "name", jdbcType = JdbcType.VARCHAR),
             @Result(property = "level", column = "level", jdbcType = JdbcType.CHAR),
-            @Result(property = "avatar", column = "avatar", jdbcType = JdbcType.VARCHAR),
             @Result(property = "fee", column = "fee_in_yuan", jdbcType = JdbcType.DOUBLE),
             @Result(property = "numClasses", column = "num_classes", jdbcType = JdbcType.INTEGER)
     })
@@ -41,7 +40,7 @@ public interface CourseRepository {
     // -----
     class CourseSQLProvider {
 
-        static final List<String> COLS = Lists.newArrayList("c.id", "c.name", "c.level", "c.avatar", "c.fee/100 fee_in_yuan");
+        static final List<String> COLS = Lists.newArrayList("c.id", "c.name", "c.level", "c.fee/100 fee_in_yuan");
 
         public String findCoursesByCategoryId(final Map<String, Object> params) {
             final List<String> REQ_COLS = Lists.newArrayList(COLS);

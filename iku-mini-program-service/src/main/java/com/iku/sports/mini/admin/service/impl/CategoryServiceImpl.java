@@ -18,6 +18,7 @@ import com.iku.sports.mini.admin.repository.CategoryRepository;
 import com.iku.sports.mini.admin.service.CategoryService;
 import com.iku.sports.mini.admin.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
@@ -41,12 +42,13 @@ public class CategoryServiceImpl implements CategoryService {
             IkuSportsConfig config) {
         this.categoryRepository = categoryRepository;
         this.config = config;
-        cache = CacheBuilder.newBuilder().build(new CacheLoader<String, List<Category>>() {
-            @Override
-            public List<Category> load(String key) throws Exception {
-                return createValue(key);
-            }
-        });
+        cache = CacheBuilder.newBuilder()
+                .build(new CacheLoader<String, List<Category>>() {
+                    @Override
+                    public List<Category> load(String key) throws Exception {
+                        return createValue(key);
+                    }
+                });
     }
 
     @Override
@@ -68,8 +70,12 @@ public class CategoryServiceImpl implements CategoryService {
             throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
-        categories.forEach(category -> category.setAvatar(
-                Utils.join(config.getStaticResourceServer(), category.getAvatar(), Constants.FORWARD_SLASH)));
+        categories.forEach(category -> {
+            if (category.getAvatar() != null) {
+                category.setAvatar(
+                        Utils.join(config.getStaticResourceServer(), category.getAvatar(), Constants.FORWARD_SLASH));
+            }
+        });
         Collections.sort(categories);
 
         return categories;
@@ -78,7 +84,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category getCategoryById(final short categoryId) throws ApiServiceException {
         final List<Category> categories = getAllCategories();
-        final Optional<Category> cate = categories.stream().filter(category -> categoryId == category.getId())
+        final Optional<Category> cate = categories.stream()
+                .filter(category -> categoryId == category.getId())
                 .findFirst();
 
         return cate.get();

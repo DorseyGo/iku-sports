@@ -157,6 +157,10 @@ swiper-item .bottom-mask::after {
   color: var(--orange);
 }
 
+.text-red {
+  color: var(--red);
+}
+
 .text-content {
   line-height: 1.6;
 }
@@ -799,6 +803,7 @@ view.tab {
 
 .card.article .iku-item .content {
   display: flex;
+  padding: 0 30rpx;
 }
 
 .card.article .iku-item .content .desc {
@@ -811,8 +816,14 @@ view.tab {
 .card.article .iku-item .content image {
   width: 240rpx;
   height: 6.4em;
-  margin-left: 20rpx;
+  margin-right: 20rpx;
   border-radius: 6rpx;
+}
+
+.card.article .iku-item .content .text-content {
+  font-size: 28rpx;
+  color: #888;
+  overflow: hidden;
 }
 
 /* --------------------- */
@@ -823,4 +834,26 @@ image {
   display: inline-block;
   position: relative;
   z-index: 0;
+}
+
+/* ------------------ */
+/* buttons */
+/* ------------------ */
+.iku-btn {
+  position: relative;
+  border: 0rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  height: 64rpx;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  overflow: visible;
+  margin-left: initial;
+  transform: translate(0rpx, 0rpx);
+  margin-left: initial;
 }

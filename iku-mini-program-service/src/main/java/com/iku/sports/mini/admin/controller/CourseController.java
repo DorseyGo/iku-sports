@@ -37,7 +37,7 @@ public class CourseController {
      * @return the list of courses.
      */
     @WebLog(response = false)
-    @GetMapping("/category/{categoryId}/courses")
+    @GetMapping("/categories/{categoryId}/courses")
     public Response<List<Course>> getCoursesByCategoryId(@PathVariable("categoryId") final short categoryId) throws
             ApiServiceException {
         final List<Course> courses = courseService.getCoursesByCategoryId(categoryId);

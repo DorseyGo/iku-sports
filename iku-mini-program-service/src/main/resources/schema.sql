@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` TINYINT(2) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(24) NOT NULL UNIQUE COMMENT 'the category name',
   `display_name` VARCHAR(24) NOT NULL COMMENT 'the display name',
-  `icon` VARCHAR(255) DEFAULT NULL COMMENT 'the icon for this category',
+  `avatar` VARCHAR(255) DEFAULT NULL COMMENT 'the icon for this category',
   `sequence` TINYINT(2) NOT NULL DEFAULT '0' COMMENT 'the sequence',
   `last_modified_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS `activity` (
 CREATE TABLE IF NOT EXISTS `course` (
   `id` TINYINT(2) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(32) NOT NULL COMMENT 'the course name',
-  `avatar` VARCHAR(255) COMMENT 'the avatar, which only stores the relative path',
   `level` CHAR(1) NOT NULL DEFAULT '1' COMMENT '1, for basic, 2 for intermediate, 3 for senior, 4 for advanced',
   `fee` BIGINT(20) NOT NULL DEFAULT '0' COMMENT 'the charge in FEN RMB',
   `description` VARCHAR(255) DEFAULT NULL COMMENT 'the description of the course',
