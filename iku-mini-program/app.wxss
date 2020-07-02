@@ -786,7 +786,7 @@ view.tab {
   background-color: var(--white);
   overflow: hidden;
   border-radius: 10rpx;
-  margin: 30rpx;
+  margin: 24rpx;
 }
 
 .card.article .iku-item .title {
