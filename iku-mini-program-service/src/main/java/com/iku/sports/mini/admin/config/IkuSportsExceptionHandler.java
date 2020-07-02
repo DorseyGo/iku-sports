@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+
 @ControllerAdvice
 @Slf4j
 public class IkuSportsExceptionHandler {
@@ -28,6 +31,18 @@ public class IkuSportsExceptionHandler {
         }
 
         return Response.fail(ex.getMessage());
+    }
+
+    @ResponseBody
+    @ExceptionHandler({ConstraintViolationException.class})
+    public Response<String> handleConstraintValidationException(final ConstraintViolationException ex) {
+        for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
+            log.error("error occurs when validate parameter, field:[{}], errorMsg:[{}]",
+                    violation.getPropertyPath().toString(), violation.getMessage(), ex);
+            return Response.fail(ex.getMessage());
+        }
+
+        return Response.fail("请求参数错误");
     }
 
     @ResponseBody
