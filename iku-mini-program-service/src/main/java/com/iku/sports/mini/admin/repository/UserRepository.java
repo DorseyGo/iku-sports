@@ -26,18 +26,6 @@ public interface UserRepository {
     @InsertProvider(type = UserSQLProvider.class, method = "save")
     void save(User user) throws DataAccessException;
 
-    @Results(id = "simpleUserRM", value = {
-            @Result(property = "id", column = "id", javaType = String.class, jdbcType = JdbcType.CHAR),
-            @Result(property = "openId", column = "open_id", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "avatarUrl", column = "avatar_url", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "nickName", column = "name", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "telephone", column = "telephone", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "numAttentions", column = "num_attentions", jdbcType = JdbcType.INTEGER),
-            @Result(property = "numCourses", column = "num_courses", jdbcType = JdbcType.INTEGER)
-    })
-    @SelectProvider(type = UserSQLProvider.class, method = "findUserByUserId")
-    User findUserByUserId(@NotNull @Param("userId") String userId);
-
     // ----
     // SQL provider
     // ----
