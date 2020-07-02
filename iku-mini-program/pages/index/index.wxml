@@ -6,10 +6,11 @@
     </swiper-item>
   </swiper>
 
+  <!-- navigator for categories -->
   <view class="iku-list grid col-2 no-border margin-left-right-24rpx">
     <navigator url="../course/course?categoryId={{id}}" class="iku-item" wx:for="{{categories}}" wx:key="id">
       <image src="{{item.avatar}}" />
-      <text class="text-normal text-dark-gray">{{item.displayName}}</text>
+      <text class="text-normal text-dark-gray margin-top-8rpx">{{item.displayName}}</text>
     </navigator>
   </view>
 

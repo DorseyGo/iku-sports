@@ -282,6 +282,10 @@ swiper-item .bottom-mask::after {
   margin-top: 22rpx;
 }
 
+.margin-top-8rpx {
+  margin-top: 8rpx;
+}
+
 .margin-left-right-24rpx {
   margin-left: 24rpx;
   margin-right: 24rpx;
