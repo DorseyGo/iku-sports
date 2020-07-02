@@ -6,12 +6,12 @@ page {
  --orange: #f37b1d;
  --yellow: #ffc600;
  --red: #FF0000;
- --light-white: rgba(255, 255, 255, 0.8); 
+ --light-white: #F2F2F2; 
 }
 
 .container, scroll-view.list {
-  height: 100%;
-  background-color: var(--white);
+  height: 100vh;
+  background-color: var(--light-white);
 }
 
 swiper, view {
@@ -156,6 +156,10 @@ swiper-item .bottom-mask::after {
 .text-orange {
   color: var(--orange);
 }
+
+.text-content {
+  line-height: 1.6;
+}
 /** the end of text */
 
 /**
@@ -282,8 +286,8 @@ swiper-item .bottom-mask::after {
   margin-top: 22rpx;
 }
 
-.margin-top-8rpx {
-  margin-top: 8rpx;
+.margin-top-10rpx {
+  margin-top: 10rpx;
 }
 
 .margin-left-right-24rpx {
@@ -743,7 +747,7 @@ view.tab {
 }
 
 .iku-list.grid.no-border {
-  padding: 8rpx 10rpx;
+  padding: 10rpx 10rpx;
 }
 
 .iku-list.grid.no-border .iku-item {
@@ -772,4 +776,51 @@ view.tab {
 /* card */
 .card {
   min-height: 340rpx;
+  background-color: var(--white);
+  display: block;
+  overflow: hidden;
+}
+
+.card .iku-item {
+  display: block;
+  background-color: var(--white);
+  overflow: hidden;
+  border-radius: 10rpx;
+  margin: 30rpx;
+}
+
+.card.article .iku-item .title {
+  font-size: 30rpx;
+  font-weight: 900;
+  color: var(--black);
+  line-height: 100rpx;
+  padding: 0 30rpx;
+}
+
+.card.article .iku-item .content {
+  display: flex;
+}
+
+.card.article .iku-item .content .desc {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card.article .iku-item .content image {
+  width: 240rpx;
+  height: 6.4em;
+  margin-left: 20rpx;
+  border-radius: 6rpx;
+}
+
+/* --------------------- */
+/* image                */
+/* --------------------- */
+image {
+  max-width: 100%;
+  display: inline-block;
+  position: relative;
+  z-index: 0;
 }

@@ -8,14 +8,25 @@
 
   <!-- navigator for categories -->
   <view class="iku-list grid col-2 no-border margin-left-right-24rpx">
-    <navigator url="../course/course?categoryId={{id}}" class="iku-item" wx:for="{{categories}}" wx:key="id">
+    <navigator url="../course/course?categoryId={{item.id}}" class="iku-item" wx:for="{{categories}}" wx:key="id">
       <image src="{{item.avatar}}" />
-      <text class="text-normal text-dark-gray margin-top-8rpx">{{item.displayName}}</text>
+      <text class="text-normal text-dark-gray margin-top-10rpx">{{item.displayName}}</text>
     </navigator>
   </view>
 
-  <view class="card margin-left-right-24rpx radius border-2rpx">
-
+  <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
+    <view class="iku-item">
+      <view class="title">
+        <view class="text-cut">球技交流</view>
+      </view>
+    
+      <view class="content">
+        <image mode="aspectFill" src="../../images/tennies_2_2x.png" />
+        <view class="desc">
+          <view class="text-content"></view>
+        </view>
+      </view>
+    </view>
   </view>
   
 </scroll-view>

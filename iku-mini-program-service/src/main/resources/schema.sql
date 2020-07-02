@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `title` VARCHAR(32) DEFAULT NULL COMMENT 'the brief of activity',
   `link` VARCHAR(24) DEFAULT NULL,
   `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP ,
-  `category_id` TINYINT(2) NOT NULL DEFAULT '-1' COMMENT 'the category id',
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 

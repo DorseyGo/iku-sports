@@ -46,23 +46,6 @@
   max-width: 500rpx;
 }
 
-.content {
-  position: absolute;
-  z-index: 5;
-  top: 180rpx;
-  padding: 4rpx 0rpx;
-  border-bottom: 1rpx solid rgba(255, 255, 255, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 460rpx;
-}
-
-.content .action image {
-  height: 80rpx;
-  width: 88rpx;
-}
-
 .bottom {
   position: absolute;
   z-index: 5;
