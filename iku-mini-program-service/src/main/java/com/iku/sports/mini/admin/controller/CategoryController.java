@@ -37,7 +37,7 @@ public class CategoryController {
      * @throws ApiServiceException if any errors detected during process.
      */
     @WebLog(response = false)
-    @GetMapping("/api/categories")
+    @GetMapping("/categories")
     public Response<List<Category>> getAllCategories() throws ApiServiceException {
         final List<Category> categories = categoryService.getAllCategories();
 
