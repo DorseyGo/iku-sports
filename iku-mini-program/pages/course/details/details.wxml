@@ -1,10 +1,17 @@
-<view class="container">
-    <view>
-        <image src="../../../images/{{category}}-{{course.level}}.png" />
+<view class="container detail flex">
+    <view class="cover margin-left-right-24rpx margin-top-10rpx">
+        <image class="radius" src="../../../images/{{category}}_{{course.level}}.png" mode="aspectFill" />
     </view>
-    <view class="card" >
-        <view class="title">
-            
+    <view class="card article margin-top-10rpx radius-24rpx margin-left-right-24rpx flex-sub" >
+        <view class="iku-item">
+            <view class="title">
+                <view class="text-cut">{{course.name}}</view>
+            </view>
+            <view class="content">
+                <view class="detail">
+                    <view class="text-content">{{course.description}}</view>
+                </view>
+            </view>
         </view>
     </view>
 </view>

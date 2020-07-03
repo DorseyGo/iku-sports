@@ -76,7 +76,7 @@ public interface CourseRepository {
 
             return new SQL() {
                 {
-                    SELECT(AGG_COLS.toArray(new String[AGG_COLS.size()]));
+                    SELECT(REQ_COLS.toArray(new String[REQ_COLS.size()]));
                     FROM(TABLE);
                     LEFT_OUTER_JOIN(TABLE_CLASS + " ON c.id = cl.course_id");
                     WHERE("c.id = #{courseId}");

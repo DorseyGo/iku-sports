@@ -163,6 +163,20 @@
 					"pathName": "pages/about/about",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "courseId=1&category=basketball",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/details/details",
+					"pathName": "pages/course/details/details",
+					"query": "courseId=1&category=basketball",
+					"scene": null
 				}
 			]
 		}
