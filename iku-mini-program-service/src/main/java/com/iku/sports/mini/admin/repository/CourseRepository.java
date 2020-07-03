@@ -35,23 +35,51 @@ public interface CourseRepository {
     @SelectProvider(type = CourseSQLProvider.class, method = "findCoursesByCategoryId")
     List<Course> findCoursesByCategoryId(@Param("categoryId") final short categoryId);
 
+    @Results(id = "courseDetailRM", value = {
+            @Result(property = "id", column = "id", jdbcType = JdbcType.TINYINT),
+            @Result(property = "name", column = "name", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "level", column = "level", jdbcType = JdbcType.CHAR),
+            @Result(property = "fee", column = "fee_in_yuan", jdbcType = JdbcType.DOUBLE),
+            @Result(property = "description", column = "description", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "numClasses", column = "num_classes", jdbcType = JdbcType.INTEGER)
+    })
+    @SelectProvider(type = CourseSQLProvider.class, method = "findCourseById")
+    Course findCourseById(@Param("courseId") final short courseId) throws DataAccessException;
+
     // -----
     // SQL provider
     // -----
     class CourseSQLProvider {
 
         static final List<String> COLS = Lists.newArrayList("c.id", "c.name", "c.level", "c.fee/100 fee_in_yuan");
+        static final List<String> AGG_COLS = Lists.newArrayList(COLS);
+
+        static {
+            AGG_COLS.add("COUNT(cl.id) num_classes");
+        }
 
         public String findCoursesByCategoryId(final Map<String, Object> params) {
-            final List<String> REQ_COLS = Lists.newArrayList(COLS);
-            REQ_COLS.add("COUNT(cl.id) num_classes");
-
             return new SQL() {
                 {
-                    SELECT(REQ_COLS.toArray(new String[REQ_COLS.size()]));
+                    SELECT(AGG_COLS.toArray(new String[AGG_COLS.size()]));
                     FROM(TABLE);
                     LEFT_OUTER_JOIN(TABLE_CLASS + " ON c.id = cl.course_id");
                     WHERE("c.category_id = #{categoryId}");
+                    GROUP_BY("c.id");
+                }
+            }.toString();
+        }
+
+        public String findCourseById(final Map<String, Object> params) {
+            final List<String> REQ_COLS = Lists.newArrayList(AGG_COLS);
+            REQ_COLS.add("c.description");
+
+            return new SQL() {
+                {
+                    SELECT(AGG_COLS.toArray(new String[AGG_COLS.size()]));
+                    FROM(TABLE);
+                    LEFT_OUTER_JOIN(TABLE_CLASS + " ON c.id = cl.course_id");
+                    WHERE("c.id = #{courseId}");
                     GROUP_BY("c.id");
                 }
             }.toString();

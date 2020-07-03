@@ -1,0 +1,10 @@
+<view class="container">
+    <view>
+        <image src="../../../images/{{category}}-{{course.level}}.png" />
+    </view>
+    <view class="card" >
+        <view class="title">
+            
+        </view>
+    </view>
+</view>

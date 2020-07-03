@@ -159,6 +159,7 @@ swiper-item .bottom-mask::after {
 
 .text-red {
   color: var(--red);
+  font-weight: 900;
 }
 
 .text-content {
@@ -856,4 +857,28 @@ image {
   margin-left: initial;
   transform: translate(0rpx, 0rpx);
   margin-left: initial;
+}
+
+/* ----------------------- */
+/* tips */
+/* ----------------------- */
+.tips {
+  width: 100%;
+  font-size: 28rpx;
+  color: #c2c2c2;
+  overflow: hidden;
+  text-align: center;
+  padding: 12rpx;
+}
+
+/* ----------------------- */
+/* tips */
+/* ----------------------- */
+.text-content.flex {
+  display: flex;
+  flex-direction: row;
+}
+
+navigator.flex-sub {
+  padding: 8rpx;
 }

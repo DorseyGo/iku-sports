@@ -7,7 +7,8 @@ Page({
    */
   data: {
     courses: [],
-    category: null
+    category: null,
+    hasData: false
   },
 
   /**
@@ -31,6 +32,12 @@ Page({
       this.setData({
         courses: res.data
       })
+
+      if (res.data.length > 0) {
+        this.setData({
+          hasData: true
+        })
+      }
     })
   },
 

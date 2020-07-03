@@ -8,6 +8,8 @@ package com.iku.sports.mini.admin.service.impl;
 
 import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.entity.Course;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
+import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.CourseRepository;
 import com.iku.sports.mini.admin.service.CourseService;
@@ -15,6 +17,7 @@ import com.iku.sports.mini.admin.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.math.RoundingMode;
@@ -42,10 +45,26 @@ public class CourseServiceImpl implements CourseService {
         log.debug("==> Fetch courses according to category ID: {}", categoryId);
         final List<Course> courses = courseRepository.findCoursesByCategoryId(categoryId);
         courses.forEach(course -> {
-            course.setFee(course.getFee().setScale(2, RoundingMode.HALF_UP));
+            postProcess(course);
         });
 
         return courses;
     }
 
+    @Override
+    public Course getCourseById(final short courseId) throws ApiServiceException {
+        try {
+            final Course course = courseRepository.findCourseById(courseId);
+            postProcess(course);
+
+            return course;
+        } catch (DataAccessException e) {
+            log.error("==> Failed to retrieve course by ID: {}", courseId, e);
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
+        }
+    }
+
+    private void postProcess(final Course course) {
+        course.setFee(course.getFee().setScale(2, RoundingMode.HALF_UP));
+    }
 }

@@ -24,4 +24,7 @@ public class Course {
     private BigDecimal fee;
     private int numClasses;
 
+    // ------------------------
+    // description collected only when details required.
+    private String description;
 }

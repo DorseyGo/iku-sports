@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/about/about",
     "pages/appoint/appoint",
+    "pages/course/details/details",
     "pages/item-list/item-list"
   ],
   "window": {
