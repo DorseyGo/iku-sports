@@ -9,7 +9,13 @@
             </view>
             <view class="content">
                 <view class="detail">
-                    <view class="text-content">{{course.description}}</view>
+                <view class="statistic">
+                    <text>课程：{{course.numClasses}} 节</text>
+                    <text>费用：{{course.fee}} 元</text>
+                </view>
+                    <view class="text-content">
+                        <text space="emsp">  {{course.description}}</text>
+                    </view>
                 </view>
             </view>
         </view>
