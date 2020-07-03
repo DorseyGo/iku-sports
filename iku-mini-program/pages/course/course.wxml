@@ -9,8 +9,8 @@
 				<view class="content">
 					<image src="../../images/{{category.name}}_{{item.level}}.png" mode="aspectFill" />
 					<view class="desc">
-						<view class="text-content">课程：{{item.numClasses}}节</view>
-						<view class="text-content">费用：<text class="text-red">{{item.fee}}</text>元</view>
+						<view class="text-content">课程：{{item.numClasses}} 节</view>
+						<view class="text-content">费用：<text class="text-red">{{item.fee}}</text> 元</view>
 						<view class="text-content flex">
 							<navigator url="../course/details/details?courseId={{item.id}}&category={{category.name}}" class="flex-sub">{{'>>'}}详情</navigator>
 							<button class="iku-btn bg-red" size="mini" loading="{{loading}}" disabled="{{disabled}}" bindtap="onTap">

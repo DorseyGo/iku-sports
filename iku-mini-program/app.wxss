@@ -215,6 +215,11 @@ swiper-item .bottom-mask::after {
   color: var(--white);
 }
 
+.bg-orange {
+  background-color: var(--orange);
+  color: var(--white);
+}
+
 .bg-gray {
   background-color: var(--dark-gray);
   color: var(--white);
@@ -787,8 +792,8 @@ view.tab {
 }
 
 .iku-list.grid .iku-item image {
-  height: 60rpx;
-  width: 60rpx;
+  height: 90rpx;
+  width: 90rpx;
 }
 
 .border-2rpx {
@@ -817,6 +822,7 @@ view.tab {
   color: var(--black);
   line-height: 100rpx;
   padding: 0 30rpx;
+  font-family: PingFangSC-Regular,PingFang SC;
 }
 
 .card.article .iku-item .content {
@@ -835,6 +841,7 @@ view.tab {
   margin-bottom: 24rpx;
   font-size: 28rpx;
   font-weight: 800;
+  font-family: PingFangSC-Regular,PingFang SC;
 }
 
 .card.article .iku-item .content image {
@@ -848,6 +855,13 @@ view.tab {
   font-size: 28rpx;
   color: #888;
   overflow: hidden;
+  font-family: PingFangSC-Regular,PingFang SC;
+}
+
+.card.article .iku-item .action {
+  padding: 0 30rpx;
+  position: fixed;
+  bottom: 10rpx;
 }
 
 /* --------------------- */

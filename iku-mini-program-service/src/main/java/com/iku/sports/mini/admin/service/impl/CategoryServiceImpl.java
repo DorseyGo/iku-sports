@@ -70,12 +70,6 @@ public class CategoryServiceImpl implements CategoryService {
             throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
 
-        categories.forEach(category -> {
-            if (category.getAvatar() != null) {
-                category.setAvatar(
-                        Utils.join(config.getStaticResourceServer(), category.getAvatar(), Constants.FORWARD_SLASH));
-            }
-        });
         Collections.sort(categories);
 
         return categories;

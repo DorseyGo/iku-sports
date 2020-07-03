@@ -18,6 +18,15 @@
                     </view>
                 </view>
             </view>
+            <view class="action flex">
+                <button class="iku-btn bg-orange flex-sub">
+                    联系客服
+                </button>
+                <text space="emsp" class="flex-sub">{{"   "}}</text>
+                <button class="iku-btn bg-red" size="mini" loading="{{loading}}" disabled="{{disabled}}" bindtap="purchase">
+                    购买
+                </button>
+            </view>
         </view>
     </view>
 </view>
