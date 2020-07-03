@@ -42,7 +42,6 @@ public class CourseServiceImpl implements CourseService {
         log.debug("==> Fetch courses according to category ID: {}", categoryId);
         final List<Course> courses = courseRepository.findCoursesByCategoryId(categoryId);
         courses.forEach(course -> {
-            course.setAvatar(Utils.join(config.getStaticResourceServer(), course.getAvatar(), Constants.FORWARD_SLASH));
             course.setFee(course.getFee().setScale(2, RoundingMode.HALF_UP));
         });
 
