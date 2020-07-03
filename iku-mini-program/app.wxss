@@ -164,7 +164,14 @@ swiper-item .bottom-mask::after {
 
 .text-content {
   line-height: 1.6;
+  font-family: PingFangSC-Regular,PingFang SC;
 }
+
+.text-desc {
+  line-height: 50rpx;
+  letter-spacing: 8rpx;
+}
+
 /** the end of text */
 
 /**
@@ -822,6 +829,12 @@ view.tab {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.card.article .iku-item .content .desc .statistic {
+  margin-bottom: 24rpx;
+  font-size: 28rpx;
+  font-weight: 800;
 }
 
 .card.article .iku-item .content image {
