@@ -23,6 +23,6 @@
 		</view>
 	</view>
 	<view wx:else>
-		<view class="tips">产品未上线，敬请期待！</view>
+		<view class="tips">课程未上线，敬请期待！</view>
 	</view>
 </view>
