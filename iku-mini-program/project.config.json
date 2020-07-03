@@ -7,6 +7,7 @@
 		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
@@ -23,8 +24,7 @@
 		},
 		"useIsolateContext": true,
 		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false,
-		"preloadBackgroundData": false
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.3",
@@ -162,6 +162,12 @@
 					"name": "pages/about/about",
 					"pathName": "pages/about/about",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/appoint/appoint",
+					"pathName": "pages/appoint/appoint",
 					"scene": null
 				}
 			]

@@ -1,12 +1,16 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
 const request  = require("../../utils/request");
 
 const def_activities = [
   {
     id: 1,
     image: '../../images/basketball_2_2x.png'
+  },
+  {
+    id: 2,
+    image: '../../images/tennies_2_2x.png'
   }
 ]
 
@@ -26,14 +30,16 @@ const def_categories = [
 Page({
   data: {
     activities: [],
-    categories: []
+    categories: [],
+    current: 0
   },
 
   onLoad: function () {
     /** request to fetch activities */
     request.get(`activities`).then(res => {
       this.setData({
-        activities: res.data
+        activities: res.data,
+        current: 0
       })
     })
 
@@ -49,19 +55,10 @@ Page({
       })
     })
 
-    if (this.data.categories || this.data.categories.length == 0) {
+    if (this.data.categories.length == 0) {
       this.setData({
         categories: def_categories
       })
     }
-  },
-
-  navTo: function(e) {
-    let cate = e.target.dataset.cur;
-    this.setData({
-      curCategory:  cate
-    })
-
-    this.loadCoursesByCategoryName()
   }
 })

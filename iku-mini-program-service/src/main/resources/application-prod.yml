@@ -4,7 +4,7 @@ iku:
       hostname: 127.0.0.1
       port: 3306
       db-name: iku
-    static-resource-server: http://localhost:9080${server.servlet.context-path}/static
+    static-resource-server: https://106.55.37.93${server.servlet.context-path}/static
     salt: 85f39a5014284b6caedd766f78b13388
     app-id: 123123a
     secret: 123a

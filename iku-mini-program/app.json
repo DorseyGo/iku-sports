@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/appoint/appoint",
     "pages/index/index",
     "pages/about/about",
+    "pages/appoint/appoint",
     "pages/item-list/item-list"
   ],
   "window": {

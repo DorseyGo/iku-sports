@@ -1,1 +1,22 @@
 /* pages/appoint/appoint.wxss */
+.course_appoint_wrap {
+  display: flex;
+  width: 100%;
+}
+
+.course_appoint_wrap .course_img_wrap {
+  flex: 2;
+  display: flex;
+}
+
+.course_appoint_wrap .course_img_wrap image {
+  width: 30%;
+}
+
+.course_appoint_wrap .course_info_wrap {
+  flex: 3;
+  display: flex;
+}
+
+
+
