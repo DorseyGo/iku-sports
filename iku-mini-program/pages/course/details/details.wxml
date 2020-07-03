@@ -14,7 +14,7 @@
                         <text>费用：<text class="text-red">{{course.fee}}</text> 元</text>
                     </view>
                     <view class="text-content text-desc">
-                        <text space="emsp">  {{course.description}}</text>
+                        <text space="emsp">  {{course.description || ""}}</text>
                     </view>
                 </view>
             </view>
