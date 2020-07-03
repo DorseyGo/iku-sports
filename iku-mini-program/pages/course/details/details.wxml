@@ -19,7 +19,7 @@
                 </view>
             </view>
             <view class="action flex">
-                <button class="iku-btn bg-orange flex-sub">
+                <button class="iku-btn bg-orange flex-sub" bindtap="contact">
                     联系客服
                 </button>
                 <text space="emsp" class="flex-sub">{{"   "}}</text>

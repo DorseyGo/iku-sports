@@ -7,7 +7,9 @@ Page({
    */
   data: {
     category: null,
-    course: null
+    course: null,
+    customServicePhoneNo: null,
+    customService: "custom_service"
   },
 
   /**
@@ -16,6 +18,7 @@ Page({
   onLoad: function (options) {
     let category = options.category
     let courseId = options.courseId
+    let customService = this.data.customService
 
     this.setData({
       category: category
@@ -26,5 +29,25 @@ Page({
         course: res.data
       })
     })
+
+    request.get(`config/${customService}`).then(res => {
+      this.setData({
+        customServicePhoneNo: res.data.value
+      })
+    })
+  },
+
+  contact: function() {
+    let phone = this.data.customServicePhoneNo || "18998815018"
+    wx.makePhoneCall({
+      phoneNumber: phone,
+      fail: () => {
+        wx.showToast({
+          title: '联系客服失败，请稍后重试！',
+          icon: 'none'
+        });
+      }
+    });
+      
   }
 })

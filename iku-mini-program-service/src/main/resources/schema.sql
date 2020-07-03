@@ -2,13 +2,22 @@ CREATE DATABASE IF NOT EXISTS `iku`;
 USE `iku`;
 
 -- -----------------
+-- system configuration
+-- -----------------
+CREATE TABLE IF NOT EXISTS `sys_config` (
+  `id` INT(4) NOT NULL AUTO_INCREMENT,
+  `sys_key` VARCHAR(32) NOT NULL UNIQUE COMMENT 'the key of the configuration',
+  `sys_value` VARCHAR(64) NOT NULL COMMENT 'the value of the configuration',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+
+-- -----------------
 -- course categories
 -- -----------------
 CREATE TABLE IF NOT EXISTS `category` (
   `id` TINYINT(2) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(24) NOT NULL UNIQUE COMMENT 'the category name',
   `display_name` VARCHAR(24) NOT NULL COMMENT 'the display name',
-  `avatar` VARCHAR(255) DEFAULT NULL COMMENT 'the icon for this category',
   `sequence` TINYINT(2) NOT NULL DEFAULT '0' COMMENT 'the sequence',
   `last_modified_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)

@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service("categoryService")
@@ -42,7 +43,8 @@ public class CategoryServiceImpl implements CategoryService {
             IkuSportsConfig config) {
         this.categoryRepository = categoryRepository;
         this.config = config;
-        cache = CacheBuilder.newBuilder()
+        cache = CacheBuilder.newBuilder().expireAfterAccess(config.getExpiryInDays(), TimeUnit.DAYS)
+                .expireAfterWrite(config.getExpiryInDays(), TimeUnit.DAYS)
                 .build(new CacheLoader<String, List<Category>>() {
                     @Override
                     public List<Category> load(String key) throws Exception {
