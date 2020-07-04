@@ -41,20 +41,35 @@ Page({
         activities: res.data,
         current: 0
       })
-    })
 
-    if (this.data.activities.length == 0) {
-      this.setData({
-        activities: def_activities
-      })
-    }
+      this.setDefActivitiesIfPossible()
+    }, reason => {
+      console.log("Failed to request for activities")
+      this.setDefActivitiesIfPossible()
+    })
 
     request.get(`categories`).then(res => {
       this.setData({
         categories: res.data
       })
-    })
 
+      this.setDefCategoriesIfPossible()
+    }, reason => {
+      console.log("Failed to request for categories")
+      /* if rejected, set the defaults */
+      this.setDefCategoriesIfPossible()
+    })
+  },
+
+  setDefActivitiesIfPossible: function() {
+    if (this.data.activities.length == 0) {
+      this.setData({
+        activities: def_activities
+      })
+    }
+  },
+
+  setDefCategoriesIfPossible: function() {
     if (this.data.categories.length == 0) {
       this.setData({
         categories: def_categories
