@@ -6,23 +6,23 @@ const request  = require("../../utils/request");
 const def_activities = [
   {
     id: 1,
-    image: '../../images/basketball_2_2x.png'
+    image: '../../images/basketball_2.png'
   },
   {
     id: 2,
-    image: '../../images/tennies_2_2x.png'
+    image: '../../images/tennis_2.png'
   }
 ]
 
 const def_categories = [
   {
     id: 1,
-    avatar: '../../images/home.png',
+    avatar: '../../images/basketball.png',
     displayName: '篮球'
   },
   {
     id: 2,
-    avatar: '../../images/my.png',
+    avatar: '../../images/tennis.png',
     displayName: '网球'
   }
 ]

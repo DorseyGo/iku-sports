@@ -27,7 +27,6 @@ public interface CategoryRepository {
             @Result(property = "id", column = "id", jdbcType = JdbcType.TINYINT),
             @Result(property = "name", column = "name", jdbcType = JdbcType.VARCHAR),
             @Result(property = "displayName", column = "display_name", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "avatar", column = "avatar", jdbcType = JdbcType.VARCHAR),
             @Result(property = "sequence", column = "sequence", jdbcType = JdbcType.TINYINT)
     })
     @SelectProvider(type = CategorySQLProvider.class, method = "findAll")
@@ -37,7 +36,7 @@ public interface CategoryRepository {
     // SQL provider
     // ---
     class CategorySQLProvider {
-        static final List<String> COLS = Arrays.asList("id", "name", "display_name", "avatar", "sequence");
+        static final List<String> COLS = Arrays.asList("id", "name", "display_name", "sequence");
 
         public String findAll() {
             return new SQL() {

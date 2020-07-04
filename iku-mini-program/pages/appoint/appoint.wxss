@@ -1,22 +1,36 @@
 /* pages/appoint/appoint.wxss */
-.course_appoint_wrap {
+
+.course_order {
+  margin-top: 15rpx;
   display: flex;
-  width: 100%;
+  width: 96%;
+  margin-left: 15rpx;
+  border-radius: 15rpx;
+  background-color: #FFFFFF;
 }
 
-.course_appoint_wrap .course_img_wrap {
+.course_order .course_img_wrap {
   flex: 2;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.course_appoint_wrap .course_img_wrap image {
-  width: 30%;
+.course_order .course_img_wrap image {
+  width: 70%;
 }
 
-.course_appoint_wrap .course_info_wrap {
+.course_order .course_info_wrap {
   flex: 3;
   display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
 }
 
-
-
+.course_order .course_info_wrap .course_name {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  padding-bottom: 10rpx;
+}

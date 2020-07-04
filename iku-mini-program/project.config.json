@@ -166,8 +166,28 @@
 				},
 				{
 					"id": -1,
+<<<<<<< HEAD
 					"name": "pages/appoint/appoint",
 					"pathName": "pages/appoint/appoint",
+=======
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "courseId=1&category=basketball",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/details/details",
+					"pathName": "pages/course/details/details",
+					"query": "courseId=1&category=basketball",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/details/details",
+					"pathName": "pages/course/details/details",
+					"query": "courseId=1&category=basketball",
+>>>>>>> 6025d6de9fad5c3287438711cf9d812c982b4352
 					"scene": null
 				}
 			]

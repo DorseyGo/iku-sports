@@ -1,0 +1,32 @@
+<view class="container detail flex">
+    <view class="cover margin-left-right-24rpx margin-top-10rpx">
+        <image class="radius" src="../../../images/{{category}}_{{course.level}}.png" mode="aspectFill" />
+    </view>
+    <view class="card article margin-top-10rpx radius-24rpx margin-left-right-24rpx flex-sub" >
+        <view class="iku-item">
+            <view class="title">
+                <view class="text-cut">{{course.name}}</view>
+            </view>
+            <view class="content">
+                <view class="desc">
+                    <view class="statistic flex">
+                        <text class="flex-sub">课程：<text class="text-red">{{course.numClasses}}</text> 节</text>
+                        <text>费用：<text class="text-red">{{course.fee}}</text> 元</text>
+                    </view>
+                    <view class="text-content text-desc">
+                        <text space="emsp">  {{course.description || ""}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="action flex">
+                <button class="iku-btn bg-orange flex-sub" bindtap="contact">
+                    联系客服
+                </button>
+                <text space="emsp" class="flex-sub">{{"   "}}</text>
+                <button class="iku-btn bg-red" size="mini" loading="{{loading}}" disabled="{{disabled}}" bindtap="purchase">
+                    购买
+                </button>
+            </view>
+        </view>
+    </view>
+</view>

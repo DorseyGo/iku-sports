@@ -7,6 +7,7 @@ Page({
    * Page initial data
    */
   data: {
+    userInfo: {},
     showLearned: true,
     classes: [],
     user: {},
@@ -47,7 +48,40 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    this.loadUser()
-    this.loadClasses()
+    // this.loadUser()
+    wx.login({
+      success (res) {
+        console.log(res.code)
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: 'http://localhost:9080/sports/user/login',
+            data: {
+              code: res.code
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+    this.loadClasses();
+  },
+
+  handleGetUserInfo: function (e) {
+    console.log(e);
+    console.log(e.detail.userInfo.avatarUrl)
+    wx.setStorageSync('userinfo', e.detail.userInfo);
+    this.setData({
+      userInfo: e.detail.userInfo,
+    })
+  },
+
+  onShow: function(options) {
+    const userinfo = wx.getStorageSync('userinfo')
+    this.setData({
+      userInfo: userinfo,
+      hasUserInfo: true
+    })
   }
 })

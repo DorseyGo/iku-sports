@@ -157,9 +157,21 @@ swiper-item .bottom-mask::after {
   color: var(--orange);
 }
 
+.text-red {
+  color: var(--red);
+  font-weight: 900;
+}
+
 .text-content {
   line-height: 1.6;
+  font-family: PingFangSC-Regular,PingFang SC;
 }
+
+.text-desc {
+  line-height: 50rpx;
+  letter-spacing: 8rpx;
+}
+
 /** the end of text */
 
 /**
@@ -200,6 +212,11 @@ swiper-item .bottom-mask::after {
 
 .bg-red {
   background-color: var(--red);
+  color: var(--white);
+}
+
+.bg-orange {
+  background-color: var(--orange);
   color: var(--white);
 }
 
@@ -397,6 +414,11 @@ swiper-item .bottom-mask::after {
 
 .radius {
   border-radius: 8rpx;
+}
+
+.radius-24rpx {
+  border-top-left-radius: 24rpx;
+  border-top-right-radius: 24rpx;
 }
 
 .round {
@@ -661,6 +683,11 @@ view.iku-list {
   display: flex;
 }
 
+.detail.flex {
+  display: flex;
+  flex-direction: column;
+}
+
 .bottom {
   position: absolute;
   bottom: 0rpx;
@@ -686,10 +713,11 @@ view.about {
   transform: translateX(0rpx);
 }
 
+/*
 .about .iku-item image {
   position: absolute;
   left: 40rpx;
-}
+}*/
 
 .about .iku-item .content {
   position: absolute;
@@ -765,8 +793,8 @@ view.tab {
 }
 
 .iku-list.grid .iku-item image {
-  height: 60rpx;
-  width: 60rpx;
+  height: 90rpx;
+  width: 90rpx;
 }
 
 .border-2rpx {
@@ -795,10 +823,12 @@ view.tab {
   color: var(--black);
   line-height: 100rpx;
   padding: 0 30rpx;
+  font-family: PingFangSC-Regular,PingFang SC;
 }
 
 .card.article .iku-item .content {
   display: flex;
+  padding: 0 30rpx;
 }
 
 .card.article .iku-item .content .desc {
@@ -808,11 +838,31 @@ view.tab {
   justify-content: space-between;
 }
 
+.card.article .iku-item .content .desc .statistic {
+  margin-bottom: 24rpx;
+  font-size: 28rpx;
+  font-weight: 800;
+  font-family: PingFangSC-Regular,PingFang SC;
+}
+
 .card.article .iku-item .content image {
   width: 240rpx;
   height: 6.4em;
-  margin-left: 20rpx;
+  margin-right: 20rpx;
   border-radius: 6rpx;
+}
+
+.card.article .iku-item .content .text-content {
+  font-size: 28rpx;
+  color: #888;
+  overflow: hidden;
+  font-family: PingFangSC-Regular,PingFang SC;
+}
+
+.card.article .iku-item .action {
+  padding: 0 30rpx;
+  position: fixed;
+  bottom: 10rpx;
 }
 
 /* --------------------- */
@@ -823,4 +873,57 @@ image {
   display: inline-block;
   position: relative;
   z-index: 0;
+}
+
+/* ------------------ */
+/* buttons */
+/* ------------------ */
+.iku-btn {
+  position: relative;
+  border: 0rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  height: 64rpx;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  overflow: visible;
+  margin-left: initial;
+  transform: translate(0rpx, 0rpx);
+  margin-left: initial;
+}
+
+/* ----------------------- */
+/* tips */
+/* ----------------------- */
+.tips {
+  width: 100%;
+  font-size: 28rpx;
+  color: #c2c2c2;
+  overflow: hidden;
+  text-align: center;
+  padding: 12rpx;
+}
+
+.text-content.flex {
+  display: flex;
+  flex-direction: row;
+}
+
+navigator.flex-sub {
+  padding: 8rpx;
+}
+
+/* ------------------ */
+view.cover {
+  max-height: 320rpx;
+}
+
+view.cover image {
+  width: 100%;
+  height: 320rpx;
 }

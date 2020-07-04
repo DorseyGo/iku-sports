@@ -23,4 +23,13 @@ public interface CourseService {
      * @return a list of courses.
      */
     List<Course> getCoursesByCategoryId(final short categoryId);
+
+    /**
+     * Returns the course, and the description returned as an aspect of course as well.
+     *
+     * @param courseId the course ID.
+     * @return the course.
+     * @throws ApiServiceException if any errors detected during process.
+     */
+    Course getCourseById(final short courseId) throws ApiServiceException;
 }

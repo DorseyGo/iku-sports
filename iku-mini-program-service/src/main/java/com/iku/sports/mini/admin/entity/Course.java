@@ -21,8 +21,10 @@ public class Course {
     private short id;
     private String name;
     private char level;
-    private String avatar;
     private BigDecimal fee;
     private int numClasses;
 
+    // ------------------------
+    // description collected only when details required.
+    private String description;
 }

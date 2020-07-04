@@ -1,19 +1,51 @@
 <!--pages/appoint/appoint.wxml-->
-<view>
-  <block class="course_appoint_wrap">
-    <!-- 左侧课程图片 -->
-    <view class="course_img_wrap">
-      <image mode="widthFix" src="../../images/basketball_1_3x.png"></image>
+<view class="container">
+  <block>
+    <view class="course_order">
+      <!-- 左侧图片容器 -->
+      <view class="course_img_wrap">
+        <image mode="widthFix" src="http://image1.suning.cn/uimg/b2c/newcatentries/0070134290-000000000149003877_1_800x800.jpg"></image>
+      </view>
+
+      <!-- 右侧商品容器 -->
+      <view class="course_info_wrap">
+        <view class="course_name">篮球基础课程</view>
+        <view class="course_class">课时：5/30</view>
+        <view class="couse_appoint">
+          <navigator url="course-plan/course-plan">课程预约</navigator>
+        </view>
+      </view>
     </view>
 
-    <!-- 右侧课程信息 -->
-    <view class="course_info_wrap">
-      <text>基础篮球课</text>
-      <view class="picker-time-wrap">
-        <picker mode="multiSelector" 
-                value="{{dateTime1}}" bindchange="changeDateTime1"       bindcolumnchange="changeDateTimeColumn1" range="{{dateTimeArray1}}">
-            选择预约时间: {{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}
-        </picker>
+    <view class="course_order">
+      <!-- 左侧图片容器 -->
+      <view class="course_img_wrap">
+        <image mode="widthFix" src="http://image1.suning.cn/uimg/b2c/newcatentries/0070134290-000000000149003877_1_800x800.jpg"></image>
+      </view>
+
+      <!-- 右侧商品容器 -->
+      <view class="course_info_wrap">
+        <view class="course_name">篮球基础课程</view>
+        <view class="course_class">课时：5/30</view>
+        <view class="couse_appoint">
+          <navigator url="course-plan/course-plan">课程预约</navigator>
+        </view>
+      </view>
+    </view>
+
+    <view class="course_order">
+      <!-- 左侧图片容器 -->
+      <view class="course_img_wrap">
+        <image mode="widthFix" src="http://image1.suning.cn/uimg/b2c/newcatentries/0070134290-000000000149003877_1_800x800.jpg"></image>
+      </view>
+
+      <!-- 右侧商品容器 -->
+      <view class="course_info_wrap">
+        <view class="course_name">篮球基础课程</view>
+        <view class="course_class">课时：5/30</view>
+        <view class="couse_appoint">
+          <navigator url="course-plan/course-plan">课程预约</navigator>
+        </view>
       </view>
     </view>
   </block>

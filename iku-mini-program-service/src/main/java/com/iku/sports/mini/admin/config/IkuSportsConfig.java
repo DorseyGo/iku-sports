@@ -28,7 +28,8 @@ public class IkuSportsConfig {
     private String token;
     private String salt;
     private String mchId;
-    private long expiryInDays;
+    @Builder.Default
+    private long expiryInDays = 7;
     private String key;
 
     @Builder.Default

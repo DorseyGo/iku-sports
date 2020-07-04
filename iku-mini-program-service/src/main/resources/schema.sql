@@ -2,13 +2,22 @@ CREATE DATABASE IF NOT EXISTS `iku`;
 USE `iku`;
 
 -- -----------------
+-- system configuration
+-- -----------------
+CREATE TABLE IF NOT EXISTS `sys_config` (
+  `id` INT(4) NOT NULL AUTO_INCREMENT,
+  `sys_key` VARCHAR(32) NOT NULL UNIQUE COMMENT 'the key of the configuration',
+  `sys_value` VARCHAR(64) NOT NULL COMMENT 'the value of the configuration',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+
+-- -----------------
 -- course categories
 -- -----------------
 CREATE TABLE IF NOT EXISTS `category` (
   `id` TINYINT(2) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(24) NOT NULL UNIQUE COMMENT 'the category name',
   `display_name` VARCHAR(24) NOT NULL COMMENT 'the display name',
-  `icon` VARCHAR(255) DEFAULT NULL COMMENT 'the icon for this category',
   `sequence` TINYINT(2) NOT NULL DEFAULT '0' COMMENT 'the sequence',
   `last_modified_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -32,7 +41,6 @@ CREATE TABLE IF NOT EXISTS `activity` (
 CREATE TABLE IF NOT EXISTS `course` (
   `id` TINYINT(2) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(32) NOT NULL COMMENT 'the course name',
-  `avatar` VARCHAR(255) COMMENT 'the avatar, which only stores the relative path',
   `level` CHAR(1) NOT NULL DEFAULT '1' COMMENT '1, for basic, 2 for intermediate, 3 for senior, 4 for advanced',
   `fee` BIGINT(20) NOT NULL DEFAULT '0' COMMENT 'the charge in FEN RMB',
   `description` VARCHAR(255) DEFAULT NULL COMMENT 'the description of the course',
@@ -150,3 +158,42 @@ CREATE TABLE `class_watched_his` (
   `watch_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`class_id`, `user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+
+drop table if exists arrange_class;
+
+/*==============================================================*/
+/* Table: arrange_class                                         */
+/*==============================================================*/
+create table arrange_class
+(
+   id                   int not null,
+   user_id              varchar(32) comment '用户ID',
+   class_id             int comment '课程ID',
+   coach_id             int comment '教练ID',
+   site                 varchar(256) comment '上课地点',
+   begin_time           date comment '开课时间',
+   end_time             date comment '结束时间',
+   duration             int comment '时长(分钟)',
+   create_time          date comment '创建时间',
+   primary key (id)
+);
+
+alter table arrange_class comment '课程排班表';
+
+drop table if exists appointment;
+
+/*==============================================================*/
+/* Table: appointment                                           */
+/*==============================================================*/
+create table appointment
+(
+   id                   int not null,
+   arrange_id           int comment '排班课程ID',
+   user_id              varchar(32) comment '用户ID',
+   status               int comment '状态:0-取消;1-确认',
+   update_time          date comment '更新时间',
+   create_time          date comment '创建时间/预约时间',
+   primary key (id)
+);
+
+alter table appointment comment '用户预约课程表';

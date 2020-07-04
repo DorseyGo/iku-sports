@@ -7,10 +7,10 @@
   </swiper>
 
   <!-- navigator for categories -->
-  <view class="iku-list grid col-2 no-border margin-left-right-24rpx">
+  <view class="iku-list grid col-2 no-border margin-left-right-24rpx radius">
     <navigator url="../course/course?categoryId={{item.id}}" class="iku-item" wx:for="{{categories}}" wx:key="id">
-      <image src="{{item.avatar}}" />
-      <text class="text-normal text-dark-gray margin-top-10rpx">{{item.displayName}}</text>
+      <image src="../../images/{{item.name}}.png" />
+      <text class="text-normal text-dark-gray">{{item.displayName}}</text>
     </navigator>
   </view>
 
@@ -21,7 +21,7 @@
       </view>
     
       <view class="content">
-        <image mode="aspectFill" src="../../images/tennies_2_2x.png" />
+        <image mode="aspectFill" src="../../images/tennis_2.png" />
         <view class="desc">
           <view class="text-content"></view>
         </view>

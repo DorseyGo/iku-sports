@@ -1,0 +1,27 @@
+<!--pages/appoint/course-plan/course-plan.wxml-->
+<view class="container">
+    <view class="course_plan_detail">
+      <view>课时：第 3 节</view>
+      <view>教练：<text>james harden</text></view>
+      <view>时间：<text>2020-07-05 09:30 - 2020-07-05 10:30</text></view>
+      <view>地点：<text>广州天河体育中心</text></view>
+      <view class="course_subscribe">
+        <button class="iku-btn btn" bindtap="subscribe">预约</button>
+      </view>
+      <!--
+      <view class="course_cancel_subscribe">
+        <button bindtap="cancelSubscribe">取消</button>
+      </view>
+      -->
+    </view>
+
+    <view class="course_plan_detail">
+      <view>课时：第 3 节</view>
+      <view>教练：<text>james harden</text></view>
+      <view>时间：<text>2020-07-05 09:30 - 2020-07-05 10:30</text></view>
+      <view class="course_addr">地点：<text>广州天河体育中心</text></view>
+      <view class="course_subscribe">
+        <button class="iku-btn btn" bindtap="subscribe">预约</button>
+      </view>
+    </view>
+</view>
