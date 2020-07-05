@@ -13,12 +13,12 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
-public @interface Map {
+public @interface Key {
 
     /**
-     * Return the key of this map.
+     * Return the value of the key.
      *
-     * @return the key of this map.
+     * @return the value of the key.
      */
-    String key() default "";
+    String value() default "";
 }
