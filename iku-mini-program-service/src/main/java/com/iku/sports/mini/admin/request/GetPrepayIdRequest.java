@@ -6,9 +6,11 @@
  */
 package com.iku.sports.mini.admin.request;
 
-import com.iku.sports.mini.admin.annotation.Map;
+import com.iku.sports.mini.admin.annotation.Key;
+import com.iku.sports.mini.admin.model.Constants;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Tolerate;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.validation.annotation.Validated;
@@ -16,34 +18,36 @@ import org.springframework.validation.annotation.Validated;
 @Data
 @Builder
 @Validated
-public class GetPrepayIdRequest {
+public class GetPrepayIdRequest implements WxRequest {
 
-    @Map(key = "body")
+    @Key( "body")
     @Length(max = 128)
     private String productDescription;
 
-    @Map(key = "out_trade_no")
+    @Key("out_trade_no")
     @Length(max = 32)
     private String orderNo;
 
-    @Map(key = "total_fee")
-    private int totalFee;
+    @Key("total_fee")
+    private double totalFee;
 
-    @Map(key = "spbill_create_ip")
+    @Key("spbill_create_ip")
     @Length(max = 64)
     private String terminalIpAddr;
 
     @URL
     @Length(max = 256)
-    @Map(key = "notify_url")
+    @Key("notify_url")
     private String notifyUrlAddr;
-    private String tradeType = TradeType.JSAPI.name();
+
+    @Key("trade_type")
+    private String tradeType = Constants.TradeType.JSAPI.name();
+
+    @Key("openid")
     private String openId;
 
-    /**
-     * The trade type
-     */
-    public enum TradeType {
-        JSAPI, NATIVE, APP;
+    @Tolerate
+    public GetPrepayIdRequest() {
+        // empty for initialization.
     }
 }

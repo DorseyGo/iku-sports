@@ -6,7 +6,6 @@
  */
 package com.iku.sports.mini.admin.model;
 
-import com.iku.sports.mini.admin.annotation.Map;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
@@ -14,35 +13,19 @@ import lombok.experimental.Tolerate;
 @Data
 @Builder
 public class Prepayment {
-    @Map(key = "appId")
-    protected String appId;
-
-    @Map(key = "timeStamp")
-    protected String timeStamp;
-
-    @Map(key = "nonceStr")
-    protected String nonceStr;
-
-    @Map(key = "package")
-    protected String pckage;
-
-    @Map(key = "signType")
+    private String appId;
+    private String timeStamp;
+    private String nonce;
+    private String pckage;
     @Builder.Default
-    protected String signType = SignType.MD5.getType();
+    private String signType = Constants.SignType.MD5.getType();
+
+    // -----------------------
+    // computed, when prepayment is prepared.
+    // -----------------------
+    private String sign;
 
     @Tolerate
     public Prepayment() {}
 
-
-    public enum SignType {
-        MD5("MD5"), HMAC_SHA256("HMAC-SHA256");
-        private final String type;
-        SignType(final String type) {
-            this.type = type;
-        }
-
-        public String getType() {
-            return type;
-        }
-    }
 }

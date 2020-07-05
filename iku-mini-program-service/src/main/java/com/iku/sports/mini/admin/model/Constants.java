@@ -56,4 +56,22 @@ public interface Constants {
             throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
         }
     }
+
+    enum SignType {
+        MD5("MD5"), HMAC_SHA256("HMAC-SHA256");
+        private final String type;
+        SignType(final String type) {
+            this.type = type;
+        }
+
+
+
+        public String getType() {
+            return type;
+        }
+    }
+
+    enum TradeType {
+        JSAPI, NATIVE, APP;
+    }
 }

@@ -105,30 +105,6 @@ public class Utils {
         return builder.toString();
     }
 
-    public static <T> Map<String, String> toMap(final T obj) {
-        if (obj == null) {
-            return Maps.newHashMapWithExpectedSize(0);
-        }
-
-        final Map<String, String> params = Maps.newHashMapWithExpectedSize(32);
-        ReflectionUtils.doWithFields(obj.getClass(), field -> {
-            ReflectionUtils.makeAccessible(field);
-            com.iku.sports.mini.admin.annotation.Map map = field.getAnnotation(com.iku.sports.mini.admin.annotation.Map.class);
-            params.put(map.key(), (String) field.get(obj));
-        }, field -> field.isAnnotationPresent(com.iku.sports.mini.admin.annotation.Map.class));
-
-        return params;
-    }
-
-    public static <T> SortedMap<String, String> toSortedMap(final T obj) {
-        Map<String, String> hashMap = toMap(obj);
-
-        SortedMap<String, String> sortedMap = Maps.newTreeMap();
-        sortedMap.putAll(hashMap);
-
-        return sortedMap;
-    }
-
     public static String getTimestamp() {
         return String.valueOf((System.currentTimeMillis() / 1000));
     }
