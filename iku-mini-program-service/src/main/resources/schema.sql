@@ -174,6 +174,8 @@ create table arrange_class
    begin_time           date comment '开课时间',
    end_time             date comment '结束时间',
    duration             int comment '时长(分钟)',
+   headcount            int comment '课程总人数',
+   ordercount           int comment '预约人数',
    create_time          date comment '创建时间',
    primary key (id)
 );
@@ -196,4 +198,25 @@ create table appointment
    primary key (id)
 );
 
-alter table appointment comment '用户预约课程表';
+alter table artical comment '文章列表';
+
+drop table if exists article;
+
+/*==============================================================*/
+/* Table: article                                           */
+/*==============================================================*/
+create table article
+(id                   int not null auto_increment comment '文章id',
+   user_id              varchar(32) comment '用户ID',
+   status               int comment '状态:0-未发布;1-已发布',
+   titile               TINYTEXT comment '标题',
+   body_text            TEXT comment '文章内容',
+   picture              VARCHAR (30) comment '文章配图地址',
+   video                varchar(30) comment '视频地址',
+   update_time          date comment '更新时间',
+   create_time          TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间/预约时间',
+   primary key (id)
+);
+
+alter table article comment '文章列表';
+
