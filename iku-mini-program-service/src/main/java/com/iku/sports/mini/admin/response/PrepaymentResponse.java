@@ -1,20 +1,27 @@
-/*
+/**
  * File: PrepaymentResponse
  * Author: DorSey Q F TANG
- * Created: 2020/4/22
+ * Created: 2020/7/5 11:22
  * CopyRight: All rights reserved
  */
 package com.iku.sports.mini.admin.response;
 
-import com.iku.sports.mini.admin.annotation.Map;
-import com.iku.sports.mini.admin.model.Prepayment;
+import com.iku.sports.mini.admin.model.Constants;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
 @Data
-public class PrepaymentResponse extends Prepayment {
+@Builder
+public class PrepaymentResponse {
+    private String appId;
+    private String nonce;
     private String sign;
+    private String tradeType = Constants.TradeType.JSAPI.name();
+    private String prepayId;
 
-    public PrepaymentResponse() {}
+    @Tolerate
+    public PrepaymentResponse() {
+        // empty for initialization.
+    }
 }

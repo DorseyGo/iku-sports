@@ -1,4 +1,4 @@
-  /* 列表 */
+/* 列表 */
   .person-list {
     display: flex;
     flex-direction: column;
@@ -32,3 +32,28 @@
     background: rgb(172, 170, 170);
     margin-left: 90rpx;
   }
+.head {
+  display: flex;
+  flex-direction: row;
+}
+
+.head image {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.head button {
+  margin-left: 0rpx;
+  border: 0rpx;
+  color: white;
+  font-weight: normal;
+  margin-top: 35rpx;
+}
+
+.head .username {
+  color: white;
+  font-weight: normal;
+  margin-top: 45rpx;
+}

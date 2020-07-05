@@ -6,6 +6,7 @@
  */
 package com.iku.sports.mini.admin.service;
 
+import com.iku.sports.mini.admin.entity.User;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 
 /**
@@ -21,4 +22,13 @@ public interface UserService {
      * @throws ApiServiceException if any error detected during the process.
      */
     String doLoginAndReturnToken(final String code) throws ApiServiceException;
+
+    /**
+     * Returns the user for the given user ID. Throws ApiServiceException if any DB error detected
+     * or the user queried is null.
+     *
+     * @param userId the user ID.
+     * @return the user.
+     */
+    User getUserById(final String userId) throws ApiServiceException;
 }

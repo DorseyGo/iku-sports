@@ -1,0 +1,31 @@
+/* pages/appoint/course-plan/course-plan.wxss */
+.course_plan_detail {
+  width: 96%;
+  text-align: left;
+  margin-top: 5rpx;
+  margin-left: 15rpx;
+  padding-left: 20rpx;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+  font-size: 30rpx;
+  background-color: #FFFFFF;
+  border-radius: 15rpx;
+}
+
+.course_plan_detail .course_addr {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.course_plan_detail .course_subscribe {
+  text-align: right;
+  margin-right: 20rpx;
+}
+
+.course_plan_detail .course_subscribe .btn {
+  font-weight: normal;
+  font-size: 30rpx;
+  width: 200rpx;
+}

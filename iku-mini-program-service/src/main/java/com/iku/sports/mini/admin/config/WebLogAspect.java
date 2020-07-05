@@ -48,7 +48,7 @@ public class WebLogAspect {
 
         long endTime = System.currentTimeMillis();
 
-        log.info("request url: {}, response:{}, cost time: {}", url, outputResponse ? JsonUtil.toJSONString(result) : "", endTime - startTime);
+        log.info("request url: {}, response:{}, cost time: {} ms", url, outputResponse ? JsonUtil.toJSONString(result) : "", endTime - startTime);
 
         return result;
     }

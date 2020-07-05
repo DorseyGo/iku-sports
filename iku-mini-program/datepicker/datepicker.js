@@ -1,5 +1,5 @@
-// pages/appoint/appoint.js
-const dateTimePicker = require('../../utils/dateTimePicker');
+// datepicker/datepicker
+const dateTimePicker = require("../utils/dateTimePicker");
 
 Page({
 

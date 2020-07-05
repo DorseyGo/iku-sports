@@ -9,11 +9,12 @@ package com.iku.sports.mini.admin.controller;
 import com.iku.sports.mini.admin.annotation.WebLog;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.Response;
+import com.iku.sports.mini.admin.request.LoginRequest;
 import com.iku.sports.mini.admin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,13 +28,13 @@ public class UserController {
     /**
      * Login, and fetch openID and session key from WeChat server.
      *
-     * @param code the code, according to which the open ID and session key can be fetched.
+     * @param loginRequest the code, according to which the open ID and session key can be fetched.
      * @return the token which implies the open ID and session key.
      */
     @WebLog
-    @RequestMapping("/user/login")
-    public Response<String> login(@RequestParam("code") final String code) throws ApiServiceException {
-        final String token = userService.doLoginAndReturnToken(code);
+    @PostMapping("/user/login")
+    public Response<String> login(@RequestBody LoginRequest loginRequest) throws ApiServiceException {
+        final String token = userService.doLoginAndReturnToken(loginRequest.getCode());
         return Response.ok(token);
     }
 }

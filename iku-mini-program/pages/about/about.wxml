@@ -1,5 +1,13 @@
 <view class="container">
     <view class="about mg-left-xl margin-top-22rpx">
+        
+        <view class="head">
+            <image mode="aspectFit" src="{{!userInfo.nickName ? '../../images/grey_head.jpg' : userInfo.avatarUrl }}"></image>
+            <button wx:if="{{!userInfo.nickName}}" plain size="mini" open-type="getUserInfo" bindgetuserinfo="handleGetUserInfo">登录</button>
+            <text class="username">{{userInfo.nickName}}</text>
+        </view>
+        
+        <!--
         <view class="iku-item">
             <image class="round sm" src="{{user.avatarUrl}}" mode="aspectFill" />
             <view class="content">
@@ -7,12 +15,15 @@
                 <view class="text-sm-26rpx text-dark-gray">{{user.telephone}}</view>
             </view>
         </view>
+        -->
 
         <view class="iku-item flex top-border-dark-gray text-white text-sm-26rpx">
-            <view class="item flex-sub">
+            <navigator class="item flex-sub" url="../appoint/appoint?userId={{userId}}">
                 <text class="text-normal">{{user.numCourses}}</text>
-                <text class="text-dark-gray">近期预约课程</text>
-            </view>
+            
+                <text class="text-dark-gray">我的课程</text>
+            </navigator>
+             
             <view class="item flex-sub">
                 <text class="text-normal">{{user.numAttentions}}</text>
                 <text class="text-dark-gray">我的关注</text>
@@ -21,8 +32,8 @@
     </view>
     
     <view class="flex text-center tab mg-left-16rpx margin-top-lg text-dark-gray text-sm-30rpx">
-        <view class="tab-item {{showLearned ? 'cur text-white': ''}}" index= 1 bindtap="toggleLearned">已学课程</view>
-        <view class="tab-item {{showLearned ? '' : 'cur text-white'}}" index = 2 bindtap="toggleLearned">收藏课程</view>
+        <view class="tab-item {{showLearned ? 'cur text-white': ''}}" bindtap="toggleLearned">已学课程</view>
+        <view class="tab-item {{showLearned ? '' : 'cur text-white'}}" bindtap="toggleLearned">收藏课程</view>
     </view>
     
     

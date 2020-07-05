@@ -713,10 +713,11 @@ view.about {
   transform: translateX(0rpx);
 }
 
+/*
 .about .iku-item image {
   position: absolute;
   left: 40rpx;
-}
+}*/
 
 .about .iku-item .content {
   position: absolute;

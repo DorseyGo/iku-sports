@@ -56,7 +56,8 @@ public class IkuSportsConfig {
         final WxMpInMemoryConfigStorage inMemStorage = new WxMpInMemoryConfigStorage();
         inMemStorage.setSecret(secret);
         inMemStorage.setAppId(appId);
-        inMemStorage.setToken(token);
+        // no need token under this circumstance.
+//        inMemStorage.setToken(token);
 
         return inMemStorage;
     }
