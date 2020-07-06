@@ -13,33 +13,29 @@ import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 import javax.validation.constraints.NotNull;
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Repository("orderRepository")
 public interface OrderRepository {
     String TABLE = "order";
-    String TABLE_COURSE = "course";
 
     @InsertProvider(type = OrderSQLProvider.class, method = "save")
     void save(Order order) throws DataAccessException;
 
-    @Results(id = "orderRM", value = {
-            @Result(property = "orderId", column = "id", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "fee", column = "fee", jdbcType = JdbcType.BIGINT),
-            @Result(property = "discount", column = "discount", jdbcType = JdbcType.FLOAT),
-            @Result(property = "productName", column = "name", jdbcType = JdbcType.VARCHAR)
-    })
-    @SelectProvider(type = OrderSQLProvider.class, method = "findOrderById")
-    Order findOrderById(@NotNull @Param("orderId") String orderId) throws DataAccessException;
+    @UpdateProvider(type = OrderSQLProvider.class, method = "updateTransIdAndPaidTimeById")
+    void updateTransIdAndPaidTimeById(@Param("transactionId") String transactionId, @Param("paidTime") Date paidTime,
+            @Param("orderId") String orderId) throws DataAccessException;
 
     // -----
     // SQL provider
     // -----
     class OrderSQLProvider {
-        static final List<String> COLS = Lists.newArrayList("o.id", "o.fee", "o.discount", "c.name");
 
         public String save(final Order order) {
             return new SQL() {
@@ -50,9 +46,16 @@ public interface OrderRepository {
                     }
 
                     VALUES("fee", "#{fee}");
-                    VALUES("discount", "#{discount}");
                     VALUES("status", "#{status}");
-                    VALUES("course_id", "#{courseId}");
+                    VALUES("product_type", "#{productType}");
+
+                    if (order.getDiscount() != null) {
+                        VALUES("discount", "#{discount}");
+                    }
+
+                    if (order.getProductId() != null) {
+                        VALUES("product_id", "#{productId}");
+                    }
 
                     if (order.getUserId() != null) {
                         VALUES("user_id", "#{userId}");
@@ -61,13 +64,21 @@ public interface OrderRepository {
             }.toString();
         }
 
-        public String findOrderById(final Map<String, Object> params) {
+        public String updateTransIdAndPaidTimeById(final Map<String, Object> params) {
             return new SQL() {
                 {
-                    SELECT(COLS.toArray(new String[COLS.size()]));
-                    FROM(TABLE + " o");
-                    INNER_JOIN(TABLE_COURSE + " c ON o.course_id = c.id");
-                    WHERE("o.id = #{orderId}");
+                    UPDATE(TABLE);
+                    if (params.get("transactionId") != null) {
+                        SET("transaction_id", "#{transactionId}");
+                    }
+
+                    if (params.get("paidTime") != null) {
+                        SET("paid_time", "#{paidTime}");
+                    }
+
+                    if (params.get("orderId") != null) {
+                        WHERE("id", "#{orderId}");
+                    }
                 }
             }.toString();
         }

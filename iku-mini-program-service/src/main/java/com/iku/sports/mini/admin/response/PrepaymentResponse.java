@@ -17,6 +17,7 @@ public class PrepaymentResponse {
     private String appId;
     private String nonce;
     private String sign;
+    @Builder.Default
     private String tradeType = Constants.TradeType.JSAPI.name();
     private String prepayId;
 

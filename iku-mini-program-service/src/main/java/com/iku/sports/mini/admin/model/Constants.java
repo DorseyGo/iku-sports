@@ -10,6 +10,10 @@ import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * The constants which enumerates all available constants used in entire project.
  */
@@ -17,6 +21,8 @@ public interface Constants {
     String FORWARD_SLASH = "/";
     int OK_REQ = 0;
     int FAIL_REQ = -1;
+
+    BigDecimal ONE_HUNDRED = new BigDecimal(100);
 
     /* configurations for WeChat */
     String URL_JS_CODE_2_SESSION = "https://api.weixin.qq.com/sns/jscode2session";
@@ -29,6 +35,18 @@ public interface Constants {
     String FAIL = "FAIL";
 
     int DEFAULT_PAGE_SIZE = 5;
+    String RESP_2_WECHAT = "<xml>\n" +
+                           "  <return_code><![CDATA[%s]]></return_code>\n" +
+                           "  <return_msg><![CDATA[%s]]></return_msg>\n" +
+                           "</xml>";
+
+    String DATE_PATTERN_WECHAT = "yyyyMMddHHmmss";
+    ThreadLocal<DateFormat> DATE_FORMATTER_WECHAT = new ThreadLocal<DateFormat>() {
+        @Override
+        protected DateFormat initialValue() {
+            return new SimpleDateFormat(DATE_PATTERN_WECHAT);
+        }
+    };
 
     @Slf4j
     enum CourseLevel {
@@ -60,10 +78,10 @@ public interface Constants {
     enum SignType {
         MD5("MD5"), HMAC_SHA256("HMAC-SHA256");
         private final String type;
+
         SignType(final String type) {
             this.type = type;
         }
-
 
 
         public String getType() {
@@ -78,7 +96,7 @@ public interface Constants {
     /**
      * Enumerate all available order status.
      */
-    public enum OrderStatus {
+    enum OrderStatus {
         UN_PAID('0'), PAID('1'), REFUND('2'), CANCEL('3');
         private char code;
 
@@ -98,6 +116,28 @@ public interface Constants {
         }
 
         public char getCode() {
+            return code;
+        }
+    }
+
+    enum ProductType {
+        COURSE((short) 0), SPORTS_GOODS((short) 1);
+        private final short code;
+
+        ProductType(short code) {this.code = code;}
+
+        public static ProductType codeOf(final short code) {
+            final ProductType[] prodTypes = ProductType.values();
+            for (ProductType productType : prodTypes) {
+                if (productType.code == code) {
+                    return productType;
+                }
+            }
+
+            throw new RuntimeException("==> Product Type " + code + " is not supported");
+        }
+
+        public short getCode() {
             return code;
         }
     }

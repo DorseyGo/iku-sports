@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -19,7 +20,7 @@ public class Order {
     private String orderId;
     private String productName;
     private int fee;
-    private double discount;
+    private BigDecimal discount;
     private int moneyPaid;
     private long moneyRefund;
 
@@ -36,10 +37,14 @@ public class Order {
     private String userId;
     private Date paidTime;
 
+    // ---------------------------
+    // transaction id, generated when this order is paid
+    // ---------------------------
+    private String transactionId;
+
     @Tolerate
     public Order() {
         // empty
     }
-
 
 }

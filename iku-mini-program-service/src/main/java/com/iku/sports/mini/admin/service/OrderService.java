@@ -12,6 +12,10 @@ import com.iku.sports.mini.admin.request.NewOrderRequest;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * The business service, which focuses on process <tt>order</tt> resource.
+ */
 public interface OrderService {
 
+    void updateTransIdAndPaidTimeById(String transactionId, String endTime, String orderId);
 }

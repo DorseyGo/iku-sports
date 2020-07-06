@@ -26,6 +26,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolationException;
+
 @Slf4j
 @Transactional
 @Service("userService")
@@ -60,6 +62,16 @@ public class UserServiceImpl implements UserService {
         }
 
         return saveOpenIdAndSessionKey(resp.getOpenId(), resp.getSessionKey());
+    }
+
+    @Override
+    public User getUserById(String userId) throws ApiServiceException {
+        if (Strings.isNullOrEmpty(userId)) {
+            log.error("==> Required user id");
+            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
+        }
+
+        return userRepository.findUserById(userId);
     }
 
     @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
