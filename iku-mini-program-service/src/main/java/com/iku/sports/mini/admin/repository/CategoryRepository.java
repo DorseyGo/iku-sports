@@ -6,6 +6,7 @@
  **/
 package com.iku.sports.mini.admin.repository;
 
+import com.google.common.collect.Lists;
 import com.iku.sports.mini.admin.entity.Category;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -15,7 +16,6 @@ import org.apache.ibatis.type.JdbcType;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Repository("categoryRepository")
@@ -36,7 +36,7 @@ public interface CategoryRepository {
     // SQL provider
     // ---
     class CategorySQLProvider {
-        static final List<String> COLS = Arrays.asList("id", "name", "display_name", "sequence");
+        static final List<String> COLS = Lists.newArrayList("id", "name", "display_name", "sequence");
 
         public String findAll() {
             return new SQL() {
