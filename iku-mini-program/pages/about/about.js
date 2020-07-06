@@ -11,7 +11,18 @@ Page({
     showLearned: true,
     classes: [],
     user: {},
-    userId: "e9b6ea6f672086252a83a48be2198d63"
+    userId: "e9b6ea6f672086252a83a48be2198d63",
+    list:[{
+      url:"../../images/header.jpeg",
+      name:"初级网球课"
+    },{
+      url:"../../images/header.jpeg",
+      name:"初级网球课"
+    },
+    {
+      url:"../../images/header.jpeg",
+      name:"初级网球课"
+    }]
   },
 
   toggleLearned: function() {

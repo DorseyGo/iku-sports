@@ -1,7 +1,7 @@
 <view class="container">
-    <view class="about mg-left-xl margin-top-22rpx">
+    <view class=" card about  margin-top-22rpx margin-left-right-24rpx radius border-2rpx">
         
-        <view class="head">
+        <view class=" head">
             <image mode="aspectFit" src="{{!userInfo.nickName ? '../../images/grey_head.jpg' : userInfo.avatarUrl }}"></image>
             <button wx:if="{{!userInfo.nickName}}" plain size="mini" open-type="getUserInfo" bindgetuserinfo="handleGetUserInfo">登录</button>
             <text class="username">{{userInfo.nickName}}</text>
@@ -16,11 +16,10 @@
             </view>
         </view>
         -->
-
+<!-- 
         <view class="iku-item flex top-border-dark-gray text-white text-sm-26rpx">
             <navigator class="item flex-sub" url="../appoint/appoint?userId={{userId}}">
-                <text class="text-normal">{{user.numCourses}}</text>
-            
+                <text class="text-normal">{{user.numCourses}}</text>            
                 <text class="text-dark-gray">我的课程</text>
             </navigator>
              
@@ -28,17 +27,33 @@
                 <text class="text-normal">{{user.numAttentions}}</text>
                 <text class="text-dark-gray">我的关注</text>
             </view>
+        </view> -->
+    </view>
+    <view class="line margin-top-10rpx"></view>
+
+    <view class="flex text-center tab mg-left-16rpx margin-top-10rpx text-dark-gray text-sm-30rpx">
+        <view class="tab-item" bindtap="toggleLearned">
+            <text text-align = "left">已学课程</text>
+            <text text-align = "right">更多</text>           
+        </view>         
+        <!-- <view class="tab-item {{showLearned ? '' : 'cur text-white'}}" bindtap="toggleLearned">收藏课程</view> -->
+    </view>
+    <!-- 外层视图容器 -->
+    <view class="section">
+    <!-- scroll视图容器 -->
+    <scroll-view class="scroll_view" scroll-x="true">
+    <!-- 滚动列表内容 -->
+        <view class="cont" wx:for="{{list}}" wx:key="{{item}}">
+         <!-- 滚动图片 -->
+        <image src="{{item.url}}"class="cont_img"/>
+         <!-- 滚动文本 -->
+        <view class="content">
+            <view  class="cont_name" >{{item.name}}</view>            
         </view>
-    </view>
-    
-    <view class="flex text-center tab mg-left-16rpx margin-top-lg text-dark-gray text-sm-30rpx">
-        <view class="tab-item {{showLearned ? 'cur text-white': ''}}" bindtap="toggleLearned">已学课程</view>
-        <view class="tab-item {{showLearned ? '' : 'cur text-white'}}" bindtap="toggleLearned">收藏课程</view>
-    </view>
-    
-    
-    
-    
+        </view>
+    </scroll-view>
+    </view>    
+    <view class="line margin-top-10rpx"></view>
     <view class="iku-list margin-top-22rpx">
         <view class="list-item">
             <image class="item-image" src="../../images/清单.png" />
