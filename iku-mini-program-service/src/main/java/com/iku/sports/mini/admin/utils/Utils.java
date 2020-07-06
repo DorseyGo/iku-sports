@@ -14,6 +14,7 @@ import com.google.common.collect.Maps;
 import com.iku.sports.mini.admin.annotation.Params;
 import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.request.QueryParams;
+import com.iku.sports.mini.admin.response.Resp2Wechat;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.ReflectionUtils;
 
@@ -53,7 +54,7 @@ public class Utils {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(suffix), "suffix missed");
 
         return prefix.replaceAll(delim + "$", "")
-                + delim + suffix.replaceAll("^" + delim, "");
+               + delim + suffix.replaceAll("^" + delim, "");
     }
 
     public static <T extends QueryParams> String genQueryParams(final T queryParams) {
@@ -63,9 +64,9 @@ public class Utils {
             ReflectionUtils.makeAccessible(field);
 
             String param = String.format(Locale.ROOT, "%s=%s",
-                                         field.getAnnotation(Params.class)
-                                                 .key(),
-                                         field.get(queryParams));
+                    field.getAnnotation(Params.class)
+                            .key(),
+                    field.get(queryParams));
 
             params.add(param);
         }, field -> field.isAnnotationPresent(Params.class));
@@ -105,10 +106,6 @@ public class Utils {
         return builder.toString();
     }
 
-    public static String getTimestamp() {
-        return String.valueOf((System.currentTimeMillis() / 1000));
-    }
-
     public static String genUUID(final int len) {
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         if (uuid.length() < len) {
@@ -118,42 +115,19 @@ public class Utils {
         return uuid.substring(0, len);
     }
 
-    public static String sign(final SortedMap<String, String> params, final String key) {
-        final StringBuilder builder = new StringBuilder();
-        params.forEach((k, value) -> {
-            if (!Strings.isNullOrEmpty(value) && !k.equalsIgnoreCase(key)) {
-                builder.append(String.format(Locale.ROOT, "%s=%s&", k, value));
-            }
-        });
-
-        builder.append(String.format(Locale.ROOT, "key=%s", key));
-        return md5(builder.toString()).toUpperCase();
-    }
-
-    public static byte[] read(final InputStream is) throws IOException {
-        ByteArrayOutputStream baos = null;
-        try {
-            baos = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int len = 0;
-            while ((len = is.read(buffer)) != -1) {
-                baos.write(buffer, 0, len);
-            }
-
-            baos.flush();
-            return baos.toByteArray();
-        } finally {
-            if (baos != null) {
-                baos.close();
-            }
-
-            if (is != null) {
-                is.close();
-            }
-        }
-    }
-
     public static int paginateOffset(int curPage, int pageSize) {
         return (curPage - 1) * pageSize;
+    }
+
+    public static String genWxPackage(final String prepayId) {
+        return String.format(Locale.ROOT, "prepay_id=%s", prepayId);
+    }
+
+    public static String getTimestamp() {
+        return String.valueOf((System.currentTimeMillis() / 1000));
+    }
+
+    public static String toWxXmlResponse(final Resp2Wechat resp) {
+        return String.format(Locale.ROOT, Constants.RESP_2_WECHAT, resp.getReturnCode(), resp.getReturnMessage());
     }
 }

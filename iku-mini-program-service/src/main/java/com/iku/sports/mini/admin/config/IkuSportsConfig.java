@@ -40,6 +40,7 @@ public class IkuSportsConfig {
      */
     private String machineIpAddr;
     private String notifyUrlAddr;
+    private String wxApiKey;
 
     @Tolerate
     public IkuSportsConfig() {}
