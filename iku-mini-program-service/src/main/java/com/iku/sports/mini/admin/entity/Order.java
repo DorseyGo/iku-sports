@@ -6,20 +6,22 @@
  */
 package com.iku.sports.mini.admin.entity;
 
+import com.iku.sports.mini.admin.model.Constants;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
+
+import java.util.Date;
 
 @Data
 @Builder
 public class Order {
     private String orderId;
+    private String productName;
     private int fee;
-    private short courseId;
-    private String userId;
-    private float discount;
+    private double discount;
     private int moneyPaid;
-    private long refundMoney;
+    private long moneyRefund;
 
     /**
      * 0, for unpaid,
@@ -28,39 +30,16 @@ public class Order {
      * 3, for cancel
      */
     @Builder.Default
-    private char status = OrderStatus.UN_PAID.getCode();
-    // computed by course id.
-    private String productName;
+    private char status = Constants.OrderStatus.UN_PAID.getCode();
+    private String productId;
+    private short productType;
+    private String userId;
+    private Date paidTime;
 
     @Tolerate
     public Order() {
         // empty
     }
 
-    /**
-     * Enumerate all available order status.
-     */
-    public enum OrderStatus {
-        UN_PAID('0'), PAID('1'), REFUND('2'), CANCEL('3');
-        private char code;
 
-        OrderStatus(final char code) {
-            this.code = code;
-        }
-
-        public static OrderStatus orderStatus(final char code) {
-            final OrderStatus[] orderStatuses = OrderStatus.values();
-            for (int index = 0; index < orderStatuses.length; index++) {
-                if (orderStatuses[index].code == code) {
-                    return orderStatuses[index];
-                }
-            }
-
-            throw new RuntimeException("code " + code + " is not recognized as order status");
-        }
-
-        public char getCode() {
-            return code;
-        }
-    }
 }

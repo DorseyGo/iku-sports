@@ -87,13 +87,16 @@ CREATE TABLE IF NOT EXISTS `coach`(
 CREATE TABLE IF NOT EXISTS `order`(
   `id` VARCHAR(32) NOT NULL,
   `fee` BIGINT(20) NOT NULL DEFAULT '0' COMMENT 'the original fee',
-  `discount` FLOAT NOT NULL DEFAULT '1.00f' COMMENT 'the discount',
+  `discount` DECIMAL(3, 2) NOT NULL DEFAULT '1.00' COMMENT 'the discount',
   `money_paid` BIGINT(20) NOT NULL DEFAULT '0' COMMENT 'money paid by user',
-  `paid_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `refund_money` BIGINT(20) NOT NULL DEFAULT '0',
+  `money_refund` BIGINT(20) NOT NULL DEFAULT '0',
   `status` CHAR(1) DEFAULT '0' COMMENT '0 for unpaid, 1 for paid, 2 for refund, 3 for cancel',
-  `course_id` TINYINT(2) NOT NULL,
-  `user_id` CHAR(32) NOT NULL,
+  `product_id` VARCHAR(32) NOT NULL COMMENT 'the product ID',
+  `product_type` VARCHAR(12) NOT NULL DEFAULT 'course' COMMENT 'course & sports goods',
+  `user_id` CHAR(32) NOT NULL COMMENT 'the user id',
+  `paid_time` DATETIME DEFAULT NULL COMMENT 'the time when paid',
+  `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'the order created time',
+  `last_modify_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'the time when order modified',
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 

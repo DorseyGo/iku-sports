@@ -68,20 +68,6 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/article/list/list",
-					"pathName": "pages/article/list/list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/course/list/list",
-					"pathName": "pages/course/list/list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "pages/index/index",
 					"pathName": "pages/index/index",
 					"query": "",
@@ -89,76 +75,6 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/course/classes/list",
-					"pathName": "pages/course/classes/list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/about/about",
-					"pathName": "pages/about/about",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 6,
-					"name": "pages/course/classes/detail/details",
-					"pathName": "pages/course/classes/detail/details",
-					"query": "classId=1",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/course/list/list",
-					"pathName": "pages/course/list/",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/course/classes/list",
-					"pathName": "pages/course/classes/list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/course/coach/coach.wxml",
-					"pathName": "pages/course/coach/coach.wxml",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 10,
-					"name": "pages/course/coach/coach",
-					"pathName": "pages/course/coach/coach",
-					"query": "coachId=2",
-					"scene": null
-				},
-				{
-					"id": 11,
-					"name": "pages/course/coach/coach",
-					"pathName": "pages/course/coach/coach",
-					"query": "coachId=2",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/course/classes/detail/details",
-					"pathName": "pages/course/classes/detail/details",
-					"query": "classId=1",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/course/classes/detail/details",
-					"pathName": "pages/course/classes/detail/details",
-					"query": "classId=1",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "pages/about/about",
 					"pathName": "pages/about/about",
 					"query": "",
@@ -166,12 +82,8 @@
 				},
 				{
 					"id": -1,
-<<<<<<< HEAD
 					"name": "pages/appoint/appoint",
 					"pathName": "pages/appoint/appoint",
-=======
-					"name": "pages/index/index",
-					"pathName": "pages/index/index",
 					"query": "courseId=1&category=basketball",
 					"scene": null
 				},
@@ -180,14 +92,6 @@
 					"name": "pages/course/details/details",
 					"pathName": "pages/course/details/details",
 					"query": "courseId=1&category=basketball",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/course/details/details",
-					"pathName": "pages/course/details/details",
-					"query": "courseId=1&category=basketball",
->>>>>>> 6025d6de9fad5c3287438711cf9d812c982b4352
 					"scene": null
 				}
 			]
