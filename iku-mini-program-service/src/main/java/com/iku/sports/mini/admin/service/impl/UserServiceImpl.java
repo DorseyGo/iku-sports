@@ -70,4 +70,10 @@ public class UserServiceImpl implements UserService {
 
         return id;
     }
+
+    @Override
+    public User getUserById(String userId) throws ApiServiceException {
+        //TODO
+        return null;
+    }
 }

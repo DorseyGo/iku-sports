@@ -22,11 +22,34 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Transactional
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
+    private OrderRepository orderRepository;
+
+    @Autowired
+    public OrderServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
+    @Override
+    public List<Integer> findPurchasedCourse(String userId) {
+        List<Order> orders = orderRepository.findOrderByUserId(userId);
+        if (CollectionUtils.isEmpty(orders)) {
+            return Collections.emptyList();
+        }
+
+        return orders.stream()
+                    .map(Order::getCourseId)
+                    .map(Integer::valueOf)
+                    .collect(Collectors.toList());
+    }
 }

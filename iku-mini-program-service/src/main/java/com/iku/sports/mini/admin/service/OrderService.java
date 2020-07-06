@@ -6,12 +6,13 @@
  */
 package com.iku.sports.mini.admin.service;
 
-import com.iku.sports.mini.admin.entity.Order;
-import com.iku.sports.mini.admin.exception.ApiServiceException;
-import com.iku.sports.mini.admin.request.NewOrderRequest;
-
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public interface OrderService {
-
+    /**
+     * return the sort of unique id of purchased course specified by {@code userId}
+     * @param userId unique id of user
+     * @return
+     */
+    List<Integer> findPurchasedCourse(String userId);
 }

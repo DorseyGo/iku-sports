@@ -5,7 +5,7 @@
 			<view class="iku-item" wx:key="1000">
 				<view class="content">
 					<view class="desc">
-						<view class="text-content">课时：第 3 节</view>
+						<view class="text-content">课时：第 <text class="text-red">3</text> 节</view>
             <view class="text-content course_name">
 							讲解内容：<text class="text-red">运球</text>
 						</view>

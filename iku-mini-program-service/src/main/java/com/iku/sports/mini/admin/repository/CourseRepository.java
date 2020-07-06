@@ -46,6 +46,20 @@ public interface CourseRepository {
     @SelectProvider(type = CourseSQLProvider.class, method = "findCourseById")
     Course findCourseById(@Param("courseId") final short courseId) throws DataAccessException;
 
+    @ResultMap("courseDetailRM")
+    @Select({
+            "<script>",
+                "SELECT c.id, c.name, c.level, c.fee/100 fee_in_yuan, c.description, COUNT(cl.id) num_classes FROM course c ",
+                "left outer join class cl on c.id = cl.course_id ",
+                "where c.id in ",
+                "<foreach collection='courseIds' item='courseId' open='(' separator=',' close=')'>",
+                "#{courseId}",
+                "</foreach>",
+                "group by c.id",
+            "</script>"
+    })
+    List<Course> batchFindCourses(@Param("courseIds") List<Integer> courseIds);
+
     // -----
     // SQL provider
     // -----

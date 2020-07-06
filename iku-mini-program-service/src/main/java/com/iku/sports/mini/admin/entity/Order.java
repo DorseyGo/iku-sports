@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
+import java.util.Date;
+
 @Data
 @Builder
 public class Order {
@@ -20,6 +22,7 @@ public class Order {
     private float discount;
     private int moneyPaid;
     private long refundMoney;
+    private Date paidTime;
 
     /**
      * 0, for unpaid,

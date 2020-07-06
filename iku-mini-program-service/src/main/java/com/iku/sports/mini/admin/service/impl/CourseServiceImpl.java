@@ -64,6 +64,14 @@ public class CourseServiceImpl implements CourseService {
         }
     }
 
+    @Override
+    public List<Course> getCourses(List<Integer> courseIds) {
+        List<Course> courses = courseRepository.batchFindCourses(courseIds);
+        courses.forEach(this::postProcess);
+
+        return courses;
+    }
+
     private void postProcess(final Course course) {
         course.setFee(course.getFee().setScale(2, RoundingMode.HALF_UP));
     }

@@ -1,4 +1,6 @@
 // pages/appoint/appoint.js
+const request = require("../../utils/request");
+
 Page({
 
   /**
@@ -12,7 +14,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.userId)
+    console.log(options.userId);
+    let userId = options.userId
+    request.get(`appoint/course/list/${userId}`)
+           .then(res => {
+              console.log(res);
+           })
   },
 
   navigateCoursePlan: function (e) {

@@ -17,7 +17,6 @@
 							课程内容：<text class="course_label text-red">运球</text>
 							<text class="course_label text-red">投篮</text>
 						</view>
-						<view class="text-content">教练：<text>harden</text></view>
 						<view class="course_evaluate"><text>好评度95%</text></view>
 						<view class="text-content flex">
 							<view class="flex-sub"></view>
