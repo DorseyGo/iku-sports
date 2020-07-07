@@ -56,7 +56,7 @@ public class WxApiService {
             return objectMapper.readValue(json.getBytes(StandardCharsets.UTF_8), resp);
         } catch (WxErrorException ex) {
             log.error("==> Failed to issue request to wechat server", ex);
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
+            throw new ApiServiceException(IkuSportsError.LOGIN_ERR);
         } catch (IOException e) {
             log.error("==> Failed to parse the json: {}", json, e);
             throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
@@ -97,7 +97,7 @@ public class WxApiService {
 
         if (prepayId == null) {
             log.error("==> No prepay ID generate when issue request to WeChat");
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
+            throw new ApiServiceException(IkuSportsError.UNIFORM_ORDER_ERR);
         }
 
         return PrepaymentResponse.builder()

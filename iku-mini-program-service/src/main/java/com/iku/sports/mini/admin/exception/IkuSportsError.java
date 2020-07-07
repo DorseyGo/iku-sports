@@ -16,6 +16,16 @@ public enum IkuSportsError {
     INTERNAL_ERR(2000, "Server Internal Error"),
     SYSTEM_ERR(2001, "Connection error"),
 
+    // ----
+    // login problem
+    // ----
+    LOGIN_ERR(3000, "Login failed"),
+
+    // ----
+    // payment related error
+    // ----
+    UNIFORM_ORDER_ERR(4000, "Uniform order failed"),
+
     // ------
     // Parameters error
     // ------
