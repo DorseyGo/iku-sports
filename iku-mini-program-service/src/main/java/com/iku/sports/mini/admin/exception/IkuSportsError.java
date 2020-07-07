@@ -10,13 +10,26 @@ import java.util.Locale;
 
 /**
  * Enumeration, which enumerates all available errors.
- * 错误代码
- * 错误代码[1000, 2000)，统一返回前端错误信息 网络异常，请稍后重试；
- * 错误代码[2000, 3000)，原样返回错误代码对应的异常信息
  *
  */
 public enum IkuSportsError {
-    INTERNAL_ERR(2000, "系统内部错误");
+    INTERNAL_ERR(2000, "Server Internal Error"),
+    SYSTEM_ERR(2001, "Connection error"),
+
+    // ----
+    // login problem
+    // ----
+    LOGIN_ERR(3000, "Login failed"),
+
+    // ----
+    // payment related error
+    // ----
+    UNIFORM_ORDER_ERR(4000, "Uniform order failed"),
+
+    // ------
+    // Parameters error
+    // ------
+    PARAM_VALIDATION_FAIL(-1, "Parameters required error");
 
     private final int errorCode;
     private final String errorMessage;

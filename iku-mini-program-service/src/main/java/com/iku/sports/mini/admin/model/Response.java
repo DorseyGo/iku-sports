@@ -6,6 +6,7 @@
  **/
 package com.iku.sports.mini.admin.model;
 
+import com.iku.sports.mini.admin.exception.IkuSportsError;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,6 +49,17 @@ public class Response<T> implements Serializable {
 
     public static <T> Response<T> fail(final int statusCode, final String errorPhase) {
         return new Response<>(statusCode, errorPhase, null);
+    }
+
+    /**
+     * Returns the error response, with error specified.
+     *
+     * @param error the error response, with error code and error message.
+     * @param <T>
+     * @return
+     */
+    public static <T> Response<T> fail(final IkuSportsError error) {
+        return fail(error.getErrorCode(), error.getErrorMessage());
     }
 
     public static <T> Response<T> fail(final String msg) {

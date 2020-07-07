@@ -172,6 +172,14 @@ swiper-item .bottom-mask::after {
   letter-spacing: 8rpx;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.text-bold {
+  font-weight: 900;
+}
+
 /** the end of text */
 
 /**
@@ -423,6 +431,11 @@ swiper-item .bottom-mask::after {
 
 .round {
   border-radius: 5000rpx;
+}
+
+.raidus-bottom {
+  border-bottom-left-radius: 8rpx;
+  border-bottom-right-radius: 8rpx;
 }
 
 .ik-avatar {
@@ -809,6 +822,11 @@ view.tab {
   overflow: hidden;
 }
 
+.card.nav {
+  min-height: 66rpx;
+  display: flex;
+}
+
 .card .iku-item {
   display: block;
   background-color: var(--white);
@@ -926,4 +944,15 @@ view.cover {
 view.cover image {
   width: 100%;
   height: 320rpx;
+}
+
+/* -------------------- */
+/* avatar */
+view.avatar.round {
+  width: 360rpx;
+  height: 360rpx;
+}
+
+.center {
+  align-items: center;
 }

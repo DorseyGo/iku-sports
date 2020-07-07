@@ -13,8 +13,11 @@ import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 import javax.validation.constraints.NotNull;
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,14 +29,9 @@ public interface OrderRepository {
     @InsertProvider(type = OrderSQLProvider.class, method = "save")
     void save(Order order) throws DataAccessException;
 
-    @Results(id = "orderRM", value = {
-            @Result(property = "orderId", column = "id", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "fee", column = "fee", jdbcType = JdbcType.BIGINT),
-            @Result(property = "discount", column = "discount", jdbcType = JdbcType.FLOAT),
-            @Result(property = "productName", column = "name", jdbcType = JdbcType.VARCHAR)
-    })
-    @SelectProvider(type = OrderSQLProvider.class, method = "findOrderById")
-    Order findOrderById(@NotNull @Param("orderId") String orderId) throws DataAccessException;
+    @UpdateProvider(type = OrderSQLProvider.class, method = "updateTransIdAndPaidTimeById")
+    void updateTransIdAndPaidTimeById(@Param("transactionId") String transactionId, @Param("paidTime") Date paidTime,
+            @Param("orderId") String orderId) throws DataAccessException;
 
     @Results(id = "simpleOrder", value = {
             @Result(property = "orderId", column = "id", jdbcType = JdbcType.VARCHAR),
@@ -41,10 +39,14 @@ public interface OrderRepository {
             @Result(property = "discount", column = "discount", jdbcType = JdbcType.FLOAT),
             @Result(property = "moneyPaid", column = "money_paid", jdbcType = JdbcType.BIGINT),
             @Result(property = "paidTime", column = "paid_time"),
-            @Result(property = "refundMoney", column = "refund_money", jdbcType = JdbcType.BIGINT),
+            @Result(property = "moneyRefund", column = "money_refund", jdbcType = JdbcType.BIGINT),
             @Result(property = "status", column = "status", jdbcType = JdbcType.CHAR),
-            @Result(property = "courseId", column = "course_id", jdbcType = JdbcType.CHAR),
-            @Result(property = "user_id", column = "user_id", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "productId", column = "product_id", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "productType", column = "product_type", jdbcType = JdbcType.TINYINT),
+            @Result(property = "transactionId", column = "transaction_id", jdbcType = JdbcType.TINYINT),
+            @Result(property = "createdTime", column = "create_time"),
+            @Result(property = "lastModifyTime", column = "last_modify_time"),
+            @Result(property = "userId", column = "user_id", jdbcType = JdbcType.VARCHAR),
     })
     @SelectProvider(type = OrderSQLProvider.class, method = "findOrderByUserId")
     List<Order> findOrderByUserId(@Param("userId") String userId) throws DataAccessException;
@@ -53,9 +55,9 @@ public interface OrderRepository {
     // SQL provider
     // -----
     class OrderSQLProvider {
-        static final List<String> COLS = Lists.newArrayList("o.id", "o.fee", "o.discount", "c.name");
-        static final List<String> ORDER_COLS = Lists.newArrayList("`id`", "`fee`", "`discount`", "`money_paid`",
-                                            "`paid_time`", "`refund_money`", "`status`", "`course_id`");
+        private final static List<String> ORDER_COLS = Lists.newArrayList("`id`", "`fee`", "`discount`",
+                "`money_paid`", "`money_refund`", "`status`", "`product_id`", "`product_type`", "`transaction_id`",
+                "`user_id`", "`paid_time`", "`create_time`", "`last_modify_time`");
 
         public String save(final Order order) {
             return new SQL() {
@@ -66,9 +68,16 @@ public interface OrderRepository {
                     }
 
                     VALUES("fee", "#{fee}");
-                    VALUES("discount", "#{discount}");
                     VALUES("status", "#{status}");
-                    VALUES("course_id", "#{courseId}");
+                    VALUES("product_type", "#{productType}");
+
+                    if (order.getDiscount() != null) {
+                        VALUES("discount", "#{discount}");
+                    }
+
+                    if (order.getProductId() != null) {
+                        VALUES("product_id", "#{productId}");
+                    }
 
                     if (order.getUserId() != null) {
                         VALUES("user_id", "#{userId}");
@@ -77,13 +86,21 @@ public interface OrderRepository {
             }.toString();
         }
 
-        public String findOrderById(final Map<String, Object> params) {
+        public String updateTransIdAndPaidTimeById(final Map<String, Object> params) {
             return new SQL() {
                 {
-                    SELECT(COLS.toArray(new String[COLS.size()]));
-                    FROM(TABLE + " o");
-                    INNER_JOIN(TABLE_COURSE + " c ON o.course_id = c.id");
-                    WHERE("o.id = #{orderId}");
+                    UPDATE(TABLE);
+                    if (params.get("transactionId") != null) {
+                        SET("transaction_id", "#{transactionId}");
+                    }
+
+                    if (params.get("paidTime") != null) {
+                        SET("paid_time", "#{paidTime}");
+                    }
+
+                    if (params.get("orderId") != null) {
+                        WHERE("id", "#{orderId}");
+                    }
                 }
             }.toString();
         }

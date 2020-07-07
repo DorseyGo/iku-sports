@@ -1,5 +1,6 @@
 package com.iku.sports.mini.admin.service.impl;
 
+import com.google.common.base.Functions;
 import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
@@ -16,6 +17,8 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,7 +57,7 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
                                 .courseName(course.getName())
                                 .courseDesc(course.getDescription())
                                 .totalClass(course.getNumClasses())
-                                .studiedClass(0) // TODO
+                                .studiedClass(courseClassService.countWatchedCourseClass(userId, (int) course.getId()))
                                 .build();
                     })
                     .collect(Collectors.toList());

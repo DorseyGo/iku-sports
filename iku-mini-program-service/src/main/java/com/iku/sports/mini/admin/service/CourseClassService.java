@@ -40,4 +40,6 @@ public interface CourseClassService {
     void saveWatchedClasses(String userId, int classId) throws ApiServiceException;
 
     boolean existsWatchedHis(String userId, int classId) throws ApiServiceException;
+
+    int countWatchedCourseClass(String userId, Integer courseId);
 }

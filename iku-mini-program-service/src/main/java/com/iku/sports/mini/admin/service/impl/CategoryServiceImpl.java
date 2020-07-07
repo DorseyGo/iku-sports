@@ -63,13 +63,13 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
-    private List<Category> createValue(final String key) throws ApiServiceException {
+    private List<Category> createValue(final String key) throws DataAccessException {
         List<Category> categories;
         try {
             categories = categoryRepository.findAll();
         } catch (DataAccessException e) {
             log.error("==> Failed to find all categories", e);
-            throw new ApiServiceException(IkuSportsError.INTERNAL_ERR);
+            throw e;
         }
 
         Collections.sort(categories);

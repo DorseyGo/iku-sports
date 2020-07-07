@@ -1,4 +1,5 @@
 const config = require("../config");
+const errors  = require("./errorCodes");
 
 const request = (uri, options) => {
     return new Promise((resolve, reject) => {
@@ -16,7 +17,7 @@ const request = (uri, options) => {
                 }
 
                 wx.showToast({
-                    title: result.data.errorPhase || '请求错误，请稍后重试',
+                    title: errors.getError(result.data.statusCode) || "未知错误，请联系管理员",
                     icon: 'none'
                 });
             },

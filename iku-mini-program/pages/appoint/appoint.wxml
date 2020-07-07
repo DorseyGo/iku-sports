@@ -1,17 +1,19 @@
 <!--pages/appoint/appoint.wxml-->
 <view class="container">
-  <view wx:if="{{true}}">
-    <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
-			<view class="iku-item" wx:key="1000">
+  <view wx:if="{{hasPurchasedAppointCourse}}">
+    <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx"
+					wx:for="{{appointCourseInfo}}" wx:key="courseId"
+		>
+			<view class="iku-item">
 				<view class="title">
-					<view class="text-cut">基础篮球课</view>
+					<view class="text-cut">{{item.courseName}}</view>
 				</view>
 				<view class="content">
-					<image src="../../images/basketball_1.png" mode="aspectFill" />
+					<image src="../../images/basketball_{{item.courseLevel}}.png" mode="aspectFill" />
 					<view class="desc">
 						<view class="text-content flex">
-							<view class="flex-sub">完成 3 节</view>
-							<view>总课时 30 节</view>
+							<view class="flex-sub">完成 {{item.studiedClass}} 节</view>
+							<view>总课时 {{item.totalClass}} 节</view>
 						</view>
 						<view class="text-content course_name">
 							课程内容：<text class="course_label text-red">运球</text>
@@ -30,4 +32,9 @@
 			</view>
 		</view>
   </view>
+	<view wx:else class="center">
+		<view>
+			<image mode="aspectFill" src="../../images/order.png"></image>
+		</view>
+	</view>
 </view>

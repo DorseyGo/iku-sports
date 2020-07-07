@@ -17,7 +17,7 @@ iku:
     mch-id: 123ddasdeggasd
     expiry-in-days: 1
     machine-ip-addr: 127.0.0.1
-    notify-url-addr: https://${iku.mini-program.machine-ip-addr}:${server.port}/api/payment/notification
+    notify-url-addr: https://${iku.mini-program.machine-ip-addr}:${server.port}/payment/notification
 
 spring:
   output:

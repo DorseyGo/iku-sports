@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    hasAppoint: false
+    hasAppoint: false,
+    appointCourseInfo: [],
+    hasPurchasedAppointCourse: false // 已经购买可以预约
   },
 
   /**
@@ -15,10 +17,18 @@ Page({
    */
   onLoad: function (options) {
     console.log(options.userId);
-    let userId = options.userId
-    request.get(`appoint/course/list/${userId}`)
+    // let userId = options.userId
+    let userId = 'e9b6ea6f672086252a83a48be2198d63';
+    request.get(`appoint/course/list/e9b6ea6f672086252a83a48be2198d63`)
            .then(res => {
-              console.log(res);
+            let hasData = false;
+            if (res.data.length > 0) {
+              hasData = true;
+            }
+              this.setData({
+                appointCourseInfo: res.data,
+                hasPurchasedAppointCourse: hasData
+              })
            })
   },
 

@@ -23,8 +23,8 @@ public class Course {
     private char level;
     private BigDecimal fee;
     private int numClasses;
-
-    // ------------------------
-    // description collected only when details required.
+    // defines how many people purchase this course.
+    private int numPurchases;
     private String description;
+
 }

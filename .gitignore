@@ -16,6 +16,7 @@ hs_err_pid*
 tesla/
 *.data
 *.log
+*.log.gz
 *.dat
 CATALINA_APPLOG_IS_UNDEFINED/
 
@@ -23,7 +24,10 @@ CATALINA_APPLOG_IS_UNDEFINED/
 logs/
 # IntelliJ project files
 .idea
+.idea/libraries
 *.iml
+*.xml
+
 out
 gen### Eclipse template
 *.pydevproject

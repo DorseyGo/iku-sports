@@ -6,15 +6,11 @@
  */
 package com.iku.sports.mini.admin.service.impl;
 
-import com.iku.sports.mini.admin.config.IkuSportsConfig;
+import com.iku.sports.mini.admin.constant.OrderTypeEnum;
 import com.iku.sports.mini.admin.entity.Order;
-import com.iku.sports.mini.admin.entity.User;
-import com.iku.sports.mini.admin.exception.ApiServiceException;
+import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.OrderRepository;
-import com.iku.sports.mini.admin.request.NewOrderRequest;
 import com.iku.sports.mini.admin.service.OrderService;
-import com.iku.sports.mini.admin.service.UserService;
-import com.iku.sports.mini.admin.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,6 +20,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.text.ParseException;
+import java.util.Date;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.List;
@@ -48,8 +46,24 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return orders.stream()
-                    .map(Order::getCourseId)
+                    .filter(order -> OrderTypeEnum.COURSE.getCode() == order.getProductType())
+                    .map(Order::getProductId)
                     .map(Integer::valueOf)
                     .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = DataAccessException.class)
+    public void updateTransIdAndPaidTimeById(String transactionId, String endTime, String orderId) throws
+            DataAccessException {
+        Date paidTime = null;
+        try {
+            paidTime = Constants.DATE_FORMATTER_WECHAT.get().parse(endTime);
+        } catch (ParseException e) {
+            log.error("==> Failed to parse the time: {}", endTime, e);
+            paidTime = new Date();
+        }
+
+        this.orderRepository.updateTransIdAndPaidTimeById(transactionId, paidTime, orderId);
     }
 }

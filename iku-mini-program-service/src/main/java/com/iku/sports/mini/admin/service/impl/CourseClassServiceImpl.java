@@ -19,8 +19,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * File: CourseClassServiceImpl
@@ -181,5 +184,23 @@ public class CourseClassServiceImpl implements CourseClassService {
     @Override
     public boolean existsWatchedHis(String userId, int classId) throws ApiServiceException {
         return watchedClassHisService.existsWatchedHis(userId, classId);
+    }
+
+    @Override
+    public int countWatchedCourseClass(String userId, Integer courseId) {
+        try {
+            List<CourseClass> watchedClasses = this.getClassesByUserId(userId);
+            if (CollectionUtils.isEmpty(watchedClasses)) {
+                log.warn("the user:{} has not watched class", userId);
+                return 0;
+            }
+
+            Map<Integer, Long> countWatchedClasses = watchedClasses
+                    .stream()
+                    .collect(Collectors.groupingBy(CourseClass::getCourseId, Collectors.counting()));
+            return countWatchedClasses.getOrDefault(courseId, 0L).intValue();
+        } catch (ApiServiceException e) {
+            return 0;
+        }
     }
 }
