@@ -4,6 +4,7 @@
     "pages/about/about",
     "pages/appoint/appoint",
     "pages/course/details/details",
+    "pages/order/order",
     "pages/item-list/item-list",
     "pages/appoint/course-plan/course-plan"
   ],
@@ -14,9 +15,9 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "backgroundColor": "#FFA500",
-    "color": "#EEE",
-    "selectedColor": "#FFF",
+    "backgroundColor": "#FFF",
+    "color": "#aaa",
+    "selectedColor": "#FFc500",
     "list": [
       {
         "pagePath": "pages/index/index",
