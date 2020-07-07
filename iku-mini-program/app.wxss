@@ -945,3 +945,14 @@ view.cover image {
   width: 100%;
   height: 320rpx;
 }
+
+/* -------------------- */
+/* avatar */
+view.avatar.round {
+  width: 360rpx;
+  height: 360rpx;
+}
+
+.center {
+  align-items: center;
+}
