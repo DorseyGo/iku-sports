@@ -22,6 +22,10 @@ Page({
     {
       url:"../../images/header.jpeg",
       name:"初级网球课"
+    },
+    {
+      url:"../../images/header.jpeg",
+      name:"初级网球课"
     }]
   },
 
