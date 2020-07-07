@@ -1,2 +1,35 @@
-<!--pages/order/order.wxml-->
-<text>pages/order/order.wxml</text>
+<view class="container">
+    <view class="text-dark-gray nav margin-left-right-24rpx card text-normal text-center raidus-bottom">
+        <view class="nav-item {{current == item.status ? 'text-bold current' : ''}} flex-sub"
+            wx:for="{{orderStatues}}" wx:key="id" bindtap="selectTab" 
+            data-cur="{{item.status}}">
+            {{item.displayName}}
+        </view>
+    </view>
+
+    <view wx:if="{{hasData}}">
+        <!-- orders -->
+        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
+            <view class="iku-item">
+                <view class="title">
+                    <view class="text-cut">基础篮球课程</view>
+                </view>
+                <view class="content">
+                    <image src="../../images/basketball_1.png" mode="aspectFill" />
+                    <view class="desc">
+                        <view class="text-content">课程：20 节</view>
+                        <view class="text-content text-cut">篮球基础动作</view>
+                    </view>
+                    <view class="action">
+                        ￥<text class="text-red">500</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view wx:else>
+        <image src="" />
+        <text class="tips">您还没有相关订单</text>
+    </view>
+</view>

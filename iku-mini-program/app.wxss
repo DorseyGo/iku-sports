@@ -172,6 +172,14 @@ swiper-item .bottom-mask::after {
   letter-spacing: 8rpx;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.text-bold {
+  font-weight: 900;
+}
+
 /** the end of text */
 
 /**
@@ -423,6 +431,11 @@ swiper-item .bottom-mask::after {
 
 .round {
   border-radius: 5000rpx;
+}
+
+.raidus-bottom {
+  border-bottom-left-radius: 8rpx;
+  border-bottom-right-radius: 8rpx;
 }
 
 .ik-avatar {
@@ -807,6 +820,11 @@ view.tab {
   background-color: var(--white);
   display: block;
   overflow: hidden;
+}
+
+.card.nav {
+  min-height: 66rpx;
+  display: flex;
 }
 
 .card .iku-item {
