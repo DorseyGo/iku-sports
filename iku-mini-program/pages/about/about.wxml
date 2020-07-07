@@ -20,9 +20,10 @@
         <view class="iku-item flex top-border-dark-gray text-white text-sm-26rpx">
             <navigator class="item flex-sub" url="../appoint/appoint?userId={{userId}}">
                 <text class="text-normal">{{user.numCourses}}</text>
+            
                 <text class="text-dark-gray">我的课程</text>
             </navigator>
-            
+             
             <view class="item flex-sub">
                 <text class="text-normal">{{user.numAttentions}}</text>
                 <text class="text-dark-gray">我的关注</text>
@@ -34,21 +35,31 @@
         <view class="tab-item {{showLearned ? 'cur text-white': ''}}" bindtap="toggleLearned">已学课程</view>
         <view class="tab-item {{showLearned ? '' : 'cur text-white'}}" bindtap="toggleLearned">收藏课程</view>
     </view>
-
+    
+    
+    
+    
     <view class="iku-list margin-top-22rpx">
-        <navigator url="../course/classes/detail/details?classId={{item.id}}" class="iku-item margin-top-30rpx" wx:for="{{classes}}" wx:key="id">
-            <view class="iku-avatar radius" style="background-image: url('{{item.cover}}')"></view>
-            <view class="content">
-                <view class="text-white text-xl">
-                    <text class="text-cut">{{item.title}}</text>
-                </view>
-                <view class="text-dark-gray text-sm-26rpx flex">
-                   <text class="text-cut">{{item.content}}</text>
-                </view>
-                <view class="bottom text-normal text-dark-gray">
-                    <text class="text-yellow">{{item.watches}}</text> 人已观看
-                </view>
-            </view>
-        </navigator>
+        <view class="list-item">
+            <image class="item-image" src="../../images/清单.png" />
+            <text class="item-text">我的订单</text> 
+           <!--<image class="item-left-image" src="../../images/箭头.png" />
+           !-->
+        </view>
+        <view class="person-line"></view>
+        <view class="list-item">
+            <image class="item-image" src="../../images/用户.png" />
+            <text class="item-text">我的帖子</text> 
+        </view>
+        <view class="person-line"></view>
+        <view class="list-item">
+            <image class="item-image" src="../../images/重要提示.png" />
+            <text class="item-text">反馈建议</text> 
+        </view>
+        <view class="person-line"></view>
+        <view class="list-item">
+            <image class="item-image" src="../../images/设置.png" />
+            <text class="item-text">设置</text> 
+        </view>
     </view>
 </view>

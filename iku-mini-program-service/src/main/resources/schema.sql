@@ -87,13 +87,16 @@ CREATE TABLE IF NOT EXISTS `coach`(
 CREATE TABLE IF NOT EXISTS `order`(
   `id` VARCHAR(32) NOT NULL,
   `fee` BIGINT(20) NOT NULL DEFAULT '0' COMMENT 'the original fee',
-  `discount` FLOAT NOT NULL DEFAULT '1.00f' COMMENT 'the discount',
+  `discount` DECIMAL(3, 2) NOT NULL DEFAULT '1.00' COMMENT 'the discount',
   `money_paid` BIGINT(20) NOT NULL DEFAULT '0' COMMENT 'money paid by user',
-  `paid_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `refund_money` BIGINT(20) NOT NULL DEFAULT '0',
+  `money_refund` BIGINT(20) NOT NULL DEFAULT '0',
   `status` CHAR(1) DEFAULT '0' COMMENT '0 for unpaid, 1 for paid, 2 for refund, 3 for cancel',
-  `course_id` TINYINT(2) NOT NULL,
-  `user_id` CHAR(32) NOT NULL,
+  `product_id` VARCHAR(32) NOT NULL COMMENT 'the product ID',
+  `product_type` VARCHAR(12) NOT NULL DEFAULT 'course' COMMENT 'course & sports goods',
+  `user_id` CHAR(32) NOT NULL COMMENT 'the user id',
+  `paid_time` DATETIME DEFAULT NULL COMMENT 'the time when paid',
+  `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'the order created time',
+  `last_modify_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'the time when order modified',
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
@@ -174,6 +177,8 @@ create table arrange_class
    begin_time           date comment '开课时间',
    end_time             date comment '结束时间',
    duration             int comment '时长(分钟)',
+   headcount            int comment '课程总人数',
+   ordercount           int comment '预约人数',
    create_time          date comment '创建时间',
    primary key (id)
 );
@@ -196,4 +201,25 @@ create table appointment
    primary key (id)
 );
 
-alter table appointment comment '用户预约课程表';
+alter table artical comment '文章列表';
+
+drop table if exists article;
+
+/*==============================================================*/
+/* Table: article                                           */
+/*==============================================================*/
+create table article
+(id                   int not null auto_increment comment '文章id',
+   user_id              varchar(32) comment '用户ID',
+   status               int comment '状态:0-未发布;1-已发布',
+   titile               TINYTEXT comment '标题',
+   body_text            TEXT comment '文章内容',
+   picture              VARCHAR (30) comment '文章配图地址',
+   video                varchar(30) comment '视频地址',
+   update_time          date comment '更新时间',
+   create_time          TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间/预约时间',
+   primary key (id)
+);
+
+alter table article comment '文章列表';
+

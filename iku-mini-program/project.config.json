@@ -68,29 +68,8 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/article/list/list",
-					"pathName": "pages/article/list/list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/course/list/list",
-					"pathName": "pages/course/list/list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "pages/index/index",
 					"pathName": "pages/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/course/classes/list",
-					"pathName": "pages/course/classes/list",
 					"query": "",
 					"scene": null
 				},
@@ -102,14 +81,18 @@
 					"scene": null
 				},
 				{
-					"id": 6,
-					"name": "pages/course/classes/detail/details",
-					"pathName": "pages/course/classes/detail/details",
-					"query": "classId=1",
+					"id": -1,
+					"name": "pages/appoint/appoint",
+					"pathName": "pages/appoint/appoint",
+					"query": "courseId=1&category=basketball",
 					"scene": null
 				},
 				{
 					"id": -1,
+					"name": "pages/course/details/details",
+					"pathName": "pages/course/details/details",
+					"query": "courseId=1&category=basketball",
+					"scene": null,
 					"name": "pages/course/list/list",
 					"pathName": "pages/course/list/",
 					"query": "",
