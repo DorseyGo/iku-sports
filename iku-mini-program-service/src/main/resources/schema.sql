@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `order`(
   `money_refund` BIGINT(20) NOT NULL DEFAULT '0',
   `status` CHAR(1) DEFAULT '0' COMMENT '0 for unpaid, 1 for paid, 2 for refund, 3 for cancel',
   `product_id` VARCHAR(32) NOT NULL COMMENT 'the product ID',
-  `product_type` VARCHAR(12) NOT NULL DEFAULT 'course' COMMENT 'course & sports goods',
+  `product_type` TINYINT(3) NOT NULL DEFAULT '0' COMMENT '0 for course, 1 for sports goods',
   `transaction_id` CHAR(32) DEFAULT NULL COMMENT 'the transaction id, such as wechat',
   `user_id` CHAR(32) NOT NULL COMMENT 'the user id',
   `paid_time` DATETIME DEFAULT NULL COMMENT 'the time when paid',

@@ -8,6 +8,7 @@ package com.iku.sports.mini.admin.repository;
 
 import com.google.common.collect.Lists;
 import com.iku.sports.mini.admin.entity.Course;
+import com.iku.sports.mini.admin.model.Constants;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
@@ -24,18 +25,9 @@ import java.util.Map;
 public interface CourseRepository {
     String TABLE = "course c";
     String TABLE_CLASS = "class cl";
+    String TABLE_ORDER = "order o";
 
     @Results(id = "courseRM", value = {
-            @Result(property = "id", column = "id", jdbcType = JdbcType.TINYINT),
-            @Result(property = "name", column = "name", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "level", column = "level", jdbcType = JdbcType.CHAR),
-            @Result(property = "fee", column = "fee_in_yuan", jdbcType = JdbcType.DOUBLE),
-            @Result(property = "numClasses", column = "num_classes", jdbcType = JdbcType.INTEGER)
-    })
-    @SelectProvider(type = CourseSQLProvider.class, method = "findCoursesByCategoryId")
-    List<Course> findCoursesByCategoryId(@Param("categoryId") final short categoryId);
-
-    @Results(id = "courseDetailRM", value = {
             @Result(property = "id", column = "id", jdbcType = JdbcType.TINYINT),
             @Result(property = "name", column = "name", jdbcType = JdbcType.VARCHAR),
             @Result(property = "level", column = "level", jdbcType = JdbcType.CHAR),
@@ -43,6 +35,10 @@ public interface CourseRepository {
             @Result(property = "description", column = "description", jdbcType = JdbcType.VARCHAR),
             @Result(property = "numClasses", column = "num_classes", jdbcType = JdbcType.INTEGER)
     })
+    @SelectProvider(type = CourseSQLProvider.class, method = "findCoursesByCategoryId")
+    List<Course> findCoursesByCategoryId(@Param("categoryId") final short categoryId);
+
+    @ResultMap("courseRM")
     @SelectProvider(type = CourseSQLProvider.class, method = "findCourseById")
     Course findCourseById(@Param("courseId") final short courseId) throws DataAccessException;
 
@@ -51,11 +47,19 @@ public interface CourseRepository {
     // -----
     class CourseSQLProvider {
 
-        static final List<String> COLS = Lists.newArrayList("c.id", "c.name", "c.level", "c.fee/100 fee_in_yuan");
+        static final List<String> COLS = Lists.newArrayList("c.id", "c.name", "c.level", "c.fee/100 fee_in_yuan", "c.description");
         static final List<String> AGG_COLS = Lists.newArrayList(COLS);
 
         static {
             AGG_COLS.add("COUNT(cl.id) num_classes");
+            AGG_COLS.add(new SQL() {
+                {
+                    SELECT("COUNT(o.user_id)");
+                    FROM(TABLE_ORDER);
+                    WHERE("o.product_id = c.id");
+                    WHERE("o.product_type = " + Constants.ProductType.COURSE.getCode());
+                }
+            }.toString());
         }
 
         public String findCoursesByCategoryId(final Map<String, Object> params) {
@@ -71,12 +75,9 @@ public interface CourseRepository {
         }
 
         public String findCourseById(final Map<String, Object> params) {
-            final List<String> REQ_COLS = Lists.newArrayList(AGG_COLS);
-            REQ_COLS.add("c.description");
-
             return new SQL() {
                 {
-                    SELECT(REQ_COLS.toArray(new String[REQ_COLS.size()]));
+                    SELECT(AGG_COLS.toArray(new String[AGG_COLS.size()]));
                     FROM(TABLE);
                     LEFT_OUTER_JOIN(TABLE_CLASS + " ON c.id = cl.course_id");
                     WHERE("c.id = #{courseId}");
