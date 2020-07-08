@@ -1,5 +1,6 @@
 package com.iku.sports.mini.admin.service;
 
+import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.CourseAppoint;
 
 import java.util.List;
@@ -12,5 +13,5 @@ public interface CourseAppointmentService {
      * 用户已购课程信息
      * @return
      */
-    List<CourseAppoint> purchasedCourse(String userId);
+    List<CourseAppoint> courseAppoint(String userId) throws ApiServiceException;
 }

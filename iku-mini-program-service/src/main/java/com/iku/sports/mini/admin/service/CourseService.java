@@ -32,4 +32,11 @@ public interface CourseService {
      * @throws ApiServiceException if any errors detected during process.
      */
     Course getCourseById(final short courseId) throws ApiServiceException;
+
+    /**
+     * return the sort of course specified by {@code courseIds}
+     * @param courseIds the collection of course id
+     * @return
+     */
+    List<Course> getCourses(final List<Integer> courseIds);
 }

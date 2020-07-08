@@ -1,12 +1,22 @@
 <view class="container">
-    <view class=" card about  margin-top-22rpx margin-left-right-24rpx radius border-2rpx">
+    <view class="card about margin-left-right-24rpx radius border-2rpx">
         
         <view class=" head">
             <image mode="aspectFit" src="{{!userInfo.nickName ? '../../images/grey_head.jpg' : userInfo.avatarUrl }}"></image>
             <button wx:if="{{!userInfo.nickName}}" plain size="mini" open-type="getUserInfo" bindgetuserinfo="handleGetUserInfo">登录</button>
             <text class="username">{{userInfo.nickName}}</text>
         </view>
-        
+        <view class="line-1px"></view>
+         <view >
+            <image class="top-left-item-image top-item-image-size" src="../../images/list.png" />
+            <image class="top-center-item-image top-item-image-size" src="../../images/list.png" />
+            <image class="top-right-item-image top-item-image-size" src="../../images/list.png" />
+        </view>
+        <view class="margin-top-2-percent">
+            <text class="top-font-size" style="margin-left: 4%;">订单管理 </text>
+            <text class="top-font-size" style="margin-left: 12%;">订单管理 </text>            
+            <text class="top-font-size" style="margin-left: 12%;">订单管理 </text>
+        </view>
         <!--
         <view class="iku-item">
             <image class="round sm" src="{{user.avatarUrl}}" mode="aspectFill" />
@@ -29,51 +39,44 @@
             </view>
         </view> -->
     </view>
-    <view class="line margin-top-10rpx"></view>
-
-    <view class="flex text-center tab mg-left-16rpx margin-top-10rpx text-dark-gray text-sm-30rpx">
-        <view class="tab-item" bindtap="toggleLearned">
-            <text text-align = "left">已学课程</text>
-            <text text-align = "right">更多</text>           
-        </view>         
-        <!-- <view class="tab-item {{showLearned ? '' : 'cur text-white'}}" bindtap="toggleLearned">收藏课程</view> -->
-    </view>
-    <!-- 外层视图容器 -->
-    <view class="section">
-    <!-- scroll视图容器 -->
-    <scroll-view class="scroll_view" scroll-x="true">
-    <!-- 滚动列表内容 -->
-        <view class="cont" wx:for="{{list}}" wx:key="{{item}}">
-         <!-- 滚动图片 -->
-        <image src="{{item.url}}"class="cont_img"/>
-         <!-- 滚动文本 -->
-        <view class="content">
-            <view  class="cont_name" >{{item.name}}</view>            
+    <view class="card about margin-left-right-24rpx radius border-2rpx margin-top-2-percent">
+        <view class="flex text-center tab mg-left-16rpx margin-top-10rpx text-dark-gray text-sm-30rpx">
+            <view class="tab-item" bindtap="toggleLearned">
+                <text style="text-align:right">已学课程</text>
+                <text  style="float:right">更多</text>           
+            </view>         
+            <!-- <view class="tab-item {{showLearned ? '' : 'cur text-white'}}" bindtap="toggleLearned">收藏课程</view> -->
         </view>
-        </view>
-    </scroll-view>
-    </view>    
+        <!-- 外层视图容器 -->
+        <view class="section">
+        <!-- scroll视图容器 -->
+        <scroll-view class="scroll_view" scroll-x="true">
+        <!-- 滚动列表内容 -->
+            <view class="cont" wx:for="{{list}}" wx:key="{{item}}">
+            <!-- 滚动图片 -->
+            <image src="{{item.url}}"class="cont_img"/>
+            <!-- 滚动文本 -->
+            <view class="content">
+                <view  class="cont_name" >{{item.name}}</view>            
+            </view>
+            </view>
+        </scroll-view>
+        </view>  
+    </view>  
     <view class="line margin-top-10rpx"></view>
     <view class="iku-list margin-top-22rpx">
         <view class="list-item">
-            <image class="item-image" src="../../images/清单.png" />
-            <text class="item-text">我的订单</text> 
-           <!--<image class="item-left-image" src="../../images/箭头.png" />
-           !-->
-        </view>
-        <view class="person-line"></view>
-        <view class="list-item">
-            <image class="item-image" src="../../images/用户.png" />
+            <image class="item-image" src="../../images/my_logo.png" />
             <text class="item-text">我的帖子</text> 
         </view>
         <view class="person-line"></view>
         <view class="list-item">
-            <image class="item-image" src="../../images/重要提示.png" />
+            <image class="item-image" src="../../images/import_note.png" />
             <text class="item-text">反馈建议</text> 
         </view>
         <view class="person-line"></view>
         <view class="list-item">
-            <image class="item-image" src="../../images/设置.png" />
+            <image class="item-image" src="../../images/setup.png" />
             <text class="item-text">设置</text> 
         </view>
     </view>

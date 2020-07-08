@@ -5,26 +5,30 @@
 	},
 	"setting": {
 		"urlCheck": true,
+		"scopeDataCheck": false,
+		"coverView": true,
 		"es6": true,
 		"postcss": true,
+		"compileHotReLoad": false,
 		"preloadBackgroundData": false,
 		"minified": true,
-		"newFeature": true,
-		"coverView": true,
 		"autoAudits": false,
+		"newFeature": true,
+		"uglifyFileName": false,
+		"uploadWithSourceMap": true,
+		"useIsolateContext": true,
+		"nodeModules": false,
+		"enhance": false,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false,
 		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		},
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false,
-		"useIsolateContext": true
+		}
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.3",
@@ -85,6 +89,62 @@
 					"name": "pages/appoint/appoint",
 					"pathName": "pages/appoint/appoint",
 					"query": "courseId=1&category=basketball",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/list/list",
+					"pathName": "pages/course/list/",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/classes/list",
+					"pathName": "pages/course/classes/list",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/coach/coach.wxml",
+					"pathName": "pages/course/coach/coach.wxml",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 10,
+					"name": "pages/course/coach/coach",
+					"pathName": "pages/course/coach/coach",
+					"query": "coachId=2",
+					"scene": null
+				},
+				{
+					"id": 11,
+					"name": "pages/course/coach/coach",
+					"pathName": "pages/course/coach/coach",
+					"query": "coachId=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/classes/detail/details",
+					"pathName": "pages/course/classes/detail/details",
+					"query": "classId=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/classes/detail/details",
+					"pathName": "pages/course/classes/detail/details",
+					"query": "classId=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/about/about",
+					"pathName": "pages/about/about",
+					"query": "",
 					"scene": null
 				},
 				{

@@ -36,6 +36,8 @@ public class Order {
     private short productType;
     private String userId;
     private Date paidTime;
+    private Date createdTime;
+    private Date lastModifyTime;
 
     // ---------------------------
     // transaction id, generated when this order is paid

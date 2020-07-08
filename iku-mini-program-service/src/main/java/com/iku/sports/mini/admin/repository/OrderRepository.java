@@ -23,7 +23,8 @@ import java.util.Map;
 
 @Repository("orderRepository")
 public interface OrderRepository {
-    String TABLE = "order";
+    String TABLE = "`order`";
+    String TABLE_COURSE = "course";
 
     @InsertProvider(type = OrderSQLProvider.class, method = "save")
     void save(Order order) throws DataAccessException;
@@ -32,10 +33,31 @@ public interface OrderRepository {
     void updateTransIdAndPaidTimeById(@Param("transactionId") String transactionId, @Param("paidTime") Date paidTime,
             @Param("orderId") String orderId) throws DataAccessException;
 
+    @Results(id = "simpleOrder", value = {
+            @Result(property = "orderId", column = "id", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "fee", column = "fee", jdbcType = JdbcType.BIGINT),
+            @Result(property = "discount", column = "discount", jdbcType = JdbcType.FLOAT),
+            @Result(property = "moneyPaid", column = "money_paid", jdbcType = JdbcType.BIGINT),
+            @Result(property = "paidTime", column = "paid_time"),
+            @Result(property = "moneyRefund", column = "money_refund", jdbcType = JdbcType.BIGINT),
+            @Result(property = "status", column = "status", jdbcType = JdbcType.CHAR),
+            @Result(property = "productId", column = "product_id", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "productType", column = "product_type", jdbcType = JdbcType.TINYINT),
+            @Result(property = "transactionId", column = "transaction_id", jdbcType = JdbcType.TINYINT),
+            @Result(property = "createdTime", column = "create_time"),
+            @Result(property = "lastModifyTime", column = "last_modify_time"),
+            @Result(property = "userId", column = "user_id", jdbcType = JdbcType.VARCHAR),
+    })
+    @SelectProvider(type = OrderSQLProvider.class, method = "findOrderByUserId")
+    List<Order> findOrderByUserId(@Param("userId") String userId) throws DataAccessException;
+
     // -----
     // SQL provider
     // -----
     class OrderSQLProvider {
+        private final static List<String> ORDER_COLS = Lists.newArrayList("`id`", "`fee`", "`discount`",
+                "`money_paid`", "`money_refund`", "`status`", "`product_id`", "`product_type`", "`transaction_id`",
+                "`user_id`", "`paid_time`", "`create_time`", "`last_modify_time`");
 
         public String save(final Order order) {
             return new SQL() {
@@ -79,6 +101,16 @@ public interface OrderRepository {
                     if (params.get("orderId") != null) {
                         WHERE("id", "#{orderId}");
                     }
+                }
+            }.toString();
+        }
+
+        public String findOrderByUserId(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT(ORDER_COLS.toArray(new String[0]));
+                    FROM(TABLE);
+                    WHERE("user_id = #{userId} and status = 1");
                 }
             }.toString();
         }

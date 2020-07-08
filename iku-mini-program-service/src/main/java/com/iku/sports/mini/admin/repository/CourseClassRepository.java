@@ -71,7 +71,8 @@ public interface CourseClassRepository {
             @Result(property = "title", column = "title", jdbcType = JdbcType.VARCHAR),
             @Result(property = "cover", column = "cover", jdbcType = JdbcType.VARCHAR),
             @Result(property = "content", column = "content", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "watches", column = "watches", jdbcType = JdbcType.INTEGER)
+            @Result(property = "watches", column = "watches", jdbcType = JdbcType.INTEGER),
+            @Result(property = "courseId", column = "course_id", jdbcType = JdbcType.TINYINT)
     })
     @SelectProvider(type = CourseClassSqlProvider.class, method = "findFirst2ByClassId")
     List<CourseClass> findFirst2ByClassId(@Param("relatedClassId") final int relatedClassId);
@@ -107,7 +108,7 @@ public interface CourseClassRepository {
         static final List<String> COLS_COACH = Lists.newArrayList("ch.name");
 
         static final List<String> SIMPLE_COLS_CLASS = Lists
-                .newArrayList("c.id", "c.title", "c.cover", "c.content", "c.watches");
+                .newArrayList("c.id", "c.title", "c.cover", "c.content", "c.watches", "c.course_id");
 
         static {
             COLS_CLASS.addAll(COLS_COACH);
