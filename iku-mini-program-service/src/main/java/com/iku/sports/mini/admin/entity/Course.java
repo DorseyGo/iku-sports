@@ -26,5 +26,5 @@ public class Course {
     // defines how many people purchase this course.
     private int numPurchases;
     private String description;
-
+    private short categoryId;
 }

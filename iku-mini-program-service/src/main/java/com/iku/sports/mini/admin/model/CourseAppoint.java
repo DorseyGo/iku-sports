@@ -17,6 +17,10 @@ public class CourseAppoint {
      */
     private Integer courseId;
     /**
+     * 类别名
+     */
+    private String categoryName;
+    /**
      * 课程级别
      */
     private Character courseLevel;

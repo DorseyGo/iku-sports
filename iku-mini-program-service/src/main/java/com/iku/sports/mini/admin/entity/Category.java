@@ -16,7 +16,7 @@ import java.util.Date;
 @Builder
 public class Category implements Comparable<Category> {
 
-    private short id;
+    private Short id;
     private String name;
     private String displayName;
     private short sequence;

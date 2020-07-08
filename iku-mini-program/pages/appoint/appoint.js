@@ -21,6 +21,7 @@ Page({
     let userId = 'e9b6ea6f672086252a83a48be2198d63';
     request.get(`appoint/course/list/e9b6ea6f672086252a83a48be2198d63`)
            .then(res => {
+            console.log(res)
             let hasData = false;
             if (res.data.length > 0) {
               hasData = true;

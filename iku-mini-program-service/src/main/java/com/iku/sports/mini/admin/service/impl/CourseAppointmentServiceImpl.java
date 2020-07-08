@@ -1,12 +1,10 @@
 package com.iku.sports.mini.admin.service.impl;
 
+import com.iku.sports.mini.admin.entity.Category;
 import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.CourseAppoint;
-import com.iku.sports.mini.admin.service.CourseAppointmentService;
-import com.iku.sports.mini.admin.service.CourseClassService;
-import com.iku.sports.mini.admin.service.CourseService;
-import com.iku.sports.mini.admin.service.OrderService;
+import com.iku.sports.mini.admin.service.*;
 import com.iku.sports.mini.admin.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,13 +22,15 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
     private OrderService orderService;
     private CourseService courseService;
     private CourseClassService courseClassService;
+    private CategoryService categoryService;
 
     @Autowired
     public CourseAppointmentServiceImpl(OrderService orderService, CourseService courseService,
-                                        CourseClassService courseClassService) {
+                                        CourseClassService courseClassService, CategoryService categoryService) {
         this.orderService = orderService;
         this.courseService = courseService;
         this.courseClassService = courseClassService;
+        this.categoryService = categoryService;
     }
 
     @Override
@@ -45,10 +46,15 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
             return Collections.emptyList();
         }
 
+        List<Category> allCategories = categoryService.getAllCategories();
+        Map<Short, String> categoryMap = allCategories.stream()
+                .collect(Collectors.toMap(Category::getId, Category::getName));
+
         return courses.stream()
                     .map(course -> {
                         return CourseAppoint.builder()
                                 .courseId((int) course.getId())
+                                .categoryName(categoryMap.getOrDefault(course.getCategoryId(), "basketball"))
                                 .courseLevel(course.getLevel())
                                 .courseName(course.getName())
                                 .courseDesc(course.getDescription())

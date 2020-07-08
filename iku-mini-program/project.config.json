@@ -5,30 +5,30 @@
 	},
 	"setting": {
 		"urlCheck": true,
-		"scopeDataCheck": false,
-		"coverView": true,
 		"es6": true,
+		"enhance": false,
 		"postcss": true,
-		"compileHotReLoad": false,
 		"preloadBackgroundData": false,
 		"minified": true,
-		"autoAudits": false,
 		"newFeature": true,
-		"uglifyFileName": false,
-		"uploadWithSourceMap": true,
-		"useIsolateContext": true,
+		"coverView": true,
 		"nodeModules": false,
-		"enhance": false,
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false,
+		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"uglifyFileName": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"compileHotReLoad": false,
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"useIsolateContext": true,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.3",
@@ -152,6 +152,12 @@
 					"name": "pages/course/details/details",
 					"pathName": "pages/course/details/details",
 					"query": "courseId=1&category=basketball",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/order/order",
+					"pathName": "pages/order/order",
 					"scene": null
 				}
 			]

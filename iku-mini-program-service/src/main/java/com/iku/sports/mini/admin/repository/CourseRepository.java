@@ -34,6 +34,7 @@ public interface CourseRepository {
             @Result(property = "level", column = "level", jdbcType = JdbcType.CHAR),
             @Result(property = "fee", column = "fee_in_yuan", jdbcType = JdbcType.DOUBLE),
             @Result(property = "description", column = "description", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "categoryId", column = "category_id", jdbcType = JdbcType.TINYINT),
             @Result(property = "numClasses", column = "num_classes", jdbcType = JdbcType.INTEGER)
     })
     @SelectProvider(type = CourseSQLProvider.class, method = "findCoursesByCategoryId")
@@ -53,7 +54,7 @@ public interface CourseRepository {
     class CourseSQLProvider {
 
         static final List<String> COLS = Lists
-                .newArrayList("c.id", "c.name", "c.level", "c.fee/100 fee_in_yuan", "c.description");
+                .newArrayList("c.id", "c.name", "c.level", "c.fee/100 fee_in_yuan", "c.description", "c.category_id");
         static final List<String> AGG_COLS = Lists.newArrayList(COLS);
 
         static {
