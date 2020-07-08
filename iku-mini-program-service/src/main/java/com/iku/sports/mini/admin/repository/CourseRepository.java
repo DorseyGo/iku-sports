@@ -6,6 +6,7 @@
  */
 package com.iku.sports.mini.admin.repository;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.model.Constants;
@@ -43,25 +44,16 @@ public interface CourseRepository {
     Course findCourseById(@Param("courseId") final short courseId) throws DataAccessException;
 
     @ResultMap("courseRM")
-    @Select({
-            "<script>",
-                "SELECT c.id, c.name, c.level, c.fee/100 fee_in_yuan, c.description, COUNT(cl.id) num_classes FROM course c ",
-                "left outer join class cl on c.id = cl.course_id ",
-                "where c.id in ",
-                "<foreach collection='courseIds' item='courseId' open='(' separator=',' close=')'>",
-                "#{courseId}",
-                "</foreach>",
-                "group by c.id",
-            "</script>"
-    })
-    List<Course> batchFindCourses(@Param("courseIds") List<Integer> courseIds);
+    @SelectProvider(type = CourseSQLProvider.class, method = "findCoursesByIds")
+    List<Course> findCoursesByIds(@Param("courseIds") List<Short> courseIds);
 
     // -----
     // SQL provider
     // -----
     class CourseSQLProvider {
 
-        static final List<String> COLS = Lists.newArrayList("c.id", "c.name", "c.level", "c.fee/100 fee_in_yuan", "c.description");
+        static final List<String> COLS = Lists
+                .newArrayList("c.id", "c.name", "c.level", "c.fee/100 fee_in_yuan", "c.description");
         static final List<String> AGG_COLS = Lists.newArrayList(COLS);
 
         static {
@@ -95,6 +87,24 @@ public interface CourseRepository {
                     FROM(TABLE);
                     LEFT_OUTER_JOIN(TABLE_CLASS + " ON c.id = cl.course_id");
                     WHERE("c.id = #{courseId}");
+                    GROUP_BY("c.id");
+                }
+            }.toString();
+        }
+
+        public String findCoursesByIds(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT(AGG_COLS.toArray(new String[AGG_COLS.size()]));
+                    FROM(TABLE);
+                    LEFT_OUTER_JOIN(TABLE_CLASS + " ON c.id = cl.course_id");
+
+                    final List<Short> courseIds = (List<Short>) params.get("courseIds");
+                    if (courseIds != null && !courseIds.isEmpty()) {
+                        final String conditions = Joiner.on(Constants.DELIM_COMMA).join(courseIds);
+                        WHERE("(" + conditions + ")");
+                    }
+
                     GROUP_BY("c.id");
                 }
             }.toString();

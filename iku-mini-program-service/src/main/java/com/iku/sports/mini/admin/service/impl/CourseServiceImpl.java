@@ -10,10 +10,8 @@ import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
-import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.CourseRepository;
 import com.iku.sports.mini.admin.service.CourseService;
-import com.iku.sports.mini.admin.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -65,8 +63,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getCourses(List<Integer> courseIds) {
-        List<Course> courses = courseRepository.batchFindCourses(courseIds);
+    public List<Course> getCourses(List<Short> courseIds) {
+        List<Course> courses = courseRepository.findCoursesByIds(courseIds);
         courses.forEach(this::postProcess);
 
         return courses;

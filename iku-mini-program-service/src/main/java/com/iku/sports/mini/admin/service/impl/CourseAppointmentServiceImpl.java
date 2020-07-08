@@ -1,8 +1,6 @@
 package com.iku.sports.mini.admin.service.impl;
 
-import com.google.common.base.Functions;
 import com.iku.sports.mini.admin.entity.Course;
-import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.CourseAppoint;
 import com.iku.sports.mini.admin.service.CourseAppointmentService;
@@ -17,8 +15,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,7 +34,7 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
 
     @Override
     public List<CourseAppoint> courseAppoint(String userId) throws ApiServiceException {
-        List<Integer> courseIds = orderService.findPurchasedCourse(userId);
+        List<Short> courseIds = orderService.getPurchasedCourseIdsByUserId(userId);
         if (CollectionUtils.isEmpty(courseIds)) {
             return Collections.emptyList();
         }

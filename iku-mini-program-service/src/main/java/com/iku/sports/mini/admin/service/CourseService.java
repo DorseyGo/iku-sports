@@ -38,5 +38,5 @@ public interface CourseService {
      * @param courseIds the collection of course id
      * @return
      */
-    List<Course> getCourses(final List<Integer> courseIds);
+    List<Course> getCourses(final List<Short> courseIds);
 }

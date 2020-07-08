@@ -24,6 +24,8 @@ public interface Constants {
 
     BigDecimal ONE_HUNDRED = new BigDecimal(100);
 
+    String DELIM_COMMA = ",";
+
     /* configurations for WeChat */
     String URL_JS_CODE_2_SESSION = "https://api.weixin.qq.com/sns/jscode2session";
     /* retain how many numbers */

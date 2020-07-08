@@ -14,10 +14,11 @@ import java.util.List;
 public interface OrderService {
 
     void updateTransIdAndPaidTimeById(String transactionId, String endTime, String orderId);
+
     /**
      * return the sort of unique id of purchased course specified by {@code userId}
      * @param userId unique id of user
      * @return
      */
-    List<Integer> findPurchasedCourse(String userId);
+    List<Short> getPurchasedCourseIdsByUserId(String userId);
 }
