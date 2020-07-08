@@ -12,6 +12,7 @@ import com.iku.sports.mini.admin.repository.OrderRepository;
 import com.iku.sports.mini.admin.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -31,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(@Qualifier("orderRepository") OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 
@@ -43,10 +44,10 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return orders.stream()
-                    .filter(order -> Constants.ProductType.COURSE.getCode() == order.getProductType())
-                    .map(Order::getProductId)
-                    .map(Short::valueOf)
-                    .collect(Collectors.toList());
+                .filter(order -> Constants.ProductType.COURSE.getCode() == order.getProductType())
+                .map(Order::getProductId)
+                .map(Short::valueOf)
+                .collect(Collectors.toList());
     }
 
     @Override
