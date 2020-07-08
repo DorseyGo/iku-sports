@@ -320,6 +320,11 @@ swiper-item .bottom-mask::after {
   margin-right: 24rpx;
 }
 
+.margin-left-70-percent
+{
+  margin-left: 70%;
+}
+
 .width-half {
   width: 50%;
 }
@@ -711,7 +716,7 @@ view.about {
   min-height: 324rpx;
   width: calc(100% - 36rpx - 36rpx);
   border-radius: 20rpx;
-  background:rgba(34,35,36,1);
+  background:rgb(252, 252, 252);
 }
 
 .about .iku-item {
@@ -724,6 +729,45 @@ view.about {
   align-items: center;
   transition: all .6s ease-in-out 0s;
   transform: translateX(0rpx);
+}
+
+.about .top-item-image-size{
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 4%;
+}
+
+.about .top-left-item-image {
+  margin-left: 80rpx;
+}
+
+.about .top-center-item-image {
+  margin-left: 150rpx;
+}
+
+.about .top-right-item-image {
+  margin-left: 155rpx;
+}
+
+.about .top-font-margin-left-110rpx
+{
+  margin-left: 110rpx;
+}
+
+.about .top-font-margin-left-60rpx
+{
+  margin-left: 60rpx;
+}
+
+.about .top-item-image-text{
+  width: 80rpx;
+  height: 80rpx;
+  margin-top: 4%;
+}
+
+.about .top-font-size{
+  font-size: 25rpx;
+
 }
 
 /*
