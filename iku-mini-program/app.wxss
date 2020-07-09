@@ -307,6 +307,10 @@ swiper-item .bottom-mask::after {
   margin-top: 60rpx;
 }
 
+.margin-top-xlg {
+  margin-top: 90rpx;
+}
+
 .margin-top-22rpx {
   margin-top: 22rpx;
 }
@@ -993,8 +997,8 @@ view.cover image {
 /* -------------------- */
 /* avatar */
 view.avatar.round {
-  width: 360rpx;
-  height: 360rpx;
+  width: 128rpx;
+  height: 128rpx;
 }
 
 .center {
