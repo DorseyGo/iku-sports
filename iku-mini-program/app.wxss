@@ -790,6 +790,10 @@ view.about {
 
 }
 
+.flex-column {
+  flex-direction: column;
+  align-items: center;
+}
 /*
 .about .iku-item image {
   position: absolute;
@@ -841,8 +845,16 @@ view.tab {
   flex-wrap: wrap;
 }
 
+.grid-2 {
+  display: flex;
+}
+
 .grid.col-2 navigator {
   width: 50%;
+}
+
+.grid-2.col-4 navigator {
+  width: 25%;
 }
 
 .iku-list.grid {
@@ -893,6 +905,14 @@ view.tab {
 
 .card .iku-item {
   display: block;
+  background-color: var(--white);
+  overflow: hidden;
+  border-radius: 10rpx;
+  margin: 24rpx;
+}
+
+.card .iku-item-flex {
+  display: flex;
   background-color: var(--white);
   overflow: hidden;
   border-radius: 10rpx;
