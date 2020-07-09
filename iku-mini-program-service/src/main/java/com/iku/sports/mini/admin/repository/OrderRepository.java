@@ -51,6 +51,9 @@ public interface OrderRepository {
     @SelectProvider(type = OrderSQLProvider.class, method = "findOrderByUserId")
     List<Order> findOrderByUserId(@Param("userId") String userId) throws DataAccessException;
 
+    @DeleteProvider(type = OrderSQLProvider.class, method = "deleteById")
+    void deleteById(@Param("orderId") String orderId) throws DataAccessException;
+
     // -----
     // SQL provider
     // -----
@@ -111,6 +114,20 @@ public interface OrderRepository {
                     SELECT(ORDER_COLS.toArray(new String[0]));
                     FROM(TABLE);
                     WHERE("user_id = #{userId} and status = 1");
+                }
+            }.toString();
+        }
+
+        public String deleteById(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    DELETE_FROM(TABLE);
+                    if (params.get("orderId") != null) {
+                        WHERE("id = #{orderId}");
+                    } else {
+                        // if no order id found, prevent it from delete all.
+                        WHERE("1 = 2");
+                    }
                 }
             }.toString();
         }
