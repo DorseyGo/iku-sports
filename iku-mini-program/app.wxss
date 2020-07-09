@@ -74,7 +74,7 @@ swiper-item .bottom-mask::after {
 }
 
 .nav .nav-item.current {
-  border-bottom: 2rpx solid var(--yellow);
+  border-bottom: 4rpx solid var(--orange);
 }
 
 /** text */

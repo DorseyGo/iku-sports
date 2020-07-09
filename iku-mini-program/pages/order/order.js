@@ -77,5 +77,9 @@ Page({
         hasData: res.data.length > 0
       })
     })
+  },
+
+  delete: function() {
+    console.log("delete button pressed");
   }
 })
