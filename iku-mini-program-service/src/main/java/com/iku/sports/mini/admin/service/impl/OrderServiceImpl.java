@@ -52,16 +52,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = DataAccessException.class)
-    public void updateTransIdAndPaidTimeById(String transactionId, String endTime, String orderId) throws
+    public void updateTransIdAndPaidTimeById(String transactionId, Date paidTime, String orderId) throws
             DataAccessException {
-        Date paidTime = null;
-        try {
-            paidTime = Constants.DATE_FORMATTER_WECHAT.get().parse(endTime);
-        } catch (ParseException e) {
-            log.error("==> Failed to parse the time: {}", endTime, e);
-            paidTime = new Date();
-        }
-
         this.orderRepository.updateTransIdAndPaidTimeById(transactionId, paidTime, orderId);
     }
+
 }

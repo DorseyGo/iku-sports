@@ -6,6 +6,7 @@
  */
 package com.iku.sports.mini.admin.service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,7 +14,14 @@ import java.util.List;
  */
 public interface OrderService {
 
-    void updateTransIdAndPaidTimeById(String transactionId, String endTime, String orderId);
+    /**
+     * Update the transaction ID and paid time according to the order ID.
+     *
+     * @param transactionId the transaction ID.
+     * @param paidTime the paid time.
+     * @param orderId the order ID.
+     */
+    void updateTransIdAndPaidTimeById(String transactionId, Date paidTime, String orderId);
 
     /**
      * return the sort of unique id of purchased course specified by {@code userId}

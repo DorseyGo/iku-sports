@@ -30,6 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.Date;
 
 /**
  * The controller, which is used to handle the request for payment.
@@ -84,8 +86,15 @@ public class PaymentController {
             final String orderNo = notification.getOrderNo();
             final String transactionId = notification.getTransactionId();
             final String endTime = notification.getEndTime();
+            Date paidTime = null;
+            try {
+                paidTime = (endTime == null) ? new Date() : Constants.DATE_FORMATTER_WECHAT.get().parse(endTime);
+            } catch (ParseException e) {
+                log.error("==> Failed to parse the time: {}", endTime, e);
+                paidTime = new Date();
+            }
 
-            orderService.updateTransIdAndPaidTimeById(transactionId, endTime, orderNo);
+            orderService.updateTransIdAndPaidTimeById(transactionId, paidTime, orderNo);
             resp = Resp2Wechat.builder().returnCode(Constants.SUCCESS)
                     .returnMessage(Constants.OK).build();
         }
