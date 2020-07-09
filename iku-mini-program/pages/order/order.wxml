@@ -7,14 +7,14 @@
         </view>
     </view>
 
-    <scroll-view wx:if="{{hasData}}" scroll-y="{{true}}">
+    <scroll-view scroll-y="{{true}}" class="list" wx:if="{{hasData}}">
         <!-- orders -->
         <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx">
             <view class="iku-item">
                 <view class="title flex">
                     <view class="text-cut flex-sub">基础篮球课程</view>
                     <text class="margin-right-24rpx text-unbold">已取消</text>
-                    <view ontap="delete" class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
+                    <view ontap="delete" data-cur="1" class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
                 </view>
                 <view class="content">
                     <image class="sm" src="../../images/basketball_1.png" mode="aspectFill" />
