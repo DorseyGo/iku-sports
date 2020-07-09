@@ -103,7 +103,7 @@ public interface CourseRepository {
                     final List<Short> courseIds = (List<Short>) params.get("courseIds");
                     if (courseIds != null && !courseIds.isEmpty()) {
                         final String conditions = Joiner.on(Constants.DELIM_COMMA).join(courseIds);
-                        WHERE("(" + conditions + ")");
+                        WHERE("c.id IN (" + conditions + ")");
                     }
 
                     GROUP_BY("c.id");
