@@ -34,7 +34,7 @@ Page({
     current: -1,
     offset: 0,
     orders: [],
-    hasData: false
+    hasData: true
   },
 
   /**

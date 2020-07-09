@@ -9,19 +9,21 @@
 
     <view wx:if="{{hasData}}">
         <!-- orders -->
-        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
+        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx">
             <view class="iku-item">
-                <view class="title">
-                    <view class="text-cut">基础篮球课程</view>
+                <view class="title flex">
+                    <view class="text-cut flex-sub">基础篮球课程</view>
+                    <text class="margin-right-24rpx text-unbold">已取消</text>
+                    <view class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
                 </view>
                 <view class="content">
-                    <image src="../../images/basketball_1.png" mode="aspectFill" />
+                    <image class="sm" src="../../images/basketball_1.png" mode="aspectFill" />
                     <view class="desc">
-                        <view class="text-content">课程：20 节</view>
-                        <view class="text-content text-cut">篮球基础动作</view>
+                        <view class="text-content text-wrap">篮球基础教程,移动技术包括:走、跑、跳、急停、转身、跨步和滑步等几种脚步动作。
+                        移动是攻防的基础这就需要一个既稳定又便于移动的基本姿势做保证.</view>
                     </view>
-                    <view class="action">
-                        ￥<text class="text-red">500</text>
+                    <view class="notice text-normal">
+                        ￥<text class="text-red text-lg">500</text>.00
                     </view>
                 </view>
             </view>
