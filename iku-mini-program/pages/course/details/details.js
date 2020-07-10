@@ -9,7 +9,7 @@ Page({
     category: null,
     course: null,
     customServicePhoneNo: null,
-    customService: "custom_service"
+    customService: "customer_service"
   },
 
   /**
