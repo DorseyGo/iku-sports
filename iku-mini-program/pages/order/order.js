@@ -34,7 +34,8 @@ Page({
     current: -1,
     offset: 0,
     orders: [],
-    hasData: true
+    hasData: true,
+    orderId2Removed: null
   },
 
   /**
@@ -79,7 +80,27 @@ Page({
     })
   },
 
-  delete: function() {
-    console.log("delete button pressed");
+  delete: function(e) {
+    let orderId = e.currentTarget.dataset.cur
+    wx.showModal({
+      title: '提示',
+      content: '是否删除此订单？',
+      showCancel: true,
+      cancelText: '取消',
+      cancelColor: '#000000',
+      confirmText: '确定',
+      confirmColor: '#3CC51F',
+      success: (result) => {
+        if (result.confirm) {
+          this.deleteOrder(orderId)
+        }
+      }
+    });
+  },
+
+  deleteOrder: function(orderId) {
+    request.del(`orders/${orderId}`).then(res => {
+        
+    })
   }
 })

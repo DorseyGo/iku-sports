@@ -7,6 +7,7 @@
 package com.iku.sports.mini.admin.service.impl;
 
 import com.iku.sports.mini.admin.entity.Order;
+import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.OrderRepository;
 import com.iku.sports.mini.admin.service.OrderService;
@@ -48,6 +49,12 @@ public class OrderServiceImpl implements OrderService {
                 .map(Order::getProductId)
                 .map(Short::valueOf)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = DataAccessException.class)
+    public void deleteOrdeById(final String orderId) throws ApiServiceException {
+        orderRepository.deleteById(orderId);
     }
 
     @Override

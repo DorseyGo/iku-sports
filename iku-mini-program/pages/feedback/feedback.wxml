@@ -1,0 +1,3 @@
+<view class="container">
+<button open-type='feedback'>意见反馈</button>
+</view>

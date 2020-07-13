@@ -6,6 +6,8 @@
  */
 package com.iku.sports.mini.admin.service;
 
+import com.iku.sports.mini.admin.exception.ApiServiceException;
+
 import java.util.Date;
 import java.util.List;
 
@@ -29,4 +31,12 @@ public interface OrderService {
      * @return
      */
     List<Short> getPurchasedCourseIdsByUserId(String userId);
+
+    /**
+     * Delete the order from underlying database according to the given order ID.
+     *
+     * @param orderId the order id.
+     * @throws ApiServiceException if any errors detected during process.
+     */
+    void deleteOrdeById(String orderId) throws ApiServiceException;
 }

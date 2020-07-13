@@ -672,6 +672,11 @@ view.iku-list {
   min-height: 220rpx;
 }
 
+view.iku-list-height-120 {
+  overflow: hidden;
+  min-height: 50rpx;
+}
+
 .iku-list .iku-item {
   position: relative;
   display: flex;
@@ -779,10 +784,8 @@ view.about {
   margin-left: 60rpx;
 }
 
-.about .top-item-image-text{
-  width: 80rpx;
-  height: 80rpx;
-  margin-top: 4%;
+.about .top-item-text{
+  font-weight: 900;
 }
 
 .about .top-font-size{
@@ -790,6 +793,10 @@ view.about {
 
 }
 
+.flex-column {
+  flex-direction: column;
+  align-items: center;
+}
 /*
 .about .iku-item image {
   position: absolute;
@@ -841,8 +848,20 @@ view.tab {
   flex-wrap: wrap;
 }
 
+.grid-2 {
+  display: flex;
+}
+
 .grid.col-2 navigator {
   width: 50%;
+}
+
+.grid-2.col-3 navigator {
+  width: 33.33%;
+}
+
+.grid-2.col-4 navigator {
+  width: 25%;
 }
 
 .iku-list.grid {
@@ -886,6 +905,13 @@ view.tab {
   overflow: hidden;
 }
 
+.card-height-300 {
+  min-height: 300rpx;
+  background-color: var(--white);
+  display: block;
+  overflow: hidden;
+}
+
 .card.nav {
   min-height: 66rpx;
   display: flex;
@@ -893,6 +919,14 @@ view.tab {
 
 .card .iku-item {
   display: block;
+  background-color: var(--white);
+  overflow: hidden;
+  border-radius: 10rpx;
+  margin: 24rpx;
+}
+
+.card .iku-item-flex {
+  display: flex;
   background-color: var(--white);
   overflow: hidden;
   border-radius: 10rpx;

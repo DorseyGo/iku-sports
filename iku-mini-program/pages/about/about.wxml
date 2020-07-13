@@ -1,28 +1,67 @@
 <view class="container">
-    <view class="card about margin-left-right-24rpx radius border-2rpx">
+    <view class="card margin-left-right-24rpx radius border-2rpx ">
         
-        <view class=" head">
+        <view class=" head ">
             <image mode="aspectFit" src="{{!userInfo.nickName ? '../../images/grey_head.jpg' : userInfo.avatarUrl }}"></image>
             <button wx:if="{{!userInfo.nickName}}" plain size="mini" open-type="getUserInfo" bindgetuserinfo="handleGetUserInfo">登录</button>
             <text class="username">{{userInfo.nickName}}</text>
         </view>
-        <view class="line-1px margin-top-2-percent"></view>
-         <view >
-            <image class="top-left-item-image top-item-image-size" src="../../images/list.png" />
-            <image class="top-center-item-image top-item-image-size" src="../../images/list.png" />
-            <image class="top-right-item-image top-item-image-size" src="../../images/list.png" />
-        </view>
-        <view class="text-dark-gray">
-            <text class="top-font-size top-font-margin-left-60rpx">订单管理 </text>
-            <text class="top-font-size top-font-margin-left-110rpx" >订单管理 </text>            
-            <text class="top-font-size top-font-margin-left-110rpx">订单管理 </text>
-        </view>
-        
+        <view class="line-1px"></view>
+            <view class="iku-list-height-120 grid-2 col-4 no-border margin-left-right-24rpx radius margin-top-2-percent">
+                <navigator class="iku-item-flex flex-column" url="../course/course">
+                    <text class="margin-top-10rpx">23</text>
+                    <text class="text-normal top-item-text text-dark-gray margin-top-10rpx">在学</text>
+                </navigator>
+                <navigator class="iku-item-flex flex-column" >
+                    <text class="margin-top-10rpx">25</text>
+                    <text class="text-normal top-item-text text-dark-gray margin-top-10rpx">收藏</text>
+                </navigator>
+                <navigator class="iku-item-flex flex-column" url="../undetermined/undetermined">
+                    <text class="margin-top-10rpx">0</text>
+                    <text class="text-normal top-item-text text-dark-gray margin-top-10rpx">待定</text>
+                </navigator>
+                <navigator class="iku-item-flex flex-column" >
+                    <text class="margin-top-10rpx">40</text>
+                    <text class="text-normal top-item-text text-dark-gray margin-top-10rpx">打卡次数</text>
+                </navigator>
+            </view>
     </view>
-    <view class="card about margin-left-right-24rpx radius border-2rpx margin-top-2-percent">
-        <view class=" mg-left-16rpx text-dark-gray text-sm-30rpx tab-item margin-top-4-percent text-dark-gray">
+    
+    <view class="card margin-left-right-24rpx radius border-2rpx margin-top-2-percent">
+        <view class="iku-list-height-120 grid-2 col-3  no-border margin-left-right-24rpx radius margin-top-2-percent">
+            <navigator class="iku-item-flex flex-column" url="../order/order">
+                <image class="function-img-size" src="../../images/list.png" />
+                <text class="text-normal text-dark-gray margin-top-10rpx">我的订单</text>
+            </navigator>
+            <navigator class="iku-item-flex flex-column" url="../appoint/appoint">
+                <image class="function-img-size" src="../../images/apponitment.png" />
+                <text class="text-normal text-dark-gray margin-top-10rpx">课程预约</text>
+            </navigator>
+            <navigator class="iku-item-flex flex-column" >
+                <image class="function-img-size"  src="../../images/invitation.png" />
+                <text class="text-normal text-dark-gray margin-top-10rpx">帖子管理</text>
+            </navigator>
+        </view>
+        <view class="iku-list-height-120 grid-2 col-3  no-border margin-left-right-24rpx radius">
+            
+            <navigator class="iku-item-flex flex-column" url="../feedback/feedback">
+                <image class="function-img-size"  src="../../images/feedback.png" />
+                <text class="text-normal text-dark-gray margin-top-10rpx">反馈建议</text>
+            </navigator>
+            <navigator class="iku-item-flex flex-column" url="../undetermined/undetermined">
+                <image class="function-img-size" src="../../images/setup.png" />
+                <text class="text-normal text-dark-gray margin-top-10rpx">设置</text>
+            </navigator>
+            <navigator class="iku-item-flex flex-column" url="../undetermined/undetermined">
+                <image class="function-img-size" src="../../images/more.png" />
+                <text class="text-normal text-dark-gray margin-top-10rpx">更多</text>
+            </navigator>
+        </view>
+    </view>
+    <view class="card  margin-left-right-24rpx radius border-2rpx margin-top-2-percent">
+        <view class=" mg-left-16rpx flex text-dark-gray text-sm-30rpx tab-item margin-top-4-percent text-dark-gray">
             <text>已学课程</text>
-            <text class="margin-left-70-percent"> 更多</text>           
+            <navigator  url="../course/course" class="margin-left-70-percent">更多</navigator>          
         </view>
         <view class="line-1px margin-top-"></view>
 
@@ -37,23 +76,5 @@
         </scroll-view>
         </view>  
     </view>  
-    <view class="iku-list about margin-top-22rpx card margin-left-right-24rpx radius border-2rpx" >
-        <view class="list-item flex">
-            <image class="item-image" src="../../images/my_logo.png" />
-            <text class="item-text">我的帖子</text> 
-            <image class="item-image-size-40rpx margin-left-70-percent" src="../../images/arrow.png" />
-        </view>
-        <view class="person-line"></view>
-        <view class="list-item">
-            <image class="item-image" src="../../images/import_note.png" />
-            <text class="item-text">反馈建议</text> 
-            <image class="item-image-size-40rpx margin-left-70-percent" src="../../images/arrow.png" />
-        </view>
-        <view class="person-line"></view>
-        <view class="list-item">
-            <image class="item-image" src="../../images/setup.png" />
-            <text class="item-text">设置</text> 
-            <image class="item-image-size-40rpx margin-left-70-percent" src="../../images/arrow.png" />
-        </view>
-    </view>
+    
 </view>
