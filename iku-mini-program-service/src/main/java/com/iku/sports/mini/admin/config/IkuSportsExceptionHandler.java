@@ -33,7 +33,7 @@ public class IkuSportsExceptionHandler {
         for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
             log.error("==> Error detected when validate parameter: {}, with error: {}",
                     violation.getPropertyPath().toString(), violation.getMessage(), ex);
-            return Response.fail(ex.getMessage());
+            return Response.fail(IkuSportsError.PARAM_VALIDATION_FAIL);
         }
 
         return Response.fail("Parameter validation error");

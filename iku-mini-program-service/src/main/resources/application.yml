@@ -18,6 +18,7 @@ iku:
     expiry-in-days: 1
     machine-ip-addr: 127.0.0.1
     notify-url-addr: https://${iku.mini-program.machine-ip-addr}:${server.port}/payment/notification
+    appoint_ahead_day: 0
 
 spring:
   output:

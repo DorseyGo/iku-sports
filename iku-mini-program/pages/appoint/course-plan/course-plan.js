@@ -1,4 +1,6 @@
 // pages/appoint/course-plan/course-plan.js
+const request = require("../../../utils/request");
+
 Page({
 
   /**
@@ -12,7 +14,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let userId = options.userId;
+    let courseId = options.courseId;
 
+    request.get(`arrange/class/${courseId}?userId=${userId}`)
+           .then(res => {
+             console.log(res)
+           })
   },
 
   /**

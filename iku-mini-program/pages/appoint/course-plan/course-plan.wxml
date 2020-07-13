@@ -5,23 +5,22 @@
 			<view class="iku-item" wx:key="1000">
 				<view class="content">
 					<view class="desc">
-						<view class="text-content">课时：第 <text class="text-red">3</text> 节</view>
             <view class="text-content course_name">
-							讲解内容：<text class="text-red">运球</text>
+							课程内容：<text class="text-red">运球</text>
 						</view>
-						<view class="text-content">教练：<text>harden</text></view>
-            <view class="text-content">
-              上课时间：<text class="text-red">2020-07-05 10:30</text>
-            </view>
-            <view class="text-content">
-              结束时间：<text>2020-07-05 11:30</text>
+            <view class="text-content flex">
+              <view class="flex-sub">教练：<text>harden</text></view>
+						  <view>课时：第 <text class="text-red">3</text> 节</view>
             </view>
             <view class="text-content flex">
-              <view class="flex-sub icon-">已约：<text class="text-red">30</text></view>
-              <view>剩余名额：<text class="text-red">5</text></view>
+              <view class="flex-sub">上课时间：<text class="text-red">2020-07-05 10:30</text>
+              </view>
+              <view>时长：0.5小时</view>
             </view>
-            <view class="text-content">
-              场地：<text>风雨球场</text>
+            <view class="text-content">场地：<text>风雨球场</text></view>
+            <view class="text-content flex">
+              <view class="flex-sub">已预约：<text class="text-red">30</text></view>
+              <view>剩余：<text class="text-red">5</text></view>
             </view>
 						<view class="text-content flex">
               <view class="flex-sub"></view>

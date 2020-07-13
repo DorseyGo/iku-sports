@@ -171,7 +171,7 @@ drop table if exists arrange_class;
 create table arrange_class
 (
    id                   int not null,
-   user_id              varchar(32) comment '用户ID',
+   course_id            TINYINT(2) comment '用户ID',
    class_id             int comment '课程ID',
    coach_id             int comment '教练ID',
    site                 varchar(256) comment '上课地点',

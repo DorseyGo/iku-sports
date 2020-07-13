@@ -26,7 +26,7 @@ import java.util.Map;
 public interface CourseRepository {
     String TABLE = "course c";
     String TABLE_CLASS = "class cl";
-    String TABLE_ORDER = "order o";
+    String TABLE_ORDER = "`order` o";
 
     @Results(id = "courseRM", value = {
             @Result(property = "id", column = "id", jdbcType = JdbcType.TINYINT),
@@ -59,14 +59,14 @@ public interface CourseRepository {
 
         static {
             AGG_COLS.add("COUNT(cl.id) num_classes");
-            AGG_COLS.add(new SQL() {
+            AGG_COLS.add("(" + new SQL() {
                 {
                     SELECT("COUNT(o.user_id)");
                     FROM(TABLE_ORDER);
                     WHERE("o.product_id = c.id");
                     WHERE("o.product_type = " + Constants.ProductType.COURSE.getCode());
                 }
-            }.toString());
+            }.toString() + ")");
         }
 
         public String findCoursesByCategoryId(final Map<String, Object> params) {
