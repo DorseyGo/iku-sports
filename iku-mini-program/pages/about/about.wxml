@@ -67,7 +67,7 @@
 
         <view class="section text-dark-gray">
         <scroll-view class="scroll_view" scroll-x="true">
-            <view class="cont" wx:for="{{list}}" wx:key="{{item}}">
+            <view class="cont" wx:for="{{list}}" wx:key="name">
             <image src="{{item.url}}"class="cont_img"/>
             <view class="content">
                 <view  class="cont_name" >{{item.name}}</view>            
