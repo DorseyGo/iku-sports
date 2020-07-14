@@ -6,6 +6,7 @@
  */
 package com.iku.sports.mini.admin.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -26,6 +27,7 @@ public class CourseOrder {
     private char level;
 
     // computed according to fee
-    private String decimalPart;
-    private String integerPart;
+    private String decimalPart = "00";
+    private String integerPart = "0";
+
 }
