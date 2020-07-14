@@ -9,192 +9,21 @@
 
     <scroll-view scroll-y="{{true}}" class="list" wx:if="{{hasData}}">
         <!-- orders -->
-        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx">
+        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx"
+         wx:for="{{orders}}" wx:key="orderId">
             <view class="iku-item">
                 <view class="title flex">
-                    <view class="text-cut flex-sub">基础篮球课程</view>
+                    <view class="text-cut flex-sub">{{item.name}}</view>
                     <text class="margin-right-24rpx text-unbold">已取消</text>
                     <view ontap="delete" data-cur="1" class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
                 </view>
                 <view class="content">
-                    <image class="sm" src="../../images/basketball_1.png" mode="aspectFill" />
+                    <image class="sm" src="../../images/{{item.category}}_{{item.level}}.png" mode="aspectFill" />
                     <view class="desc">
-                        <view class="text-content text-wrap">篮球基础教程,移动技术包括:走、跑、跳、急停、转身、跨步和滑步等几种脚步动作。
-                        移动是攻防的基础这就需要一个既稳定又便于移动的基本姿势做保证.</view>
+                        <view class="text-content text-wrap">{{item.courseDescription}}</view>
                     </view>
                     <view class="notice text-normal">
-                        ￥<text class="text-red text-lg">500</text>.00
-                    </view>
-                </view>
-            </view>
-        </view>
-        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx">
-            <view class="iku-item">
-                <view class="title flex">
-                    <view class="text-cut flex-sub">基础篮球课程</view>
-                    <text class="margin-right-24rpx text-unbold">已取消</text>
-                    <view ontap="delete" class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
-                </view>
-                <view class="content">
-                    <image class="sm" src="../../images/basketball_1.png" mode="aspectFill" />
-                    <view class="desc">
-                        <view class="text-content text-wrap">篮球基础教程,移动技术包括:走、跑、跳、急停、转身、跨步和滑步等几种脚步动作。
-                        移动是攻防的基础这就需要一个既稳定又便于移动的基本姿势做保证.</view>
-                    </view>
-                    <view class="notice text-normal">
-                        ￥<text class="text-red text-lg">500</text>.00
-                    </view>
-                </view>
-            </view>
-        </view>
-        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx">
-            <view class="iku-item">
-                <view class="title flex">
-                    <view class="text-cut flex-sub">基础篮球课程</view>
-                    <text class="margin-right-24rpx text-unbold">已取消</text>
-                    <view ontap="delete" class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
-                </view>
-                <view class="content">
-                    <image class="sm" src="../../images/basketball_1.png" mode="aspectFill" />
-                    <view class="desc">
-                        <view class="text-content text-wrap">篮球基础教程,移动技术包括:走、跑、跳、急停、转身、跨步和滑步等几种脚步动作。
-                        移动是攻防的基础这就需要一个既稳定又便于移动的基本姿势做保证.</view>
-                    </view>
-                    <view class="notice text-normal">
-                        ￥<text class="text-red text-lg">500</text>.00
-                    </view>
-                </view>
-            </view>
-        </view>
-        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx">
-            <view class="iku-item">
-                <view class="title flex">
-                    <view class="text-cut flex-sub">基础篮球课程</view>
-                    <text class="margin-right-24rpx text-unbold">已取消</text>
-                    <view ontap="delete" class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
-                </view>
-                <view class="content">
-                    <image class="sm" src="../../images/basketball_1.png" mode="aspectFill" />
-                    <view class="desc">
-                        <view class="text-content text-wrap">篮球基础教程,移动技术包括:走、跑、跳、急停、转身、跨步和滑步等几种脚步动作。
-                        移动是攻防的基础这就需要一个既稳定又便于移动的基本姿势做保证.</view>
-                    </view>
-                    <view class="notice text-normal">
-                        ￥<text class="text-red text-lg">500</text>.00
-                    </view>
-                </view>
-            </view>
-        </view>
-        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx">
-            <view class="iku-item">
-                <view class="title flex">
-                    <view class="text-cut flex-sub">基础篮球课程</view>
-                    <text class="margin-right-24rpx text-unbold">已取消</text>
-                    <view ontap="delete" class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
-                </view>
-                <view class="content">
-                    <image class="sm" src="../../images/basketball_1.png" mode="aspectFill" />
-                    <view class="desc">
-                        <view class="text-content text-wrap">篮球基础教程,移动技术包括:走、跑、跳、急停、转身、跨步和滑步等几种脚步动作。
-                        移动是攻防的基础这就需要一个既稳定又便于移动的基本姿势做保证.</view>
-                    </view>
-                    <view class="notice text-normal">
-                        ￥<text class="text-red text-lg">500</text>.00
-                    </view>
-                </view>
-            </view>
-        </view>
-        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx">
-            <view class="iku-item">
-                <view class="title flex">
-                    <view class="text-cut flex-sub">基础篮球课程</view>
-                    <text class="margin-right-24rpx text-unbold">已取消</text>
-                    <view ontap="delete" class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
-                </view>
-                <view class="content">
-                    <image class="sm" src="../../images/basketball_1.png" mode="aspectFill" />
-                    <view class="desc">
-                        <view class="text-content text-wrap">篮球基础教程,移动技术包括:走、跑、跳、急停、转身、跨步和滑步等几种脚步动作。
-                        移动是攻防的基础这就需要一个既稳定又便于移动的基本姿势做保证.</view>
-                    </view>
-                    <view class="notice text-normal">
-                        ￥<text class="text-red text-lg">500</text>.00
-                    </view>
-                </view>
-            </view>
-        </view>
-        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx">
-            <view class="iku-item">
-                <view class="title flex">
-                    <view class="text-cut flex-sub">基础篮球课程</view>
-                    <text class="margin-right-24rpx text-unbold">已取消</text>
-                    <view ontap="delete" class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
-                </view>
-                <view class="content">
-                    <image class="sm" src="../../images/basketball_1.png" mode="aspectFill" />
-                    <view class="desc">
-                        <view class="text-content text-wrap">篮球基础教程,移动技术包括:走、跑、跳、急停、转身、跨步和滑步等几种脚步动作。
-                        移动是攻防的基础这就需要一个既稳定又便于移动的基本姿势做保证.</view>
-                    </view>
-                    <view class="notice text-normal">
-                        ￥<text class="text-red text-lg">500</text>.00
-                    </view>
-                </view>
-            </view>
-        </view>
-        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx">
-            <view class="iku-item">
-                <view class="title flex">
-                    <view class="text-cut flex-sub">基础篮球课程</view>
-                    <text class="margin-right-24rpx text-unbold">已取消</text>
-                    <view ontap="delete" class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
-                </view>
-                <view class="content">
-                    <image class="sm" src="../../images/basketball_1.png" mode="aspectFill" />
-                    <view class="desc">
-                        <view class="text-content text-wrap">篮球基础教程,移动技术包括:走、跑、跳、急停、转身、跨步和滑步等几种脚步动作。
-                        移动是攻防的基础这就需要一个既稳定又便于移动的基本姿势做保证.</view>
-                    </view>
-                    <view class="notice text-normal">
-                        ￥<text class="text-red text-lg">500</text>.00
-                    </view>
-                </view>
-            </view>
-        </view>
-        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx">
-            <view class="iku-item">
-                <view class="title flex">
-                    <view class="text-cut flex-sub">基础篮球课程</view>
-                    <text class="margin-right-24rpx text-unbold">已取消</text>
-                    <view ontap="delete" class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
-                </view>
-                <view class="content">
-                    <image class="sm" src="../../images/basketball_1.png" mode="aspectFill" />
-                    <view class="desc">
-                        <view class="text-content text-wrap">篮球基础教程,移动技术包括:走、跑、跳、急停、转身、跨步和滑步等几种脚步动作。
-                        移动是攻防的基础这就需要一个既稳定又便于移动的基本姿势做保证.</view>
-                    </view>
-                    <view class="notice text-normal">
-                        ￥<text class="text-red text-lg">500</text>.00
-                    </view>
-                </view>
-            </view>
-        </view>
-        <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx min-height-280rpx">
-            <view class="iku-item">
-                <view class="title flex">
-                    <view class="text-cut flex-sub">基础篮球课程</view>
-                    <text class="margin-right-24rpx text-unbold">已取消</text>
-                    <view ontap="delete" class="round avatar" style="background-image: url('../../images/delete.png'); background-position: center"></view>
-                </view>
-                <view class="content">
-                    <image class="sm" src="../../images/basketball_1.png" mode="aspectFill" />
-                    <view class="desc">
-                        <view class="text-content text-wrap">篮球基础教程,移动技术包括:走、跑、跳、急停、转身、跨步和滑步等几种脚步动作。
-                        移动是攻防的基础这就需要一个既稳定又便于移动的基本姿势做保证.</view>
-                    </view>
-                    <view class="notice text-normal">
-                        ￥<text class="text-red text-lg">500</text>.00
+                        ￥<text class="text-red text-lg">{{item.integerPart}}</text>.{{item.decimalPart}}
                     </view>
                 </view>
             </view>

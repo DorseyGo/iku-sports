@@ -31,32 +31,50 @@ Page({
    */
   data: {
     orderStatues: orderStatuses,
-    current: -1,
-    offset: 0,
+    current: -1, // current status
+    curPage: 1, // current page
     orders: [],
-    hasData: true,
-    orderId2Removed: null
+    hasData: true, // whether has data
+    orderId2Removed: null,
+    hasMore: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.loadOrders()
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.setData({
+      curPage: 1
+    })
 
+    this.loadOrders()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    if (hasMore) {
+      wx.showLoading({
+        title: "正在加载...",
+        mask: true
+      });
 
+      this.loadOrders()
+      return
+    }
+
+    wx.showLoading({
+      title: "已经到底了!",
+      mask: true
+    });
   },
   
   selectTab: function(e) {
@@ -64,18 +82,21 @@ Page({
     this.setData({
       current: curStatus
     });
+
+    this.loadOrders()
   },
 
-  loadOrders: function(status) {
-    let userId = wx.getStorageSync('token');
-    request.get(`orders`, {
+  loadOrders: function() {
+    let userId = wx.getStorageSync('token')
+    let curPage = this.data.curPage
+    request.get(`orders/${curPage}`, {
       userId: userId,
-      status: status,
-      offset: offset
+      status: this.data.current
     }).then(res => {
       this.setData({
-        orders: res.data,
-        hasData: res.data.length > 0
+        orders: res.data.data,
+        hasData: res.data.data.length > 0,
+        hasMore: res.data.hasNextPaging
       })
     })
   },
@@ -100,7 +121,26 @@ Page({
 
   deleteOrder: function(orderId) {
     request.del(`orders/${orderId}`).then(res => {
-        
+        wx.showToast({
+          title: '订单已删除',
+          icon: 'success'
+        });
+
+        this.removeOrderById(orderId)
     })
+  },
+
+  removeOrderById: function(orderId) {
+    let pos = this.data.orders.forEach((item, index) => {
+      if (item.id === orderId) {
+        return index;
+      }
+
+      return -1;
+    });
+
+    if (pos != -1) {
+      this.data.orders.splice(pos, 1)
+    }
   }
 })

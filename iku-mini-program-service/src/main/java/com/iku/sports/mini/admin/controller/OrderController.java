@@ -6,15 +6,15 @@
  */
 package com.iku.sports.mini.admin.controller;
 
+import com.iku.sports.mini.admin.entity.CourseOrder;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
+import com.iku.sports.mini.admin.model.Paging;
 import com.iku.sports.mini.admin.model.Response;
 import com.iku.sports.mini.admin.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -31,8 +31,17 @@ public class OrderController {
     }
 
     @DeleteMapping("/orders/{orderId}")
-    public Response<String> deleteOrderById(@PathVariable("orderId") @NotNull final String orderId) throws ApiServiceException {
-        orderService.deleteOrdeById(orderId);
+    public Response<String> deleteOrderById(@PathVariable("orderId") @NotNull final String orderId) throws
+            ApiServiceException {
+        orderService.deleteOrderById(orderId);
         return Response.ok();
+    }
+
+    @GetMapping("/orders/{curPage}")
+    public Response<Paging<CourseOrder>> paginate(@PathVariable("curPage") final int curPage,
+            @RequestParam("userId") final String userId,
+            @RequestParam("status") final char status) throws ApiServiceException {
+        Paging<CourseOrder> paging = orderService.paginateByUserIdAndStatus(curPage, userId, status);
+        return Response.ok(paging);
     }
 }
