@@ -35,7 +35,8 @@ Page({
     curPage: 1, // current page
     orders: [],
     hasData: true, // whether has data
-    orderId2Removed: null
+    orderId2Removed: null,
+    hasMore: false
   },
 
   /**
@@ -60,7 +61,20 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    if (hasMore) {
+      wx.showLoading({
+        title: "正在加载...",
+        mask: true
+      });
 
+      this.loadOrders()
+      return
+    }
+
+    wx.showLoading({
+      title: "已经到底了!",
+      mask: true
+    });
   },
   
   selectTab: function(e) {
@@ -73,15 +87,16 @@ Page({
   },
 
   loadOrders: function() {
-    let userId = wx.getStorageSync('token');
-    request.get(`orders`, {
+    let userId = wx.getStorageSync('token')
+    let curPage = this.data.curPage
+    request.get(`orders/${curPage}`, {
       userId: userId,
-      status: this.data.current,
-      curPage: this.data.curPage
+      status: this.data.current
     }).then(res => {
       this.setData({
-        orders: res.data,
-        hasData: res.data.length > 0
+        orders: res.data.data,
+        hasData: res.data.data.length > 0,
+        hasMore: res.data.hasNextPaging
       })
     })
   },

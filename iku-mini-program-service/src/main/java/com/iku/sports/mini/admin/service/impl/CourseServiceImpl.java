@@ -10,6 +10,7 @@ import com.iku.sports.mini.admin.config.IkuSportsConfig;
 import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
+import com.iku.sports.mini.admin.model.Constants;
 import com.iku.sports.mini.admin.repository.CourseRepository;
 import com.iku.sports.mini.admin.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
@@ -71,6 +72,6 @@ public class CourseServiceImpl implements CourseService {
     }
 
     private void postProcess(final Course course) {
-        course.setFee(course.getFee().setScale(2, RoundingMode.HALF_UP));
+        course.setFee(course.getFee().divide(Constants.ONE_HUNDRED).setScale(2, RoundingMode.HALF_UP));
     }
 }

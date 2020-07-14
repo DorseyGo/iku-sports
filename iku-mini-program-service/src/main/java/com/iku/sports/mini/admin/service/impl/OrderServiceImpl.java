@@ -6,9 +6,14 @@
  */
 package com.iku.sports.mini.admin.service.impl;
 
+import com.google.common.base.Splitter;
+import com.iku.sports.mini.admin.config.IkuSportsConfig;
+import com.iku.sports.mini.admin.entity.CourseOrder;
 import com.iku.sports.mini.admin.entity.Order;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.Constants;
+import com.iku.sports.mini.admin.model.Paging;
+import com.iku.sports.mini.admin.repository.CourseOrderRepository;
 import com.iku.sports.mini.admin.repository.OrderRepository;
 import com.iku.sports.mini.admin.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +25,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.text.ParseException;
+import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -30,11 +35,17 @@ import java.util.stream.Collectors;
 @Transactional
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
+    private final IkuSportsConfig config;
+    private final CourseOrderRepository courseOrderRepository;
 
     @Autowired
-    public OrderServiceImpl(@Qualifier("orderRepository") OrderRepository orderRepository) {
+    public OrderServiceImpl(@Qualifier("orderRepository") OrderRepository orderRepository,
+            IkuSportsConfig config,
+            @Qualifier("courseOrderRepository") final CourseOrderRepository courseOrderRepository) {
         this.orderRepository = orderRepository;
+        this.config = config;
+        this.courseOrderRepository = courseOrderRepository;
     }
 
     @Override
@@ -53,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = DataAccessException.class)
-    public void deleteOrdeById(final String orderId) throws ApiServiceException {
+    public void deleteOrderById(final String orderId) throws ApiServiceException {
         orderRepository.deleteById(orderId);
     }
 
@@ -62,6 +73,25 @@ public class OrderServiceImpl implements OrderService {
     public void updateTransIdAndPaidTimeById(String transactionId, Date paidTime, String orderId) throws
             DataAccessException {
         this.orderRepository.updateTransIdAndPaidTimeById(transactionId, paidTime, orderId);
+    }
+
+    @Override
+    public Paging<CourseOrder> paginateByUserIdAndStatus(int curPage, String userId, char status) {
+        final int pageSize = config.getPageSize();
+        final Paging<CourseOrder> paging = new Paging<>(curPage, pageSize);
+        final List<CourseOrder> courseOrders = courseOrderRepository
+                .findPagingOrdersByUserIdAndStatus(paging.getOffset(), pageSize, userId, status);
+        courseOrders.forEach(courseOrder -> {
+            courseOrder.getFee().divide(Constants.ONE_HUNDRED).setScale(2, RoundingMode.HALF_UP);
+            List<String> result = Splitter.on(Constants.DELIM_DOT).splitToList(String.valueOf(courseOrder.getFee()));
+            if (result.size() == 2) {
+                courseOrder.setIntegerPart(result.get(0));
+                courseOrder.setDecimalPart(result.get(1));
+            }
+        });
+
+        paging.setData(courseOrders);
+        return paging;
     }
 
 }

@@ -6,7 +6,9 @@
  */
 package com.iku.sports.mini.admin.service;
 
+import com.iku.sports.mini.admin.entity.CourseOrder;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
+import com.iku.sports.mini.admin.model.Paging;
 
 import java.util.Date;
 import java.util.List;
@@ -20,13 +22,14 @@ public interface OrderService {
      * Update the transaction ID and paid time according to the order ID.
      *
      * @param transactionId the transaction ID.
-     * @param paidTime the paid time.
-     * @param orderId the order ID.
+     * @param paidTime      the paid time.
+     * @param orderId       the order ID.
      */
     void updateTransIdAndPaidTimeById(String transactionId, Date paidTime, String orderId);
 
     /**
      * return the sort of unique id of purchased course specified by {@code userId}
+     *
      * @param userId unique id of user
      * @return
      */
@@ -38,5 +41,15 @@ public interface OrderService {
      * @param orderId the order id.
      * @throws ApiServiceException if any errors detected during process.
      */
-    void deleteOrdeById(String orderId) throws ApiServiceException;
+    void deleteOrderById(String orderId) throws ApiServiceException;
+
+    /**
+     * Paginate the orders according to the given conditions.
+     *
+     * @param curPage the current page.
+     * @param userId the user ID.
+     * @param status the status.
+     * @return the page.
+     */
+    Paging<CourseOrder> paginateByUserIdAndStatus(int curPage, String userId, char status);
 }
