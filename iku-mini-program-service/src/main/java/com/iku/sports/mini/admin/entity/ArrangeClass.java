@@ -1,7 +1,9 @@
 package com.iku.sports.mini.admin.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.iku.sports.mini.admin.model.Constants;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,15 +21,17 @@ public class ArrangeClass implements Serializable {
     /**
      * 上课时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone="GMT+8")
     private Date beginTime;
     /**
      * 下课时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone="GMT+8")
     private Date endTime;
     /**
      * 课程时长
      */
-    private Integer duration;
+    private Long duration;
     /**
      * 课程总人数
      */
@@ -56,5 +60,4 @@ public class ArrangeClass implements Serializable {
      * 教练名
      */
     private String name;
-
 }

@@ -27,6 +27,21 @@ spring:
       connection-timeout: 1800
       idle-timeout: 1800
       validation-timeout: 1800
+  # jackson
+  jackson:
+    #日期格式化
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      indent_output: true
+      fail_on_empty_beans: false
+      WRITE_DATES_AS_TIMESTAMPS: false
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    parser:
+      allow_unquoted_control_chars: true
+      allow_single_quotes: true
+    time-zone: GMT+8
+
 logging:
   level:
     com.iku.sports.mini.admin.repository: debug

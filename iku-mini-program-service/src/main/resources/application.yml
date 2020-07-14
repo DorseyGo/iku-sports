@@ -43,6 +43,20 @@ spring:
     static-path-pattern: /static/**
   application:
     name: iku-sports
+  # jackson
+  jackson:
+    #日期格式化
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      indent_output: true
+      fail_on_empty_beans: false
+      WRITE_DATES_AS_TIMESTAMPS: false
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    parser:
+      allow_unquoted_control_chars: true
+      allow_single_quotes: true
+    time-zone: GMT+8
 
 jasypt:
   encryptor:

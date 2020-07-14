@@ -33,7 +33,7 @@
 		</view>
   </view>
 	<view wx:else class="detail flex center">
-        <view class="round avatar" style="background-image: url('../../images/order.png')"></view>
-        <text class="tips">您还没有相关课程订单</text>
-    </view>
+		<view class="round avatar" style="background-image: url('../../images/order.png')"></view>
+		<text class="tips">您还没有相关课程订单</text>
+  </view>
 </view>

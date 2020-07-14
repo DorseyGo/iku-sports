@@ -9,7 +9,7 @@ Page({
   data: {
     hasAppoint: false,
     appointCourseInfo: [],
-    hasPurchasedAppointCourse: false // 已经购买可以预约
+    hasPurchasedAppointCourse: true // 已经购买可以预约
   },
 
   /**

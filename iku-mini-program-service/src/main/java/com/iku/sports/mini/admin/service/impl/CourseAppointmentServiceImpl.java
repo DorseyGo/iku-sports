@@ -5,7 +5,9 @@ import com.iku.sports.mini.admin.entity.Category;
 import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.CourseAppoint;
+import com.iku.sports.mini.admin.repository.ArrangeClassRepository;
 import com.iku.sports.mini.admin.repository.CourseAppointRepository;
+import com.iku.sports.mini.admin.request.AppointClassRequest;
 import com.iku.sports.mini.admin.service.*;
 import com.iku.sports.mini.admin.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -26,16 +28,18 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
     private CourseClassService courseClassService;
     private CategoryService categoryService;
     private CourseAppointRepository courseAppointRepository;
+    private ArrangeClassRepository arrangeClassRepository;
 
     @Autowired
     public CourseAppointmentServiceImpl(OrderService orderService, CourseService courseService,
                                         CourseClassService courseClassService, CategoryService categoryService,
-                                        CourseAppointRepository courseAppointRepository) {
+                                        CourseAppointRepository courseAppointRepository, ArrangeClassRepository arrangeClassRepository) {
         this.orderService = orderService;
         this.courseService = courseService;
         this.courseClassService = courseClassService;
         this.categoryService = categoryService;
         this.courseAppointRepository = courseAppointRepository;
+        this.arrangeClassRepository = arrangeClassRepository;
     }
 
     @Override
@@ -73,5 +77,11 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
     @Override
     public Appointment appointedClass(String userId, Integer arrangedClassId) {
         return courseAppointRepository.findAppointedClass(userId, arrangedClassId);
+    }
+
+    @Override
+    public void appointment(AppointClassRequest appointClassRequest) {
+        courseAppointRepository.appointment(appointClassRequest.getUserId(), appointClassRequest.getArrangeClassId());
+        arrangeClassRepository.updateAppointedCount(appointClassRequest.getArrangeClassId());
     }
 }

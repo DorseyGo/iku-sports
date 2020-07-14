@@ -4,12 +4,12 @@ import com.iku.sports.mini.admin.annotation.WebLog;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.CourseAppoint;
 import com.iku.sports.mini.admin.model.Response;
+import com.iku.sports.mini.admin.request.AppointClassRequest;
 import com.iku.sports.mini.admin.service.CourseAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -35,5 +35,12 @@ public class CourseAppointController {
                                                        @PathVariable("userId") String userId) throws ApiServiceException {
         List<CourseAppoint> appointCourses = courseAppointmentService.courseAppoint(userId);
         return Response.ok(appointCourses);
+    }
+
+    @WebLog(response = false)
+    @PostMapping("appoint/course/class")
+    public Response<Void> appointmentClass(@Valid @RequestBody AppointClassRequest appointClassRequest) {
+        courseAppointmentService.appointment(appointClassRequest);
+        return Response.ok();
     }
 }

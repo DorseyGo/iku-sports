@@ -1,10 +1,7 @@
 package com.iku.sports.mini.admin.repository;
 
 import com.iku.sports.mini.admin.entity.ArrangeClass;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
 import org.assertj.core.util.Lists;
@@ -26,8 +23,8 @@ public interface ArrangeClassRepository {
             @Result(property = "coachId", column = "coach_id", jdbcType = JdbcType.INTEGER),
             @Result(property = "courseId", column = "course_id", jdbcType = JdbcType.TINYINT),
             @Result(property = "site", column = "site", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "beginTime", column = "begin_time", jdbcType = JdbcType.DATE),
-            @Result(property = "endTime", column = "end_time", jdbcType = JdbcType.DATE),
+            @Result(property = "beginTime", column = "begin_time"),
+            @Result(property = "endTime", column = "end_time"),
             @Result(property = "duration", column = "duration", jdbcType = JdbcType.INTEGER),
             @Result(property = "headcount", column = "headcount", jdbcType = JdbcType.INTEGER),
             @Result(property = "appointCount", column = "ordercount", jdbcType = JdbcType.INTEGER),
@@ -38,6 +35,9 @@ public interface ArrangeClassRepository {
     })
     @SelectProvider(type = SQLProvider.class, method = "findArrangeClassByCourseId")
     List<ArrangeClass> findArrangeClassByCourseId(@Param("courseId") short courseId, @Param("aheadTime") Date aheadTime);
+
+    @UpdateProvider(type = SQLProvider.class, method = "updateAppointedCount")
+    void updateAppointedCount(@Param("arrangeClassId") Integer arrangeClassId);
 
     class SQLProvider {
         final String TABLE = "arrange_class ac";
@@ -62,6 +62,10 @@ public interface ArrangeClassRepository {
                     WHERE("ac.course_id = #{courseId} and begin_time > #{aheadTime}");
                 }
             }.toString();
+        }
+
+        public String updateAppointedCount(final Map<String, Object> params) {
+            return "update arrange_class set ordercount = ordercount + 1 where id = #{arrangeClassId}";
         }
     }
 }

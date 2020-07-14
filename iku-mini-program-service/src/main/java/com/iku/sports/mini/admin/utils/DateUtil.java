@@ -26,4 +26,13 @@ public final class DateUtil {
         ZonedDateTime zdt = localDateTime.atZone(zoneId);
         return Date.from(zdt.toInstant());
     }
+
+    public static long differHour(Date minuend, Date subtrahend) {
+        long minuendTime = minuend.getTime();
+        long subtrahendTime = subtrahend.getTime();
+
+        long differMilliseconds = minuendTime - subtrahendTime;
+
+        return differMilliseconds / (60 * 60 * 1000);
+    }
 }

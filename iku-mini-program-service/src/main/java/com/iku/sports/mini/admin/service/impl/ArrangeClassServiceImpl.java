@@ -50,8 +50,15 @@ public class ArrangeClassServiceImpl implements ArrangeClassService {
             if (null != appointment) {
                 arrangeClass.setStatus(appointment.getStatus());
             }
+
+            arrangeClass.setDuration(DateUtil.differHour(arrangeClass.getEndTime(),arrangeClass.getBeginTime()));
         });
 
         return arrangedClasses;
+    }
+
+    @Override
+    public void addAppointedCount(Integer arrangeClassId) {
+        arrangeClassRepository.updateAppointedCount(arrangeClassId);
     }
 }
