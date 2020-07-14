@@ -168,21 +168,21 @@ drop table if exists arrange_class;
 /*==============================================================*/
 /* Table: arrange_class                                         */
 /*==============================================================*/
-create table arrange_class
-(
-   id                   int not null,
-   course_id            TINYINT(2) comment '用户ID',
-   class_id             int comment '课程ID',
-   coach_id             int comment '教练ID',
-   site                 varchar(256) comment '上课地点',
-   begin_time           date comment '开课时间',
-   end_time             date comment '结束时间',
-   duration             int comment '时长(分钟)',
-   headcount            int comment '课程总人数',
-   ordercount           int comment '预约人数',
-   create_time          date comment '创建时间',
-   primary key (id)
-);
+create table if not exists `arrange_class` (
+   `id`                   int not null auto_increment,
+   `course_id`            TINYINT(2) comment '课程ID',
+   `class_id`             int comment '课程ID',
+   `coach_id`             int comment '教练ID',
+   `site`                 varchar(256) comment '上课地点',
+   `begin_time`           datetime comment '开课时间',
+   `end_time`             datetime comment '结束时间',
+   `duration`             int comment '时长(分钟)',
+   `headcount`            int comment '课程总人数',
+   `ordercount`           int comment '预约人数',
+   `create_time`          datetime default CURRENT_TIMESTAMP comment '创建时间',
+   primary key (id),
+   index idx_course_id (course_id)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4 comment '课程安排表';
 
 alter table arrange_class comment '课程排班表';
 
@@ -191,16 +191,16 @@ drop table if exists appointment;
 /*==============================================================*/
 /* Table: appointment                                           */
 /*==============================================================*/
-create table appointment
-(
-   id                   int not null,
-   arrange_id           int comment '排班课程ID',
-   user_id              varchar(32) comment '用户ID',
-   status               int comment '状态:0-取消;1-确认',
-   update_time          date comment '更新时间',
-   create_time          date comment '创建时间/预约时间',
-   primary key (id)
-);
+create table if not exists `appointment` (
+   `id`                   int not null auto_increment,
+   `arrange_id`           int comment '排班课程ID',
+   `user_id`              varchar(32) comment '用户ID',
+   `status`               int default 1 comment '状态:0-取消预约; 1-预约未出席; 2-确认出席;',
+   `update_time`          datetime default CURRENT_TIMESTAMP on update current_timestamp comment '更新时间',
+   `create_time`          datetime default CURRENT_TIMESTAMP comment '创建时间/预约时间',
+   primary key (id),
+   index idx_user_arrange_id (user_id, arrange_id)
+) Engine=InnoDB default charset=utf8mb4 comment '预约';
 
 alter table artical comment '文章列表';
 

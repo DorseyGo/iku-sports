@@ -48,7 +48,7 @@ public class ArrangeClassServiceImpl implements ArrangeClassService {
         arrangedClasses.forEach(arrangeClass -> {
             Appointment appointment = courseAppointmentService.appointedClass(userId, arrangeClass.getId());
             if (null != appointment) {
-                arrangeClass.setAppointed(Boolean.TRUE);
+                arrangeClass.setStatus(appointment.getStatus());
             }
         });
 

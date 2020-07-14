@@ -29,6 +29,9 @@ public interface ArrangeClassRepository {
             @Result(property = "beginTime", column = "begin_time", jdbcType = JdbcType.DATE),
             @Result(property = "endTime", column = "end_time", jdbcType = JdbcType.DATE),
             @Result(property = "duration", column = "duration", jdbcType = JdbcType.INTEGER),
+            @Result(property = "headcount", column = "headcount", jdbcType = JdbcType.INTEGER),
+            @Result(property = "appointCount", column = "ordercount", jdbcType = JdbcType.INTEGER),
+            @Result(property = "createdTime", column = "create_time"),
             @Result(property = "chapter", column = "chapter", jdbcType = JdbcType.TINYINT),
             @Result(property = "content", column = "content", jdbcType = JdbcType.VARCHAR),
             @Result(property = "name", column = "name", jdbcType = JdbcType.VARCHAR),
@@ -48,6 +51,7 @@ public interface ArrangeClassRepository {
             List<String> classColumn = Lists.newArrayList("c.chapter", "c.content");
             List<String> coachColumn = Lists.newArrayList("co.name");
             COLUMN.addAll(classColumn);
+            COLUMN.addAll(coachColumn);
 
             return new SQL(){
                 {

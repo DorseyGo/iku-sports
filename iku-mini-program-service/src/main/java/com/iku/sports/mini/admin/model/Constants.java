@@ -143,4 +143,25 @@ public interface Constants {
             return code;
         }
     }
+
+    /**
+     * 课程预约状态
+     */
+    enum ClassAppointStatus {
+        CANCEL(0, "取消预约"),
+        APPOINTED(1, "已预约课程"),
+        ATTEND(2, "确认上课"),
+        ;
+        private int code;
+        private String desc;
+
+        ClassAppointStatus(int code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+
+        public int getCode() {
+            return code;
+        }
+    }
 }

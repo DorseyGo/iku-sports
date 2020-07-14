@@ -1,5 +1,6 @@
 package com.iku.sports.mini.admin.entity;
 
+import com.iku.sports.mini.admin.model.Constants;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -38,9 +39,10 @@ public class ArrangeClass implements Serializable {
     private Date createdTime;
 
     /**
-     * 表示用户是否已预约课程
+     * 预约课程状态
+     * @see Constants.ClassAppointStatus
      */
-    private Boolean appointed = false;
+    private Integer status;
 
     /**
      * 课程第几课时
