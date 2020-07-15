@@ -1,7 +1,7 @@
 <view class="container">
 	<view wx:if="{{hasData}}">
-		<view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx" 
-		wx:for="{{courses}}" wx:key="id">
+		<navigator class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx" 
+		wx:for="{{courses}}" wx:key="id" url="./details/details?courseId={{item.id}}&category={{category.name}}">
 			<view class="iku-item">
 				<view class="title">
 					<view class="text-cut">{{item.name}}</view>
@@ -10,7 +10,7 @@
 					<image src="../../images/{{category.name}}_{{item.level}}.png" mode="aspectFill" />
 					<view class="desc">
 						<view class="text-content">课程：{{item.numClasses}} 节</view>
-						<view class="text-content text-cut">{{item.description}}</view>
+						<view class="text-content text-wrap">{{item.description || ""}}</view>
 						<view class="text-content flex">
 							<view class="flex-sub">￥<text class="text-red">{{item.fee}}</text></view>
 							<view><text class="text-dark-gray">{{item.numPurchases}}</text> 购买</view>
@@ -18,7 +18,7 @@
 					</view>
 				</view>
 			</view>
-		</view>
+		</navigator>
 	</view>
 	<view wx:else>
 		<view class="tips">课程未上线，敬请期待！</view>

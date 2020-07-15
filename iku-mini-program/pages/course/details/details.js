@@ -17,6 +17,7 @@ Page({
    */
   onLoad: function (options) {
     let category = options.category
+    console.log("category: " + category)
     let courseId = options.courseId
     let customService = this.data.customService
 

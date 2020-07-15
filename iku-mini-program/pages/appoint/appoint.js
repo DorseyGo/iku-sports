@@ -16,19 +16,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let userId = wx.getStorageSync('token');
+    let userId = wx.getStorageSync('token') || "e9b6ea6f672086252a83a48be2198d63";
     request.get(`appoint/course/list/${userId}`)
-           .then(res => {
-            console.log(res)
-            let hasData = false;
-            if (res.data.length > 0) {
-              hasData = true;
-            }
-              this.setData({
-                appointCourseInfo: res.data,
-                hasPurchasedAppointCourse: hasData
-              })
-           })
+      .then(res => {
+        console.log(res)
+        let hasData = false;
+        if (res.data.length > 0) {
+          hasData = true;
+        }
+        this.setData({
+          appointCourseInfo: res.data,
+          hasPurchasedAppointCourse: hasData
+        })
+      })
   },
 
   navigateCoursePlan: function (e) {

@@ -5,7 +5,7 @@ const orderStatuses = [
   {
     id: 1,
     displayName: "全部",
-    status: -1
+    status: 9
   },
   {
     id: 2,

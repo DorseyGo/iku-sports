@@ -989,6 +989,10 @@ view.tab {
   font-family: PingFangSC-Regular,PingFang SC;
 }
 
+.card.article .iku-item .content .text-content.text-wrap {
+  font-size: 24rpx;
+}
+
 .card.article .iku-item .action {
   padding: 0 30rpx;
   position: fixed;
