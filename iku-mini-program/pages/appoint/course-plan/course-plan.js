@@ -16,7 +16,7 @@ Page({
    */
   onLoad: function (options) {
     let userId = wx.getStorageSync('token');
-    userId = 'e9b6ea6f672086252a83a48be2198d63'
+    // userId = 'e9b6ea6f672086252a83a48be2198d63'
     let courseId = options.courseId;
 
     this.list(courseId, userId);
@@ -44,7 +44,7 @@ Page({
    */
   appointClass: function(event) {
     let userId = wx.getStorageSync('token');
-    userId = 'e9b6ea6f672086252a83a48be2198d63'
+    // userId = 'e9b6ea6f672086252a83a48be2198d63'
     
     console.log(event)
     let courseId = event.currentTarget.dataset.courseid
@@ -58,7 +58,18 @@ Page({
   },
 
   cancelAppoint: function(event) {
-    
+    let userId = wx.getStorageSync('token');
+    // userId = 'e9b6ea6f672086252a83a48be2198d63'
+
+    console.log(event)
+    let courseId = event.currentTarget.dataset.courseid
+    console.log(courseId)
+    request.post(`appoint/course/cancel`, {
+      userId: userId,
+      arrangeClassId: event.currentTarget.dataset.arrangeclassid
+    }).then(res => {
+      this.list(courseId, userId)
+    })
   },
 
   /**

@@ -37,7 +37,7 @@ public interface ArrangeClassRepository {
     List<ArrangeClass> findArrangeClassByCourseId(@Param("courseId") short courseId, @Param("aheadTime") Date aheadTime);
 
     @UpdateProvider(type = SQLProvider.class, method = "updateAppointedCount")
-    void updateAppointedCount(@Param("arrangeClassId") Integer arrangeClassId);
+    void updateAppointedCount(@Param("arrangeClassId") Integer arrangeClassId, @Param("updateValue") Integer updateValue);
 
     class SQLProvider {
         final String TABLE = "arrange_class ac";
@@ -65,7 +65,7 @@ public interface ArrangeClassRepository {
         }
 
         public String updateAppointedCount(final Map<String, Object> params) {
-            return "update arrange_class set ordercount = ordercount + 1 where id = #{arrangeClassId}";
+            return "update arrange_class set ordercount = ordercount + #{updateValue} where id = #{arrangeClassId}";
         }
     }
 }

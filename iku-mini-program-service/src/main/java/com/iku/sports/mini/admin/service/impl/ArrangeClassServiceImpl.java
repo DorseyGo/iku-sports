@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
@@ -19,6 +21,7 @@ import java.util.List;
 /**
  * @author henlf
  */
+@Transactional
 @Service
 @Slf4j
 public class ArrangeClassServiceImpl implements ArrangeClassService {
@@ -57,8 +60,9 @@ public class ArrangeClassServiceImpl implements ArrangeClassService {
         return arrangedClasses;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     @Override
-    public void addAppointedCount(Integer arrangeClassId) {
-        arrangeClassRepository.updateAppointedCount(arrangeClassId);
+    public void updateAppointedCount(Integer arrangeClassId, Integer updateValue) {
+        arrangeClassRepository.updateAppointedCount(arrangeClassId, updateValue);
     }
 }

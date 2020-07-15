@@ -29,4 +29,9 @@ public interface CourseAppointmentService {
      * 预约
      */
     void appointment(AppointClassRequest appointClassRequest);
+
+    /**
+     * 取消预约
+     */
+    void cancelAppointment(AppointClassRequest appointClassRequest);
 }

@@ -13,6 +13,8 @@ import com.iku.sports.mini.admin.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
@@ -20,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 @Slf4j
 public class CourseAppointmentServiceImpl implements CourseAppointmentService {
@@ -79,9 +82,17 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
         return courseAppointRepository.findAppointedClass(userId, arrangedClassId);
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public void appointment(AppointClassRequest appointClassRequest) {
         courseAppointRepository.appointment(appointClassRequest.getUserId(), appointClassRequest.getArrangeClassId());
-        arrangeClassRepository.updateAppointedCount(appointClassRequest.getArrangeClassId());
+        arrangeClassRepository.updateAppointedCount(appointClassRequest.getArrangeClassId(), 1);
+    }
+
+    @Override
+    public void cancelAppointment(AppointClassRequest appointClassRequest) {
+        courseAppointRepository.cancelAppointment(appointClassRequest.getUserId(), appointClassRequest.getArrangeClassId());
+        arrangeClassRepository.updateAppointedCount(appointClassRequest.getArrangeClassId(), -1);
+
     }
 }

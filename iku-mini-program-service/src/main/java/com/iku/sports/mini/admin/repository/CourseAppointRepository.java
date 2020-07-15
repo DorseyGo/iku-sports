@@ -30,6 +30,9 @@ public interface CourseAppointRepository {
     @InsertProvider(type = SQLProvider.class, method = "appointment")
     void appointment(@Param("userId") String userId, @Param("arrangeClassId") Integer arrangeClassId);
 
+    @UpdateProvider(type = SQLProvider.class, method = "cancelAppointment")
+    void cancelAppointment(@Param("userId") String userId, @Param("arrangeClassId") Integer arrangeClassId);
+
     class SQLProvider {
         final String TABLE = "appointment";
         final List<String> COLUMN = Lists.newArrayList("`id`", "`arrange_id`", "`user_id`",
@@ -53,6 +56,10 @@ public interface CourseAppointRepository {
                     INTO_VALUES("#{arrangeClassId}", "#{userId}");
                 }
             }.toString();
+        }
+
+        public String cancelAppointment(final Map<String, Object> params) {
+            return "update appointment set status = 0 where user_id = #{userId} and arrange_id = #{arrangeClassId}";
         }
     }
 }

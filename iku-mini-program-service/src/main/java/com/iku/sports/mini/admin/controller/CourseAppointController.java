@@ -37,10 +37,22 @@ public class CourseAppointController {
         return Response.ok(appointCourses);
     }
 
+    /**
+     * 预约课程
+     * @param appointClassRequest
+     * @return
+     */
     @WebLog(response = false)
     @PostMapping("appoint/course/class")
     public Response<Void> appointmentClass(@Valid @RequestBody AppointClassRequest appointClassRequest) {
         courseAppointmentService.appointment(appointClassRequest);
+        return Response.ok();
+    }
+
+    @WebLog
+    @PostMapping("appoint/course/cancel")
+    public Response<Void> cancelAppointment(@Valid @RequestBody AppointClassRequest appointClassRequest) {
+        courseAppointmentService.cancelAppointment(appointClassRequest);
         return Response.ok();
     }
 }

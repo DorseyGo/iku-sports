@@ -22,7 +22,7 @@
 						<view class="course_evaluate"><text>好评度95%</text></view>
 						<view class="text-content flex">
 							<view class="flex-sub"></view>
-							<navigator class="couse_appoint_detail" url="./course-plan/course-plan?userId=e9b6ea6f672086252a83a48be2198d63&courseId={{item.courseId}}">
+							<navigator class="couse_appoint_detail" url="./course-plan/course-plan?courseId={{item.courseId}}">
 								{{'>>'}}预约
 							</navigator>
 								<button wx:if="{{hasAppoint}}" class="iku-btn bg-red" size="mini" loading="{{loading}}" bindtap="cacelAppoint">取消预约</button>
