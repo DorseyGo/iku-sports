@@ -43,7 +43,10 @@ public class IkuSportsConfig {
     private String wxApiKey;
 
     @Tolerate
-    public IkuSportsConfig() {}
+    public IkuSportsConfig() {
+        this.pageSize = 10;
+        this.expiryInDays = 7;
+    }
 
     @Bean
     public WxMpService wxMpService() {
