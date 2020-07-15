@@ -100,7 +100,7 @@ public interface Constants {
      * Enumerate all available order status.
      */
     enum OrderStatus {
-        UN_PAID('0'), PAID('1'), REFUND('2'), CANCEL('3');
+        UN_PAID('0'), PAID('1'), REFUND('2'), CANCEL('3'), ANY('9');
         private char code;
 
         OrderStatus(final char code) {

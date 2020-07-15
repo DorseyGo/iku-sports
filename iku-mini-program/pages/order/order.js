@@ -31,7 +31,7 @@ Page({
    */
   data: {
     orderStatues: orderStatuses,
-    current: -1, // current status
+    current: 9, // current status, 9 for all
     curPage: 1, // current page
     orders: [],
     hasData: true, // whether has data

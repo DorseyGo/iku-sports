@@ -8,6 +8,7 @@ package com.iku.sports.mini.admin.repository;
 
 import com.google.common.collect.Lists;
 import com.iku.sports.mini.admin.entity.CourseOrder;
+import com.iku.sports.mini.admin.model.Constants;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -55,7 +56,8 @@ public interface CourseOrderRepository {
                         WHERE("user_id = #{userId}");
                     }
 
-                    if (params.get("status") != null) {
+                    if (params.get("status") != null && ((Character) params.get(
+                            "status")).charValue() != Constants.OrderStatus.ANY.getCode()) {
                         WHERE("status = #{status}");
                     }
 
