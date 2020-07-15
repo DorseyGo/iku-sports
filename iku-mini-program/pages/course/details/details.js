@@ -35,7 +35,7 @@ Page({
         customServicePhoneNo: res.data.value
       })
     })
-  },
+  }, // end of onLoad function
 
   contact: function() {
     let phone = this.data.customServicePhoneNo || "18998815018"
@@ -49,5 +49,40 @@ Page({
       }
     });
       
+  }, // end of contact function
+
+  /** the purchase function */
+  purchase: function() {
+    let userId = wx.getStorageSync('token')
+    let courseId = this.data.course.id
+
+    // request to prepay and invoke to pay this course
+    request.post(`payment/course`, {
+      userId: userId,
+      courseId: courseId
+    }).then(res => {
+      console.log("uniform order succeed, with result: " + res)
+      wx.requestPayment({
+        timeStamp: res.data.timeStamp,
+        nonceStr: res.data.nonce,
+        package: res.data.pckage,
+        signType: res.data.signType,
+        paySign: res.data.sign,
+        success: (result)=>{
+          wx.showToast({
+            title: '支付成功！',
+            icon: 'success',
+            duration: 3000,
+          });
+        },
+        fail: ()=>{
+          wx.showToast({
+            title: '支付失败，请稍后重试！',
+            icon: 'none',
+            duration: 3000,
+          });
+        }
+      });
+    })
   }
 })
