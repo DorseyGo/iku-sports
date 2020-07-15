@@ -14,4 +14,11 @@ public interface ArrangeClassService {
      * @return
      */
     List<ArrangeClass> courseArrange(short courseId, String userId);
+
+    /**
+     * 更新预约人数
+     * @param arrangeClassId
+     * @param updateValue 正数：添加，负数：减少
+     */
+    void updateAppointedCount(Integer arrangeClassId, Integer updateValue);
 }

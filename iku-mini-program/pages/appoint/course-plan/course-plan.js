@@ -7,20 +7,69 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    arrangedClasses: [],
+    hasArrangedClasses: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let userId = options.userId;
+    let userId = wx.getStorageSync('token');
+    // userId = 'e9b6ea6f672086252a83a48be2198d63'
     let courseId = options.courseId;
 
+    this.list(courseId, userId);
+  },
+
+  list: function(courseId, userId) {
     request.get(`arrange/class/${courseId}?userId=${userId}`)
            .then(res => {
-             console.log(res)
-           })
+             console.log("list" + res)
+            let hasData = false;
+            if (res.data.length > 0) {
+              hasData = true;
+            }
+
+            this.setData({
+               arrangedClasses: res.data,
+               hasArrangedClasses: hasData
+            })
+          })
+  },
+
+  /**
+   * 预约
+   * @param {*} event 
+   */
+  appointClass: function(event) {
+    let userId = wx.getStorageSync('token');
+    // userId = 'e9b6ea6f672086252a83a48be2198d63'
+    
+    console.log(event)
+    let courseId = event.currentTarget.dataset.courseid
+    console.log(courseId)
+    request.post(`appoint/course/class`, {
+      userId: userId,
+      arrangeClassId: event.currentTarget.dataset.arrangeclassid
+    }).then(res => {
+      this.list(courseId, userId)
+    })
+  },
+
+  cancelAppoint: function(event) {
+    let userId = wx.getStorageSync('token');
+    // userId = 'e9b6ea6f672086252a83a48be2198d63'
+
+    console.log(event)
+    let courseId = event.currentTarget.dataset.courseid
+    console.log(courseId)
+    request.post(`appoint/course/cancel`, {
+      userId: userId,
+      arrangeClassId: event.currentTarget.dataset.arrangeclassid
+    }).then(res => {
+      this.list(courseId, userId)
+    })
   },
 
   /**

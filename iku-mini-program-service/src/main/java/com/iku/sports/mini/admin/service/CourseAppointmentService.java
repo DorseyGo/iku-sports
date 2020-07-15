@@ -3,6 +3,7 @@ package com.iku.sports.mini.admin.service;
 import com.iku.sports.mini.admin.entity.Appointment;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.CourseAppoint;
+import com.iku.sports.mini.admin.request.AppointClassRequest;
 
 import java.util.List;
 
@@ -23,4 +24,14 @@ public interface CourseAppointmentService {
      * @return
      */
     Appointment appointedClass(String userId, Integer arrangedClassId);
+
+    /**
+     * 预约
+     */
+    void appointment(AppointClassRequest appointClassRequest);
+
+    /**
+     * 取消预约
+     */
+    void cancelAppointment(AppointClassRequest appointClassRequest);
 }

@@ -1,35 +1,42 @@
 <!--pages/appoint/course-plan/course-plan.wxml-->
 <view class="container">
-  <view wx:if="{{true}}">
-    <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
-			<view class="iku-item" wx:key="1000">
+  <view wx:if="{{hasArrangedClasses}}">
+    <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx"
+      wx:for="{{arrangedClasses}}" wx:key="id"
+    >
+			<view class="iku-item">
 				<view class="content">
 					<view class="desc">
             <view class="text-content course_name">
-							课程内容：<text class="text-red">运球</text>
+							课程内容：<text class="text-red">{{item.content}}</text>
 						</view>
             <view class="text-content flex">
-              <view class="flex-sub">教练：<text>harden</text></view>
-						  <view>课时：第 <text class="text-red">3</text> 节</view>
+              <view class="flex-sub">教练：<text>{{item.name}}</text></view>
+						  <view>课时：第 <text class="text-red">{{item.chapter}}</text> 节</view>
             </view>
             <view class="text-content flex">
-              <view class="flex-sub">上课时间：<text class="text-red">2020-07-05 10:30</text>
+              <view class="flex-sub">上课时间：<text class="text-red">{{item.beginTime}}</text>
               </view>
-              <view>时长：0.5小时</view>
+              <view>时长：{{item.duration}}小时</view>
             </view>
-            <view class="text-content">场地：<text>风雨球场</text></view>
+            <view class="text-content">场地：<text>{{item.site}}</text></view>
             <view class="text-content flex">
-              <view class="flex-sub">已预约：<text class="text-red">30</text></view>
-              <view>剩余：<text class="text-red">5</text></view>
+              <view class="flex-sub">已预约：<text class="text-red">{{item.appointCount}}</text></view>
+              <view>剩余：<text class="text-red">{{item.headcount - item.appointCount}}</text></view>
             </view>
 						<view class="text-content flex">
               <view class="flex-sub"></view>
-							<button wx:if="{{!hasAppoint}}" class="iku-btn bg-red" size="mini" loading="{{loading}}" bindtap="navigateCoursePlan" data-courseId="1000" data-courseClassId="5">预约</button>
-							<button wx:if="{{hasAppoint}}" class="iku-btn bg-red" size="mini" loading="{{loading}}" bindtap="cacelAppoint">取消预约</button>
+							<button wx:if="{{item.status == null}}" class="iku-btn bg-red" size="mini" loading="{{loading}}" bindtap="appointClass" 
+              data-arrangeClassId="{{item.id}}" data-courseId="{{item.courseId}}">预约</button>
+							<button wx:if="{{item.status == 1}}" class="iku-btn bg-red" size="mini" loading="{{loading}}" data-arrangeClassId="{{item.id}}" data-courseId="{{item.courseId}}" bindtap="cancelAppoint">取消预约</button>
 						</view>
 					</view>
 				</view>
 			</view>
 		</view>
+  </view>
+  <view wx:else class="detail flex center">
+		<view class="round avatar" style="background-image: url('../../../images/order.png')"></view>
+		<text class="tips">抱歉，课程还未安排，请耐心等候！</text>
   </view>
 </view>
