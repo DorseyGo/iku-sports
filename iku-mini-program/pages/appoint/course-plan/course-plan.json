@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "课程计划",
-  "backgroundColor": "#F2F2F2"
+  "backgroundColor": "#F2F2F2",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

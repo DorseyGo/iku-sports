@@ -8,16 +8,19 @@ Page({
    */
   data: {
     arrangedClasses: [],
-    hasArrangedClasses: true,
+    hasArrangedClasses: false
   },
+
+  currentCourseId: -1,
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let userId = wx.getStorageSync('token');
-    // userId = 'e9b6ea6f672086252a83a48be2198d63'
+    userId = 'e9b6ea6f672086252a83a48be2198d63'
     let courseId = options.courseId;
+    this.currentCourseId = courseId
 
     this.list(courseId, userId);
   },
@@ -36,6 +39,8 @@ Page({
                hasArrangedClasses: hasData
             })
           })
+
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -44,80 +49,68 @@ Page({
    */
   appointClass: function(event) {
     let userId = wx.getStorageSync('token');
-    // userId = 'e9b6ea6f672086252a83a48be2198d63'
+    userId = 'e9b6ea6f672086252a83a48be2198d63'
     
     console.log(event)
-    let courseId = event.currentTarget.dataset.courseid
-    console.log(courseId)
+    
     request.post(`appoint/course/class`, {
       userId: userId,
       arrangeClassId: event.currentTarget.dataset.arrangeclassid
     }).then(res => {
-      this.list(courseId, userId)
+      wx.showToast({
+        title: '预约成功',
+        icon: 'success',
+        duration: 3000
+      });
+      
+      this.list(this.currentCourseId, userId)
     })
   },
 
   cancelAppoint: function(event) {
     let userId = wx.getStorageSync('token');
-    // userId = 'e9b6ea6f672086252a83a48be2198d63'
+    userId = 'e9b6ea6f672086252a83a48be2198d63'
 
     console.log(event)
-    let courseId = event.currentTarget.dataset.courseid
-    console.log(courseId)
+    let arrangeClassId = event.currentTarget.dataset.arrangeclassid
+    wx.showModal({
+      title: '提示',
+      content: '真的要取消课程预约吗？',
+      showCancel: true,
+      cancelText: '取消',
+      cancelColor: '#000000',
+      confirmText: '确定',
+      confirmColor: '#3CC51F',
+      success: res => {
+        if (res.confirm) {
+          this.doCancelAppoint(userId, arrangeClassId)
+        }
+      }
+    })
+  },
+
+  doCancelAppoint: function(userId, arrangeClassId) {
     request.post(`appoint/course/cancel`, {
       userId: userId,
-      arrangeClassId: event.currentTarget.dataset.arrangeclassid
+      arrangeClassId: arrangeClassId
     }).then(res => {
-      this.list(courseId, userId)
+      wx.showToast({
+        title: '取消预约成功',
+        icon: 'success',
+        duration: 3000
+      })
+
+      this.list(this.currentCourseId, userId)
     })
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
+   * 监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    let userId = wx.getStorageSync('token');
+    userId = 'e9b6ea6f672086252a83a48be2198d63'
+    
+    this.list(this.currentCourseId, userId)
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

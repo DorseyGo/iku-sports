@@ -9,7 +9,7 @@ Page({
   data: {
     hasAppoint: false,
     appointCourseInfo: [],
-    hasPurchasedAppointCourse: true // 已经购买可以预约
+    hasPurchasedAppointCourse: false // 已经购买可以预约
   },
 
   /**
@@ -17,6 +17,7 @@ Page({
    */
   onLoad: function (options) {
     let userId = wx.getStorageSync('token');
+    userId = 'e9b6ea6f672086252a83a48be2198d63'
     request.get(`appoint/course/list/${userId}`)
            .then(res => {
             console.log(res)

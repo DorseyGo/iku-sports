@@ -8,7 +8,7 @@
 				<view class="content">
 					<view class="desc">
             <view class="text-content course_name">
-							课程内容：<text class="text-red">{{item.content}}</text>
+							课时内容：<text class="text-red">{{item.content}}</text>
 						</view>
             <view class="text-content flex">
               <view class="flex-sub">教练：<text>{{item.name}}</text></view>
@@ -26,9 +26,8 @@
             </view>
 						<view class="text-content flex">
               <view class="flex-sub"></view>
-							<button wx:if="{{item.status == null}}" class="iku-btn bg-red" size="mini" loading="{{loading}}" bindtap="appointClass" 
-              data-arrangeClassId="{{item.id}}" data-courseId="{{item.courseId}}">预约</button>
-							<button wx:if="{{item.status == 1}}" class="iku-btn bg-red" size="mini" loading="{{loading}}" data-arrangeClassId="{{item.id}}" data-courseId="{{item.courseId}}" bindtap="cancelAppoint">取消预约</button>
+							<button wx:if="{{item.status == null}}" class="iku-btn bg-red" size="mini" loading="{{loading}}" bindtap="appointClass" data-arrangeClassId="{{item.id}}">预约</button>
+							<button wx:if="{{item.status == 1}}" class="iku-btn bg-red" size="mini" loading="{{loading}}" data-arrangeClassId="{{item.id}}" bindtap="cancelAppoint">取消预约</button>
 						</view>
 					</view>
 				</view>
