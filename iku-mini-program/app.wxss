@@ -120,6 +120,11 @@ swiper-item .bottom-mask::after {
   font-weight: 400;
 }
 
+.text-size-50rpx
+{
+  font-size: 50rpx;
+}
+
 .text-yellow {
   color: var(--yellow);
 }
@@ -338,6 +343,12 @@ swiper-item .bottom-mask::after {
 .margin-left-right-24rpx {
   margin-left: 24rpx;
   margin-right: 24rpx;
+}
+
+.margin-left-right-10rpx {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  max-width: 300rpx;
 }
 
 .margin-left-70-percent
@@ -697,6 +708,13 @@ view.iku-list-height-120 {
   height: 100%;
 }
 
+.iku-list .iku-item .content1 {
+  position: absolute;
+  left: 248rpx;
+  line-height: 1.6em;
+  height: 100%;
+}
+
 .iku-list .iku-item .iku-avatar {
   position: absolute;
   left: 30rpx;
@@ -797,6 +815,8 @@ view.about {
   flex-direction: column;
   align-items: center;
 }
+
+
 /*
 .about .iku-item image {
   position: absolute;
@@ -858,6 +878,10 @@ view.tab {
 
 .grid-2.col-3 navigator {
   width: 33.33%;
+}
+
+.grid-2.col-2 navigator {
+  width: 50%;
 }
 
 .grid-2.col-4 navigator {
@@ -954,6 +978,10 @@ view.tab {
   padding: 0 30rpx;
 }
 
+.card.article .iku-item .content_nopadding {
+  display: flex;
+}
+
 .card.article .iku-item .content .desc {
   flex: 1;
   display: flex;
@@ -974,6 +1002,14 @@ view.tab {
   margin-right: 20rpx;
   border-radius: 6rpx;
 }
+
+.card.article .iku-item .content_nopadding image {
+  width: 350rpx;
+  height: 6.4em;
+  margin-right: 20rpx;
+  border-radius: 6rpx;
+}
+
 
 .card.article .iku-item .content image.sm {
   width: 240rpx;

@@ -1,0 +1,17 @@
+<view class="container">   
+    <video  class="video_width"
+      src="https://42.194.194.171/static/videos/2473dd5c344d22b4d8cae7eb832f04c2.mp4" 
+      binderror="videoErrorCallback" 
+      show-center-play-btn='{{true}}' 
+      show-play-btn="{{true}}" 
+      controls
+      show-mute-btn 
+      picture-in-picture-mode="{{['push', 'pop']}}"
+      bindenterpictureinpicture='bindVideoEnterPictureInPicture'
+      bindleavepictureinpicture='bindVideoLeavePictureInPicture'
+    ></video>
+    <view >
+        <view class="title">标题</view>
+        <view ><text >内容简介</text></view>
+    </view>
+</view>

@@ -14,7 +14,7 @@
     </navigator>
   </view>
 
-  <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
+  <!-- <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
     <view class="iku-item">
       <view class="title">
         <view class="text-cut">球技交流</view>
@@ -26,7 +26,48 @@
           <view class="text-content"></view>
         </view>
       </view>
-    </view>
+    </view>    
+  </view> -->
+
+  <view class="card article  margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
+    <view class="iku-item">
+      <view class="title">
+        <view class="text-cut">教学风采</view>
+      </view>
+      <view class="content_nopadding grid-2 col-2 flex ">
+        <navigator url="../video/video" class=" margin-left-right-10rpx image_video">
+        <image  mode="aspectFill" src="../../images/tennis_2.png" />
+        <view class="desc margin-left-right-10rpx" >
+            <view class="text-content">初级课程教学</view>
+            <text class="text-content text-wrap">xxxxxxxxxxx</text> 
+        </view>
+        </navigator>
+        <navigator class=" margin-left-right-10rpx image_video">
+          <image mode="aspectFill" src="../../images/tennis_2.png" />
+          <view class="desc margin-left-right-10rpx" >
+            <view class="text-content">初级课程教学</view>
+            <text class="text-content text-wrap">xxxxxxxxxxxxx</text>
+          </view>
+        </navigator>
+        </view>
+        <view class="content_nopadding grid-2 col-2 flex ">
+          <navigator class=" margin-left-right-10rpx image_video">
+          <image mode="aspectFill" src="../../images/tennis_2.png" />
+          <view class="desc margin-left-right-10rpx" >
+              <view class="text-content">初级课程教学</view>
+              <text class="text-content text-wrap">xxxxxxxxxxxx</text> 
+          </view>
+        </navigator>
+        <navigator class=" margin-left-right-10rpx image_video">
+          <image mode="aspectFill" src="../../images/tennis_2.png" />
+          <view class="desc margin-left-right-10rpx" >
+              <view class="text-content">初级课程教学</view>
+              <text class="text-content text-wrap">xxxxxxxxxxxxxx</text> 
+          </view>
+        </navigator>
+        </view>
+    </view>    
+    
   </view>
   
 </scroll-view>
