@@ -6,6 +6,7 @@
  */
 package com.iku.sports.mini.admin.entity;
 
+import com.iku.sports.mini.admin.model.SingleHolder;
 import lombok.Data;
 
 @Data
@@ -17,7 +18,7 @@ public class TeachingStyle {
     // the tags
     private String tags;
     // derived from tags.
-    private String[] labels;
+    private SingleHolder[] labels;
     // the relative url path
     private String video;
 

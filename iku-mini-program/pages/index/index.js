@@ -31,7 +31,8 @@ Page({
   data: {
     activities: [],
     categories: [],
-    current: 0
+    current: 0,
+    teachingStyles: []
   },
 
   onLoad: function () {
@@ -58,6 +59,12 @@ Page({
       console.log("Failed to request for categories")
       /* if rejected, set the defaults */
       this.setDefCategoriesIfPossible()
+    })
+
+    request.get(`teaching-styles`).then(res => {
+      this.setData({
+        teachingStyles: res.data
+      })
     })
   },
 

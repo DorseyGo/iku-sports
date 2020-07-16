@@ -143,6 +143,16 @@ CREATE TABLE IF NOT EXISTS `article_content`(
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
+
+CREATE TABLE `teaching_style` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(24) NOT NULL COMMENT 'the title of this teaching video',
+  `cover` VARCHAR(64) DEFAULT NULL COMMENT 'the relative path for video cover',
+  `labels` VARCHAR(32) DEFAULT NULL COMMENT 'the labels for this video',
+  `video` VARCHAR(64) DEFAULT NULL COMMENT 'the relative path for video',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+
 --
 -- favorite
 --

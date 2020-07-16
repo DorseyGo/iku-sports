@@ -385,7 +385,7 @@ swiper-item .bottom-mask::after {
 
 .tag {
   vertical-align: middle;
-  position: absolute;
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -744,6 +744,10 @@ view.iku-list-height-120 {
   display: flex;
 }
 
+.block {
+  display: block;
+}
+
 .detail.flex {
   display: flex;
   flex-direction: column;
@@ -874,6 +878,12 @@ view.tab {
 
 .grid.col-2 navigator {
   width: 50%;
+}
+
+.grid.col-2 navigator.padding-10rpx {
+  width: calc((100% - 20rpx)/2);
+  margin-right: 10rpx;
+  overflow: hidden;
 }
 
 .grid-2.col-3 navigator {
@@ -1043,6 +1053,19 @@ image {
   display: inline-block;
   position: relative;
   z-index: 0;
+}
+
+.card.article .content.grid.col-2 navigator {
+  padding-bottom: 20rpx;
+}
+
+.card.article .content.grid.col-2 navigator image {
+  width: 100%;
+}
+
+.content.grid navigator view view.tag {
+  height: 24rpx;
+  margin-right: 12rpx;
 }
 
 /* ------------------ */

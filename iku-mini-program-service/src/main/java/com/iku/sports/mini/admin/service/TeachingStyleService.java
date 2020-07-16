@@ -13,5 +13,20 @@ import java.util.List;
 
 public interface TeachingStyleService {
 
+    /**
+     * Returns all available teaching styles in the underlying database.
+     *
+     * @return all available teaching styles.
+     * @throws ApiServiceException if any errors detected during process.
+     */
     List<TeachingStyle> getTeachingStyles() throws ApiServiceException;
+
+    /**
+     * Returns the teaching style according to the given style ID.
+     *
+     * @param styleId the style ID.
+     * @return the teaching style.
+     * @throws ApiServiceException if any errors detected during process.
+     */
+    TeachingStyle getTeachingStyleById(int styleId) throws ApiServiceException;
 }

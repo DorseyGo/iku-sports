@@ -8,15 +8,14 @@ package com.iku.sports.mini.admin.repository;
 
 import com.google.common.collect.Lists;
 import com.iku.sports.mini.admin.entity.TeachingStyle;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository("teachingStyleRepository")
 public interface TeachingStyleRepository {
@@ -33,6 +32,10 @@ public interface TeachingStyleRepository {
     @SelectProvider(type = TeachingStyleSQLProvider.class, method = "findAll")
     List<TeachingStyle> findAll() throws DataAccessException;
 
+    @ResultMap("teachingStyleRM")
+    @SelectProvider(type = TeachingStyleSQLProvider.class, method = "findTeachingStyleById")
+    TeachingStyle findTeachingStyleById(@Param("styleId") final int styleId) throws DataAccessException;
+
     // ------
     // SQL provider
     // ------
@@ -44,6 +47,16 @@ public interface TeachingStyleRepository {
                 {
                     SELECT(COLS.toArray(new String[COLS.size()]));
                     FROM(TABLE);
+                }
+            }.toString();
+        }
+
+        public String findTeachingStyleById(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT(COLS.toArray(new String[COLS.size()]));
+                    FROM(TABLE);
+                    WHERE("id = #{styleId}");
                 }
             }.toString();
         }

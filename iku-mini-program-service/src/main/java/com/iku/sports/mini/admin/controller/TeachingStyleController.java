@@ -14,6 +14,7 @@ import com.iku.sports.mini.admin.service.TeachingStyleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,5 +33,12 @@ public class TeachingStyleController {
     public Response<List<TeachingStyle>> getTeachingStyles() throws ApiServiceException {
         final List<TeachingStyle> teachingStyles = teachingStyleService.getTeachingStyles();
         return Response.ok(teachingStyles);
+    }
+
+    @GetMapping("/teaching-styles/{styleId}")
+    public Response<TeachingStyle> getTeachingStyleById(
+            @PathVariable("styleId") final int styleId) throws ApiServiceException {
+        final TeachingStyle teachingStyle = teachingStyleService.getTeachingStyleById(styleId);
+        return Response.ok(teachingStyle);
     }
 }

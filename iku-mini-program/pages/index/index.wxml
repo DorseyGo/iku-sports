@@ -34,38 +34,17 @@
       <view class="title">
         <view class="text-cut">教学风采</view>
       </view>
-      <view class="content_nopadding grid-2 col-2 flex ">
-        <navigator url="../video/video" class=" margin-left-right-10rpx image_video">
-        <image  mode="aspectFill" src="../../images/tennis_2.png" />
-        <view class="desc margin-left-right-10rpx" >
-            <view class="text-content">初级课程教学</view>
-            <text class="text-content text-wrap">xxxxxxxxxxx</text> 
-        </view>
-        </navigator>
-        <navigator class=" margin-left-right-10rpx image_video">
-          <image mode="aspectFill" src="../../images/tennis_2.png" />
-          <view class="desc margin-left-right-10rpx" >
-            <view class="text-content">初级课程教学</view>
-            <text class="text-content text-wrap">xxxxxxxxxxxxx</text>
+      
+      <view class="content grid col-2 no-border">
+        <navigator url="../video/video?styleId={{item.id}}" class="padding-bottom-20rpx padding-10rpx" wx:for="{{teachingStyles}}" wx:key="id">
+          <image src="{{item.cover}}" mode="aspectFill"/>
+          <text class="text-content block">{{item.title}}</text>
+          <view class="flex text-normal margin-top-10rpx">
+            <view class="tag round bg-red" wx:for="{{item.labels}}" wx:key="id" wx:for-item="labels">{{labels.name}}</view>
           </view>
         </navigator>
-        </view>
-        <view class="content_nopadding grid-2 col-2 flex ">
-          <navigator class=" margin-left-right-10rpx image_video">
-          <image mode="aspectFill" src="../../images/tennis_2.png" />
-          <view class="desc margin-left-right-10rpx" >
-              <view class="text-content">初级课程教学</view>
-              <text class="text-content text-wrap">xxxxxxxxxxxx</text> 
-          </view>
-        </navigator>
-        <navigator class=" margin-left-right-10rpx image_video">
-          <image mode="aspectFill" src="../../images/tennis_2.png" />
-          <view class="desc margin-left-right-10rpx" >
-              <view class="text-content">初级课程教学</view>
-              <text class="text-content text-wrap">xxxxxxxxxxxxxx</text> 
-          </view>
-        </navigator>
-        </view>
+      </view>
+
     </view>    
     
   </view>
