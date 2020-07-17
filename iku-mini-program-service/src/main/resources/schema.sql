@@ -118,38 +118,13 @@ CREATE TABLE IF NOT EXISTS `user`(
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
---
--- article
---
-CREATE TABLE IF NOT EXISTS `article`(
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(32) NOT NULL,
-  `cover` VARCHAR(255) DEFAULT NULL COMMENT 'the url of cover',
-  `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP ,
-  `author` VARCHAR(24) DEFAULT NULL ,
-  `category_id` TINYINT(2) NOT NULL,
-  PRIMARY KEY (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-
---
--- article content
---
-CREATE TABLE IF NOT EXISTS `article_content`(
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `material` VARCHAR(255) NOT NULL,
-  `material_type` CHAR(1) NOT NULL DEFAULT '0' COMMENT '0 for text, 1 for image, 2 for video',
-  `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `article_id` INT NOT NULL,
-  PRIMARY KEY (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-
-
 CREATE TABLE `teaching_style` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(24) NOT NULL COMMENT 'the title of this teaching video',
   `cover` VARCHAR(64) DEFAULT NULL COMMENT 'the relative path for video cover',
   `labels` VARCHAR(32) DEFAULT NULL COMMENT 'the labels for this video',
   `video` VARCHAR(64) DEFAULT NULL COMMENT 'the relative path for video',
+  `watches` BIGINT NOT NULL DEFAULT '0' COMMENT 'the watches',
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
