@@ -258,6 +258,10 @@ swiper-item .bottom-mask::after {
   background-color: var(--background-color);
 }
 
+.bg-white {
+  background-color: var(--white);
+}
+
 /** background */
 
 .padding-xl {
@@ -274,6 +278,10 @@ swiper-item .bottom-mask::after {
 
 .padding-top {
   padding-top: 62rpx;
+}
+
+.padding-12rpx {
+  padding: 12rpx;
 }
 
 .bar {
@@ -371,22 +379,21 @@ swiper-item .bottom-mask::after {
   margin-left: 50%;
 }
 
-.presentation-slide {
+.slide {
   max-width: 360rpx;
   height: 240rpx;
   box-sizing: border-box;
-  background-color: rgba(31, 32, 33, 1);
   border-radius: 10rpx;
   display: inline-block;
 }
 
-.presentation-slide .image image {
-  max-width: 500rpx;
+.slide image {
+  height: 200rpx;
   border-top-left-radius: 10rpx;
   border-top-right-radius: 10rpx;
 }
 
-.presentation-slide .info {
+.slide .info {
   margin-left: 32rpx;
 }
 

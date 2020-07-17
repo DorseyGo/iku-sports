@@ -32,22 +32,22 @@
     <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
         <view class="iku-item">
             <view class="title">
-                <view class="text-cut">球技交流</view>
+                <view class="text-cut">已学课程</view>
             </view>
 
             <scroll-view class="scroll-slides" scroll-x="true">
-                <view class="presentation-slide mg-left">
+                <view class="slide mg-left">
                     <view class="flex flex-column">
                         <image src="../../images/tennis_1.png" mode="aspectFill" />
-                        <text class="text-normal" >基础网球课</text>
+                        <text class="text-normal padding-12rpx" >基础网球课</text>
                     </view>
                     
                 </view>
 
-                <view class="presentation-slide mg-left">
+                <view class="slide mg-left">
                     <view class="flex flex-column">
                         <image src="../../images/tennis_1.png" mode="aspectFill" />
-                        <text class="text-normal" >基础网球课</text>
+                        <text class="text-normal padding-12rpx" >基础网球课</text>
                     </view>
                     
                 </view>
