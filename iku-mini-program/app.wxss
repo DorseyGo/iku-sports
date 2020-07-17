@@ -260,6 +260,10 @@ swiper-item .bottom-mask::after {
   padding: 20rpx;
 }
 
+.padding-24rpx {
+  padding: 24rpx;
+}
+
 .padding-xs {
   padding: 7rpx;
 }
@@ -312,8 +316,8 @@ swiper-item .bottom-mask::after {
   margin-right: 78rpx;
 }
 
-.margin-right-24rpx {
-  margin-right: 24rpx;
+.margin-right-12rpx {
+  margin-right: 12rpx;
 }
 
 .mg-bottom {
@@ -959,6 +963,10 @@ view.tab {
   margin: 24rpx;
 }
 
+.card .iku-item.promotions {
+  margin: 24rpx 0 ;
+}
+
 .card .iku-item-flex {
   display: flex;
   background-color: var(--white);
@@ -1045,6 +1053,15 @@ view.tab {
   bottom: 10rpx;
 }
 
+.card.title {
+  min-height: 160rpx;
+}
+
+.card.title view.title view view.tag.round {
+  height: 36rpx;
+  overflow: hidden;
+}
+
 /* --------------------- */
 /* image                */
 /* --------------------- */
@@ -1064,7 +1081,7 @@ image {
 }
 
 .content.grid navigator view view.tag {
-  height: 24rpx;
+  height: 36rpx;
   margin-right: 12rpx;
 }
 
@@ -1137,3 +1154,9 @@ view.avatar.round {
 .min-height-280rpx {
   min-height: 280rpx;
 }
+
+.right-24rpx {
+  position: fixed;
+  right: 24rpx;
+}
+

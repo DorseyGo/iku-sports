@@ -29,4 +29,13 @@ public interface TeachingStyleService {
      * @throws ApiServiceException if any errors detected during process.
      */
     TeachingStyle getTeachingStyleById(int styleId) throws ApiServiceException;
+
+    /**
+     * Update the watches by the style ID.
+     *
+     * @param styleId the style ID.
+     * @param watches the watches.
+     * @throws ApiServiceException if any errors detected during process.
+     */
+    void updateWatchesById(int styleId, long watches) throws ApiServiceException;
 }

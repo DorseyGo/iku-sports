@@ -13,12 +13,14 @@ import com.iku.sports.mini.admin.model.Response;
 import com.iku.sports.mini.admin.service.TeachingStyleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * The controller, which services the request for teaching style resource.
+ */
 @RestController
 public class TeachingStyleController {
 
@@ -41,4 +43,22 @@ public class TeachingStyleController {
         final TeachingStyle teachingStyle = teachingStyleService.getTeachingStyleById(styleId);
         return Response.ok(teachingStyle);
     }
+
+    @GetMapping("/teaching-styles/promotions/{styleId}")
+    public Response<List<TeachingStyle>> getPromotionsById(@PathVariable("styleId") final int styleId) throws
+            ApiServiceException {
+        final List<TeachingStyle> teachingStyles = teachingStyleService.getTeachingStyles();
+        final List<TeachingStyle> promotions = teachingStyles.stream()
+                .filter(teachingStyle -> styleId != teachingStyle.getId()).collect(Collectors.toList());
+
+        return Response.ok(promotions);
+    }
+
+    @PutMapping("/teaching-styles/{styleId}")
+    public Response<String> updateWatches(@PathVariable("styleId") final int styleId,
+            @RequestParam("watches") final long watches) throws ApiServiceException {
+        teachingStyleService.updateWatchesById(styleId, watches);
+        return Response.ok();
+    }
+
 }

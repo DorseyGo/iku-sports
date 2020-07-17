@@ -1,5 +1,0 @@
-/* pages/video/video.wxss */
-
-.video_width{
-    width: 100%;
-}

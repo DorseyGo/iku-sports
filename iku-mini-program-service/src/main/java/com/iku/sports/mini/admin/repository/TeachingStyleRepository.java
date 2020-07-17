@@ -27,7 +27,8 @@ public interface TeachingStyleRepository {
             @Result(property = "title", column = "title", jdbcType = JdbcType.VARCHAR),
             @Result(property = "cover", column = "cover", jdbcType = JdbcType.VARCHAR),
             @Result(property = "tags", column = "labels", jdbcType = JdbcType.VARCHAR),
-            @Result(property = "video", column = "video", jdbcType = JdbcType.VARCHAR)
+            @Result(property = "video", column = "video", jdbcType = JdbcType.VARCHAR),
+            @Result(property = "watches", column = "watches", jdbcType = JdbcType.BIGINT)
     })
     @SelectProvider(type = TeachingStyleSQLProvider.class, method = "findAll")
     List<TeachingStyle> findAll() throws DataAccessException;
@@ -36,11 +37,14 @@ public interface TeachingStyleRepository {
     @SelectProvider(type = TeachingStyleSQLProvider.class, method = "findTeachingStyleById")
     TeachingStyle findTeachingStyleById(@Param("styleId") final int styleId) throws DataAccessException;
 
+    @UpdateProvider(type = TeachingStyleSQLProvider.class, method = "updateWatchesById")
+    void updateWatchesById(int styleId, long watches) throws DataAccessException;
+
     // ------
     // SQL provider
     // ------
     class TeachingStyleSQLProvider {
-        static final List<String> COLS = Lists.newArrayList("id", "title", "cover", "labels", "video");
+        static final List<String> COLS = Lists.newArrayList("id", "title", "cover", "labels", "video", "watches");
 
         public String findAll() {
             return new SQL() {
@@ -56,6 +60,16 @@ public interface TeachingStyleRepository {
                 {
                     SELECT(COLS.toArray(new String[COLS.size()]));
                     FROM(TABLE);
+                    WHERE("id = #{styleId}");
+                }
+            }.toString();
+        }
+
+        public String updateWatchesById(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    UPDATE(TABLE);
+                    SET("watches = watches + #{watches}");
                     WHERE("id = #{styleId}");
                 }
             }.toString();

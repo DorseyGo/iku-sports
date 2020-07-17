@@ -36,11 +36,11 @@
       </view>
       
       <view class="content grid col-2 no-border">
-        <navigator url="../video/video?styleId={{item.id}}" class="padding-bottom-20rpx padding-10rpx" wx:for="{{teachingStyles}}" wx:key="id">
+        <navigator url="../teaching-style/teaching-style?styleId={{item.id}}" class="padding-bottom-20rpx padding-10rpx" wx:for="{{teachingStyles}}" wx:key="id">
           <image src="{{item.cover}}" mode="aspectFill"/>
           <text class="text-content block">{{item.title}}</text>
           <view class="flex text-normal margin-top-10rpx">
-            <view class="tag round bg-red" wx:for="{{item.labels}}" wx:key="id" wx:for-item="labels">{{labels.name}}</view>
+            <view class="tag round bg-orange" wx:for="{{item.labels}}" wx:key="id" wx:for-item="label">{{label.name}}</view>
           </view>
         </navigator>
       </view>

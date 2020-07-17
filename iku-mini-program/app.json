@@ -5,7 +5,7 @@
     "pages/appoint/appoint",
     "pages/course/details/details",
     "pages/order/order",
-    "pages/item-list/item-list",
+    "pages/teaching-style/teaching-style",
     "pages/appoint/course-plan/course-plan"
   ],
   "window": {

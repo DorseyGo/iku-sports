@@ -1,0 +1,37 @@
+<view class="container">
+    <view class="video">
+        <video src="{{teachingStyle.video}}" id="{{teachingStyle.id}}"
+            custom-cache="true" controls="{{true}}" show-muted-btn="{{true}}"
+            object-fit="cover" style="width:100%;" bindplay="updateWatches">
+        </video>
+    </view>
+
+    <view class="card title">
+        <view class="title">
+            <view class="text-lg padding-24rpx">{{teachingStyle.title}}</view>
+            <view class="padding-24rpx text-normal flex">
+                <view class="tag round bg-orange margin-right-12rpx" wx:for="{{teachingStyle.labels}}" wx:key="id" wx:for-item="label">{{label.name}}</view>
+                <view class="right-24rpx text-dark-gray">{{teachingStyle.watches}} 次播放</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="card article radius border-2rpx margin-top-10rpx">
+        <view class="iku-item promotions">
+            <view class="title">
+                <view class="text-cut">为你推荐</view>
+            </view>
+        
+            <view class="content grid col-2 no-border">
+                <navigator url="../teaching-style/teaching-style?styleId={{item.id}}" class="padding-bottom-20rpx padding-10rpx" wx:for="{{teachingStyles}}" wx:key="id">
+                    <image src="{{item.cover}}" mode="aspectFill"/>
+                    <text class="text-content block">{{item.title}}</text>
+                    <view class="flex text-normal margin-top-10rpx">
+                        <view class="tag round bg-orange" wx:for="{{item.labels}}" wx:key="id" wx:for-item="label">{{label.name}}</view>
+                    </view>
+                </navigator>
+            </view>
+
+        </view>    
+  </view>
+</view>

@@ -21,5 +21,6 @@ public class TeachingStyle {
     private SingleHolder[] labels;
     // the relative url path
     private String video;
+    private long watches;
 
 }
