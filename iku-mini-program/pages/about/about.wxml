@@ -35,7 +35,7 @@
                 <view class="text-cut">已学课程</view>
             </view>
 
-            <scroll-view class="scroll-slides" scroll-x="true">
+            <scroll-view class="scroll-slides" scroll-x="true" wx:if="{{hasLearnedCourses}}">
                 <view class="slide mg-left">
                     <view class="flex flex-column">
                         <image src="../../images/tennis_1.png" mode="aspectFill" />
@@ -52,6 +52,10 @@
                     
                 </view>
             </scroll-view>
+
+            <view class="content" wx:else>
+                <!-- no history -->
+            </view>
         </view>
     </view>
 </scroll-view>

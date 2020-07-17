@@ -37,7 +37,8 @@ Page({
    */
   data: {
     user: null,
-    menus: menus
+    menus: menus,
+    hasLearnedCourses: true
   },
 
   /**
