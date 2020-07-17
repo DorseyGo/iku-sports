@@ -39,7 +39,7 @@ Page({
     let watches = this.data.watches
     let styleId = this.data.styleId
     request.put(`teaching-styles/${styleId}`, {
-      watches: watches
+      watches: ++watches
     }).then(res => {
       console.log("Succeed update watches")
     })

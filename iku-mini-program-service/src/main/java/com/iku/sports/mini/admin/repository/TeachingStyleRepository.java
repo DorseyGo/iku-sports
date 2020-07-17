@@ -38,7 +38,7 @@ public interface TeachingStyleRepository {
     TeachingStyle findTeachingStyleById(@Param("styleId") final int styleId) throws DataAccessException;
 
     @UpdateProvider(type = TeachingStyleSQLProvider.class, method = "updateWatchesById")
-    void updateWatchesById(int styleId, long watches) throws DataAccessException;
+    void updateWatchesById(@Param("styleId") int styleId, @Param("watches") long watches) throws DataAccessException;
 
     // ------
     // SQL provider

@@ -10,6 +10,7 @@ package com.iku.sports.mini.admin.controller;
 import com.iku.sports.mini.admin.entity.TeachingStyle;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.Response;
+import com.iku.sports.mini.admin.request.UpdateWatchesRequest;
 import com.iku.sports.mini.admin.service.TeachingStyleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -56,8 +57,8 @@ public class TeachingStyleController {
 
     @PutMapping("/teaching-styles/{styleId}")
     public Response<String> updateWatches(@PathVariable("styleId") final int styleId,
-            @RequestParam("watches") final long watches) throws ApiServiceException {
-        teachingStyleService.updateWatchesById(styleId, watches);
+            @RequestBody final UpdateWatchesRequest request) throws ApiServiceException {
+        teachingStyleService.updateWatchesById(styleId, request.getWatches());
         return Response.ok();
     }
 
