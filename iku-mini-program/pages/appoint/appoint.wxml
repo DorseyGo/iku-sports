@@ -1,5 +1,5 @@
 <!--pages/appoint/appoint.wxml-->
-<view class="container">
+<scroll-view scroll-y="{{true}}" class="container">
 	<view wx:if="{{hasPurchasedAppointCourse}}">
     	<view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx"
 					wx:for="{{appointCourseInfo}}" wx:key="courseId">
@@ -32,7 +32,7 @@
 		</view>
   	</view>
 	<view wx:else class="detail flex center margin-top-xlg">
-		<view class="round avatar" style="background-image: url('../../images/order.png'); background-position: center"></view>
+		<view class="ellipse avatar" style="background-image: url('../../images/order.png'); background-position: center"></view>
 		<text class="tips">您还没有相关课程订单</text>
   	</view>
-</view>
+</scroll-view>

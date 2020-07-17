@@ -1,4 +1,4 @@
-<view class="container">
+<scroll-view scroll-y="{{true}}" class="container">
     <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
         <view class="padding-24rpx iku-head border-bottom-1rpx">
             <view class="round avatar border-2rpx margin-right-12rpx" style="background-image: url('{{user.avatar || '../../images/tourist.png'}}'); background-position: center;"></view>
@@ -9,11 +9,11 @@
         <view class="iku-list grid col-2">
             <view class="iku-item">
                 <text class="text-normal text-bold">25</text>
-                <text class="text-normal">已预约课程数</text>
+                <text class="text-normal margin-top-10rpx">已预约课程数</text>
             </view>
             <view class="iku-item">
                 <text class="text-normal text-bold">25</text>
-                <text class="text-normal">待预约课程数</text>
+                <text class="text-normal margin-top-10rpx">待预约课程数</text>
             </view>
         </view>
     </view>
@@ -54,4 +54,4 @@
             </scroll-view>
         </view>
     </view>
-</view>
+</scroll-view>

@@ -31,7 +31,7 @@
     </scroll-view>
 
     <view wx:else class="detail flex center margin-top-xlg">
-        <view class="round avatar" style="background-image: url('../../images/order.png'); background-position: center"></view>
+        <view class="ellipse avatar" style="background-image: url('../../images/order.png'); background-position: center"></view>
         <text class="tips">您还没有相关订单</text>
     </view>
 </view>

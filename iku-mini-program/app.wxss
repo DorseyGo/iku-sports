@@ -1121,6 +1121,11 @@ image {
   margin-left: initial;
 }
 
+.iku-btn.fixed {
+  position: fixed;
+  right: 48rpx;
+}
+
 /* ----------------------- */
 /* tips */
 /* ----------------------- */
@@ -1157,6 +1162,11 @@ view.cover image {
 view.avatar.round {
   width: 128rpx;
   height: 128rpx;
+}
+
+view.avatar.ellipse {
+  width: 128rpx;
+  height: 130rpx;
 }
 
 .center {
