@@ -327,10 +327,6 @@ swiper-item .bottom-mask::after {
   margin-right: 78rpx;
 }
 
-.margin-right-12rpx {
-  margin-right: 12rpx;
-}
-
 .mg-bottom {
   margin-bottom: 36rpx;
 }

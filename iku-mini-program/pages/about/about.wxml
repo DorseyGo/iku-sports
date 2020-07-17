@@ -1,7 +1,7 @@
 <scroll-view scroll-y="{{true}}" class="container">
     <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
         <view class="padding-24rpx iku-head border-bottom-1rpx">
-            <view class="round avatar border-2rpx margin-right-12rpx" style="background-image: url('{{user.avatar || '../../images/tourist.png'}}'); background-position: center;"></view>
+            <view class="round avatar border-2rpx margin-right-40rpx" style="background-image: url('{{user.avatar || '../../images/tourist.png'}}'); background-position: center;"></view>
             <text class="text-lg" >{{user.name || '游客'}}</text>
         </view>
 
