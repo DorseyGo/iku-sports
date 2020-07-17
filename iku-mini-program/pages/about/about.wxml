@@ -1,80 +1,57 @@
 <view class="container">
-    <view class="card margin-left-right-24rpx radius border-2rpx ">
-        
-        <view class=" head ">
-            <image mode="aspectFit" src="{{!userInfo.nickName ? '../../images/grey_head.jpg' : userInfo.avatarUrl }}"></image>
-            <button wx:if="{{!userInfo.nickName}}" plain size="mini" open-type="getUserInfo" bindgetuserinfo="handleGetUserInfo">登录</button>
-            <text class="username">{{userInfo.nickName}}</text>
+    <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
+        <view class="padding-24rpx iku-head border-bottom-1rpx">
+            <view class="round avatar border-2rpx margin-right-12rpx" style="background-image: url('{{user.avatar || '../../images/tourist.png'}}'); background-position: center;"></view>
+            <text class="text-lg" >{{user.name || '游客'}}</text>
         </view>
-        <view class="line-1px"></view>
-            <view class="iku-list-height-120 grid-2 col-2 no-border margin-left-right-24rpx radius margin-top-2-percent">
-                <navigator class="iku-item-flex flex-column" url="../course/course">
-                    <text class="margin-top-10rpx text-size-50rpx">23</text>
-                    <text class="text-normal top-item-text text-dark-gray margin-top-10rpx">已预约课程数</text>
-                </navigator>
-                <navigator class="iku-item-flex flex-column"  url="../appoint/appoint">
-                    <text class="margin-top-10rpx text-size-50rpx">25</text>
-                    <text class="text-normal top-item-text text-dark-gray margin-top-10rpx">待预约课程数</text>
-                </navigator>
-                <!-- <navigator class="iku-item-flex flex-column" url="../undetermined/undetermined">
-                    <text class="margin-top-10rpx">0</text>
-                    <text class="text-normal top-item-text text-dark-gray margin-top-10rpx">待定</text>
-                </navigator>
-                <navigator class="iku-item-flex flex-column" >
-                    <text class="margin-top-10rpx">40</text>
-                    <text class="text-normal top-item-text text-dark-gray margin-top-10rpx">打卡次数</text>
-                </navigator> -->
-            </view>
-    </view>
-    
-    <view class="card margin-left-right-24rpx radius border-2rpx margin-top-2-percent">
-        <view class="iku-list-height-120 grid-2 col-3  no-border margin-left-right-24rpx radius margin-top-2-percent">
-            <navigator class="iku-item-flex flex-column" url="../order/order">
-                <image class="function-img-size" src="../../images/list.png" />
-                <text class="text-normal text-dark-gray margin-top-10rpx">我的订单</text>
-            </navigator>
-            <navigator class="iku-item-flex flex-column" url="../appoint/appoint">
-                <image class="function-img-size" src="../../images/apponitment.png" />
-                <text class="text-normal text-dark-gray margin-top-10rpx">课程预约</text>
-            </navigator>
-            <navigator class="iku-item-flex flex-column" >
-                <image class="function-img-size"  src="../../images/invitation.png" />
-                <text class="text-normal text-dark-gray margin-top-10rpx">帖子管理</text>
-            </navigator>
-        </view>
-        <view class="iku-list-height-120 grid-2 col-3  no-border margin-left-right-24rpx radius">
-            
-            <navigator class="iku-item-flex flex-column" url="../feedback/feedback">
-                <image class="function-img-size"  src="../../images/feedback.png" />
-                <text class="text-normal text-dark-gray margin-top-10rpx">反馈建议</text>
-            </navigator>
-            <navigator class="iku-item-flex flex-column" url="../undetermined/undetermined">
-                <image class="function-img-size" src="../../images/non_setup.png" />
-                <text class="text-normal text-dark-gray margin-top-10rpx">设置</text>
-            </navigator>
-            <navigator class="iku-item-flex flex-column" url="../undetermined/undetermined">
-                <image class="function-img-size" src="../../images/more.png" />
-                <text class="text-normal text-dark-gray margin-top-10rpx">更多</text>
-            </navigator>
-        </view>
-    </view>
-    <view class="card  margin-left-right-24rpx radius border-2rpx margin-top-2-percent">
-        <view class=" mg-left-16rpx flex text-dark-gray text-sm-30rpx tab-item margin-top-4-percent text-dark-gray">
-            <text>已学课程</text>
-            <navigator  url="../course/course" class="margin-left-70-percent">更多</navigator>          
-        </view>
-        <view class="line-1px margin-top-"></view>
 
-        <view class="section text-dark-gray">
-        <scroll-view class="scroll_view" scroll-x="true">
-            <view class="cont" wx:for="{{list}}" wx:key="name">
-            <image src="{{item.url}}"class="cont_img"/>
-            <view class="content">
-                <view  class="cont_name" >{{item.name}}</view>            
+        <!-- statistics -->
+        <view class="iku-list grid col-2">
+            <view class="iku-item">
+                <text class="text-normal text-bold">25</text>
+                <text class="text-normal">已预约课程数</text>
             </view>
+            <view class="iku-item">
+                <text class="text-normal text-bold">25</text>
+                <text class="text-normal">待预约课程数</text>
             </view>
-        </scroll-view>
-        </view>  
-    </view>  
-    
+        </view>
+    </view>
+
+    <!-- menues -->
+    <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
+        <view class="iku-list grid col-3">
+            <navigator url="{{item.forwardTo || ''}}" class="iku-item" wx:for="{{menus}}" wx:key="id">
+                <image src="{{item.avatar}}" mode="aspectFill" />
+                <text class="text-normal margin-top-10rpx {{item.disable?'text-gray':''}}">{{item.name}}</text>
+            </navigator>
+        </view>
+    </view>
+
+    <!-- -->
+    <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
+        <view class="iku-item">
+            <view class="title">
+                <view class="text-cut">球技交流</view>
+            </view>
+
+            <scroll-view class="scroll-slides" scroll-x="true">
+                <view class="presentation-slide mg-left">
+                    <view class="flex flex-column">
+                        <image src="../../images/tennis_1.png" mode="aspectFill" />
+                        <text class="text-normal" >基础网球课</text>
+                    </view>
+                    
+                </view>
+
+                <view class="presentation-slide mg-left">
+                    <view class="flex flex-column">
+                        <image src="../../images/tennis_1.png" mode="aspectFill" />
+                        <text class="text-normal" >基础网球课</text>
+                    </view>
+                    
+                </view>
+            </scroll-view>
+        </view>
+    </view>
 </view>
