@@ -13,6 +13,8 @@ iku:
     expiry-in-days: 1
     machine-ip-addr: 127.0.0.1
     notify-url-addr: https://${iku.mini-program.machine-ip-addr}:${server.port}/api/payment/notification
+    appoint_ahead_day: 0 # 提前多久预约
+    studied_class_days: 7 # 用户几天之内的已学课时
 
 spring:
   datasource:
@@ -37,6 +39,7 @@ spring:
       WRITE_DATES_AS_TIMESTAMPS: false
     deserialization:
       FAIL_ON_UNKNOWN_PROPERTIES: false
+    defaultPropertyInclusion: NON_EMPTY
     parser:
       allow_unquoted_control_chars: true
       allow_single_quotes: true

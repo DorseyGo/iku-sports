@@ -39,6 +39,7 @@ Page({
     user: null,
     menus: menus,
     hasLearnedCourses: true,
+    learnedCourse: [],
     // 已预约课程数
     userAppointmentNums: 0,
     // 待预约课程数
@@ -51,6 +52,7 @@ Page({
   onLoad: function (options) {
     this.userAppointments();
     this.userNotYetAppointments();
+    this.userStudiedClass();
   },
 
   userAppointments: function() {
@@ -72,6 +74,22 @@ Page({
                userNotYetAppointmentNums: res.data
              })
            })
+  },
+
+  userStudiedClass: function() {
+    let userId = wx.getStorageSync('token') || "e9b6ea6f672086252a83a48be2198d63";
+    request.get(`appoint/course/studied/${userId}`)
+            .then(res => {
+              console.log("userStudiedClass", res)
+              let hasStudiedData = false;
+              if (res.data.length > 0) {
+                hasStudiedData = true;
+              }
+              this.setData({
+                hasLearnedCourses: hasStudiedData,
+                learnedCourse: res.data
+              })
+            })
   }
 
 })

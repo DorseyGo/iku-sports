@@ -1,6 +1,7 @@
 package com.iku.sports.mini.admin.service;
 
 import com.iku.sports.mini.admin.entity.Appointment;
+import com.iku.sports.mini.admin.entity.ArrangeClass;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.CourseAppoint;
 import com.iku.sports.mini.admin.request.AppointClassRequest;
@@ -50,4 +51,11 @@ public interface CourseAppointmentService {
      * @return
      */
     int countUserNotAppoint(String userId);
+
+    /**
+     * 用户已学课程
+     * @param userId
+     * @return 课时 id 集合
+     */
+    List<CourseAppoint> userStudiedClass(String userId) throws ApiServiceException;
 }

@@ -184,7 +184,8 @@ create table if not exists `appointment` (
    `update_time`          datetime default CURRENT_TIMESTAMP on update current_timestamp comment '更新时间',
    `create_time`          datetime default CURRENT_TIMESTAMP comment '创建时间/预约时间',
    primary key (id),
-   index idx_user_arrange_id (user_id, arrange_id)
+   index idx_user_arrange_id (user_id, arrange_id),
+   index idx_user_status (user_id, status)
 ) Engine=InnoDB default charset=utf8mb4 comment '预约';
 
 alter table artical comment '文章列表';

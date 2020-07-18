@@ -84,4 +84,12 @@ public class CourseAppointController {
         int userNotAppoint = courseAppointmentService.countUserNotAppoint(userId);
         return Response.ok(userNotAppoint);
     }
+
+    @WebLog(response = false)
+    @GetMapping("appoint/course/studied/{userId}")
+    public Response<List<CourseAppoint>> userStudiedClass(@NotNull @NotEmpty
+                                                    @PathVariable("userId") String userId) throws ApiServiceException {
+        List<CourseAppoint> userStudiedClass = courseAppointmentService.userStudiedClass(userId);
+        return Response.ok(userStudiedClass);
+    }
 }

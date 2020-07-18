@@ -11,9 +11,12 @@ import com.iku.sports.mini.admin.repository.ArrangeClassRepository;
 import com.iku.sports.mini.admin.repository.CourseAppointRepository;
 import com.iku.sports.mini.admin.request.AppointClassRequest;
 import com.iku.sports.mini.admin.service.*;
+import com.iku.sports.mini.admin.utils.DateUtil;
 import com.iku.sports.mini.admin.utils.JsonUtil;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +31,9 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class CourseAppointmentServiceImpl implements CourseAppointmentService {
+    @Value("${iku.mini-program.studied_class_days:7}")
+    private String recentlyStudiedClass;
+
     private OrderService orderService;
     private CourseService courseService;
     private CourseClassService courseClassService;
@@ -135,5 +141,37 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
                 .mapToInt(Course::getNumClasses)
                 .sum();
         return totalPurchasedClassNums - userAppointments.size();
+    }
+
+    @Override
+    public List<CourseAppoint> userStudiedClass(String userId) throws ApiServiceException {
+        List<ArrangeClass> userStudiedClass = courseAppointRepository.userStudiedClass(userId, DateUtil.aheadOf(7));
+        if (CollectionUtils.isEmpty(userStudiedClass)) {
+            // 用户最近没有已学课程
+            return Collections.emptyList();
+        }
+
+        List<Short> courseIds = userStudiedClass.stream()
+                .map(ArrangeClass::getCourseId)
+                .collect(Collectors.toList());
+        List<Course> studiedCourse = courseService.getCourses(courseIds);
+        if (CollectionUtils.isEmpty(studiedCourse)) {
+            log.warn("cannot find course with course id:{}", JsonUtil.toJSONString(courseIds));
+            return Collections.emptyList();
+        }
+
+        List<Category> allCategories = categoryService.getAllCategories();
+        Map<Short, String> categoryMap = allCategories.stream()
+                .collect(Collectors.toMap(Category::getId, Category::getName));
+
+        return studiedCourse.stream()
+                .map(course -> {
+                    return CourseAppoint.builder()
+                            .categoryName(categoryMap.getOrDefault(course.getCategoryId(), "basketball"))
+                            .courseLevel(course.getLevel())
+                            .courseName(course.getName())
+                            .build();
+                })
+                .collect(Collectors.toList());
     }
 }

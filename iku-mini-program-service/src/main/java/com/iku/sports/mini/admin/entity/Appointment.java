@@ -10,6 +10,9 @@ import java.util.Date;
 @Data
 public class Appointment {
     private Integer id;
+    /**
+     * 课程计划表 id
+     */
     private Integer arrangedClassId;
     private String userId;
     private Integer status;
