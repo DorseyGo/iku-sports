@@ -38,13 +38,40 @@ Page({
   data: {
     user: null,
     menus: menus,
-    hasLearnedCourses: true
+    hasLearnedCourses: true,
+    // 已预约课程数
+    userAppointmentNums: 0,
+    // 待预约课程数
+    userNotYetAppointmentNums: 0
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    this.userAppointments();
+    this.userNotYetAppointments();
+  },
+
+  userAppointments: function() {
+    let userId = wx.getStorageSync('token') || "e9b6ea6f672086252a83a48be2198d63";
+    request.get(`appoint/course/numbers/${userId}`)
+           .then(res => {
+             console.log(res)
+             this.setData({
+              userAppointmentNums: res.data
+             })
+           })
+  },
+
+  userNotYetAppointments: function() {
+    let userId = wx.getStorageSync('token') || "e9b6ea6f672086252a83a48be2198d63";
+    request.get(`appoint/course/not-appointment/${userId}`)
+           .then(res => {
+             this.setData({
+               userNotYetAppointmentNums: res.data
+             })
+           })
   }
 
 })

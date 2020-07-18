@@ -152,6 +152,7 @@ public interface Constants {
         CANCEL(0, "取消预约"),
         APPOINTED(1, "已预约课程"),
         ATTEND(2, "确认上课"),
+        completed(3, "完成")
         ;
         private int code;
         private String desc;

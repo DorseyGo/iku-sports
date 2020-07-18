@@ -16,7 +16,7 @@ import java.util.Map;
 @Repository
 public interface CourseAppointRepository {
 
-    @Results({
+    @Results(id = "appointment", value = {
             @Result(property = "id", column = "id", jdbcType = JdbcType.INTEGER),
             @Result(property = "arrangedClassId", column = "arrange_id", jdbcType = JdbcType.INTEGER),
             @Result(property = "userId", column = "user_id", jdbcType = JdbcType.VARCHAR),
@@ -32,6 +32,10 @@ public interface CourseAppointRepository {
 
     @UpdateProvider(type = SQLProvider.class, method = "cancelAppointment")
     void cancelAppointment(@Param("userId") String userId, @Param("arrangeClassId") Integer arrangeClassId);
+
+    @ResultMap("appointment")
+    @SelectProvider(type = SQLProvider.class, method = "countUserAppointment")
+    List<Appointment> countUserAppointment(@Param("userId") String userId);
 
     class SQLProvider {
         final String TABLE = "appointment";
@@ -60,6 +64,16 @@ public interface CourseAppointRepository {
 
         public String cancelAppointment(final Map<String, Object> params) {
             return "update appointment set status = 0 where user_id = #{userId} and arrange_id = #{arrangeClassId}";
+        }
+
+        public String countUserAppointment(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT(COLUMN.toArray(new String[0]));
+                    FROM(TABLE);
+                    WHERE("user_id = #{userId} and status >= 1");
+                }
+            }.toString();
         }
     }
 }

@@ -8,11 +8,11 @@
         <!-- statistics -->
         <view class="iku-list grid col-2">
             <view class="iku-item">
-                <text class="text-normal text-bold">25</text>
+                <text class="text-normal text-bold">{{userAppointmentNums}}</text>
                 <text class="text-normal margin-top-10rpx">已预约课程数</text>
             </view>
             <view class="iku-item">
-                <text class="text-normal text-bold">25</text>
+                <text class="text-normal text-bold">{{userNotYetAppointmentNums}}</text>
                 <text class="text-normal margin-top-10rpx">待预约课程数</text>
             </view>
         </view>

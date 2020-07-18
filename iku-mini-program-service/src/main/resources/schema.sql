@@ -180,7 +180,7 @@ create table if not exists `appointment` (
    `id`                   int not null auto_increment,
    `arrange_id`           int comment '排班课程ID',
    `user_id`              varchar(32) comment '用户ID',
-   `status`               int default 1 comment '状态:0-取消预约; 1-预约未出席; 2-确认出席;',
+   `status`               int default 1 comment '状态:0-取消预约; 1-预约未出席; 2-确认出席; 3-完成',
    `update_time`          datetime default CURRENT_TIMESTAMP on update current_timestamp comment '更新时间',
    `create_time`          datetime default CURRENT_TIMESTAMP comment '创建时间/预约时间',
    primary key (id),

@@ -1,9 +1,11 @@
 package com.iku.sports.mini.admin.service.impl;
 
 import com.iku.sports.mini.admin.entity.Appointment;
+import com.iku.sports.mini.admin.entity.ArrangeClass;
 import com.iku.sports.mini.admin.entity.Category;
 import com.iku.sports.mini.admin.entity.Course;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
+import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.model.CourseAppoint;
 import com.iku.sports.mini.admin.repository.ArrangeClassRepository;
 import com.iku.sports.mini.admin.repository.CourseAppointRepository;
@@ -89,10 +91,49 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
         arrangeClassRepository.updateAppointedCount(appointClassRequest.getArrangeClassId(), 1);
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public void cancelAppointment(AppointClassRequest appointClassRequest) {
         courseAppointRepository.cancelAppointment(appointClassRequest.getUserId(), appointClassRequest.getArrangeClassId());
         arrangeClassRepository.updateAppointedCount(appointClassRequest.getArrangeClassId(), -1);
+    }
 
+    @Override
+    public int countUserAppointment(String userId) {
+        List<Appointment> appointments = courseAppointRepository.countUserAppointment(userId);
+        if (CollectionUtils.isEmpty(appointments)) {
+            return 0;
+        }
+
+        return appointments.size();
+    }
+
+    @Override
+    public int countUserNotAppoint(String userId) {
+        // 用户购买课程
+        List<Short> courseIds = orderService.getPurchasedCourseIdsByUserId(userId);
+        if (CollectionUtils.isEmpty(courseIds)) {
+            // 用户没有购买课程
+            return 0;
+        }
+
+        // 用户购买的课程信息
+        List<Course> courses = courseService.getCourses(courseIds);
+        if (CollectionUtils.isEmpty(courses)) {
+            log.warn("cannot find course with course id:{}", JsonUtil.toJSONString(courseIds));
+            return 0;
+        }
+
+        // 用户预约
+        List<Appointment> userAppointments = courseAppointRepository.countUserAppointment(userId);
+        if (CollectionUtils.isEmpty(userAppointments)) {
+            // 用户没有预约
+            return courses.size();
+        }
+
+        int totalPurchasedClassNums = courses.stream()
+                .mapToInt(Course::getNumClasses)
+                .sum();
+        return totalPurchasedClassNums - userAppointments.size();
     }
 }

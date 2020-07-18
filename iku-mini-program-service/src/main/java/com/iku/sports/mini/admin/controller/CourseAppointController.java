@@ -49,10 +49,39 @@ public class CourseAppointController {
         return Response.ok();
     }
 
+    /**
+     * 取消预约
+     * @param appointClassRequest
+     * @return
+     */
     @WebLog
     @PostMapping("appoint/course/cancel")
     public Response<Void> cancelAppointment(@Valid @RequestBody AppointClassRequest appointClassRequest) {
         courseAppointmentService.cancelAppointment(appointClassRequest);
         return Response.ok();
+    }
+
+    /**
+     * 用户已预约课程数
+     * @param userId
+     * @return
+     */
+    @WebLog
+    @GetMapping("appoint/course/numbers/{userId}")
+    public Response<Integer> countUserAppointment(@NotNull @NotEmpty @PathVariable("userId") String userId) {
+        Integer numbersAppointment = courseAppointmentService.countUserAppointment(userId);
+        return Response.ok(numbersAppointment);
+    }
+
+    /**
+     * 用户还未预约课程数
+     * @param userId
+     * @return
+     */
+    @WebLog
+    @GetMapping("appoint/course/not-appointment/{userId}")
+    public Response<Integer> countUserNotAppoint(@NotNull @NotEmpty @PathVariable("userId") String userId) {
+        int userNotAppoint = courseAppointmentService.countUserNotAppoint(userId);
+        return Response.ok(userNotAppoint);
     }
 }

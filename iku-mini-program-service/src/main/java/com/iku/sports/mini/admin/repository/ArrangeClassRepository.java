@@ -1,11 +1,14 @@
 package com.iku.sports.mini.admin.repository;
 
+import com.google.common.base.Joiner;
 import com.iku.sports.mini.admin.entity.ArrangeClass;
+import com.iku.sports.mini.admin.model.Constants;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
 import org.assertj.core.util.Lists;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -39,6 +42,14 @@ public interface ArrangeClassRepository {
     @UpdateProvider(type = SQLProvider.class, method = "updateAppointedCount")
     void updateAppointedCount(@Param("arrangeClassId") Integer arrangeClassId, @Param("updateValue") Integer updateValue);
 
+    @Results({
+            @Result(property = "id", column = "id", jdbcType = JdbcType.INTEGER),
+            @Result(property = "classId", column = "class_id", jdbcType = JdbcType.INTEGER),
+            @Result(property = "courseId", column = "course_id", jdbcType = JdbcType.TINYINT)
+    })
+    @SelectProvider(type = SQLProvider.class, method = "findByIds")
+    List<ArrangeClass> findByIds(@Param("arrangedClassIds") List<Integer> arrangedClassIds);
+
     class SQLProvider {
         final String TABLE = "arrange_class ac";
         final String TABLE_CLASS = "class c";
@@ -66,6 +77,20 @@ public interface ArrangeClassRepository {
 
         public String updateAppointedCount(final Map<String, Object> params) {
             return "update arrange_class set ordercount = ordercount + #{updateValue} where id = #{arrangeClassId}";
+        }
+
+        public String findByIds(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT("ac.id", "ac.class_id", "ac.course_id");
+                    FROM(TABLE);
+                    final List<Integer> ids = (List<Integer>) params.get("arrangedClassIds");
+                    if (!CollectionUtils.isEmpty(ids)) {
+                        final String conditions = Joiner.on(Constants.DELIM_COMMA).join(ids);
+                        WHERE("c.id IN (" + conditions + ")");
+                    }
+                }
+            }.toString();
         }
     }
 }
