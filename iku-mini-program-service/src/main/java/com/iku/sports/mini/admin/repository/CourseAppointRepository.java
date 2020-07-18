@@ -39,12 +39,8 @@ public interface CourseAppointRepository {
     @SelectProvider(type = SQLProvider.class, method = "countUserAppointment")
     List<Appointment> countUserAppointment(@Param("userId") String userId);
 
-    @Results({
-            @Result(property = "classId", column = "class_id", jdbcType = JdbcType.INTEGER),
-            @Result(property = "courseId", column = "course_id", jdbcType = JdbcType.INTEGER),
-    })
-    @SelectProvider(type = SQLProvider.class, method = "userStudiedClass")
-    List<ArrangeClass> userStudiedClass(@Param("userId") String userId, @Param("recently") Date recently);
+    @SelectProvider(type = SQLProvider.class, method = "findUserStudiedClassIds")
+    List<Integer> findUserStudiedClassIds(@Param("userId") String userId, @Param("recently") Date recently);
 
     class SQLProvider {
         final String TABLE = "appointment";
@@ -85,10 +81,10 @@ public interface CourseAppointRepository {
             }.toString();
         }
 
-        public String userStudiedClass(final Map<String, Object> params) {
+        public String findUserStudiedClassIds(final Map<String, Object> params) {
             return new SQL() {
                 {
-                    SELECT("ac.class_id, ac.course_id");
+                    SELECT("ac.class_id");
                     FROM("appointment a");
                     LEFT_OUTER_JOIN("arrange_class ac on a.arrange_id = ac.id");
                     WHERE("user_id = #{userId} and status = 3 and update_time >= #{recently}");

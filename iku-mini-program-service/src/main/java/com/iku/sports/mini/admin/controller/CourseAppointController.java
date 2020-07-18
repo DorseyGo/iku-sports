@@ -1,6 +1,7 @@
 package com.iku.sports.mini.admin.controller;
 
 import com.iku.sports.mini.admin.annotation.WebLog;
+import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.model.CourseAppoint;
 import com.iku.sports.mini.admin.model.Response;
@@ -87,9 +88,9 @@ public class CourseAppointController {
 
     @WebLog(response = false)
     @GetMapping("appoint/course/studied/{userId}")
-    public Response<List<CourseAppoint>> userStudiedClass(@NotNull @NotEmpty
+    public Response<List<CourseClass>> userStudiedClass(@NotNull @NotEmpty
                                                     @PathVariable("userId") String userId) throws ApiServiceException {
-        List<CourseAppoint> userStudiedClass = courseAppointmentService.userStudiedClass(userId);
+        List<CourseClass> userStudiedClass = courseAppointmentService.userStudiedClass(userId);
         return Response.ok(userStudiedClass);
     }
 }

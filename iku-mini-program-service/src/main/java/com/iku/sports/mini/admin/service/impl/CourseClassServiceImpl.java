@@ -203,4 +203,9 @@ public class CourseClassServiceImpl implements CourseClassService {
             return 0;
         }
     }
+
+    @Override
+    public List<CourseClass> getClassesById(List<Integer> classIds) {
+        return courseClassRepository.findClassesByIds(classIds);
+    }
 }

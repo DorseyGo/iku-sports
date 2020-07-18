@@ -42,4 +42,6 @@ public interface CourseClassService {
     boolean existsWatchedHis(String userId, int classId) throws ApiServiceException;
 
     int countWatchedCourseClass(String userId, Integer courseId);
+
+    List<CourseClass> getClassesById(List<Integer> classIds);
 }

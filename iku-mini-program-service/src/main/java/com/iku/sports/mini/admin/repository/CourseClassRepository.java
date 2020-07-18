@@ -1,13 +1,16 @@
 package com.iku.sports.mini.admin.repository;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.iku.sports.mini.admin.entity.CourseClass;
 import com.iku.sports.mini.admin.model.ClassOverview;
+import com.iku.sports.mini.admin.model.Constants;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -96,6 +99,10 @@ public interface CourseClassRepository {
 
     @InsertProvider(type = CourseClassSqlProvider.class, method = "saveWatchedClasses")
     void saveWatchedClasses(@Param("userId") String userId, @Param("classId") int classId) throws DataAccessException;
+
+    @ResultMap("simpleClassRM")
+    @SelectProvider(type = CourseClassSqlProvider.class, method = "findClassesByIds")
+    List<CourseClass> findClassesByIds(@Param("classIds") List<Integer> classIds);
 
     class CourseClassSqlProvider {
         static final List<String> ALLCOLS = Arrays
@@ -219,6 +226,20 @@ public interface CourseClassRepository {
                     }
 
                     VALUES("class_id", "#{classId}");
+                }
+            }.toString();
+        }
+
+        public String findClassesByIds(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT(ALLCOLS.toArray(new String[0]));
+                    FROM(TABLE);
+                    final List<Integer> ids = (List<Integer>)params.get("classIds");
+                    if (!CollectionUtils.isEmpty(ids)) {
+                        final String conditions = Joiner.on(Constants.DELIM_COMMA).join(ids);
+                        WHERE("id IN (" + conditions + ")");
+                    }
                 }
             }.toString();
         }

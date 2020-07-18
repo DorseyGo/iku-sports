@@ -1,9 +1,6 @@
 package com.iku.sports.mini.admin.service.impl;
 
-import com.iku.sports.mini.admin.entity.Appointment;
-import com.iku.sports.mini.admin.entity.ArrangeClass;
-import com.iku.sports.mini.admin.entity.Category;
-import com.iku.sports.mini.admin.entity.Course;
+import com.iku.sports.mini.admin.entity.*;
 import com.iku.sports.mini.admin.exception.ApiServiceException;
 import com.iku.sports.mini.admin.exception.IkuSportsError;
 import com.iku.sports.mini.admin.model.CourseAppoint;
@@ -144,34 +141,14 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
     }
 
     @Override
-    public List<CourseAppoint> userStudiedClass(String userId) throws ApiServiceException {
-        List<ArrangeClass> userStudiedClass = courseAppointRepository.userStudiedClass(userId, DateUtil.aheadOf(7));
-        if (CollectionUtils.isEmpty(userStudiedClass)) {
+    public List<CourseClass> userStudiedClass(String userId) throws ApiServiceException {
+        List<Integer> userStudiedClassIds = courseAppointRepository.findUserStudiedClassIds(userId,
+                DateUtil.aheadOf(Long.parseLong(recentlyStudiedClass)));
+        if (CollectionUtils.isEmpty(userStudiedClassIds)) {
             // 用户最近没有已学课程
             return Collections.emptyList();
         }
 
-        List<Short> courseIds = userStudiedClass.stream()
-                .map(ArrangeClass::getCourseId)
-                .collect(Collectors.toList());
-        List<Course> studiedCourse = courseService.getCourses(courseIds);
-        if (CollectionUtils.isEmpty(studiedCourse)) {
-            log.warn("cannot find course with course id:{}", JsonUtil.toJSONString(courseIds));
-            return Collections.emptyList();
-        }
-
-        List<Category> allCategories = categoryService.getAllCategories();
-        Map<Short, String> categoryMap = allCategories.stream()
-                .collect(Collectors.toMap(Category::getId, Category::getName));
-
-        return studiedCourse.stream()
-                .map(course -> {
-                    return CourseAppoint.builder()
-                            .categoryName(categoryMap.getOrDefault(course.getCategoryId(), "basketball"))
-                            .courseLevel(course.getLevel())
-                            .courseName(course.getName())
-                            .build();
-                })
-                .collect(Collectors.toList());
+        return courseClassService.getClassesById(userStudiedClassIds);
     }
 }

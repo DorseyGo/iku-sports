@@ -36,21 +36,13 @@
             </view>
 
             <scroll-view class="scroll-slides" scroll-x="true" wx:if="{{hasLearnedCourses}}">
-                <view class="slide mg-left">
+                <view class="slide mg-left" wx:for="{{learnedCourse}}" wx:key="id">
                     <view class="flex flex-column">
-                        <image src="../../images/tennis_1.png" mode="aspectFill" />
-                        <text class="text-normal padding-12rpx" >基础网球课</text>
+                        <image src="{{item.cover}}" mode="aspectFill" />
+                        <text class="text-normal padding-12rpx" >{{item.title}}</text>
                     </view>
-                    
                 </view>
 
-                <view class="slide mg-left">
-                    <view class="flex flex-column">
-                        <image src="../../images/tennis_1.png" mode="aspectFill" />
-                        <text class="text-normal padding-12rpx" >基础网球课</text>
-                    </view>
-                    
-                </view>
             </scroll-view>
 
             <view class="content" wx:else>
