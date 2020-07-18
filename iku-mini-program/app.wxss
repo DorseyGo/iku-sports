@@ -425,9 +425,12 @@ swiper-item .bottom-mask::after {
   right: 0;
 }
 
-.badge image {
-  width: 80rpx;
-  height: 80rpx;
+.badge.round {
+  width: 40rpx;
+  height: 40rpx;
+  justify-content: center;
+  top: 8rpx;
+  right: -18rpx;
 }
 
 /** scroll view for list */
@@ -1158,6 +1161,7 @@ view.cover image {
 view.avatar.round {
   width: 128rpx;
   height: 128rpx;
+  position: relative;
 }
 
 view.avatar.ellipse {

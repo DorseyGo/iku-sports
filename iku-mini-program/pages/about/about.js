@@ -43,7 +43,8 @@ Page({
     // 已预约课程数
     userAppointmentNums: 0,
     // 待预约课程数
-    userNotYetAppointmentNums: 0
+    userNotYetAppointmentNums: 0,
+    numNotifications: 18
   },
 
   /**
