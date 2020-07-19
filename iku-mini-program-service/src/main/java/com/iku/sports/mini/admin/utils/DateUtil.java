@@ -35,4 +35,11 @@ public final class DateUtil {
 
         return differMilliseconds / (60 * 60 * 1000);
     }
+
+    public static Date aheadOfMinutes(long minutes) {
+        long nowTime = new Date().getTime();
+
+        long time = minutes * 60 * 1000;
+        return new Date(nowTime - time);
+    }
 }

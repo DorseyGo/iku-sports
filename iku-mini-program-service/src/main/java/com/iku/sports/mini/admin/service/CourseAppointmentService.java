@@ -9,6 +9,7 @@ import com.iku.sports.mini.admin.request.AppointClassRequest;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -59,4 +60,15 @@ public interface CourseAppointmentService {
      * @return
      */
     List<CourseClass> userStudiedClass(String userId) throws ApiServiceException;
+
+    /**
+     * 用户完成课程
+     */
+    void completedClass();
+
+    /**
+     * 用户确认参加上课
+     * @param aheadMinutesConfirmAppoint
+     */
+    void userAttendClass(Date aheadMinutesConfirmAppoint);
 }

@@ -20,6 +20,7 @@ iku:
     notify-url-addr: https://${iku.mini-program.machine-ip-addr}:${server.port}/payment/notification
     appoint_ahead_day: 0 # 提前多久预约
     studied_class_days: 7 # 用户几天之内的已学课时
+    appoint-ahead-minutes-confirm: 30 # 提前多少分钟确认预约上课
 
 spring:
   output:

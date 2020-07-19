@@ -45,6 +45,12 @@ public interface CourseAppointRepository {
     @SelectProvider(type = SQLProvider.class, method = "findUserStudiedCourseClassByUserIdAndCourseId")
     int findUserStudiedCourseClassByUserIdAndCourseId(@Param("userId") String userId, @Param("courseId") Short courseId);
 
+    @SelectProvider(type = SQLProvider.class, method = "completedClass")
+    void completedClass();
+
+    @SelectProvider(type = SQLProvider.class, method = "userAttendClass")
+    void userAttendClass(@Param("aheadMinutesConfirmAppoint") Date aheadMinutesConfirmAppoint);
+
     class SQLProvider {
         final String TABLE = "appointment";
         final List<String> COLUMN = Lists.newArrayList("`id`", "`arrange_id`", "`user_id`",
@@ -103,6 +109,26 @@ public interface CourseAppointRepository {
                     FROM("appointment a");
                     LEFT_OUTER_JOIN("arrange_class ac on a.arrange_id = ac.id");
                     WHERE("a.user_id = #{userId} and a.status = 3 and ac.course_id = #{courseId}");
+                }
+            }.toString();
+        }
+
+        public String completedClass(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    UPDATE(TABLE);
+                    SET("status = 3");
+                    WHERE("status = 2");
+                }
+            }.toString();
+        }
+
+        public String userAttendClass(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    UPDATE(TABLE);
+                    SET("status = 2");
+                    WHERE("status = 1 and update_time <= #{aheadMinutesConfirmAppoint}");
                 }
             }.toString();
         }

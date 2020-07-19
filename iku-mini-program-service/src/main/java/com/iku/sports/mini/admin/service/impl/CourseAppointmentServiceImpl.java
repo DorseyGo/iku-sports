@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -150,5 +151,15 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
         }
 
         return courseClassService.getClassesById(userStudiedClassIds);
+    }
+
+    @Override
+    public void completedClass() {
+        courseAppointRepository.completedClass();
+    }
+
+    @Override
+    public void userAttendClass(Date aheadMinutesConfirmAppoint) {
+        courseAppointRepository.userAttendClass(aheadMinutesConfirmAppoint);
     }
 }
