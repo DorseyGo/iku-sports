@@ -2,7 +2,9 @@
     <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx">
         <view class="padding-24rpx iku-head border-bottom-1rpx">
             <view class="round avatar border-2rpx margin-right-40rpx" style="background-image: url('{{user.avatar || '../../images/tourist.png'}}'); background-position: center;">
-                <view class="text-normal badge bg-red round" wx:if="{{numNotifications > 0}}">{{numNotifications}}</view>
+                <navigator url="./message-notify/message">
+                    <view class="text-normal badge bg-red round" wx:if="{{numNotifications > 0}}">{{numNotifications}}</view>
+                </navigator>
             </view>
             <text class="text-lg" >{{user.name || '游客'}}</text>
         </view>

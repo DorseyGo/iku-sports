@@ -48,13 +48,13 @@ public class MessageNotify implements Serializable {
     private Integer type;
     private Date createTime;
 
-    public static MessageNotify appointmentMessageNotify(String receiverId, Date date, String address,
-                                                         Integer arrangedId) {
+    public static MessageNotify appointmentMessageNotify(String receiverId, ArrangeClass arrangeClass) {
         return MessageNotify.builder()
                 .title("系统通知")
-                .content(String.format("恭喜您，课程预约成功！请记得于 %s 在 %s 上课。", DateUtil.format(date), address))
+                .content(String.format("恭喜您，您预订的课程【%s】预约成功！请记得于【%s】 在【%s】上课。",
+                        arrangeClass.getContent(),DateUtil.format(arrangeClass.getBeginTime()), arrangeClass.getSite()))
                 .receiverId(receiverId)
-                .businessId(arrangedId)
+                .businessId(arrangeClass.getId())
                 .type(Constants.MessageNotifyBusinessType.CLASS_APPOINTMENT.getCode())
                 .build();
     }

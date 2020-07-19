@@ -98,8 +98,7 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
         arrangeClassRepository.updateAppointedCount(appointClassRequest.getArrangeClassId(), 1);
 
         ArrangeClass arrangeClass = arrangeClassRepository.findById(appointClassRequest.getArrangeClassId());
-        MessageNotify messageNotify = MessageNotify.appointmentMessageNotify(appointClassRequest.getUserId(),
-                arrangeClass.getBeginTime(), arrangeClass.getSite(), arrangeClass.getId());
+        MessageNotify messageNotify = MessageNotify.appointmentMessageNotify(appointClassRequest.getUserId(), arrangeClass);
         messageNotifyService.sendMessageNotify(messageNotify);
     }
 

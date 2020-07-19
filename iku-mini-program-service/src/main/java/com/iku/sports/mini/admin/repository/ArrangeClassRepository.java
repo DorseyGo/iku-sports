@@ -98,10 +98,13 @@ public interface ArrangeClassRepository {
         }
 
         public String findById(final Map<String, Object> params) {
+            List<String> classColumn = Lists.newArrayList("c.chapter", "c.content");
+            COLUMN.addAll(classColumn);
             return new SQL() {
                 {
                     SELECT(COLUMN.toArray(new String[0]));
                     FROM(TABLE);
+                    LEFT_OUTER_JOIN(TABLE_CLASS + " ON ac.class_id = c.id");
                     WHERE("ac.id = #{arrangedId}");
                 }
             }.toString();

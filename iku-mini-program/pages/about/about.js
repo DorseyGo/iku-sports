@@ -100,7 +100,7 @@ Page({
 
   userMessagesNotify: function() {
     let userId = wx.getStorageSync('token') || "e9b6ea6f672086252a83a48be2198d63";
-    request.get(`massage/notify/count//${userId}`)
+    request.get(`massage/notify/count/${userId}`)
            .then(res => {
              this.setData({
               numNotifications: res.data

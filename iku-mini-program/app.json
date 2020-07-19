@@ -6,7 +6,8 @@
     "pages/course/details/details",
     "pages/order/order",
     "pages/teaching-style/teaching-style",
-    "pages/appoint/course-plan/course-plan"
+    "pages/appoint/course-plan/course-plan",
+    "pages/about/message-notify/message"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,19 @@
+<!--pages/about/message-notify/message.wxml-->
+<scroll-view scroll-y="{{true}}" class="container">
+  <view>
+    <view class="card article margin-left-right-24rpx radius border-2rpx margin-top-10rpx"
+					wx:for="{{messagesNotify}}" wx:key="id">
+      <view class="iku-item">
+        <view class="title">
+					<view class="text-cut">{{item.title}}</view>
+				</view>
+        <view class="content">
+          <view class="text-content">
+            <text>{{item.content}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
