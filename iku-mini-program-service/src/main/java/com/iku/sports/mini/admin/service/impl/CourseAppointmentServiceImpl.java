@@ -76,7 +76,7 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
                                 .courseName(course.getName())
                                 .courseDesc(course.getDescription())
                                 .totalClass(course.getNumClasses())
-                                .studiedClass(courseClassService.countWatchedCourseClass(userId, (int) course.getId()))
+                                .studiedClass(courseAppointRepository.findUserStudiedCourseClassByUserIdAndCourseId(userId, course.getId()))
                                 .build();
                     })
                     .collect(Collectors.toList());

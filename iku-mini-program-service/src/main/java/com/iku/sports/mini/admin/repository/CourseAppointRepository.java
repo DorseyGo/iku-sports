@@ -42,6 +42,9 @@ public interface CourseAppointRepository {
     @SelectProvider(type = SQLProvider.class, method = "findUserStudiedClassIds")
     List<Integer> findUserStudiedClassIds(@Param("userId") String userId, @Param("recently") Date recently);
 
+    @SelectProvider(type = SQLProvider.class, method = "findUserStudiedCourseClassByUserIdAndCourseId")
+    int findUserStudiedCourseClassByUserIdAndCourseId(@Param("userId") String userId, @Param("courseId") Short courseId);
+
     class SQLProvider {
         final String TABLE = "appointment";
         final List<String> COLUMN = Lists.newArrayList("`id`", "`arrange_id`", "`user_id`",
@@ -87,8 +90,19 @@ public interface CourseAppointRepository {
                     SELECT("ac.class_id");
                     FROM("appointment a");
                     LEFT_OUTER_JOIN("arrange_class ac on a.arrange_id = ac.id");
-                    WHERE("user_id = #{userId} and status = 3 and update_time >= #{recently}");
+                    WHERE("a.user_id = #{userId} and a.status = 3 and a.update_time >= #{recently}");
 
+                }
+            }.toString();
+        }
+
+        public String findUserStudiedCourseClassByUserIdAndCourseId(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT("count(*)");
+                    FROM("appointment a");
+                    LEFT_OUTER_JOIN("arrange_class ac on a.arrange_id = ac.id");
+                    WHERE("a.user_id = #{userId} and a.status = 3 and ac.course_id = #{courseId}");
                 }
             }.toString();
         }
