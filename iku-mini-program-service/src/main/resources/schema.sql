@@ -210,3 +210,19 @@ create table article
 
 alter table article comment '文章列表';
 
+-- 消息通知
+create table if not exists `message` (
+    `id`                int not null auto_increment,
+    `title`             varchar(255) not null default '' comment '消息通知标题',
+    `content`           varchar(1024) comment '消息内容',
+    `sender_id`         varchar(32)  not null default '0' comment '发送者 id，默认为系统发送',
+    `sender_name`       varchar(255) not null default '系统通知' comment '发送者名字',
+    `receiver_id`       varchar(32) not null default '' comment '接收者 id',
+    `receiver_name`     varchar(255) not null default '' comment '接收者名字',
+    `is_deleted`        tinyint default 0 comment '是否删除，0-有效; 1-删除',
+    `business_id`       int not null comment '业务 id',
+    `type`              tinyint not null default 0 comment '0-课程预约',
+    `create_time`       datetime default CURRENT_TIMESTAMP comment '消息创建时间/发送时间',
+    primary key (id),
+    index idx_receiver_id (receiver_id)
+) ENGINE=InnoDB default charset=utf8mb4 comment '消息通知';

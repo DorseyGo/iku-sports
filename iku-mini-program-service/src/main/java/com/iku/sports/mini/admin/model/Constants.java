@@ -167,4 +167,20 @@ public interface Constants {
         }
     }
 
+    enum MessageNotifyBusinessType {
+        CLASS_APPOINTMENT(0, "课程预约")
+        ;
+
+        private int code;
+        private String desc;
+
+        MessageNotifyBusinessType(int code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+
+        public int getCode() {
+            return code;
+        }
+    }
 }

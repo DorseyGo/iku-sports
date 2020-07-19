@@ -1,6 +1,7 @@
 package com.iku.sports.mini.admin.job;
 
 import com.iku.sports.mini.admin.service.CourseAppointmentService;
+import com.iku.sports.mini.admin.service.MessageNotifyService;
 import com.iku.sports.mini.admin.utils.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,13 @@ public class AppointmentTask {
     private String aheadMinutesConfirmAppoint;
 
     private CourseAppointmentService courseAppointmentService;
+    private MessageNotifyService messageNotifyService;
 
     @Autowired
-    public AppointmentTask(CourseAppointmentService courseAppointmentService) {
+    public AppointmentTask(CourseAppointmentService courseAppointmentService,
+                           MessageNotifyService messageNotifyService) {
         this.courseAppointmentService = courseAppointmentService;
+        this.messageNotifyService = messageNotifyService;
     }
 
     /**
@@ -42,6 +46,18 @@ public class AppointmentTask {
             courseAppointmentService.completedClass();
         } catch (Exception e) {
             log.error("occurs error update user completed class", e);
+        }
+    }
+
+    /**
+     * 通知用户上课，只通知距上课还有三个小时的用户
+     */
+    //@Scheduled(cron = "0 0 0/1 * * ?")
+    public void notifyAttendClass() {
+        try {
+            // TODO
+        } catch (Exception e) {
+            log.error("occurs error notify user attend class", e);
         }
     }
 }

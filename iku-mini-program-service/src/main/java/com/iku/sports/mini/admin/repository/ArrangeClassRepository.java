@@ -20,7 +20,7 @@ import java.util.Map;
 @Repository
 public interface ArrangeClassRepository {
 
-    @Results({
+    @Results(id = "results", value = {
             @Result(property = "id", column = "id", jdbcType = JdbcType.INTEGER),
             @Result(property = "classId", column = "class_id", jdbcType = JdbcType.INTEGER),
             @Result(property = "coachId", column = "coach_id", jdbcType = JdbcType.INTEGER),
@@ -49,6 +49,10 @@ public interface ArrangeClassRepository {
     })
     @SelectProvider(type = SQLProvider.class, method = "findByIds")
     List<ArrangeClass> findByIds(@Param("arrangedClassIds") List<Integer> arrangedClassIds);
+
+    @ResultMap("results")
+    @SelectProvider(type = SQLProvider.class, method = "findById")
+    ArrangeClass findById(@Param("arrangedId") Integer arrangedId);
 
     class SQLProvider {
         final String TABLE = "arrange_class ac";
@@ -89,6 +93,16 @@ public interface ArrangeClassRepository {
                         final String conditions = Joiner.on(Constants.DELIM_COMMA).join(ids);
                         WHERE("c.id IN (" + conditions + ")");
                     }
+                }
+            }.toString();
+        }
+
+        public String findById(final Map<String, Object> params) {
+            return new SQL() {
+                {
+                    SELECT(COLUMN.toArray(new String[0]));
+                    FROM(TABLE);
+                    WHERE("ac.id = #{arrangedId}");
                 }
             }.toString();
         }

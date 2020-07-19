@@ -38,17 +38,20 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
     private CategoryService categoryService;
     private CourseAppointRepository courseAppointRepository;
     private ArrangeClassRepository arrangeClassRepository;
+    private MessageNotifyService messageNotifyService;
 
     @Autowired
     public CourseAppointmentServiceImpl(OrderService orderService, CourseService courseService,
                                         CourseClassService courseClassService, CategoryService categoryService,
-                                        CourseAppointRepository courseAppointRepository, ArrangeClassRepository arrangeClassRepository) {
+                                        CourseAppointRepository courseAppointRepository, ArrangeClassRepository arrangeClassRepository,
+                                        MessageNotifyService messageNotifyService) {
         this.orderService = orderService;
         this.courseService = courseService;
         this.courseClassService = courseClassService;
         this.categoryService = categoryService;
         this.courseAppointRepository = courseAppointRepository;
         this.arrangeClassRepository = arrangeClassRepository;
+        this.messageNotifyService = messageNotifyService;
     }
 
     @Override
@@ -93,6 +96,11 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
     public void appointment(AppointClassRequest appointClassRequest) {
         courseAppointRepository.appointment(appointClassRequest.getUserId(), appointClassRequest.getArrangeClassId());
         arrangeClassRepository.updateAppointedCount(appointClassRequest.getArrangeClassId(), 1);
+
+        ArrangeClass arrangeClass = arrangeClassRepository.findById(appointClassRequest.getArrangeClassId());
+        MessageNotify messageNotify = MessageNotify.appointmentMessageNotify(appointClassRequest.getUserId(),
+                arrangeClass.getBeginTime(), arrangeClass.getSite(), arrangeClass.getId());
+        messageNotifyService.sendMessageNotify(messageNotify);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
@@ -100,6 +108,7 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
     public void cancelAppointment(AppointClassRequest appointClassRequest) {
         courseAppointRepository.cancelAppointment(appointClassRequest.getUserId(), appointClassRequest.getArrangeClassId());
         arrangeClassRepository.updateAppointedCount(appointClassRequest.getArrangeClassId(), -1);
+        messageNotifyService.cancelMessageNotifyByReceiverId(appointClassRequest.getUserId(), appointClassRequest.getArrangeClassId());
     }
 
     @Override
@@ -127,17 +136,18 @@ public class CourseAppointmentServiceImpl implements CourseAppointmentService {
             log.warn("cannot find course with course id:{}", JsonUtil.toJSONString(courseIds));
             return 0;
         }
+        // 总课时数
+        int totalPurchasedClassNums = courses.stream()
+                .mapToInt(Course::getNumClasses)
+                .sum();
 
         // 用户预约
         List<Appointment> userAppointments = courseAppointRepository.countUserAppointment(userId);
         if (CollectionUtils.isEmpty(userAppointments)) {
             // 用户没有预约
-            return courses.size();
+            return totalPurchasedClassNums;
         }
 
-        int totalPurchasedClassNums = courses.stream()
-                .mapToInt(Course::getNumClasses)
-                .sum();
         return totalPurchasedClassNums - userAppointments.size();
     }
 

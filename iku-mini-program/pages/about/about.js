@@ -44,16 +44,21 @@ Page({
     userAppointmentNums: 0,
     // 待预约课程数
     userNotYetAppointmentNums: 0,
-    numNotifications: 18
+    numNotifications: 0
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    
+  },
+
+  onShow: function() {
     this.userAppointments();
     this.userNotYetAppointments();
     this.userStudiedClass();
+    this.userMessagesNotify();
   },
 
   userAppointments: function() {
@@ -91,6 +96,16 @@ Page({
                 learnedCourse: res.data
               })
             })
+  },
+
+  userMessagesNotify: function() {
+    let userId = wx.getStorageSync('token') || "e9b6ea6f672086252a83a48be2198d63";
+    request.get(`massage/notify/count//${userId}`)
+           .then(res => {
+             this.setData({
+              numNotifications: res.data
+             })
+           })
   }
 
 })
